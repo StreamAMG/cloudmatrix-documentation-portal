@@ -12,6 +12,29 @@ The following sequence diagram outlines how a simple integration would work with
 
 ![CloudMatrix Enrichment API - Phase 1 - Sequence (1).png](https://stoplight.io/api/v1/projects/cHJqOjc2ODM3/images/OiCWC6k7vtU)
 
+
+The following script demonstrates how your service can upload your binary file to the binary store.
+
+```javascript
+var request = require('request');
+var fs = require('fs');
+request({
+  method: 'PUT',
+  uri: "https://steamamg.s3.us-west-2.amazonaws.com/videos/file",
+  body: fs.readFileSync('/streamamg/mock/example-1.mp4'),
+  headers: {
+    'Content-Type': 'video/mp4'
+  }
+},
+function(error, response, body) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('upload successful:', body);
+  }
+});
+```
+
 For more complex/larger objects you must perform a multipart upload of content. 
 
 The following sequence outlines how this can be achieved using the multipart API endpoints. 
