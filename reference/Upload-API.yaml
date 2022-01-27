@@ -12,7 +12,7 @@ paths:
   /upload:
     parameters: []
     put:
-      summary: Request a Upload URL
+      summary: Request a upload URL
       operationId: put-upload
       responses:
         '200':
@@ -112,7 +112,7 @@ paths:
         description: The body should contain the additional CloudMatrix Metadata you would like to store along side the entry.
   /multipart/start:
     put:
-      summary: Start Multipart Upload
+      summary: Start multipart upload
       operationId: put-multipart-start
       responses:
         '200':
@@ -210,7 +210,7 @@ paths:
         description: The request body should contain information you would like to store against your CloudMatrix Entry
   /multipart/upload:
     put:
-      summary: Request a Upload URL
+      summary: Request a upload URL
       operationId: put-multipart-start
       responses:
         '200':
@@ -279,7 +279,7 @@ paths:
     parameters: []
   /multipart/complete:
     put:
-      summary: Complete a Multipart Upload
+      summary: Complete a multipart upload
       operationId: put-multipart-start
       responses:
         '200':
