@@ -7,7 +7,8 @@ info:
     The CloudMatrix Upload API provides clients with the functionality to upload Media Content via a HTTP API with no dependencies on a technology or framework.
 
     The upload functionality allows clients to upload Rich Metadata alongside their media so that it is automatically available within CloudMatrix once the media entry is processed via MediaPlatform. 
-servers: []
+servers:
+  - url: 'https://cloudmatrix.upload.streamamg.com'
 paths:
   /upload:
     parameters: []
