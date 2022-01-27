@@ -238,7 +238,10 @@ paths:
                     uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
                     etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
           headers: {}
-      description: The multipart upload endpoint allows you to generate a signed URL for the binary chunk you want to upload.
+      description: |-
+        The multipart upload endpoint allows you to generate a signed URL for the binary chunk you want to upload.
+
+        It is important that you store a the etag response for each upload as this is required for the final step of completing the multiple upload.
       tags:
         - Multipart
       requestBody:
