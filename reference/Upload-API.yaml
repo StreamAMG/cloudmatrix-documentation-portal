@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Upload API
+  title: API Reference
   version: '1.0'
   summary: An API to facilitate the uploading of media Content into StreamAMGs CloudMatrix & MediaPlatform Products
   description: |-
@@ -112,7 +112,7 @@ paths:
         description: The body should contain the additional CloudMatrix Metadata you would like to store along side the entry.
   /multipart/start:
     put:
-      summary: Start Multipart Upload
+      summary: Start
       operationId: put-multipart-start
       responses:
         '200':
@@ -210,7 +210,7 @@ paths:
         description: The request body should contain information you would like to store against your CloudMatrix Entry
   /multipart/upload:
     put:
-      summary: Start Multipart Upload
+      summary: Upload
       operationId: put-multipart-start
       responses:
         '200':
@@ -220,30 +220,30 @@ paths:
               schema:
                 description: ''
                 type: object
+                x-examples:
+                  example-1:
+                    partNumber: 1
+                    uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+                    etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
                 properties:
                   partNumber:
                     type: number
                   uploadId:
                     type: string
                     minLength: 1
-                  etag:
+                  uploadUrl:
                     type: string
                     minLength: 1
                 required:
                   - partNumber
                   - uploadId
-                  - etag
-                x-examples:
-                  example-1:
-                    partNumber: 1
-                    uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
-                    etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
+                  - uploadUrl
               examples:
                 Example:
                   value:
                     partNumber: 1
                     uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
-                    etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
+                    uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJWZ7B6WCRGMKFGQ%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
           headers: {}
       description: |-
         The multipart upload endpoint allows you to generate a signed URL for the binary chunk you want to upload.
@@ -279,14 +279,63 @@ paths:
     parameters: []
   /multipart/complete:
     put:
-      summary: Start Multipart Upload
+      summary: Complete
       operationId: put-multipart-start
       responses:
         '200':
           description: OK
-      description: The final part of the multipart upload is the completion step.
+      description: 'The final part of the multipart upload is the completion step. This request should be called when all chunks of the data have been sent. '
       tags:
         - Multipart
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                uploadId:
+                  type: string
+                  minLength: 1
+                parts:
+                  type: array
+                  uniqueItems: true
+                  minItems: 1
+                  items:
+                    required:
+                      - partNumber
+                      - etag
+                    properties:
+                      partNumber:
+                        type: number
+                      etag:
+                        type: string
+                        minLength: 1
+              required:
+                - uploadId
+                - parts
+              x-examples:
+                example-1:
+                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+                  parts:
+                    - partNumber: 1
+                      etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
+                    - partNumber: 2
+                      etag: 44a64df551425fcc55e4d42a148795d9f25f89d5
+                    - partNumber: 2
+                      etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
+            examples:
+              Example:
+                value:
+                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+                  parts:
+                    - partNumber: 1
+                      etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
+                    - partNumber: 2
+                      etag: 44a64df551425fcc55e4d42a148795d9f25f89d5
+                    - partNumber: 2
+                      etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
+        description: The request body should contain a reference to each part along with the Etag of each upload.
     parameters: []
 components:
   schemas: {}
