@@ -18,9 +18,16 @@ paths:
         '200':
           description: OK
       description: |
-        In order to upload a media entry first a initial API call to retrive a signed URL must be generated. This signed URL will allow the client to directly upload the binary data to the storage location via HTTP.
+        In order to upload a media entry, first a initial API call to retrive a signed URL must be generated. This signed URL will allow you to directly upload the media binary to the storage location via HTTP.
       tags:
         - Upload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+        description: The body should contain the additional CloudMatrix Metadata you would like to store along side the entry.
   /multipart/start:
     put:
       summary: Start Multipart Upload
