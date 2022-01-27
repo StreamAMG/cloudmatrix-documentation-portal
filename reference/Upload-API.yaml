@@ -116,6 +116,101 @@ paths:
           content:
             application/json:
               schema:
+                description: ''
+                type: object
+                properties:
+                  entryId:
+                    type: string
+                    minLength: 1
+                  uploadId:
+                    type: string
+                    minLength: 1
+                required:
+                  - entryId
+                  - uploadId
+                x-examples:
+                  example-1:
+                    entryId: 0_tsdqrl2p
+                    uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+              examples:
+                Example:
+                  value:
+                    entryId: 0_tsdqwl2p
+                    uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+      description: |-
+        For larger uploads (Larger than 5GB) you should utilise the multipart API, this allows the upload to handle partial uploads.
+
+        Like the upload process this has multiple steps, the first step you must initialise the multipart upload process by calling the start endpoint.
+      tags:
+        - Multipart
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  id: 68ca71de-7f6e-11ec-a8a3-0242ac120002
+                  title: Example 2
+                  description: A brief description of the example 2 video
+                  metadata:
+                    originalReleaseDate: '2022-01-07'
+                  entitlements:
+                    - monthly99
+                    - premium
+                  multipart:
+                    numberOfParts: 10
+              properties:
+                id:
+                  type: string
+                  minLength: 1
+                title:
+                  type: string
+                  minLength: 1
+                description:
+                  type: string
+                  minLength: 1
+                metadata:
+                  type: object
+                  required:
+                    - originalReleaseDate
+                  properties:
+                    originalReleaseDate:
+                      type: string
+                      minLength: 1
+                entitlements:
+                  type: array
+                  items:
+                    type: object
+              required:
+                - id
+                - title
+                - description
+                - metadata
+                - entitlements
+            examples:
+              Example:
+                value:
+                  id: 68ca71de-7f6e-11ec-a8a3-0242ac120002
+                  title: Example 2
+                  description: A brief description of the example 2 video
+                  metadata:
+                    originalReleaseDate: '2022-01-07'
+                  entitlements:
+                    - monthly99
+                    - premium
+        description: The request body should contain information you would like to store against your CloudMatrix Entry
+  /multipart/upload:
+    put:
+      summary: Start Multipart Upload
+      operationId: put-multipart-start
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
                 type: object
                 properties: {}
       description: |-
@@ -193,6 +288,7 @@ paths:
                   multipart:
                     numberOfParts: 10
         description: The request body must contain information about your future uploads. i.e number of parts.
+    parameters: []
   /multipart/complete:
     put:
       summary: Start Multipart Upload
