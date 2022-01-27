@@ -1,6 +1,6 @@
 # Upload a Media Entry
 
-A client can use the CloudMatrix Upload API to upload media entries and enriched metadata into their CloudMatrix and MediaPlatform instances.
+A client can use the CloudMatrix Upload API to upload media entries into their CloudMatrix and MediaPlatform instances.
 
 This allows clients to build rich integrations with their StreamAMG's products.
 
