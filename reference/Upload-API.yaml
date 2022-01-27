@@ -55,7 +55,19 @@ paths:
             schema:
               description: ''
               type: object
+              x-examples:
+                example-1:
+                  id: 27b24738-7f6b-11ec-a8a3-0242ac120002
+                  title: Example 1
+                  description: A brief description of the example 1 video
+                  metadata:
+                    originalReleaseDate: '2022-01-01'
+                  entitlements:
+                    - monthly99
+                    - premium
               properties:
+                filename:
+                  type: string
                 id:
                   type: string
                   minLength: 1
@@ -67,36 +79,28 @@ paths:
                   minLength: 1
                 metadata:
                   type: object
+                  required:
+                    - originalReleaseDate
                   properties:
                     originalReleaseDate:
                       type: string
                       minLength: 1
-                  required:
-                    - originalReleaseDate
                 entitlements:
                   type: array
                   items:
-                    required: []
-                    properties: {}
+                    type: object
+                '':
+                  type: string
               required:
                 - id
                 - title
                 - description
                 - metadata
                 - entitlements
-              x-examples:
-                example-1:
-                  id: 27b24738-7f6b-11ec-a8a3-0242ac120002
-                  title: Example 1
-                  description: A brief description of the example 1 video
-                  metadata:
-                    originalReleaseDate: '2022-01-01'
-                  entitlements:
-                    - monthly99
-                    - premium
             examples:
               Example:
                 value:
+                  filename: example-1.mp4
                   id: 27b24738-7f6b-11ec-a8a3-0242ac120002
                   title: Example 1
                   description: A brief description of the example 1 video
@@ -162,6 +166,8 @@ paths:
                   multipart:
                     numberOfParts: 10
               properties:
+                filename:
+                  type: string
                 id:
                   type: string
                   minLength: 1
@@ -192,6 +198,7 @@ paths:
             examples:
               Example:
                 value:
+                  filename: example-1.mp4
                   id: 68ca71de-7f6e-11ec-a8a3-0242ac120002
                   title: Example 2
                   description: A brief description of the example 2 video
@@ -277,7 +284,7 @@ paths:
       responses:
         '200':
           description: OK
-      description: ''
+      description: The final part of the multipart upload is the completion step.
       tags:
         - Multipart
     parameters: []
