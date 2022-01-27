@@ -13,7 +13,7 @@ The following sequence diagram outlines how a simple integration would work with
 <img src="https://stoplight.io/api/v1/projects/cHJqOjc2ODM3/images/OiCWC6k7vtU" alt="CloudMatrix Enrichment API - Phase 1 - Sequence (1).png" width="900" style="align:center"/>
 
 
-The following script demonstrates how your service can upload your binary file to the binary store once you have request a signed URL from the Upload API.
+The following script demonstrates how your service can upload your binary files to the binary store once you have request a signed URL from the Upload API.
 
 ```javascript
 const request = require('request');
