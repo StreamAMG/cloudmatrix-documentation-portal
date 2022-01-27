@@ -113,6 +113,11 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
       description: |-
         For larger uploads (Larger than 5GB) you should utilise the multipart API, this allows the upload to handle partial uploads.
 
@@ -123,8 +128,70 @@ paths:
         content:
           application/json:
             schema:
+              description: ''
               type: object
-              properties: {}
+              properties:
+                id:
+                  type: string
+                  minLength: 1
+                title:
+                  type: string
+                  minLength: 1
+                description:
+                  type: string
+                  minLength: 1
+                metadata:
+                  type: object
+                  properties:
+                    originalReleaseDate:
+                      type: string
+                      minLength: 1
+                  required:
+                    - originalReleaseDate
+                entitlements:
+                  type: array
+                  items:
+                    required: []
+                    properties: {}
+                multipart:
+                  type: object
+                  properties:
+                    numberOfParts:
+                      type: number
+                  required:
+                    - numberOfParts
+              required:
+                - id
+                - title
+                - description
+                - metadata
+                - entitlements
+                - multipart
+              x-examples:
+                example-1:
+                  id: 68ca71de-7f6e-11ec-a8a3-0242ac120002
+                  title: Example 2
+                  description: A brief description of the example 2 video
+                  metadata:
+                    originalReleaseDate: '2022-01-07'
+                  entitlements:
+                    - monthly99
+                    - premium
+                  multipart:
+                    numberOfParts: 10
+            examples:
+              Example:
+                value:
+                  id: 68ca71de-7f6e-11ec-a8a3-0242ac120002
+                  title: Example 2
+                  description: A brief description of the example 2 video
+                  metadata:
+                    originalReleaseDate: '2022-01-07'
+                  entitlements:
+                    - monthly99
+                    - premium
+                  multipart:
+                    numberOfParts: 10
         description: The request body must contain information about your future uploads. i.e number of parts.
   /multipart/complete:
     put:
