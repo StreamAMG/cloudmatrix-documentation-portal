@@ -17,16 +17,70 @@ paths:
       responses:
         '200':
           description: OK
-      description: |
-        In order to upload a media entry, first a initial API call to retrive a signed URL must be generated. This signed URL will allow you to directly upload the media binary to the storage location via HTTP.
+      description: |-
+        In order to upload a media entry, first a initial API call to retrive a signed URL must be generated. This signed URL will allow you to directly upload the media asset to the storage location via HTTP.
+
+        The initial API call should consist of metadata you would like to store against your asset within the CloudMatrix Platform and any associated entitlements for the entry you are uploading.
+
+        Note: This method of upload only supports upto 5GB per asset, for larger assets please refer to the multipart upload.
       tags:
         - Upload
       requestBody:
         content:
           application/json:
             schema:
+              description: ''
               type: object
-              properties: {}
+              properties:
+                id:
+                  type: string
+                  minLength: 1
+                title:
+                  type: string
+                  minLength: 1
+                description:
+                  type: string
+                  minLength: 1
+                metadata:
+                  type: object
+                  properties:
+                    originalReleaseDate:
+                      type: string
+                      minLength: 1
+                  required:
+                    - originalReleaseDate
+                entitlements:
+                  type: array
+                  items:
+                    required: []
+                    properties: {}
+              required:
+                - id
+                - title
+                - description
+                - metadata
+                - entitlements
+              x-examples:
+                example-1:
+                  id: 27b24738-7f6b-11ec-a8a3-0242ac120002
+                  title: Example 1
+                  description: A brief description of the example 1 video
+                  metadata:
+                    originalReleaseDate: '2022-01-01'
+                  entitlements:
+                    - monthly99
+                    - premium
+            examples:
+              Example:
+                value:
+                  id: 27b24738-7f6b-11ec-a8a3-0242ac120002
+                  title: Example 1
+                  description: A brief description of the example 1 video
+                  metadata:
+                    originalReleaseDate: '2022-01-01'
+                  entitlements:
+                    - monthly99
+                    - premium
         description: The body should contain the additional CloudMatrix Metadata you would like to store along side the entry.
   /multipart/start:
     put:
@@ -50,44 +104,4 @@ paths:
         - Multipart
     parameters: []
 components:
-  schemas:
-    User:
-      title: User
-      type: object
-      description: ''
-      examples:
-        - id: 142
-          firstName: Alice
-          lastName: Smith
-          email: alice.smith@gmail.com
-          dateOfBirth: '1997-10-31'
-          emailVerified: true
-          signUpDate: '2019-08-24'
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the given user.
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        dateOfBirth:
-          type: string
-          format: date
-          example: '1997-10-31'
-        emailVerified:
-          type: boolean
-          description: Set to true if the user's email has been verified.
-        createDate:
-          type: string
-          format: date
-          description: The date that the user was created.
-      required:
-        - id
-        - firstName
-        - lastName
-        - email
-        - emailVerified
+  schemas: {}
