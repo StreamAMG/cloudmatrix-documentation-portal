@@ -113,9 +113,19 @@ paths:
       responses:
         '200':
           description: OK
-      description: ''
+      description: |-
+        For larger uploads (Larger than 5GB) you should utilise the multipart API, this allows the upload to handle partial uploads.
+
+        Like the upload process this has multiple steps, the first step you must initialise the multipart upload process by calling the start endpoint.
       tags:
         - Multipart
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+        description: The request body must contain information about your future uploads. i.e number of parts.
   /multipart/complete:
     put:
       summary: Start Multipart Upload
