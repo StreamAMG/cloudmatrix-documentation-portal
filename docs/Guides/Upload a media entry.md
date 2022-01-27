@@ -33,7 +33,10 @@ request({
 });
 ```
 
-For more complex/larger objects you must perform a multipart upload of content. 
+## Multipart Uploads
+
+
+For more complex/larger objects (>5GB) you must perform a multipart upload of content. 
 
 The following sequence outlines how this can be achieved using the multipart API endpoints. 
 
