@@ -211,12 +211,34 @@ paths:
           content:
             application/json:
               schema:
+                description: ''
                 type: object
-                properties: {}
-      description: |-
-        For larger uploads (Larger than 5GB) you should utilise the multipart API, this allows the upload to handle partial uploads.
-
-        Like the upload process this has multiple steps, the first step you must initialise the multipart upload process by calling the start endpoint.
+                properties:
+                  partNumber:
+                    type: number
+                  uploadId:
+                    type: string
+                    minLength: 1
+                  etag:
+                    type: string
+                    minLength: 1
+                required:
+                  - partNumber
+                  - uploadId
+                  - etag
+                x-examples:
+                  example-1:
+                    partNumber: 1
+                    uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+                    etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
+              examples:
+                Example:
+                  value:
+                    partNumber: 1
+                    uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+                    etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
+          headers: {}
+      description: The multipart upload endpoint allows you to generate a signed URL for the binary chunk you want to upload.
       tags:
         - Multipart
       requestBody:
@@ -226,68 +248,24 @@ paths:
               description: ''
               type: object
               properties:
-                id:
+                partNumber:
+                  type: number
+                uploadId:
                   type: string
                   minLength: 1
-                title:
-                  type: string
-                  minLength: 1
-                description:
-                  type: string
-                  minLength: 1
-                metadata:
-                  type: object
-                  properties:
-                    originalReleaseDate:
-                      type: string
-                      minLength: 1
-                  required:
-                    - originalReleaseDate
-                entitlements:
-                  type: array
-                  items:
-                    required: []
-                    properties: {}
-                multipart:
-                  type: object
-                  properties:
-                    numberOfParts:
-                      type: number
-                  required:
-                    - numberOfParts
               required:
-                - id
-                - title
-                - description
-                - metadata
-                - entitlements
-                - multipart
+                - partNumber
+                - uploadId
               x-examples:
                 example-1:
-                  id: 68ca71de-7f6e-11ec-a8a3-0242ac120002
-                  title: Example 2
-                  description: A brief description of the example 2 video
-                  metadata:
-                    originalReleaseDate: '2022-01-07'
-                  entitlements:
-                    - monthly99
-                    - premium
-                  multipart:
-                    numberOfParts: 10
+                  partNumber: 1
+                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
             examples:
               Example:
                 value:
-                  id: 68ca71de-7f6e-11ec-a8a3-0242ac120002
-                  title: Example 2
-                  description: A brief description of the example 2 video
-                  metadata:
-                    originalReleaseDate: '2022-01-07'
-                  entitlements:
-                    - monthly99
-                    - premium
-                  multipart:
-                    numberOfParts: 10
-        description: The request body must contain information about your future uploads. i.e number of parts.
+                  partNumber: 1
+                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+        description: The request body must contain the part number and the upload id of the partial upload chunk.
     parameters: []
   /multipart/complete:
     put:
