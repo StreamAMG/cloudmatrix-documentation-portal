@@ -6,7 +6,7 @@ This allows clients to build rich integrations with their StreamAMG's products.
 
 > In order to secure the API, the client must provide all server IPs they wish to use to access the upload API, in return they will be sent an API key which must be set as a Request header across all API requests. 
 
-Please refer to the API Reference documentation for Technical Implementation details.
+Please refer to the API Reference documentation for Technical Implementation details found in the left hand menu.
 
 The following sequence diagram outlines how a simple integration would work with files less than 5GB. 
 
