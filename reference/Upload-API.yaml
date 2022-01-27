@@ -257,7 +257,13 @@ paths:
             schema:
               description: ''
               type: object
+              x-examples:
+                example-1:
+                  partNumber: 1
+                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
               properties:
+                filename:
+                  type: string
                 partNumber:
                   type: number
                 uploadId:
@@ -266,13 +272,10 @@ paths:
               required:
                 - partNumber
                 - uploadId
-              x-examples:
-                example-1:
-                  partNumber: 1
-                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
             examples:
               Example:
                 value:
+                  filename: example-2.mp4
                   partNumber: 1
                   uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
         description: The request body must contain the part number and the upload id of the partial upload chunk.
@@ -293,27 +296,6 @@ paths:
             schema:
               description: ''
               type: object
-              properties:
-                uploadId:
-                  type: string
-                  minLength: 1
-                parts:
-                  type: array
-                  uniqueItems: true
-                  minItems: 1
-                  items:
-                    required:
-                      - partNumber
-                      - etag
-                    properties:
-                      partNumber:
-                        type: number
-                      etag:
-                        type: string
-                        minLength: 1
-              required:
-                - uploadId
-                - parts
               x-examples:
                 example-1:
                   uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
@@ -324,9 +306,34 @@ paths:
                       etag: 44a64df551425fcc55e4d42a148795d9f25f89d5
                     - partNumber: 2
                       etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
+              properties:
+                filename:
+                  type: string
+                uploadId:
+                  type: string
+                  minLength: 1
+                parts:
+                  type: array
+                  uniqueItems: true
+                  minItems: 1
+                  items:
+                    type: object
+                    properties:
+                      partNumber:
+                        type: number
+                      etag:
+                        type: string
+                        minLength: 1
+                    required:
+                      - partNumber
+                      - etag
+              required:
+                - uploadId
+                - parts
             examples:
               Example:
                 value:
+                  filename: example-2.mp4
                   uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
                   parts:
                     - partNumber: 1
