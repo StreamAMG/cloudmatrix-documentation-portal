@@ -33,7 +33,7 @@ request({
 });
 ```
 
-Once your upload request has been processed your entry will be made available within CloudMatrix for you to see/edit. 
+Once your upload request has been processed your entry will be made available within CloudMatrix for you to edit. 
 
 > Please note that although your entry will exist in CloudMatrix it will not be available in any feeds until the video asset has been ingested into MediaPlatform.
 
@@ -41,7 +41,7 @@ Once your upload request has been processed your entry will be made available wi
 ## Multipart Uploads
 
 
-For more complex/larger objects (>5GB) you must perform a multipart upload of content. 
+For larger objects (>5GB) you must perform a multipart upload of content. 
 
 The following sequence outlines how this can be achieved using the multipart API endpoints. 
 
