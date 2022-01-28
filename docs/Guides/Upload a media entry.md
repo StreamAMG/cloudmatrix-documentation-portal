@@ -33,7 +33,7 @@ request({
 });
 ```
 
-Once your upload request has been processed your entry will be made available within CloudMatrix for you to edit. 
+Once you have initialised an upload request using the initial API call your entry will be made available in CloudMatrix to edit. 
 
 > Please note that although your entry will exist in CloudMatrix it will not be available in any feeds until the video asset has been ingested into MediaPlatform.
 
