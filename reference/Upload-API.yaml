@@ -310,115 +310,6 @@ paths:
               type: object
               x-examples:
                 example-1:
-                  id: 68ca71de-7f6e-11ec-a8a3-0242ac120002
-                  title: Example 2
-                  description: A brief description of the example 2 video
-                  metadata:
-                    originalReleaseDate: '2022-01-07'
-                  entitlements:
-                    - monthly99
-                    - premium
-                  multipart:
-                    numberOfParts: 10
-              properties:
-                filename:
-                  type: string
-                id:
-                  type: string
-                  minLength: 1
-                title:
-                  type: string
-                  minLength: 1
-                description:
-                  type: string
-                  minLength: 1
-                metadata:
-                  type: object
-                  required:
-                    - originalReleaseDate
-                  properties:
-                    originalReleaseDate:
-                      type: string
-                      minLength: 1
-                entitlements:
-                  type: array
-                  items:
-                    type: object
-              required:
-                - id
-                - title
-                - description
-                - metadata
-                - entitlements
-            examples:
-              Example:
-                value:
-                  filename: example-1.mp4
-                  id: 68ca71de-7f6e-11ec-a8a3-0242ac120002
-                  title: Example 2
-                  description: A brief description of the example 2 video
-                  metadata:
-                    originalReleaseDate: '2022-01-07'
-                  entitlements:
-                    - monthly99
-                    - premium
-        description: The request body should contain information you would like to store against your CloudMatrix Entry
-  /multipart/upload:
-    put:
-      summary: Request a upload URL
-      operationId: put-multipart-start
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                x-examples:
-                  example-1:
-                    partNumber: 1
-                    uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
-                    etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
-                properties:
-                  partNumber:
-                    type: number
-                  uploadId:
-                    type: string
-                    minLength: 1
-                  uploadUrl:
-                    type: string
-                    minLength: 1
-                required:
-                  - partNumber
-                  - uploadId
-                  - uploadUrl
-              examples:
-                Example:
-                  value:
-                    partNumber: 1
-                    uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
-                    uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJWZ7B6WCRGMKFGQ%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
-          headers: {}
-      description: |-
-        <!--
-        focus: false
-        -->
-        ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
-
-        The multipart upload endpoint allows you to generate a signed URL for the binary chunk you want to upload.
-
-        It is important that you store a the etag response for each upload as this is required for the final step of completing the multiple upload.
-      tags:
-        - Multipart
-      requestBody:
-        content:
-          application/json:
-            schema:
-              description: ''
-              type: object
-              x-examples:
-                example-1:
                   attributes:
                     - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
                       label: title
@@ -621,6 +512,77 @@ paths:
                             to: '06-06-2022T22:51:25Z'
                             id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
         description: The body should contain the additional CloudMatrix Metadata you would like to store along side the entry.
+  /multipart/upload:
+    put:
+      summary: Request a upload URL
+      operationId: put-multipart-start
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    partNumber: 1
+                    uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+                    etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
+                properties:
+                  partNumber:
+                    type: number
+                  uploadId:
+                    type: string
+                    minLength: 1
+                  uploadUrl:
+                    type: string
+                    minLength: 1
+                required:
+                  - partNumber
+                  - uploadId
+                  - uploadUrl
+              examples:
+                Example:
+                  value:
+                    partNumber: 1
+                    uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+                    uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJWZ7B6WCRGMKFGQ%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
+          headers: {}
+      description: |-
+        The multipart upload endpoint allows you to generate a signed URL for the binary chunk you want to upload.
+
+        It is important that you store a the etag response for each upload as this is required for the final step of completing the multiple upload.
+      tags:
+        - Multipart
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  partNumber: 1
+                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+              properties:
+                filename:
+                  type: string
+                partNumber:
+                  type: number
+                uploadId:
+                  type: string
+                  minLength: 1
+              required:
+                - partNumber
+                - uploadId
+            examples:
+              Example:
+                value:
+                  filename: example-2.mp4
+                  partNumber: 1
+                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+        description: The request body must contain the part number and the upload id of the partial upload chunk.
     parameters: []
   /multipart/complete:
     put:
