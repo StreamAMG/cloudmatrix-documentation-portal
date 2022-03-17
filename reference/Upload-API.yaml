@@ -297,6 +297,11 @@ paths:
                     entryId: 0_tsdqwl2p
                     uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
       description: |-
+        <!--
+        focus: false
+        -->
+        ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
+
         For larger uploads (Larger than 5GB) you should utilise the multipart API, this allows the upload to handle partial uploads.
 
         Like the upload process this has multiple steps, the first step you must initialise the multipart upload process by calling the start endpoint.
@@ -591,7 +596,13 @@ paths:
       responses:
         '200':
           description: OK
-      description: 'The final part of the multipart upload is the completion step. This request should be called when all chunks of the data have been sent. '
+      description: |-
+        <!--
+        focus: false
+        -->
+        ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
+
+        The final part of the multipart upload is the completion step. This request should be called when all chunks of the data have been sent. 
       tags:
         - Multipart
       requestBody:
