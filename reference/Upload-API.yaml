@@ -58,58 +58,207 @@ paths:
               type: object
               x-examples:
                 example-1:
-                  id: 27b24738-7f6b-11ec-a8a3-0242ac120002
-                  title: Example 1
-                  description: A brief description of the example 1 video
-                  metadata:
-                    originalReleaseDate: '2022-01-01'
-                  entitlements:
-                    - monthly99
-                    - premium
+                  attributes:
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
+                      label: title
+                      value: Some Title
+                      items:
+                        - alias: '1234'
+                          value: Team A
+                        - alias: '6789'
+                          value: Team B
+                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18ada
+                      label: description
+                      value: Some Description
+                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18adb
+                      label: custom field
+                      value: Some custom field
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
+                      label: entitlement
+                      items:
+                        - value: entitlement1
+                        - value: entitlement2
+                    - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
+                      label: Teams
+                      items:
+                        - alias: '1234'
+                          value: Team A
+                        - alias: '6789'
+                          value: Team B
+                  publication:
+                    publish: true
+                    from: '06-03-2022T22:51:25Z'
+                    to: '06-06-2022T22:51:25Z'
+                    config:
+                      - target: web
+                        region:
+                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
+                            from: '06-03-2022T22:51:25Z'
+                            to: '06-06-2022T22:51:25Z'
+                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d3
+                            from: '06-03-2022T22:51:25Z'
+                            to: '06-06-2022T22:51:25Z'
+                      - target: app
+                        from: '06-03-2022T22:51:25Z'
+                        to: '06-06-2022T22:51:25Z'
+                        region:
+                          - from: '06-03-2022T22:51:25Z'
+                            to: '06-06-2022T22:51:25Z'
+                            id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
               properties:
-                filename:
-                  type: string
-                id:
-                  type: string
-                  minLength: 1
-                title:
-                  type: string
-                  minLength: 1
-                description:
-                  type: string
-                  minLength: 1
-                metadata:
-                  type: object
-                  required:
-                    - originalReleaseDate
-                  properties:
-                    originalReleaseDate:
-                      type: string
-                      minLength: 1
-                entitlements:
+                attributes:
                   type: array
+                  uniqueItems: true
+                  minItems: 1
+                  description: The metadata attributes
                   items:
                     type: object
-                '':
-                  type: string
+                    properties:
+                      id:
+                        type: string
+                        minLength: 1
+                        description: CloudMatrix attribute id
+                      label:
+                        type: string
+                        minLength: 1
+                        description: CloudMatrix attribute label
+                      value:
+                        type: string
+                        minLength: 1
+                        description: CloudMatrix attribute value
+                      items:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        description: CloudMatrix attribute where value is a collection
+                        items:
+                          type: object
+                          additionalProperties: false
+                          properties:
+                            alias:
+                              type: string
+                              minLength: 1
+                              description: 'CloudMatrix attribute report value, this should be used as an alias for 3rd party attribute value '
+                            value:
+                              type: string
+                              minLength: 1
+                              description: CloudMatrix attribute value
+                          required:
+                            - value
+                    required:
+                      - id
+                publication:
+                  type: object
+                  required:
+                    - publish
+                    - from
+                  properties:
+                    publish:
+                      type: boolean
+                      description: CloudMatrix attribute flag to indicate whether to publish the attribute or not
+                      default: false
+                    from:
+                      type: string
+                      minLength: 1
+                      description: |-
+                        From date is required only when publish is set to true.
+                        Expected format is ISO 8601.
+                    to:
+                      type: string
+                      minLength: 1
+                      description: Expected format is ISO 8601.
+                    config:
+                      type: array
+                      uniqueItems: true
+                      minItems: 1
+                      items:
+                        type: object
+                        properties:
+                          target:
+                            type: string
+                            minLength: 1
+                            description: CloudMatrix target uuid
+                          from:
+                            type: string
+                            minLength: 1
+                            description: Expected format is ISO 8601.
+                          to:
+                            type: string
+                            minLength: 1
+                            description: Expected format is ISO 8601.
+                          region:
+                            type: array
+                            uniqueItems: true
+                            minItems: 1
+                            description: 'CloudMatrix attribute '
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                  minLength: 1
+                                  description: CloudMatrix region uuid
+                                from:
+                                  type: string
+                                  minLength: 1
+                                  description: Expected format is ISO 8601.
+                                to:
+                                  type: string
+                                  minLength: 1
+                                  description: Expected format is ISO 8601.
+                              required:
+                                - id
+                        required:
+                          - target
+                          - region
               required:
-                - id
-                - title
-                - description
-                - metadata
-                - entitlements
+                - attributes
+                - publication
             examples:
               Example:
                 value:
-                  filename: example-1.mp4
-                  id: 27b24738-7f6b-11ec-a8a3-0242ac120002
-                  title: Example 1
-                  description: A brief description of the example 1 video
-                  metadata:
-                    originalReleaseDate: '2022-01-01'
-                  entitlements:
-                    - monthly99
-                    - premium
+                  attributes:
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
+                      label: title
+                      value: Some Title
+                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18ada
+                      label: description
+                      value: Some Description
+                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18adb
+                      label: custom field
+                      value: Some custom field
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
+                      label: entitlement
+                      items:
+                        - value: entitlement1
+                        - value: entitlement2
+                    - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
+                      label: Teams
+                      items:
+                        - alias: '1234'
+                          value: Team A
+                        - alias: '6789'
+                          value: Team B
+                  publication:
+                    publish: true
+                    from: '06-03-2022T22:51:25Z'
+                    to: '06-06-2022T22:51:25Z'
+                    config:
+                      - target: web
+                        region:
+                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
+                            from: '06-03-2022T22:51:25Z'
+                            to: '06-06-2022T22:51:25Z'
+                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d3
+                            from: '06-03-2022T22:51:25Z'
+                            to: '06-06-2022T22:51:25Z'
+                      - target: app
+                        from: '06-03-2022T22:51:25Z'
+                        to: '06-06-2022T22:51:25Z'
+                        region:
+                          - from: '06-03-2022T22:51:25Z'
+                            to: '06-06-2022T22:51:25Z'
+                            id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
         description: The body should contain the additional CloudMatrix Metadata you would like to store along side the entry.
   /multipart/start:
     put:
@@ -260,26 +409,208 @@ paths:
               type: object
               x-examples:
                 example-1:
-                  partNumber: 1
-                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+                  attributes:
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
+                      label: title
+                      value: Some Title
+                      items:
+                        - alias: '1234'
+                          value: Team A
+                        - alias: '6789'
+                          value: Team B
+                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18ada
+                      label: description
+                      value: Some Description
+                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18adb
+                      label: custom field
+                      value: Some custom field
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
+                      label: entitlement
+                      items:
+                        - value: entitlement1
+                        - value: entitlement2
+                    - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
+                      label: Teams
+                      items:
+                        - alias: '1234'
+                          value: Team A
+                        - alias: '6789'
+                          value: Team B
+                  publication:
+                    publish: true
+                    from: '06-03-2022T22:51:25Z'
+                    to: '06-06-2022T22:51:25Z'
+                    config:
+                      - target: web
+                        region:
+                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
+                            from: '06-03-2022T22:51:25Z'
+                            to: '06-06-2022T22:51:25Z'
+                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d3
+                            from: '06-03-2022T22:51:25Z'
+                            to: '06-06-2022T22:51:25Z'
+                      - target: app
+                        from: '06-03-2022T22:51:25Z'
+                        to: '06-06-2022T22:51:25Z'
+                        region:
+                          - from: '06-03-2022T22:51:25Z'
+                            to: '06-06-2022T22:51:25Z'
+                            id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
               properties:
-                filename:
-                  type: string
-                partNumber:
-                  type: number
-                uploadId:
-                  type: string
-                  minLength: 1
+                attributes:
+                  type: array
+                  uniqueItems: true
+                  minItems: 1
+                  description: The metadata attributes
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        minLength: 1
+                        description: CloudMatrix attribute id
+                      label:
+                        type: string
+                        minLength: 1
+                        description: CloudMatrix attribute label
+                      value:
+                        type: string
+                        minLength: 1
+                        description: CloudMatrix attribute value
+                      items:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        description: CloudMatrix attribute where value is a collection
+                        items:
+                          type: object
+                          additionalProperties: false
+                          properties:
+                            alias:
+                              type: string
+                              minLength: 1
+                              description: 'CloudMatrix attribute report value, this should be used as an alias for 3rd party attribute value '
+                            value:
+                              type: string
+                              minLength: 1
+                              description: CloudMatrix attribute value
+                          required:
+                            - value
+                    required:
+                      - id
+                publication:
+                  type: object
+                  required:
+                    - publish
+                    - from
+                  properties:
+                    publish:
+                      type: boolean
+                      description: CloudMatrix attribute flag to indicate whether to publish the attribute or not
+                      default: false
+                    from:
+                      type: string
+                      minLength: 1
+                      description: |-
+                        From date is required only when publish is set to true.
+                        Expected format is ISO 8601.
+                    to:
+                      type: string
+                      minLength: 1
+                      description: Expected format is ISO 8601.
+                    config:
+                      type: array
+                      uniqueItems: true
+                      minItems: 1
+                      items:
+                        type: object
+                        properties:
+                          target:
+                            type: string
+                            minLength: 1
+                            description: CloudMatrix target uuid
+                          from:
+                            type: string
+                            minLength: 1
+                            description: Expected format is ISO 8601.
+                          to:
+                            type: string
+                            minLength: 1
+                            description: Expected format is ISO 8601.
+                          region:
+                            type: array
+                            uniqueItems: true
+                            minItems: 1
+                            description: 'CloudMatrix attribute '
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                  minLength: 1
+                                  description: CloudMatrix region uuid
+                                from:
+                                  type: string
+                                  minLength: 1
+                                  description: Expected format is ISO 8601.
+                                to:
+                                  type: string
+                                  minLength: 1
+                                  description: Expected format is ISO 8601.
+                              required:
+                                - id
+                        required:
+                          - target
+                          - region
               required:
-                - partNumber
-                - uploadId
+                - attributes
+                - publication
             examples:
               Example:
                 value:
-                  filename: example-2.mp4
-                  partNumber: 1
-                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
-        description: The request body must contain the part number and the upload id of the partial upload chunk.
+                  attributes:
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
+                      label: title
+                      value: Some Title
+                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18ada
+                      label: description
+                      value: Some Description
+                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18adb
+                      label: custom field
+                      value: Some custom field
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
+                      label: entitlement
+                      items:
+                        - value: entitlement1
+                        - value: entitlement2
+                    - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
+                      label: Teams
+                      items:
+                        - alias: '1234'
+                          value: Team A
+                        - alias: '6789'
+                          value: Team B
+                  publication:
+                    publish: true
+                    from: '06-03-2022T22:51:25Z'
+                    to: '06-06-2022T22:51:25Z'
+                    config:
+                      - target: web
+                        region:
+                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
+                            from: '06-03-2022T22:51:25Z'
+                            to: '06-06-2022T22:51:25Z'
+                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d3
+                            from: '06-03-2022T22:51:25Z'
+                            to: '06-06-2022T22:51:25Z'
+                      - target: app
+                        from: '06-03-2022T22:51:25Z'
+                        to: '06-06-2022T22:51:25Z'
+                        region:
+                          - from: '06-03-2022T22:51:25Z'
+                            to: '06-06-2022T22:51:25Z'
+                            id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
+        description: The body should contain the additional CloudMatrix Metadata you would like to store along side the entry.
     parameters: []
   /multipart/complete:
     put:
