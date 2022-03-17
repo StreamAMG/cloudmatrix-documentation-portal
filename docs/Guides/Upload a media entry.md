@@ -1,5 +1,10 @@
 # Upload a Media Entry
 
+<!--
+focus: false
+-->
+![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
+
 The CloudMatrix Upload API allows you to upload media entries into your CloudMatrix and MediaPlatform instances.
 
 This allows you to build rich integrations with StreamAMG's products.
