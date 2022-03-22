@@ -13,7 +13,7 @@ paths:
   /upload:
     parameters: []
     put:
-      summary: Request a upload URL
+      summary: Request an Upload URL
       operationId: put-upload
       responses:
         '200':
