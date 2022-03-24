@@ -333,7 +333,7 @@ paths:
 
         The update attributes endpoint allows updating existing attributes in the CloudMatrix.
       tags:
-        - Upload
+        - Update
       requestBody:
         content:
           application/json:
