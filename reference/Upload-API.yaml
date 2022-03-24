@@ -458,7 +458,7 @@ paths:
                           value: Team A
                         - alias: '6789'
                           value: Team B
-        description: The body should contain the additional CloudMatrix Metadata you would like to store along side the entry.
+        description: The body should contain the additional CloudMatrix Metadata attributes you would like to update.
   /multipart/start:
     put:
       summary: Start multipart upload
