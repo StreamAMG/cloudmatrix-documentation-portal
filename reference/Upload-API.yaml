@@ -2,11 +2,19 @@ openapi: 3.1.0
 info:
   title: API Reference
   version: '1.0'
+  contact: {
+    "name": "Jonathon Robins",
+    "email": "Jonathon.Robins@pamediagroup.com"
+  }
   summary: An API to facilitate the uploading of media Content into StreamAMGs CloudMatrix & MediaPlatform Products
   description: |-
     The CloudMatrix Upload API provides clients with the functionality to upload Media Content via a HTTP API with no dependencies on a technology or framework.
 
     The upload functionality allows clients to upload Rich Metadata alongside their media so that it is automatically available within CloudMatrix once the media entry is processed via MediaPlatform. 
+tags:
+  - name: Upload
+  - name: Update
+  - name: Multipart  
 servers:
   - url: 'https://cloudmatrix.upload.streamamg.com'
 paths:
@@ -714,7 +722,7 @@ paths:
   /multipart/upload:
     put:
       summary: Request a upload URL
-      operationId: put-multipart-start
+      operationId: put-multipart-upload
       responses:
         '200':
           description: OK
@@ -791,7 +799,7 @@ paths:
   /multipart/complete:
     put:
       summary: Complete a multipart upload
-      operationId: put-multipart-start
+      operationId: put-multipart-complete
       responses:
         '200':
           description: OK
