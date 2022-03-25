@@ -69,55 +69,6 @@ paths:
             schema:
               description: ''
               type: object
-              x-examples:
-                example-1:
-                  attributes:
-                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
-                      label: title
-                      value: Some Title
-                      items:
-                        - alias: '1234'
-                          value: Team A
-                        - alias: '6789'
-                          value: Team B
-                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18ada
-                      label: description
-                      value: Some Description
-                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18adb
-                      label: custom field
-                      value: Some custom field
-                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
-                      label: entitlement
-                      items:
-                        - value: entitlement1
-                        - value: entitlement2
-                    - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
-                      label: Teams
-                      items:
-                        - alias: '1234'
-                          value: Team A
-                        - alias: '6789'
-                          value: Team B
-                  publication:
-                    publish: true
-                    from: '06-03-2022T22:51:25Z'
-                    to: '06-06-2022T22:51:25Z'
-                    config:
-                      - target: web
-                        region:
-                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
-                            from: '06-03-2022T22:51:25Z'
-                            to: '06-06-2022T22:51:25Z'
-                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d3
-                            from: '06-03-2022T22:51:25Z'
-                            to: '06-06-2022T22:51:25Z'
-                      - target: app
-                        from: '06-03-2022T22:51:25Z'
-                        to: '06-06-2022T22:51:25Z'
-                        region:
-                          - from: '06-03-2022T22:51:25Z'
-                            to: '06-06-2022T22:51:25Z'
-                            id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
               properties:
                 attributes:
                   type: array
@@ -348,55 +299,6 @@ paths:
             schema:
               description: ''
               type: object
-              x-examples:
-                example-1:
-                  attributes:
-                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
-                      label: title
-                      value: Some Title
-                      items:
-                        - alias: '1234'
-                          value: Team A
-                        - alias: '6789'
-                          value: Team B
-                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18ada
-                      label: description
-                      value: Some Description
-                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18adb
-                      label: custom field
-                      value: Some custom field
-                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
-                      label: entitlement
-                      items:
-                        - value: entitlement1
-                        - value: entitlement2
-                    - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
-                      label: Teams
-                      items:
-                        - alias: '1234'
-                          value: Team A
-                        - alias: '6789'
-                          value: Team B
-                  publication:
-                    publish: true
-                    from: '06-03-2022T22:51:25Z'
-                    to: '06-06-2022T22:51:25Z'
-                    config:
-                      - target: web
-                        region:
-                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
-                            from: '06-03-2022T22:51:25Z'
-                            to: '06-06-2022T22:51:25Z'
-                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d3
-                            from: '06-03-2022T22:51:25Z'
-                            to: '06-06-2022T22:51:25Z'
-                      - target: app
-                        from: '06-03-2022T22:51:25Z'
-                        to: '06-06-2022T22:51:25Z'
-                        region:
-                          - from: '06-03-2022T22:51:25Z'
-                            to: '06-06-2022T22:51:25Z'
-                            id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
               properties:
                 attributes:
                   type: array
