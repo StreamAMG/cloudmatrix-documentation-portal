@@ -2,11 +2,19 @@ openapi: 3.1.0
 info:
   title: API Reference
   version: '1.0'
+  contact: {
+    "name": "Jonathon Robins",
+    "email": "Jonathon.Robins@pamediagroup.com"
+  }
   summary: An API to facilitate the uploading of media Content into StreamAMGs CloudMatrix & MediaPlatform Products
   description: |-
     The CloudMatrix Upload API provides clients with the functionality to upload Media Content via a HTTP API with no dependencies on a technology or framework.
 
     The upload functionality allows clients to upload Rich Metadata alongside their media so that it is automatically available within CloudMatrix once the media entry is processed via MediaPlatform. 
+tags:
+  - name: Upload
+  - name: Update
+  - name: Multipart  
 servers:
   - url: 'https://cloudmatrix.upload.streamamg.com'
 paths:
@@ -48,11 +56,11 @@ paths:
         -->
         ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
 
-        In order to upload a media entry, first a initial API call to retrive a signed URL must be generated. This signed URL will allow you to directly upload the media asset to the storage location via HTTP.
+        In order to upload a media entry, first an initial API call to retrive a signed URL must be generated. This signed URL will allow you to directly upload the media asset to the storage location via HTTP.
 
         The initial API call should consist of metadata you would like to store against your asset within the CloudMatrix Platform and any associated entitlements for the entry you are uploading.
 
-        Note: This method of upload only supports upto 5GB per asset, for larger assets please refer to the multipart upload.
+        **Note**: This method of upload only supports upto 5GB per asset, for larger assets please refer to the multipart upload.
       tags:
         - Upload
       requestBody:
@@ -61,55 +69,6 @@ paths:
             schema:
               description: ''
               type: object
-              x-examples:
-                example-1:
-                  attributes:
-                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
-                      label: title
-                      value: Some Title
-                      items:
-                        - alias: '1234'
-                          value: Team A
-                        - alias: '6789'
-                          value: Team B
-                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18ada
-                      label: description
-                      value: Some Description
-                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18adb
-                      label: custom field
-                      value: Some custom field
-                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
-                      label: entitlement
-                      items:
-                        - value: entitlement1
-                        - value: entitlement2
-                    - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
-                      label: Teams
-                      items:
-                        - alias: '1234'
-                          value: Team A
-                        - alias: '6789'
-                          value: Team B
-                  publication:
-                    publish: true
-                    from: '06-03-2022T22:51:25Z'
-                    to: '06-06-2022T22:51:25Z'
-                    config:
-                      - target: web
-                        region:
-                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
-                            from: '06-03-2022T22:51:25Z'
-                            to: '06-06-2022T22:51:25Z'
-                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d3
-                            from: '06-03-2022T22:51:25Z'
-                            to: '06-06-2022T22:51:25Z'
-                      - target: app
-                        from: '06-03-2022T22:51:25Z'
-                        to: '06-06-2022T22:51:25Z'
-                        region:
-                          - from: '06-03-2022T22:51:25Z'
-                            to: '06-06-2022T22:51:25Z'
-                            id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
               properties:
                 attributes:
                   type: array
@@ -265,6 +224,143 @@ paths:
                             to: '06-06-2022T22:51:25Z'
                             id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
         description: The body should contain the additional CloudMatrix Metadata you would like to store along side the entry.
+  /update:
+    parameters: []
+    put:
+      summary: Update Attributes
+      operationId: put-update
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  status:
+                    type: number
+                    enum:
+                      - 200
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+                  - message
+              examples:
+                Example:
+                  value:
+                    status: 200
+                    message: Attributes updated successfully
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  status:
+                    type: number
+                    enum:
+                      - 400
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+                  - message
+              examples:
+                Example:
+                  value:
+                    status: 400
+                    message: Attribute id e078d72a-aad4-4b68-9227-e0bde0b35c6d not found
+      description: |-
+        <!--
+        focus: false
+        -->
+        ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
+
+        The update attributes endpoint allows updating existing attributes in the CloudMatrix.
+      tags:
+        - Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                attributes:
+                  type: array
+                  uniqueItems: true
+                  minItems: 1
+                  description: The metadata attributes
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        minLength: 1
+                        description: CloudMatrix attribute id
+                      label:
+                        type: string
+                        minLength: 1
+                        description: CloudMatrix attribute label
+                      value:
+                        type: string
+                        minLength: 1
+                        description: CloudMatrix attribute value
+                      items:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        description: CloudMatrix attribute where value is a collection
+                        items:
+                          type: object
+                          additionalProperties: false
+                          properties:
+                            alias:
+                              type: string
+                              minLength: 1
+                              description: CloudMatrix attribute report value, this should be used as an alias for 3rd party attribute value
+                            value:
+                              type: string
+                              minLength: 1
+                              description: CloudMatrix attribute value
+                          required:
+                            - value
+                    required:
+                      - id
+              required:
+                - attributes
+            examples:
+              Example:
+                value:
+                  attributes:
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
+                      label: title
+                      value: Some Title
+                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18ada
+                      label: description
+                      value: Some Description
+                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18adb
+                      label: custom field
+                      value: Some custom field
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
+                      label: entitlement
+                      items:
+                        - value: entitlement1
+                        - value: entitlement2
+                    - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
+                      label: Teams
+                      items:
+                        - alias: '1234'
+                          value: Team A
+                        - alias: '6789'
+                          value: Team B
+        description: The body should contain the additional CloudMatrix Metadata attributes you would like to update.
   /multipart/start:
     put:
       summary: Start multipart upload
@@ -520,7 +616,7 @@ paths:
   /multipart/upload:
     put:
       summary: Request a upload URL
-      operationId: put-multipart-start
+      operationId: put-multipart-upload
       responses:
         '200':
           description: OK
@@ -597,7 +693,7 @@ paths:
   /multipart/complete:
     put:
       summary: Complete a multipart upload
-      operationId: put-multipart-start
+      operationId: put-multipart-complete
       responses:
         '200':
           description: OK
