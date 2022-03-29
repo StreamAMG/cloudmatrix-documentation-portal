@@ -288,11 +288,8 @@ paths:
                     minLength: 1
                 required:
                   - message
-                x-examples:
-                  example-1:
-                    message: Forbidden
               examples:
-                example-1:
+                Example:
                   value:
                     message: Forbidden
       description: |-
