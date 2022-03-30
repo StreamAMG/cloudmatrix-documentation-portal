@@ -2,10 +2,9 @@ openapi: 3.1.0
 info:
   title: API Reference
   version: '1.0'
-  contact: {
-    "name": "Jonathon Robins",
-    "email": "Jonathon.Robins@pamediagroup.com"
-  }
+  contact:
+    name: Jonathon Robins
+    email: Jonathon.Robins@pamediagroup.com
   summary: An API to facilitate the uploading of media Content into StreamAMGs CloudMatrix & MediaPlatform Products
   description: |-
     The CloudMatrix Upload API provides clients with the functionality to upload Media Content via a HTTP API with no dependencies on a technology or framework.
@@ -14,7 +13,7 @@ info:
 tags:
   - name: Upload
   - name: Update
-  - name: Multipart  
+  - name: Multipart
 servers:
   - url: 'https://cloudmatrix.upload.streamamg.com'
 paths:
@@ -276,6 +275,23 @@ paths:
                   value:
                     status: 400
                     message: Attribute id e078d72a-aad4-4b68-9227-e0bde0b35c6d not found
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                Example:
+                  value:
+                    message: Forbidden
       description: |-
         <!--
         focus: false
@@ -324,7 +340,7 @@ paths:
                             alias:
                               type: string
                               minLength: 1
-                              description: CloudMatrix attribute report value, this should be used as an alias for 3rd party attribute value
+                              description: 'CloudMatrix attribute report value, this should be used as an alias for 3rd party attribute value'
                             value:
                               type: string
                               minLength: 1
