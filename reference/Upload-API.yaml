@@ -17,11 +17,11 @@ tags:
 servers:
   - url: 'https://cloudmatrix.upload.streamamg.com'
 paths:
-  /upload:
+  /entry:
     parameters: []
-    put:
+    post:
       summary: Request an Upload URL
-      operationId: put-upload
+      operationId: post-upload
       responses:
         '200':
           description: OK
@@ -57,7 +57,7 @@ paths:
 
         In order to upload a media entry, first an initial API call to retrive a signed URL must be generated. This signed URL will allow you to directly upload the media asset to the storage location via HTTP.
 
-        The initial API call should consist of metadata you would like to store against your asset within the CloudMatrix Platform and any associated entitlements for the entry you are uploading.
+        The initial API call should consist of attributes (metadata) you would like to store against your asset within the CloudMatrix Platform and any associated entitlements for the entry you are uploading.
 
         **Note**: This method of upload only supports upto 5GB per asset, for larger assets please refer to the multipart upload.
       tags:
@@ -223,11 +223,17 @@ paths:
                             to: '06-06-2022T22:51:25Z'
                             id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
         description: The body should contain the additional CloudMatrix Metadata you would like to store along side the entry.
-  /update:
-    parameters: []
-    put:
-      summary: Update Attributes
-      operationId: put-update
+  '/entry/{entryId}':
+    parameters:
+      - schema:
+          type: string
+        name: entryId
+        in: path
+        required: true
+        description: The Cloudmatrix entry id to update
+    patch:
+      summary: Update Entry Attributes
+      operationId: patch-attributes
       responses:
         '200':
           description: OK
@@ -298,7 +304,7 @@ paths:
         -->
         ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
 
-        The update attributes endpoint allows updating existing attributes in the CloudMatrix.
+        The endpoint updates existing CloudMatrix media entry attributes.
       tags:
         - Update
       requestBody:
