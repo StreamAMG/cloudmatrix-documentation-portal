@@ -59,7 +59,9 @@ paths:
 
         The initial API call should consist of attributes (metadata) you would like to store against your asset within the CloudMatrix Platform and any associated entitlements for the entry you are uploading.
 
-        **Note**: This method of upload only supports upto 5GB per asset, for larger assets please refer to the multipart upload.
+        **Note**: 
+        - This method of upload only supports upto 5GB per asset, for larger assets please refer to the multipart upload.
+        - This endpoint uploads only the VOD entries
       tags:
         - Upload
       requestBody:
@@ -343,10 +345,6 @@ paths:
                           type: object
                           additionalProperties: false
                           properties:
-                            alias:
-                              type: string
-                              minLength: 1
-                              description: 'CloudMatrix attribute report value, this should be used as an alias for 3rd party attribute value'
                             value:
                               type: string
                               minLength: 1
@@ -378,10 +376,8 @@ paths:
                     - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
                       label: Teams
                       items:
-                        - alias: '1234'
-                          value: Team A
-                        - alias: '6789'
-                          value: Team B
+                        - value: Team A
+                        - value: Team B
         description: The body should contain the additional CloudMatrix Metadata attributes you would like to update.
   /multipart/start:
     put:
