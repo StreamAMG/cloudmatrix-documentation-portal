@@ -82,10 +82,6 @@ paths:
                         type: string
                         minLength: 1
                         description: CloudMatrix attribute id
-                      label:
-                        type: string
-                        minLength: 1
-                        description: CloudMatrix attribute label
                       value:
                         type: string
                         minLength: 1
@@ -183,21 +179,16 @@ paths:
                 value:
                   attributes:
                     - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
-                      label: title
                       value: Some Title
                     - id: 57e816fb-03b7-4706-a99f-5c6ef8d18ada
-                      label: description
                       value: Some Description
                     - id: 57e816fb-03b7-4706-a99f-5c6ef8d18adb
-                      label: custom field
                       value: Some custom field
                     - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
-                      label: entitlement
                       items:
                         - value: entitlement1
                         - value: entitlement2
                     - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
-                      label: Teams
                       items:
                         - alias: '1234'
                           value: Team A
@@ -231,7 +222,7 @@ paths:
         name: entryId
         in: path
         required: true
-        description: The Cloudmatrix entry id to update
+        description: The Cloudmatrix entry id to update (representing the article which must already exist).
     patch:
       summary: Update Entry Attributes
       operationId: patch-attributes
@@ -299,6 +290,26 @@ paths:
                 Example:
                   value:
                     message: Forbidden
+        '500':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                description: On an unexpected or validation error e.g. invalid integer type or dropdown value, return a 
+                  response detailing the asset and identifiers of the failed media asset configuration item(s).
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+                  - message
+              examples:
+                Example:
+                  value:
+                    status: error
+                    message: Cannot update for entry id 0_507zgscf with attribute id(s) ["a61de76c-e367-4c63-93e0-2d6fd6e256cf"]
       description: |-
         <!--
         focus: false
@@ -319,27 +330,23 @@ paths:
                   type: array
                   uniqueItems: true
                   minItems: 1
-                  description: The metadata attributes
+                  description: The metadata attributes (either as a single value or a collectioj of values).
                   items:
                     type: object
                     properties:
                       id:
                         type: string
                         minLength: 1
-                        description: CloudMatrix attribute id
-                      label:
-                        type: string
-                        minLength: 1
-                        description: CloudMatrix attribute label
+                        description: CloudMatrix attribute id (media asset configured custom field identifier)
                       value:
                         type: string
                         minLength: 1
-                        description: CloudMatrix attribute value
+                        description: CloudMatrix attribute value (media asset configured custom field value)
                       items:
                         type: array
                         uniqueItems: true
                         minItems: 1
-                        description: CloudMatrix attribute where value is a collection
+                        description: CloudMatrix attribute where value is a collection.
                         items:
                           type: object
                           additionalProperties: false
@@ -347,7 +354,7 @@ paths:
                             value:
                               type: string
                               minLength: 1
-                              description: CloudMatrix attribute value
+                              description: CloudMatrix attribute value (media asset configured custom field value)
                           required:
                             - value
                     required:
@@ -355,29 +362,57 @@ paths:
               required:
                 - attributes
             examples:
-              Example:
+              String Value Example:
                 value:
                   attributes:
                     - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
-                      label: title
-                      value: Some Title
+                      value: 'Updated Title'
+              Integer Value Example:
+                value:
+                  attributes:
                     - id: 57e816fb-03b7-4706-a99f-5c6ef8d18ada
-                      label: description
-                      value: Some Description
+                      value: '123'
+              Boolean Value Example:
+                value:
+                  attributes:
                     - id: 57e816fb-03b7-4706-a99f-5c6ef8d18adb
-                      label: custom field
-                      value: Some custom field
+                      value: 'true'
+              Multi-Value Example:
+                value:
+                  attributes:
                     - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
-                      label: entitlement
                       items:
-                        - value: entitlement1
-                        - value: entitlement2
-                    - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
-                      label: Teams
-                      items:
-                        - value: Team A
-                        - value: Team B
-        description: The body should contain the additional CloudMatrix Metadata attributes you would like to update.
+                        - value: 'team1'
+                        - value: 'team2'
+              Date Value Example:
+                value:
+                  attributes:
+                    - id: 7ac5484e-ec8c-45f6-9437-95c909f5d41d
+                      value: '2022-02-24'
+              Time Value Example:
+                value:
+                  attributes:
+                    - id: 17cfb9e1-1775-41a8-8628-1cf053551c73
+                      value: '15:30'
+              Datetime Value Example:
+                value:
+                  attributes:
+                    - id: cdb8eb34-917f-4e45-b617-a6d994d00d2c
+                      value: '2022-02-24 11:30:20'
+                    - id: cdb8eb34-917f-4e45-b617-a6d994d00d2c
+                      value: '2022/02/24 11:30:20'
+        description: |-
+          The body should contain the additional CloudMatrix Metadata attributes you would like to update. 
+          
+          The value(s) supplied must be of the correct type for the media asset configured custom field (see examples)
+         
+          Invalid value(s) will result in a status code of 500 being returned (see responses) detailing the error-prone 
+          attribute identifier.
+        
+          Any error (validation or non-existent custom attribute etc) will result in no changes being updated in the 
+          entire payload. If all the changes are valid and updates are possible then they will all be committed to the 
+          database in one transaction.
+
   /multipart/start:
     put:
       summary: Start multipart upload
@@ -430,7 +465,6 @@ paths:
                 example-1:
                   attributes:
                     - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
-                      label: title
                       value: Some Title
                       items:
                         - alias: '1234'
@@ -438,18 +472,14 @@ paths:
                         - alias: '6789'
                           value: Team B
                     - id: 57e816fb-03b7-4706-a99f-5c6ef8d18ada
-                      label: description
                       value: Some Description
                     - id: 57e816fb-03b7-4706-a99f-5c6ef8d18adb
-                      label: custom field
                       value: Some custom field
                     - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
-                      label: entitlement
                       items:
                         - value: entitlement1
                         - value: entitlement2
                     - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
-                      label: Teams
                       items:
                         - alias: '1234'
                           value: Team A
@@ -488,10 +518,6 @@ paths:
                         type: string
                         minLength: 1
                         description: CloudMatrix attribute id
-                      label:
-                        type: string
-                        minLength: 1
-                        description: CloudMatrix attribute label
                       value:
                         type: string
                         minLength: 1
@@ -589,21 +615,16 @@ paths:
                 value:
                   attributes:
                     - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
-                      label: title
                       value: Some Title
                     - id: 57e816fb-03b7-4706-a99f-5c6ef8d18ada
-                      label: description
                       value: Some Description
                     - id: 57e816fb-03b7-4706-a99f-5c6ef8d18adb
-                      label: custom field
                       value: Some custom field
                     - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
-                      label: entitlement
                       items:
                         - value: entitlement1
                         - value: entitlement2
                     - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
-                      label: Teams
                       items:
                         - alias: '1234'
                           value: Team A
