@@ -330,7 +330,7 @@ paths:
                   type: array
                   uniqueItems: true
                   minItems: 1
-                  description: The metadata attributes (either as a single value or a collectioj of values).
+                  description: The metadata attributes (either as a single value or a collection of values).
                   items:
                     type: object
                     properties:
