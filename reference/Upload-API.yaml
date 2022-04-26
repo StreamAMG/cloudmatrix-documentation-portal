@@ -269,10 +269,14 @@ paths:
                   - status
                   - message
               examples:
-                Example:
+                Not Found:
                   value:
                     status: 400
-                    message: Attribute id e078d72a-aad4-4b68-9227-e0bde0b35c6d not found
+                    message: Attribute id(s) e078d72a-aad4-4b68-9227-e0bde0b35xx1,e078d72a-aad4-4b68-9227-e0bde0b35xx2 not found
+                Invalid Request:
+                  value:
+                    status: 400
+                    message: Bad Request Exception
         '403':
           description: Forbidden
           content:
@@ -308,8 +312,8 @@ paths:
               examples:
                 Example:
                   value:
-                    status: error
-                    message: Cannot update for entry id 0_507zgscf with attribute id(s) ["a61de76c-e367-4c63-93e0-2d6fd6e256cf"]
+                    status: 500
+                    message: Cannot update for entry id 0_507zgscf with attribute id a61de76c-e367-4c63-93e0-2d6fd6e256cf
       description: |-
         <!--
         focus: false
