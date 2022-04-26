@@ -272,7 +272,7 @@ paths:
                 Not Found:
                   value:
                     status: 400
-                    message: Attribute id(s) e078d72a-aad4-4b68-9227-e0bde0b35xx1,e078d72a-aad4-4b68-9227-e0bde0b35xx2 not found
+                    message: 'Attribute id(s) e078d72a-aad4-4b68-9227-e0bde0b35xx1,e078d72a-aad4-4b68-9227-e0bde0b35xx2 not found'
                 Invalid Request:
                   value:
                     status: 400
@@ -299,8 +299,7 @@ paths:
           content:
             application/json:
               schema:
-                description: On an unexpected or validation error e.g. invalid integer type or dropdown value, return a 
-                  response detailing the asset and identifiers of the failed media asset configuration item(s).
+                description: 'On an unexpected or validation error e.g. invalid integer type or dropdown value, return a response detailing the asset and identifiers of the failed media asset configuration item(s).'
                 type: object
                 properties:
                   message:
@@ -370,7 +369,7 @@ paths:
                 value:
                   attributes:
                     - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
-                      value: 'Updated Title'
+                      value: Updated Title
               Integer Value Example:
                 value:
                   attributes:
@@ -386,8 +385,8 @@ paths:
                   attributes:
                     - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
                       items:
-                        - value: 'team1'
-                        - value: 'team2'
+                        - value: team1
+                        - value: team2
               Date Value Example:
                 value:
                   attributes:
@@ -407,16 +406,21 @@ paths:
                       value: '2022/02/24 11:30:20'
         description: |-
           The body should contain the additional CloudMatrix Metadata attributes you would like to update. 
-          
+
           The value(s) supplied must be of the correct type for the media asset configured custom field (see examples)
-         
+
           Invalid value(s) will result in a status code of 500 being returned (see responses) detailing the error-prone 
           attribute identifier.
-        
+
           Any error (validation or non-existent custom attribute etc) will result in no changes being updated in the 
           entire payload. If all the changes are valid and updates are possible then they will all be committed to the 
           database in one transaction.
-
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: x-api-key
+          description: Authorisation key
   /multipart/start:
     put:
       summary: Start multipart upload
