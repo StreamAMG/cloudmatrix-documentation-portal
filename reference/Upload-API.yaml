@@ -32,7 +32,7 @@ paths:
                 x-examples:
                   example-1:
                     entryId: 0_xshqrl2n
-                    signedUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJWZ7B6WCRGMKFGQ%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
+                    uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJWZ7B6WCRGMKFGQ%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
                 properties:
                   entryId:
                     type: string
@@ -48,6 +48,65 @@ paths:
                   value:
                     entryId: 0_xshqrl2n
                     uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJWZ7B6WCRGMKFGQ%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  status:
+                    type: number
+                    enum:
+                      - 400
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+                  - message
+              examples:
+                Invalid Request:
+                  value:
+                    status: 400
+                    message: Bad Request Exception
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                Example:
+                  value:
+                    message: Forbidden
+        '500':
+          description: Application Error
+          content:
+            application/json:
+              schema:
+                description: 'On an unexpected or validation application error return a generic error message'
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+                  - message
+              examples:
+                Example:
+                  value:
+                    status: 500
+                    message: Error creating a new entry
       description: |-
         <!--
         focus: false
@@ -56,7 +115,7 @@ paths:
 
         In order to upload a media entry, first an initial API call to retrive a signed URL must be generated. This signed URL will allow you to directly upload the media asset to the storage location via HTTP.
 
-        The initial API call should consist of attributes (metadata) you would like to store against your asset within the CloudMatrix Platform and any associated entitlements for the entry you are uploading.
+        The initial API call should consist of attributes (metadata) you would like to store against your asset within the CloudMatrix Platform and any associated publication details for the entry you are uploading.
 
         **Note**: 
         - This method of upload only supports upto 5GB per asset, for larger assets please refer to the multipart upload.
@@ -95,14 +154,14 @@ paths:
                           type: object
                           additionalProperties: false
                           properties:
-                            alias:
-                              type: string
-                              minLength: 1
-                              description: 'CloudMatrix attribute report value, this should be used as an alias for 3rd party attribute value '
                             value:
                               type: string
                               minLength: 1
                               description: CloudMatrix attribute value
+                            alias:
+                              type: string
+                              minLength: 1
+                              description: CloudMatrix attribute report value, this should be used as an alias for 3rd party attribute value
                           required:
                             - value
                     required:
@@ -150,7 +209,7 @@ paths:
                             type: array
                             uniqueItems: true
                             minItems: 1
-                            description: 'CloudMatrix attribute '
+                            description: CloudMatrix attribute
                             items:
                               type: object
                               properties:
