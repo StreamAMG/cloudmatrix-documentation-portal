@@ -17,7 +17,14 @@ servers:
   - url: 'https://cloudmatrix.api.streamamg.com'
 paths:
   /entry:
-    parameters: []
+    parameters:
+      - in: query
+        schema:
+          type: string
+          default: en
+        name: language
+        required: false
+        description: The Cloudmatrix language for custom attributes (representing a valid configured language).
     post:
       summary: Create a new CloudMatrix entry
       operationId: post-upload
@@ -276,12 +283,19 @@ paths:
         description: The body should contain the additional CloudMatrix Metadata you would like to store along side the entry.
   '/entry/{entryId}':
     parameters:
-      - schema:
+      - in: path
+        schema:
           type: string
         name: entryId
-        in: path
         required: true
         description: The Cloudmatrix entry id to update (representing the article which must already exist).
+      - in: query
+        schema:
+          type: string
+          default: en
+        name: language
+        required: false
+        description: The Cloudmatrix language for custom attributes (representing a valid configured language).
     patch:
       summary: Update Entry Attributes
       operationId: patch-attributes
