@@ -910,79 +910,66 @@ paths:
       tags: []
       responses:
         '200':
-          description: |2-
-
-
+          description: |-
+            Json response in following format
               
               "itemData": [
                 {
-                  "id": "ae412bb2-bf6a-4568-9af0-3e959db35b0c",
+                  "id": "{articleid}",
                   "mediaData": {
-                    "mediaType": "OnDemand",
-                    "entryId": "0_aj8swfbd",
+                    "mediaType": "OnDemand or live",
+                    "entryId": "{entryid}",
                     "entryStatus": "Ready",
-                    "thumbnailUrl": "https://open.http.mp.streamamg.com/p/3000759/sp/300075900/thumbnail/entry_id/0_aj8swfbd/"
+                    "thumbnailUrl": "{thumbnailurl}"
                   },
                   "sortData": [
                     
                   ],
                   "metaData": {
-                    "test_datepicker": "2022-06-27T00:00:00",
+                    "DatetimeField": "YYYY-MM-DDTHH:mm:ss",
                     "body": "Test",
-                    "testdropdown": "TV2",
-                    "content_name": [
-                      "highlights"
+                    "DropdownField": "TV2",
+                    "MultiSelectDropdownList": [
+                      "value1",
+                      "value2",
+                      "value3"
                     ],
-                    "testautocomplete2": [
-                      
+                    "AutocompleteTypeField": [
+                      "value1",
+                      "value2",
+                      "value3"
                     ],
-                    "test_integer": 5,
-                    "content_type": [
-                      
-                    ],
-                    "test32": -1,
-                    "livescoreplayers": [
-                      
-                    ],
-                    "SysEntryEntitlements": [
-                      "basic",
-                      "paid"
-                    ],
-                    "_country": "VI",
-                    "test_datetime_picker": "2022-06-26T23:59:57",
-                    "testentitlements": [
+                    "IntegerTypeField": {numeric value},
+                    "CountryTypeField": "{two letter ISO country code}",
+                    "EntitlementTypeFields": [
+                      "TestEntitlement",
                       "TestEntitlement"
                     ],
-                    "livescoreteams": [
-                      
+                    "OptaFixture": "{string type value}",
+                    "OptaSeason": [
+                      "season1",
+                      "season2"
                     ],
-                    "season": [
-                      "2021"
+                    "OptaPlayers": [
+                      "Player1",
+                      "Player2"
                     ],
-                    "VideoDuration": 31,
-                    "player_name": [
-                      "Player A"
-                    ],
-                    "optaseriesdropdown": 3,
-                    "title": "file_example_MP4_640_3MG",
-                    "optaepisode": 6,
-                    "tournament": [
-                      
-                    ],
+                    "OptaTeam": "{team name}",
+                    "Optaground": "{ground name}",
+                    "VideoDuration": {positive integer value},
+                    "title": "{string value}",
+                    "optaepisode": {positive integer value},
                     "tags": [
                       "test1",
                       "test2"
-                    ],
-                    "testmdropdown": [
-                      "V1"
                     ]
                   },
                   "publicationData": {
-                    "createdAt": "2022-06-21T15:48:55",
-                    "updatedAt": "2022-06-27T13:04:40",
+                    "createdAt": "YYYY-MM-DDTHH:mm:ss",
+                    "updatedAt": "YYYY-MM-DDTHH:mm:ss",
                     "released": true,
-                    "releaseFrom": "2022-06-21T15:48:55",
-                    "releaseTo": "9999-12-31T23:59:59.9999999"
+                    "releaseFrom": "YYYY-MM-DDTHH:mm:ss",
+                    "releaseTo": "YYYY-MM-DDTHH:mm:ss"
                   }
                 }
               ],
