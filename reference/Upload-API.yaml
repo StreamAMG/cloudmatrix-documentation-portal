@@ -910,7 +910,90 @@ paths:
       tags: []
       responses:
         '200':
-          description: OK
+          description: |2-
+
+
+              
+              "itemData": [
+                {
+                  "id": "ae412bb2-bf6a-4568-9af0-3e959db35b0c",
+                  "mediaData": {
+                    "mediaType": "OnDemand",
+                    "entryId": "0_aj8swfbd",
+                    "entryStatus": "Ready",
+                    "thumbnailUrl": "https://open.http.mp.streamamg.com/p/3000759/sp/300075900/thumbnail/entry_id/0_aj8swfbd/"
+                  },
+                  "sortData": [
+                    
+                  ],
+                  "metaData": {
+                    "test_datepicker": "2022-06-27T00:00:00",
+                    "body": "Test",
+                    "testdropdown": "TV2",
+                    "content_name": [
+                      "highlights"
+                    ],
+                    "testautocomplete2": [
+                      
+                    ],
+                    "test_integer": 5,
+                    "content_type": [
+                      
+                    ],
+                    "test32": -1,
+                    "livescoreplayers": [
+                      
+                    ],
+                    "SysEntryEntitlements": [
+                      "basic",
+                      "paid"
+                    ],
+                    "_country": "VI",
+                    "test_datetime_picker": "2022-06-26T23:59:57",
+                    "testentitlements": [
+                      "TestEntitlement"
+                    ],
+                    "livescoreteams": [
+                      
+                    ],
+                    "season": [
+                      "2021"
+                    ],
+                    "VideoDuration": 31,
+                    "player_name": [
+                      "Player A"
+                    ],
+                    "optaseriesdropdown": 3,
+                    "title": "file_example_MP4_640_3MG",
+                    "optaepisode": 6,
+                    "tournament": [
+                      
+                    ],
+                    "tags": [
+                      "test1",
+                      "test2"
+                    ],
+                    "testmdropdown": [
+                      "V1"
+                    ]
+                  },
+                  "publicationData": {
+                    "createdAt": "2022-06-21T15:48:55",
+                    "updatedAt": "2022-06-27T13:04:40",
+                    "released": true,
+                    "releaseFrom": "2022-06-21T15:48:55",
+                    "releaseTo": "9999-12-31T23:59:59.9999999"
+                  }
+                }
+              ],
+              "pagingData": {
+                "totalCount": 1,
+                "itemCount": 1,
+                "pageCount": 1,
+                "pageSize": 50,
+                "pageIndex": 0
+              }
+            }
       operationId: get-api-v1-apiUserId-apiKey-targetId-languageCode
       description: ''
       parameters:
@@ -918,7 +1001,7 @@ paths:
             type: string
           in: query
           name: query
-          description: 'Elastic search query string query '
+          description: Elastic search query string query. The field must be qualified with the section in the body like metadata.title
         - schema:
             type: number
           in: query
@@ -933,7 +1016,7 @@ paths:
             type: string
           in: query
           name: sortBy
-          description: The field name qualified with the metadata body group like metadata.title.
+          description: The field name qualified with the section in the body like metadata.title.
         - schema:
             type: string
           in: query
