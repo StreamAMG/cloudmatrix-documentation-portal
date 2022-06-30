@@ -946,10 +946,7 @@ paths:
                       "TestEntitlement"
                     ],
                     "OptaFixture": "{string value}",
-                    "OptaSeason": [
-                      "season1",
-                      "season2"
-                    ],
+                    "OptaSeason":"season name",
                     "OptaPlayers": [
                       "Player1",
                       "Player2"
