@@ -100,7 +100,7 @@ paths:
           content:
             application/json:
               schema:
-                description: 'On an unexpected or validation application error return a generic error message'
+                description: On an unexpected or validation application error return a generic error message
                 type: object
                 properties:
                   message:
@@ -168,7 +168,7 @@ paths:
                             alias:
                               type: string
                               minLength: 1
-                              description: CloudMatrix attribute report value, this should be used as an alias for 3rd party attribute value
+                              description: 'CloudMatrix attribute report value, this should be used as an alias for 3rd party attribute value'
                           required:
                             - value
                     required:
@@ -879,5 +879,39 @@ paths:
                       etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
         description: The request body should contain a reference to each part along with the Etag of each upload.
     parameters: []
+  '/api/v1/{apiKey}/{targetId}/{languageCode}/?':
+    parameters:
+      - schema:
+          type: string
+        name: apiKey
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: targetId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: languageCode
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: ''
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: ''
+        in: path
+        required: true
+    get:
+      summary: search
+      tags: []
+      responses:
+        '200':
+          description: OK
+      operationId: get-api-v1-apiUserId-apiKey-targetId-languageCode
 components:
   schemas: {}
