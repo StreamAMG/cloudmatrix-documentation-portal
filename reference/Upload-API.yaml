@@ -917,5 +917,27 @@ paths:
         - schema:
             type: string
           in: query
+          name: query
+          description: 'Elastic search query string query '
+        - schema:
+            type: number
+          in: query
+          name: pageIndex
+          description: 'Page index. '
+        - schema:
+            type: number
+          in: query
+          name: pageSize
+          description: 'Page Size '
+        - schema:
+            type: string
+          in: query
+          name: sortBy
+          description: The field name qualified with the metadata body group like metadata.title.
+        - schema:
+            type: string
+          in: query
+          name: sortOrder
+          description: '"asc" or "desc"'
 components:
   schemas: {}
