@@ -906,7 +906,7 @@ paths:
         required: true
         description: Two characters ISO language code
     get:
-      summary: search
+      summary: Article search
       tags: []
       responses:
         '200':
@@ -1001,9 +1001,9 @@ paths:
               "entryStatus": "Ready",
               "thumbnailUrl": "{thumbnailurl}"
           1.2. MetaData
-              Fields and their values as created at CloudMatrix UI. Fields at cloudMatrix are dynamically created     
-              from custom types. 
-            
+            Fields and their values as created at CloudMatrix UI. Fields at cloudMatrix are dynamically created     
+            from custom types. 
+          
           1.3 Publication data: Contains following fields           
               "createdAt": "YYYY-MM-DDTHH:mm:ss",
               "updatedAt": "YYYY-MM-DDTHH:mm:ss",
@@ -1011,12 +1011,12 @@ paths:
               "releaseFrom": "YYYY-MM-DDTHH:mm:ss",
               "releaseTo": "YYYY-MM-DDTHH:mm:ss"
               
-         2.  pagingData: Contains pogination details. 
-              "totalCount": {positive integer value},
-              "itemCount": {positive integer value}},
-              "pageCount": {positive integer value},
-              "pageSize": {positive integer value},
-              "pageIndex": {positive integer value}
+        2.pagingData: Contains pogination details. 
+          "totalCount": {positive integer value},
+          "itemCount": {positive integer value}},
+          "pageCount": {positive integer value},
+          "pageSize": {positive integer value},
+          "pageIndex": {positive integer value}
       parameters:
         - schema:
             type: string
