@@ -912,7 +912,7 @@ paths:
         '200':
           description: |-
             Json response in following format
-              {
+            {
               "itemData": [
                 {
                   "id": "{articleid}",
