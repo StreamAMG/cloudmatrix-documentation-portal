@@ -1126,11 +1126,12 @@ paths:
               "entryId": "{entryid}",
               "entryStatus": "Ready",
               "thumbnailUrl": "{thumbnailurl}"
-          1.2. MetaData
+          1.3. Sort Data: Custom sorting order
+          1.3. MetaData
            Metadata is  custom configurable schema. Number and the values depends upon the customer fields and 
            their types.   
           
-          1.3 Publication data: Contains following fields           
+          1.4 Publication data: Contains following fields           
               "createdAt": "YYYY-MM-DDTHH:mm:ss",
               "updatedAt": "YYYY-MM-DDTHH:mm:ss",
               "released": true,
