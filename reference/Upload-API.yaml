@@ -1127,7 +1127,8 @@ paths:
               "entryStatus": "Ready",
               "thumbnailUrl": "{thumbnailurl}"
           1.2. MetaData
-           Metadata is  custom configurable schema.   
+           Metadata is  custom configurable schema. Number and the values depends upon the customer fields and 
+           their types.   
           
           1.3 Publication data: Contains following fields           
               "createdAt": "YYYY-MM-DDTHH:mm:ss",
