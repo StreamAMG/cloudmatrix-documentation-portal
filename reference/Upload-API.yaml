@@ -879,7 +879,7 @@ paths:
                       etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
         description: The request body should contain a reference to each part along with the Etag of each upload.
     parameters: []
-  '/api/v1/{apiUserId}/{apiKey}/{targetId}/{languageCode}':
+  '/api/v1/{apiUserId}/{apiKey}/{targetId}/{languageCode}/search':
     parameters:
       - schema:
           type: string
@@ -912,5 +912,10 @@ paths:
         '200':
           description: OK
       operationId: get-api-v1-apiUserId-apiKey-targetId-languageCode
+      description: ''
+      parameters:
+        - schema:
+            type: string
+          in: query
 components:
   schemas: {}
