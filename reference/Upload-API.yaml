@@ -897,7 +897,6 @@ paths:
           type: string
         name: targetId
         in: path
-        required: true
         description: Guid identifying the target where articles are allowed to be published
       - schema:
           type: string
