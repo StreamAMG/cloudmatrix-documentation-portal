@@ -946,7 +946,10 @@ paths:
                       "TestEntitlement"
                     ],
                     "OptaFixture": "{string value}",
-                    "OptaSeason":"season name",
+                    "OptaSeason": [
+                      "season1",
+                      "season2"
+                    ],
                     "OptaPlayers": [
                       "Player1",
                       "Player2"
@@ -980,6 +983,8 @@ paths:
             }
         '500':
           description: Internal Server Error
+        '501':
+          description: Not Implemented
       operationId: get-api-v1-apiUserId-apiKey-targetId-languageCode
       description: |-
         Json reponse containing atciles based on a provided "query string" in query parameters of the request. 
