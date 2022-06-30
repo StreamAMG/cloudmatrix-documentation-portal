@@ -912,7 +912,7 @@ paths:
           description: |-
             A sample response
               
-            // 20220630172743
+            // 20220630173758
             // https://anywhere-staging.streamamg.com/api/v1/cffd1f37-ea4c-4c2d-bf54-e5d1d07626af/y5cy9UoIYBQlx0EnNKrWrvKshemjXWpUmFKBOMM093aL5sL41q/en/search/?query=mediaData.entryId:(0_aj8swfbd)
 
             {
@@ -1087,7 +1087,7 @@ paths:
                     "optaseriesdropdown": 3,
                     "opta_season": "2021",
                     "title": "file_example_MP4_640_3MG",
-                    "optaepisode": 6,
+                    "episode": 6,
                     "tags": [
                       "Replay",
                       "Football"
@@ -1095,7 +1095,7 @@ paths:
                   },
                   "publicationData": {
                     "createdAt": "2022-06-21T15:48:55",
-                    "updatedAt": "2022-06-30T16:27:35",
+                    "updatedAt": "2022-06-30T16:37:52",
                     "released": true,
                     "releaseFrom": "2022-06-21T15:48:55",
                     "releaseTo": "9999-12-31T23:59:59.9999999"
