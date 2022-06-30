@@ -911,80 +911,204 @@ paths:
       responses:
         '200':
           description: |-
-            Json response in following format
-            {
+            A sample response
+              
+              "metaData": {
+                
+              },
               "itemData": [
                 {
-                  "id": "{articleid}",
+                  "id": "ae412bb2-bf6a-4568-9af0-3e959db35b0c",
                   "mediaData": {
-                    "mediaType": "OnDemand or live",
-                    "entryId": "{entryid}",
+                    "mediaType": "OnDemand",
+                    "entryId": "0_aj8swfbd",
                     "entryStatus": "Ready",
-                    "thumbnailUrl": "{thumbnailurl}"
+                    "thumbnailUrl": "https://open.http.mp.streamamg.com/p/3000759/sp/300075900/thumbnail/entry_id/0_aj8swfbd/"
                   },
                   "sortData": [
                     
                   ],
                   "metaData": {
-                    "DatetimeField": "YYYY-MM-DDTHH:mm:ss",
-                    "body": "description of the article text",
-                    "DropdownField": "selected value",
-                    "MultiSelectDropdownList": [
-                      "value1",
-                      "value2",
-                      "value3"
+                    "home_team": "t14",
+                    "body": "A sample media ",
+                    "home_players": [
+                      "p116535",
+                      "p60706",
+                      "p464353",
+                      "p200720",
+                      "p490138",
+                      "p433019",
+                      "p97032",
+                      "p171287",
+                      "p438277",
+                      "p214285",
+                      "p122798",
+                      "p152898",
+                      "p60914",
+                      "p219937",
+                      "p197464",
+                      "p169187",
+                      "p215136",
+                      "p480818",
+                      "p116643",
+                      "p41733",
+                      "p61558",
+                      "p15157",
+                      "p175592",
+                      "p56979",
+                      "p81880",
+                      "p206915",
+                      "p68312",
+                      "p182436",
+                      "p243343",
+                      "p233489",
+                      "p92217",
+                      "p110979",
+                      "p118748",
+                      "p194634",
+                      "p152760",
+                      "p104542",
+                      "p432987",
+                      "p232904",
+                      "p210237",
+                      "p141921",
+                      "p153682",
+                      "p444884",
+                      "p157882",
+                      "p204716",
+                      "p210156",
+                      "p443629",
+                      "p430992",
+                      "p440148",
+                      "p492777",
+                      "p496185",
+                      "p462490",
+                      "p215133",
+                      "p466937",
+                      "p432988",
+                      "p441616",
+                      "p441428",
+                      "p482533",
+                      "p515481",
+                      "p244731"
                     ],
-                    "AutocompleteTypeField": [
-                      "value1",
-                      "value2",
-                      "value3"
+                    "opta_fixture": "2210294",
+                    "content_name": [
+                      "highlights"
                     ],
-                    "IntegerTypeField": {numeric value},
-                    "CountryTypeField": "{two letter ISO country code}",
-                    "EntitlementTypeFields": [
-                      "TestEntitlement",
-                      "TestEntitlement"
+                    "away_players": [
+                      "p109745",
+                      "p20310",
+                      "p228286",
+                      "p431019",
+                      "p102380",
+                      "p82263",
+                      "p135363",
+                      "p51090",
+                      "p103192",
+                      "p172850",
+                      "p225796",
+                      "p41328",
+                      "p109533",
+                      "p441191",
+                      "p85955",
+                      "p116594",
+                      "p176413",
+                      "p91651",
+                      "p184341",
+                      "p124183",
+                      "p243568",
+                      "p219847",
+                      "p223332",
+                      "p450529",
+                      "p173879",
+                      "p165153",
+                      "p44346",
+                      "p209046",
+                      "p209706",
+                      "p200415",
+                      "p219256",
+                      "p194794",
+                      "p49013",
+                      "p105700",
+                      "p199598",
+                      "p88894",
+                      "p126187",
+                      "p169102",
+                      "p126186",
+                      "p94245",
+                      "p167767",
+                      "p118335",
+                      "p204727",
+                      "p163793",
+                      "p180732",
+                      "p61603",
+                      "p171162",
+                      "p482158",
+                      "p199583",
+                      "p232787",
+                      "p180736",
+                      "p440323",
+                      "p181913",
+                      "p122074",
+                      "p66749",
+                      "p89335",
+                      "p470165",
+                      "p499857",
+                      "p491785",
+                      "p450543",
+                      "p488160",
+                      "p487838",
+                      "p487827",
+                      "p498367"
                     ],
-                    "OptaFixture": "{string value}",
-                    "OptaSeason": [
-                      "season1",
-                      "season2"
+                    "competition": "8",
+                    "content_type": [
+                      "Full replays"
                     ],
-                    "OptaPlayers": [
-                      "Player1",
-                      "Player2"
+                    "away_team": "t8",
+                    "livescoreplayers": [
+                      "95536",
+                      "8600",
+                      "9483",
+                      "81637"
                     ],
-                    "OptaTeam": "{team name}",
-                    "Optaground": "{ground name}",
-                    "VideoDuration": {positive integer value},
-                    "title": "{string value}",
-                    "optaepisode": {positive integer value},
+                    "sysentryentitlements": [
+                      "basic",
+                      "paid"
+                    ],
+                    "ground": "anfield",
+                    "_country": "VI",
+                    "test_datetime_picker": "2022-06-26T23:59:57",
+                    "VideoDuration": 31,
+                    "optaseriesdropdown": 3,
+                    "opta_season": "2021",
+                    "title": "file_example_MP4_640_3MG",
+                    "optaepisode": 6,
                     "tags": [
                       "test1",
                       "test2"
                     ]
                   },
                   "publicationData": {
-                    "createdAt": "YYYY-MM-DDTHH:mm:ss",
-                    "updatedAt": "YYYY-MM-DDTHH:mm:ss",
+                    "createdAt": "2022-06-21T15:48:55",
+                    "updatedAt": "2022-06-30T15:45:23",
                     "released": true,
-                    "releaseFrom": "YYYY-MM-DDTHH:mm:ss",
-                    "releaseTo": "YYYY-MM-DDTHH:mm:ss"
+                    "releaseFrom": "2022-06-21T15:48:55",
+                    "releaseTo": "9999-12-31T23:59:59.9999999"
                   }
                 }
               ],
               "pagingData": {
-                "totalCount": {positive integer value},
-                "itemCount": {positive integer value}},
-                "pageCount": {positive integer value},
-                "pageSize": {positive integer value},
-                "pageIndex": {positive integer value}
+                "totalCount": 1,
+                "itemCount": 1,
+                "pageCount": 1,
+                "pageSize": 50,
+                "pageIndex": 0
               }
             }
         '500':
           description: Internal Server Error
-        '501':
-          description: Not Implemented
       operationId: get-api-v1-apiUserId-apiKey-targetId-languageCode
       description: |-
         Json reponse containing atciles based on a provided "query string" in query parameters of the request. 
@@ -1003,8 +1127,7 @@ paths:
               "entryStatus": "Ready",
               "thumbnailUrl": "{thumbnailurl}"
           1.2. MetaData
-            Fields and their values as created at CloudMatrix UI. Fields at cloudMatrix are dynamically created     
-            from custom types. 
+           Fields in  
           
           1.3 Publication data: Contains following fields           
               "createdAt": "YYYY-MM-DDTHH:mm:ss",
