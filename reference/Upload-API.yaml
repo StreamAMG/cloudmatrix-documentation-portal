@@ -927,8 +927,8 @@ paths:
                   ],
                   "metaData": {
                     "DatetimeField": "YYYY-MM-DDTHH:mm:ss",
-                    "body": "Test",
-                    "DropdownField": "TV2",
+                    "body": "description of the article text",
+                    "DropdownField": "selected value",
                     "MultiSelectDropdownList": [
                       "value1",
                       "value2",
