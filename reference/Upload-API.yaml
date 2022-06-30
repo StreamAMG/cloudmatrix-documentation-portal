@@ -912,7 +912,7 @@ paths:
         '200':
           description: |-
             Json response in following format
-              
+              {
               "itemData": [
                 {
                   "id": "{articleid}",
@@ -981,8 +981,8 @@ paths:
                 "pageIndex": {positive integer value}
               }
             }
-        '201':
-          description: Created
+        '500':
+          description: Internal Server Error
       operationId: get-api-v1-apiUserId-apiKey-targetId-languageCode
       description: |-
         Json reponse containing atciles based on a provided "query string" in query parameters of the request. 
