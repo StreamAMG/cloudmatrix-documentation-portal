@@ -974,11 +974,11 @@ paths:
                 }
               ],
               "pagingData": {
-                "totalCount": 1,
-                "itemCount": 1,
-                "pageCount": 1,
-                "pageSize": 50,
-                "pageIndex": 0
+                "totalCount": {positive integer value},
+                "itemCount": {positive integer value}},
+                "pageCount": {positive integer value},
+                "pageSize": {positive integer value},
+                "pageIndex": {positive integer value}
               }
             }
       operationId: get-api-v1-apiUserId-apiKey-targetId-languageCode
