@@ -879,33 +879,32 @@ paths:
                       etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
         description: The request body should contain a reference to each part along with the Etag of each upload.
     parameters: []
-  '/api/v1/{apiKey}/{targetId}/{languageCode}/?':
+  '/api/v1/{apiUserId}/{apiKey}/{targetId}/{languageCode}':
     parameters:
+      - schema:
+          type: string
+        name: apiUserId
+        in: path
+        required: true
+        description: Guid identifying the requesting client
       - schema:
           type: string
         name: apiKey
         in: path
         required: true
+        description: Second layer encrypted identifier for the requesting client
       - schema:
           type: string
         name: targetId
         in: path
         required: true
+        description: Guid identifying the target where articles are allowed to be published
       - schema:
           type: string
         name: languageCode
         in: path
         required: true
-      - schema:
-          type: string
-        name: ''
-        in: path
-        required: true
-      - schema:
-          type: string
-        name: ''
-        in: path
-        required: true
+        description: Two characters ISO language code
     get:
       summary: search
       tags: []
