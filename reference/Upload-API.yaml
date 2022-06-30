@@ -1127,7 +1127,7 @@ paths:
               "entryStatus": "Ready",
               "thumbnailUrl": "{thumbnailurl}"
           1.2. MetaData
-           Fields in  
+           Metadata is  custom configurable schema.   
           
           1.3 Publication data: Contains following fields           
               "createdAt": "YYYY-MM-DDTHH:mm:ss",
