@@ -916,9 +916,6 @@ paths:
             // https://anywhere-staging.streamamg.com/api/v1/cffd1f37-ea4c-4c2d-bf54-e5d1d07626af/y5cy9UoIYBQlx0EnNKrWrvKshemjXWpUmFKBOMM093aL5sL41q/en/search/?query=mediaData.entryId:(0_aj8swfbd)
 
             {
-              "metaData": {
-                
-              },
               "itemData": [
                 {
                   "id": "ae412bb2-bf6a-4568-9af0-3e959db35b0c",
