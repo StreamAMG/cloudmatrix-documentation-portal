@@ -809,76 +809,6 @@ paths:
                   uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
         description: The request body must contain the part number and the upload id of the partial upload chunk.
     parameters: []
-  /multipart/complete:
-    put:
-      summary: Complete a multipart upload
-      operationId: put-multipart-complete
-      responses:
-        '200':
-          description: OK
-      description: |-
-        <!--
-        focus: false
-        -->
-        ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
-
-        The final part of the multipart upload is the completion step. This request should be called when all chunks of the data have been sent. 
-      tags:
-        - Multipart
-      requestBody:
-        content:
-          application/json:
-            schema:
-              description: ''
-              type: object
-              x-examples:
-                example-1:
-                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
-                  parts:
-                    - partNumber: 1
-                      etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
-                    - partNumber: 2
-                      etag: 44a64df551425fcc55e4d42a148795d9f25f89d5
-                    - partNumber: 2
-                      etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
-              properties:
-                filename:
-                  type: string
-                uploadId:
-                  type: string
-                  minLength: 1
-                parts:
-                  type: array
-                  uniqueItems: true
-                  minItems: 1
-                  items:
-                    type: object
-                    properties:
-                      partNumber:
-                        type: number
-                      etag:
-                        type: string
-                        minLength: 1
-                    required:
-                      - partNumber
-                      - etag
-              required:
-                - uploadId
-                - parts
-            examples:
-              Example:
-                value:
-                  filename: example-2.mp4
-                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
-                  parts:
-                    - partNumber: 1
-                      etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
-                    - partNumber: 2
-                      etag: 44a64df551425fcc55e4d42a148795d9f25f89d5
-                    - partNumber: 2
-                      etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
-        description: The request body should contain a reference to each part along with the Etag of each upload.
-    parameters: []
   '/api/v1/{apiUserId}/{apiKey}/{targetId}/{languageCode}/search':
     parameters:
       - schema:
@@ -1179,7 +1109,7 @@ paths:
           description: Internal Server Error
       operationId: get-api-v1-apiUserId-apiKey-targetId-languageCode
       description: |
-        Searches the articles which are published in the target which matches the "targetid" path parameter. The requesting user identified with the "userId" and "userKey" validated to have access to the target before responding. 
+        Searches the articles which are published on to the target which matches the "targetid" path parameter. The requesting user identified with the {}userId} and {userKey} must have the access to the target idenitified by {targetid} to get a valid response. 
 
         Json reponse containing atciles based on a provided "query string" in query parameters of the request. 
         This query uses a syntax to parse and split the provided query string based on operators, such as AND or NOT. The query then analyzes each split text independently before returning matching documents.
@@ -1228,6 +1158,76 @@ paths:
             examples:
               example-1:
                 value: {}
+  /multipart/complete:
+    put:
+      summary: Complete a multipart upload
+      operationId: put-multipart-complete
+      responses:
+        '200':
+          description: OK
+      description: |-
+        <!--
+        focus: false
+        -->
+        ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
+
+        The final part of the multipart upload is the completion step. This request should be called when all chunks of the data have been sent. 
+      tags:
+        - Multipart
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+                  parts:
+                    - partNumber: 1
+                      etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
+                    - partNumber: 2
+                      etag: 44a64df551425fcc55e4d42a148795d9f25f89d5
+                    - partNumber: 2
+                      etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
+              properties:
+                filename:
+                  type: string
+                uploadId:
+                  type: string
+                  minLength: 1
+                parts:
+                  type: array
+                  uniqueItems: true
+                  minItems: 1
+                  items:
+                    type: object
+                    properties:
+                      partNumber:
+                        type: number
+                      etag:
+                        type: string
+                        minLength: 1
+                    required:
+                      - partNumber
+                      - etag
+              required:
+                - uploadId
+                - parts
+            examples:
+              Example:
+                value:
+                  filename: example-2.mp4
+                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+                  parts:
+                    - partNumber: 1
+                      etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
+                    - partNumber: 2
+                      etag: 44a64df551425fcc55e4d42a148795d9f25f89d5
+                    - partNumber: 2
+                      etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
+        description: The request body should contain a reference to each part along with the Etag of each upload.
+    parameters: []
   '/{apiUserId}/{apiKey}/{languageCode}/search':
     parameters:
       - schema:
@@ -1517,7 +1517,7 @@ paths:
           description: Internal Server Error
       operationId: get-apiUserId-apiKey-targetId-languageCode-search
       description: |-
-        Searches the articles which are published on any target for "query string query" search provided in as query. The search is used to distribute free or promotion media. 
+        Searches the articles published on any target. The search is used to distribute free or promotional media. Any request having valid "userId" and "userKey" will be responded with the list of artciles.
 
         Json reponse containing atciles based on a provided "query string" in query parameters of the request. 
         This query uses a syntax to parse and split the provided query string based on operators, such as AND or NOT. The query then analyzes each split text independently before returning matching documents.
