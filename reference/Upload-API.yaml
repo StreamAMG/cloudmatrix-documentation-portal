@@ -898,6 +898,7 @@ paths:
         name: targetId
         in: path
         description: Guid identifying the target where articles are allowed to be published
+        required: true
       - schema:
           type: string
         name: languageCode
