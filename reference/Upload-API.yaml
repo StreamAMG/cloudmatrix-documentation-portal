@@ -907,7 +907,8 @@ paths:
         description: Two characters ISO language code
     get:
       summary: Article search
-      tags: [search]
+      tags:
+        - search
       responses:
         '200':
           description: OK
@@ -1164,9 +1165,9 @@ paths:
                             - Football
                         publicationData:
                           createdAt: '2022-06-21T15:48:55'
-                          updatedAt: '2022-06-30T16:37:52'
+                          updatedAt: '2022-07-04T10:03:22'
                           released: true
-                          releaseFrom: '2022-06-21T15:48:55'
+                          releaseFrom: '2022-06-01T15:48:55'
                           releaseTo: '9999-12-31T23:59:59.9999999'
                     pagingData:
                       totalCount: 1
@@ -1177,13 +1178,12 @@ paths:
         '500':
           description: Internal Server Error
       operationId: get-api-v1-apiUserId-apiKey-targetId-languageCode
-      description: |+
+      description: |
         Json reponse containing atciles based on a provided "query string" in query parameters of the request. 
         This query uses a syntax to parse and split the provided query string based on operators, such as AND or NOT. The query then analyzes each split text independently before returning matching documents.
 
         The entire reference of the query string query syntax can be found at
         https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html
-
       parameters:
         - schema:
             type: string
