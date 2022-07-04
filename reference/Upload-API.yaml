@@ -1518,7 +1518,7 @@ paths:
           description: Internal Server Error
       operationId: get-apiUserId-apiKey-targetId-languageCode-search
       description: |-
-        Searches the articles published on any target. The search is used to distribute free or promotional media. Any request having valid "userId" and "userKey" will be responded with the list of artciles.
+        Searches the articles published on any target. Request coming from a valid  user from any country will be responded with the list of artciles provided articles are published. 
 
         Json reponse containing atciles based on a provided "query string" in query parameters of the request. 
         This query uses a syntax to parse and split the provided query string based on operators, such as AND or NOT. The query then analyzes each split text independently before returning matching documents.
