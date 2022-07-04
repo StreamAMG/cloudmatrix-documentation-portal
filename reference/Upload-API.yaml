@@ -1247,7 +1247,7 @@ paths:
         required: true
     get:
       summary: Unrestricted Article Search
-      tags: []
+      tags: [search]
       responses:
         '200':
           description: OK
