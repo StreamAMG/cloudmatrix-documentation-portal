@@ -907,7 +907,7 @@ paths:
         description: Two characters ISO language code
     get:
       summary: Article search
-      tags: []
+      tags: [search]
       responses:
         '200':
           description: OK
