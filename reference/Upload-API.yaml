@@ -1179,6 +1179,8 @@ paths:
           description: Internal Server Error
       operationId: get-api-v1-apiUserId-apiKey-targetId-languageCode
       description: |
+        Searches the articles which are published in the target which matches the "targetid" path parameter. The requesting user identified with the "userId" and "userKey" validated to have access to the target before responding. 
+
         Json reponse containing atciles based on a provided "query string" in query parameters of the request. 
         This query uses a syntax to parse and split the provided query string based on operators, such as AND or NOT. The query then analyzes each split text independently before returning matching documents.
 
