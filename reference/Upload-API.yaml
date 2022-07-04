@@ -13,6 +13,7 @@ info:
 tags:
   - name: Entry
   - name: Multipart
+  - name: Search
 servers:
   - url: 'https://cloudmatrix.api.streamamg.com'
 paths:
