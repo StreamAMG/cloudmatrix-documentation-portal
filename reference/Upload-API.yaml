@@ -1226,5 +1226,27 @@ paths:
             examples:
               example-1:
                 value: {}
+  '/{apiUserId}/{apiKey}/{languageCode}/search':
+    parameters:
+      - schema:
+          type: string
+        name: apiUserId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: apiKey
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: languageCode
+        in: path
+        required: true
+    get:
+      summary: Unrestricted Article Search
+      tags: []
+      responses: {}
+      operationId: get-apiUserId-apiKey-targetId-languageCode-search
 components:
   schemas: {}
