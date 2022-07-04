@@ -1248,7 +1248,7 @@ paths:
     get:
       summary: Unrestricted Article Search
       tags:
-        - search
+        - Unrestricted search
       responses:
         '200':
           description: OK
