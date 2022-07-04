@@ -1109,7 +1109,7 @@ paths:
           description: Internal Server Error
       operationId: get-api-v1-apiUserId-apiKey-targetId-languageCode
       description: |
-        Searches the articles which are published on to the target which matches the "targetid" path parameter. The requesting user identified with the {}userId} and {userKey} must have the access to the target idenitified by {targetid} to get a valid response. 
+        Searches the articles which are published on to the target which matches the "targetid" path parameter. The requesting user identified with the {userId} and {userKey} must have the access to the target idenitified by {targetid} to get a valid response. Target resolves to a set of country and so request will be responded only when requests coming from countries under the target. 
 
         Json reponse containing atciles based on a provided "query string" in query parameters of the request. 
         This query uses a syntax to parse and split the provided query string based on operators, such as AND or NOT. The query then analyzes each split text independently before returning matching documents.
@@ -1247,7 +1247,8 @@ paths:
         required: true
     get:
       summary: Unrestricted Article Search
-      tags: [search]
+      tags:
+        - search
       responses:
         '200':
           description: OK
