@@ -1246,7 +1246,17 @@ paths:
     get:
       summary: Unrestricted Article Search
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-apiUserId-apiKey-targetId-languageCode-search
+      description: |-
+        Searches the articles which are published on any target for "query string query" search provided in as query. The search is used to distribute free or promotion media. 
+
+        Json reponse containing atciles based on a provided "query string" in query parameters of the request. 
+        This query uses a syntax to parse and split the provided query string based on operators, such as AND or NOT. The query then analyzes each split text independently before returning matching documents.
+
+        The entire reference of the query string query syntax can be found at
+        https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html
 components:
   schemas: {}
