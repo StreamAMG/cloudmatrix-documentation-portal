@@ -851,7 +851,7 @@ paths:
                 properties:
                   metaData:
                     type: object
-                    properties: {}
+                    additionalProperties: true
                   itemData:
                     type: array
                     items:
@@ -1146,10 +1146,34 @@ paths:
             application/json:
               schema:
                 type: object
+                x-examples:
+                  example-1:
+                    metaData: {}
+                    itemData:
+                      - id: ae412bb2-bf6a-4568-9af0-3e959db35b0c
+                        mediaData:
+                          mediaType: OnDemand
+                          entryId: 0_aj8swfbd
+                          entryStatus: Ready
+                          thumbnailUrl: 'https://open.http.mp.streamamg.com/p/3000759/sp/300075900/thumbnail/entry_id/0_aj8swfbd/'
+                        sortData: []
+                        metaData: {}
+                        publicationData:
+                          createdAt: '2022-06-21T15:48:55'
+                          updatedAt: '2022-06-30T16:37:52'
+                          released: true
+                          releaseFrom: '2022-06-21T15:48:55'
+                          releaseTo: '9999-12-31T23:59:59.9999999'
+                    pagingData:
+                      totalCount: 1
+                      itemCount: 1
+                      pageCount: 1
+                      pageSize: 50
+                      pageIndex: 0
                 properties:
                   metaData:
                     type: object
-                    properties: {}
+                    additionalProperties: true
                   itemData:
                     type: array
                     items:
@@ -1172,10 +1196,9 @@ paths:
                           type: array
                           items:
                             type: object
-                            properties: {}
                         metaData:
                           type: object
-                          properties: {}
+                          additionalProperties: true
                         publicationData:
                           type: object
                           properties:
@@ -1202,30 +1225,6 @@ paths:
                         type: integer
                       pageIndex:
                         type: integer
-                x-examples:
-                  example-1:
-                    metaData: {}
-                    itemData:
-                      - id: ae412bb2-bf6a-4568-9af0-3e959db35b0c
-                        mediaData:
-                          mediaType: OnDemand
-                          entryId: 0_aj8swfbd
-                          entryStatus: Ready
-                          thumbnailUrl: 'https://open.http.mp.streamamg.com/p/3000759/sp/300075900/thumbnail/entry_id/0_aj8swfbd/'
-                        sortData: []
-                        metaData: {}
-                        publicationData:
-                          createdAt: '2022-06-21T15:48:55'
-                          updatedAt: '2022-06-30T16:37:52'
-                          released: true
-                          releaseFrom: '2022-06-21T15:48:55'
-                          releaseTo: '9999-12-31T23:59:59.9999999'
-                    pagingData:
-                      totalCount: 1
-                      itemCount: 1
-                      pageCount: 1
-                      pageSize: 50
-                      pageIndex: 0
               examples:
                 example-1:
                   value:
