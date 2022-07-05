@@ -263,23 +263,23 @@ paths:
                           value: Team B
                   publication:
                     publish: true
-                    from: '06-03-2022T22:51:25Z'
-                    to: '06-06-2022T22:51:25Z'
+                    from: '2022-03-06T22:51:25Z'
+                    to: '2022-06-06T22:51:25Z'
                     config:
-                      - target: web
+                      - target: 54fc1851-cf8a-4d7c-86fb-9cc7d8d1ff5c
                         region:
                           - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
-                            from: '06-03-2022T22:51:25Z'
-                            to: '06-06-2022T22:51:25Z'
+                            from: '2022-03-06T22:51:25Z'
+                            to: '2022-06-06T22:51:25Z'
                           - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d3
-                            from: '06-03-2022T22:51:25Z'
-                            to: '06-06-2022T22:51:25Z'
-                      - target: app
-                        from: '06-03-2022T22:51:25Z'
-                        to: '06-06-2022T22:51:25Z'
+                            from: '2022-03-06T22:51:25Z'
+                            to: '2022-06-06T22:51:25Z'
+                      - target: 8b6a094d-59e3-4a31-8324-19e1366fca55
+                        from: '2022-03-06T22:51:25Z'
+                        to: '2022-06-06T22:51:25Z'
                         region:
-                          - from: '06-03-2022T22:51:25Z'
-                            to: '06-06-2022T22:51:25Z'
+                          - from: '2022-03-06T22:51:25Z'
+                            to: '2022-06-06T22:51:25Z'
                             id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
         description: The body should contain the additional CloudMatrix Metadata you would like to store along side the entry.
   '/entry/{entryId}':
@@ -569,23 +569,23 @@ paths:
                           value: Team B
                   publication:
                     publish: true
-                    from: '06-03-2022T22:51:25Z'
-                    to: '06-06-2022T22:51:25Z'
+                    from: '2022-03-06T22:51:25Z'
+                    to: '2022-06-06T22:51:25Z'
                     config:
-                      - target: web
+                      - target: 8b6a094d-59e3-4a31-8324-19e1366fca55
                         region:
                           - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
-                            from: '06-03-2022T22:51:25Z'
-                            to: '06-06-2022T22:51:25Z'
+                            from: '2022-03-06T22:51:25Z'
+                            to: '2022-06-06T22:51:25Z'
                           - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d3
-                            from: '06-03-2022T22:51:25Z'
-                            to: '06-06-2022T22:51:25Z'
-                      - target: app
-                        from: '06-03-2022T22:51:25Z'
-                        to: '06-06-2022T22:51:25Z'
+                            from: '2022-03-06T22:51:25Z'
+                            to: '2022-06-06T22:51:25Z'
+                      - target: 54fc1851-cf8a-4d7c-86fb-9cc7d8d1ff5c
+                        from: '2022-03-06T22:51:25Z'
+                        to: '2022-06-06T22:51:25Z'
                         region:
-                          - from: '06-03-2022T22:51:25Z'
-                            to: '06-06-2022T22:51:25Z'
+                          - from: '2022-03-06T22:51:25Z'
+                            to: '2022-06-06T22:51:25Z'
                             id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
               properties:
                 attributes:
@@ -714,23 +714,23 @@ paths:
                           value: Team B
                   publication:
                     publish: true
-                    from: '06-03-2022T22:51:25Z'
-                    to: '06-06-2022T22:51:25Z'
+                    from: '2022-03-06T22:51:25Z'
+                    to: '2022-06-06T22:51:25Z'
                     config:
-                      - target: web
+                      - target: 54fc1851-cf8a-4d7c-86fb-9cc7d8d1ff5c
                         region:
                           - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
-                            from: '06-03-2022T22:51:25Z'
-                            to: '06-06-2022T22:51:25Z'
+                            from: '2022-03-06T22:51:25Z'
+                            to: '2022-06-06T22:51:25Z'
                           - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d3
-                            from: '06-03-2022T22:51:25Z'
-                            to: '06-06-2022T22:51:25Z'
-                      - target: app
-                        from: '06-03-2022T22:51:25Z'
-                        to: '06-06-2022T22:51:25Z'
+                            from: '2022-03-06T22:51:25Z'
+                            to: '2022-06-06T22:51:25Z'
+                      - target: 8b6a094d-59e3-4a31-8324-19e1366fca55
+                        from: '2022-03-06T22:51:25Z'
+                        to: '2022-06-06T22:51:25Z'
                         region:
-                          - from: '06-03-2022T22:51:25Z'
-                            to: '06-06-2022T22:51:25Z'
+                          - from: '2022-03-06T22:51:25Z'
+                            to: '2022-06-06T22:51:25Z'
                             id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
         description: The body should contain the additional CloudMatrix Metadata you would like to store along side the entry.
   /multipart/upload:
