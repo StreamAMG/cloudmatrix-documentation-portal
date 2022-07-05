@@ -839,7 +839,7 @@ paths:
     get:
       summary: Article search
       tags:
-        - search
+        - Search
       responses:
         '200':
           description: OK
