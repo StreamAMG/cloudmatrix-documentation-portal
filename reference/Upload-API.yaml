@@ -877,7 +877,7 @@ paths:
                             properties: {}
                         metaData:
                           type: object
-                          properties: {}
+                          additionalProperties: true
                         publicationData:
                           type: object
                           properties:
