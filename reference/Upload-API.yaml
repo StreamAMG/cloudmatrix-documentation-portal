@@ -1311,6 +1311,7 @@ paths:
         name: entryId
         in: path
         required: true
+        description: 10 characters alphanumeric Id identifying media entry
     get:
       summary: Entry Entitlement
       tags:
