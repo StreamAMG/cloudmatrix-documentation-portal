@@ -1313,7 +1313,38 @@ paths:
     get:
       summary: Entry Entitlement
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  entitlement:
+                    type: array
+                    items:
+                      type: string
+                  ttl:
+                    type: integer
+                x-examples:
+                  example-1:
+                    entitlement:
+                      - paid
+                      - basic
+                    ttl: 90
+              examples:
+                example-1:
+                  value:
+                    entitlement:
+                      - string
+                    ttl: 0
       operationId: get-entryentitlements-entryId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
 components:
   schemas: {}
