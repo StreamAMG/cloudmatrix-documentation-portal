@@ -1303,5 +1303,17 @@ paths:
 
         The entire reference of the query string query syntax can be found at
         https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html
+  'api/v1/entryentitlements/{entryId}':
+    parameters:
+      - schema:
+          type: string
+        name: entryId
+        in: path
+        required: true
+    get:
+      summary: Entry Entitlement
+      tags: []
+      responses: {}
+      operationId: get-entryentitlements-entryId
 components:
   schemas: {}
