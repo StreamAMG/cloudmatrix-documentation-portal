@@ -1340,8 +1340,9 @@ paths:
                 example-1:
                   value:
                     entitlement:
-                      - string
-                    ttl: 0
+                      - paid
+                      - basic
+                    ttl: 90
         '500':
           description: Internal Server Error
       operationId: get-entryentitlements-entryId
