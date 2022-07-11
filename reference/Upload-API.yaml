@@ -1313,7 +1313,7 @@ paths:
         required: true
     get:
       summary: Entry Entitlement
-      tags: 
+      tags:
         - Entitlement
       responses:
         '200':
@@ -1348,5 +1348,6 @@ paths:
             schema:
               type: object
               properties: {}
+      description: 'Returns the list of entitlement and Time to live (TTL) for the "entry" identify by the entryid. '
 components:
   schemas: {}
