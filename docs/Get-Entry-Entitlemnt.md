@@ -8,4 +8,4 @@ Entry entirlement API is used to get the list of entry entitlement for a given e
 
 The high level flow diagram:
 
-<img src="assets/images/Entry-Entielement.png" alt="CloudMatrix Entitlement API" width="900" style="align:center"/>
+<img src="../../assets/images/Entry-Entielement.png" alt="CloudMatrix Entitlement API" width="900" style="align:center"/>
