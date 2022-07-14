@@ -14,6 +14,7 @@ tags:
   - name: Entry
   - name: Multipart
   - name: Search
+  - name: Entitlement
 servers:
   - url: 'https://cloudmatrix.api.streamamg.com'
 paths:
@@ -1303,5 +1304,54 @@ paths:
 
         The entire reference of the query string query syntax can be found at
         https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html
+  '/api/v1/entryentitlements/{entryId}':
+    parameters:
+      - schema:
+          type: string
+        name: entryId
+        in: path
+        required: true
+        description: 10 characters alphanumeric Id identifying media entry
+    get:
+      summary: Entry Entitlement
+      tags:
+        - Entitlement
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  entitlement:
+                    type: array
+                    items:
+                      type: string
+                  ttl:
+                    type: integer
+                x-examples:
+                  example-1:
+                    entitlement:
+                      - paid
+                      - basic
+                    ttl: 90
+              examples:
+                example-1:
+                  value:
+                    entitlement:
+                      - paid
+                      - basic
+                    ttl: 90
+        '500':
+          description: Internal Server Error
+      operationId: get-entryentitlements-entryId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+      description: 'Returns the list of entitlement and Time to live (TTL) for the "entry" identify by the entryid. '
 components:
   schemas: {}
