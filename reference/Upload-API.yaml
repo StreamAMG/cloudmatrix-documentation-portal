@@ -36,33 +36,71 @@ paths:
           content:
             application/json:
               schema:
-                description: ''
+                description: 'Success reporting back any values that are invalid and ignored.'
                 type: object
                 x-examples:
                   example-1:
+                    status: 200
+                    message: 'Successfully uploaded'
                     entryId: 0_xshqrl2n
                     uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJWZ7B6WCRGMKFGQ%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
                 properties:
+                  status:
+                    type: number
+                    enum:
+                      - 200
+                  message:
+                    type: string
+                    minLength: 1
                   entryId:
                     type: string
                     minLength: 1
                   uploadUrl:
                     type: string
                     minLength: 1
+                  failed:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        reason:
+                          type: string
                 required:
+                  - status
+                  - message
                   - entryId
                   - uploadUrl
               examples:
-                Example:
+                Example - Success:
                   value:
+                    status: 200
+                    message: 'Successfully uploaded'
                     entryId: 0_xshqrl2n
                     uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJWZ7B6WCRGMKFGQ%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
+                Example - Success With Invalid Values Reported:
+                  value:
+                    status: 200
+                    message: 'Successfully uploaded'
+                    entryId: 0_xshqrl2n
+                    uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJWZ7B6WCRGMKFGQ%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
+                    failed: [
+                      {
+                        'id': 'c490887c-c21b-4bda-b59a-8ca1ee88d8a8',
+                        'reason': 'Invalid value for attribute type specified'
+                      },
+                      {
+                        'id': 'a61de76c-e367-4c63-93e0-2d6fd6e256cf',
+                        'reason': 'Invalid value for attribute type specified'
+                      }
+                    ]
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                description: ''
+                description: 'The request payload shape or attribute identifiers are invalid.'
                 type: object
                 properties:
                   status:
@@ -72,6 +110,15 @@ paths:
                   message:
                     type: string
                     minLength: 1
+                  failed:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        reason:
+                          type: string
                 required:
                   - status
                   - message
@@ -80,12 +127,22 @@ paths:
                   value:
                     status: 400
                     message: Bad Request Exception
+                Invalid Attributes:
+                  value:
+                    status: 400
+                    message: Failed to create attributes
+                    failed: [
+                      {
+                        'id': 'c490887c-c21b-4bda-b59a-8ca1ee88d8a8',
+                        'reason': 'Attribute identifier is invalid'
+                      }
+                    ]
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                description: ''
+                description: 'Forbidden.'
                 type: object
                 properties:
                   message:
@@ -102,7 +159,7 @@ paths:
           content:
             application/json:
               schema:
-                description: On an unexpected or validation application error return a generic error message
+                description: 'On an unexpected error a generic error message is returned.'
                 type: object
                 properties:
                   message:
@@ -115,7 +172,7 @@ paths:
                 Example:
                   value:
                     status: 500
-                    message: Error creating a new entry
+                    message: Unexpected Error
       description: |-
         <!--
         focus: false
@@ -307,7 +364,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ''
+                description: 'Success reporting back any values that are invalid and ignored.'
                 type: object
                 properties:
                   status:
@@ -321,16 +378,30 @@ paths:
                   - status
                   - message
               examples:
-                Example:
+                Example - Success:
                   value:
                     status: 200
-                    message: Attributes updated successfully
+                    message: 'Attributes updated successfully'
+                Example - Success With Invalid Values Reported:
+                  value:
+                    status: 200
+                    message: 'Attributes updated successfully'
+                    failed: [
+                      {
+                        'id': 'c490887c-c21b-4bda-b59a-8ca1ee88d8a8',
+                        'reason': 'Invalid value for attribute type specified'
+                      },
+                      {
+                        'id': 'a61de76c-e367-4c63-93e0-2d6fd6e256cf',
+                        'reason': 'Invalid value for attribute type specified'
+                      }
+                    ]
         '400':
-          description: Bad Request
+          description: 'Bad Request'
           content:
             application/json:
               schema:
-                description: ''
+                description: 'The request payload shape or attribute identifiers are invalid.'
                 type: object
                 properties:
                   status:
@@ -344,20 +415,26 @@ paths:
                   - status
                   - message
               examples:
-                Not Found:
-                  value:
-                    status: 400
-                    message: 'Attribute id(s) e078d72a-aad4-4b68-9227-e0bde0b35xx1,e078d72a-aad4-4b68-9227-e0bde0b35xx2 not found'
                 Invalid Request:
                   value:
                     status: 400
                     message: Bad Request Exception
+                Invalid Attributes:
+                  value:
+                    status: 400
+                    message: 'Not all attributes found: none updated'
+                    failed: [
+                      {
+                        'id': 'c490887c-c21b-4bda-b59a-8ca1ee88d8a8',
+                        'reason': 'Attribute identifier is invalid'
+                      }
+                    ]
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                description: ''
+                description: 'Forbidden.'
                 type: object
                 properties:
                   message:
@@ -374,7 +451,7 @@ paths:
           content:
             application/json:
               schema:
-                description: 'On an unexpected or validation error e.g. invalid integer type or dropdown value, return a response detailing the asset and identifiers of the failed media asset configuration item(s).'
+                description: 'On an unexpected error a generic error message is returned.'
                 type: object
                 properties:
                   message:
@@ -387,7 +464,7 @@ paths:
                 Example:
                   value:
                     status: 500
-                    message: Cannot update for entry id 0_507zgscf with attribute id a61de76c-e367-4c63-93e0-2d6fd6e256cf
+                    message: 'Unexpected Error'
       description: |-
         <!--
         focus: false
