@@ -32,11 +32,11 @@ paths:
       operationId: post-upload
       responses:
         '200':
-          description: OK
+          description: 'Success - reporting back any values that are invalid and not updated'
           content:
             application/json:
               schema:
-                description: 'Success reporting back any values that are invalid and ignored.'
+                description: 'status and message with optional list of invalid values for attributes ignored'
                 type: object
                 x-examples:
                   example-1:
@@ -96,11 +96,11 @@ paths:
                       }
                     ]
         '400':
-          description: Bad Request
+          description: 'Bad Request - payload shape or attribute identifiers are invalid (nothing created)'
           content:
             application/json:
               schema:
-                description: 'The request payload shape or attribute identifiers are invalid.'
+                description: 'Status and message and optional list of invalid attribute identifiers (nothing created)'
                 type: object
                 properties:
                   status:
@@ -142,7 +142,7 @@ paths:
           content:
             application/json:
               schema:
-                description: 'Forbidden.'
+                description: 'Forbidden'
                 type: object
                 properties:
                   message:
@@ -159,7 +159,7 @@ paths:
           content:
             application/json:
               schema:
-                description: 'On an unexpected error a generic error message is returned.'
+                description: 'On an unexpected error a generic error message is returned'
                 type: object
                 properties:
                   message:
@@ -360,11 +360,11 @@ paths:
       operationId: patch-attributes
       responses:
         '200':
-          description: OK
+          description: 'Success - reporting back any values that are invalid and not updated'
           content:
             application/json:
               schema:
-                description: 'Success reporting back any values that are invalid and ignored.'
+                description: 'status and message with optional list of invalid values for attributes ignored'
                 type: object
                 properties:
                   status:
@@ -374,6 +374,15 @@ paths:
                   message:
                     type: string
                     minLength: 1
+                  failed:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        reason:
+                          type: string
                 required:
                   - status
                   - message
@@ -397,11 +406,11 @@ paths:
                       }
                     ]
         '400':
-          description: 'Bad Request'
+          description: 'Bad Request - payload shape or attribute identifiers are invalid (nothing updated)'
           content:
             application/json:
               schema:
-                description: 'The request payload shape or attribute identifiers are invalid.'
+                description: 'Status and message and optional list of invalid attribute identifiers (nothing updated)'
                 type: object
                 properties:
                   status:
@@ -411,6 +420,15 @@ paths:
                   message:
                     type: string
                     minLength: 1
+                  failed:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        reason:
+                          type: string
                 required:
                   - status
                   - message
@@ -434,7 +452,7 @@ paths:
           content:
             application/json:
               schema:
-                description: 'Forbidden.'
+                description: 'Forbidden'
                 type: object
                 properties:
                   message:
@@ -451,7 +469,7 @@ paths:
           content:
             application/json:
               schema:
-                description: 'On an unexpected error a generic error message is returned.'
+                description: 'On an unexpected error a generic error message is returned'
                 type: object
                 properties:
                   message:
