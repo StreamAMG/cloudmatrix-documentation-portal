@@ -25,6 +25,8 @@ The following are setup via the Cloud Matrix UI and relate to path parameters fo
 - A value identifying requesting client
 - Example value: e166df2b-4128-4557-9985-525ec361d009
 
+```https://{client-cloudmatrix-instance}/api/v1/{apiUserId}/```
+
 **apiKey** (string) : required
 
 - An encrypted value identifying requesting client
@@ -60,8 +62,11 @@ The following are setup via the Cloud Matrix UI and relate to path parameters fo
 - A  value identifying the predefined feed via the Cloud Matrix UI which contains the query to retrieve videos
 - Example value: 76h756w0-0471-828s-r17e-dy732790fadf
 
+```https://{client-cloudmatrix-instance}/api/v1/{apiUserId}/{targetId}/{languageCode}/feed/{feedId}```
 
-## query params
+
+
+## query parameters
 
 **pageIndex** (integer)
 
@@ -85,7 +90,13 @@ The following are setup via the Cloud Matrix UI and relate to path parameters fo
 - The field must be qualified with the section in the body
 - Example value:  metadata.title
 
-```?query=mediaData.MediaType:(OnDemand)```
+<!-- theme: info -->
+
+> #### Search API
+> When using the search API include the 'search' path before the query that follows the language code path parameter
+
+
+```search/?query=mediaData.MediaType:(OnDemand)```
 
 ---
 **sortBy** (string)
