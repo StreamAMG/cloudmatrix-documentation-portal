@@ -1456,8 +1456,8 @@ paths:
         required: true
     get:
       summary: Search feed without restrictions of targets
-      tags: 
-      - Feed
+      tags:
+        - Feed
       responses:
         '200':
           description: OK
@@ -1541,18 +1541,18 @@ paths:
                                 type: object
                                 additionalProperties: true
                           publicationData:
-                                type: object
-                                properties:
-                                  createdAt:
-                                    type: string
-                                  updatedAt:
-                                    type: string
-                                  released:
-                                    type: boolean
-                                  releaseFrom:
-                                    type: string
-                                  releaseTo:
-                                    type: string
+                            type: object
+                            properties:
+                              createdAt:
+                                type: string
+                              updatedAt:
+                                type: string
+                              released:
+                                type: boolean
+                              releaseFrom:
+                                type: string
+                              releaseTo:
+                                type: string
                         pagingData:
                           type: object
                           properties:
@@ -1567,5 +1567,132 @@ paths:
                             pageIndex:
                               type: integer
       operationId: get-api-v1-apiUserId-apiKey-languageCode-feed-feedId
+  '/api/v1/{apiUserId}/{apiKey}/{targetId}/{languageCode}/feed/{feedId}':
+    parameters:
+      - schema:
+          type: string
+        name: apiUserId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: apiKey
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: targetId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: languageCode
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: feedId
+        in: path
+        required: true
+    get:
+      summary: Search feed published to target identified by targetId
+      tags: 
+        - Feed
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  feedMetaData:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      title:
+                        type: string
+                      description:
+                        type: 'null'
+                      target:
+                        type: string
+                  sections:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        itemData:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              mediaData:
+                                type: object
+                                properties:
+                                  mediaType:
+                                    type: string
+                                  entryId:
+                                    type: string
+                                  entryStatus:
+                                    type: string
+                                  thumbnailUrl:
+                                    type: string
+                              metaData:
+                                type: object
+                                additionalProperties: true
+                        pagingData:
+                          type: object
+                          properties:
+                            totalCount:
+                              type: integer
+                            itemCount:
+                              type: integer
+                            pageCount:
+                              type: integer
+                            pageSize:
+                              type: integer
+                            pageIndex:
+                              type: integer
+                x-examples:
+                  Example 1:
+                    feedMetaData:
+                      id: a50c0879-6d2b-4979-b96b-e74f82a4b5bb
+                      name: new_es_test
+                      title: Testing new ES enviroment
+                      description: null
+                      target: website
+                    sections:
+                      - id: 4b10812b-7aa0-4445-9369-ed7399d06448
+                        name: Single Entry
+                        itemData:
+                          - id: f2f13c7c-40ba-46b4-a92e-5ffb61bddd36
+                            mediaData:
+                              mediaType: OnDemand
+                              entryId: 0_1o4osi6n
+                              entryStatus: Ready
+                              thumbnailUrl: 'https://open.http.mp.streamamg.com/p/3000759/sp/300075900/thumbnail/entry_id/0_1o4osi6n/'
+                            metaData:{}
+                            publicationData:
+                              createdAt: '2022-11-25T16:34:19'
+                              updatedAt: '2022-11-25T16:37:41'
+                              released: true
+                              releaseFrom: '2022-11-25T16:34:19'
+                              releaseTo: '9999-12-31T23:59:59.9999999'
+                        pagingData:
+                          totalCount: 1
+                          itemCount: 1
+                          pageCount: 1
+                          pageSize: 50
+                          pageIndex: 0
+      operationId: get-api-v1-apiUserId-apiKey-targetId-languageCode-feed-feedId
 components:
   schemas: {}
