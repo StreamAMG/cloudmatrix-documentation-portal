@@ -1483,7 +1483,7 @@ paths:
                               entryId: 0_1o4osi6n
                               entryStatus: Ready
                               thumbnailUrl: 'https://open.http.mp.streamamg.com/p/3000759/sp/300075900/thumbnail/entry_id/0_1o4osi6n/'
-                            metaData:{}
+                            metaData: {}
                             publicationData:
                               createdAt: '2022-11-25T16:34:19'
                               updatedAt: '2022-11-25T16:37:41'
