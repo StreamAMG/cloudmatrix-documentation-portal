@@ -1456,7 +1456,8 @@ paths:
         required: true
     get:
       summary: Search feed without restrictions of targets
-      tags: []
+      tags: 
+      - Feed
       responses:
         '200':
           description: OK
@@ -1482,46 +1483,7 @@ paths:
                               entryId: 0_1o4osi6n
                               entryStatus: Ready
                               thumbnailUrl: 'https://open.http.mp.streamamg.com/p/3000759/sp/300075900/thumbnail/entry_id/0_1o4osi6n/'
-                            metaData:
-                              series: null
-                              body: ''
-                              player: null
-                              competition: null
-                              streamamg_test_dropdown_attribute: null
-                              tour: null
-                              ground: null
-                              personofinterest: []
-                              matchid: null
-                              test_field: null
-                              embargo: false
-                              disableadverts: false
-                              season: null
-                              board: null
-                              optafixture: null
-                              collection: null
-                              inttext: null
-                              cliptype:
-                                - ''
-                              episodeno: null
-                              malta: []
-                              fixture: null
-                              dateofpublication: '2022-11-25T16:34:19'
-                              mutiselect2: []
-                              SysEntryEntitlements: []
-                              VideoDuration: 183
-                              priority_: null
-                              competitions: null
-                              language: null
-                              awayteamplayers: []
-                              eventdate: null
-                              title: sample_1280x720_surfing_with_audio
-                              mediaplayerid: null
-                              hometeamplayers: []
-                              awayteam: null
-                              entitlements: []
-                              tags:
-                                - ''
-                              hometeam: null
+                            metaData:{}
                             publicationData:
                               createdAt: '2022-11-25T16:34:19'
                               updatedAt: '2022-11-25T16:37:41'
