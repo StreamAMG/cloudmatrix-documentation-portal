@@ -1456,7 +1456,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Search feed without restrictions of targets
+      summary: Unrestricted Feed
       tags:
         - Feed
       responses:
@@ -1596,7 +1596,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Targeted Feed
+      summary: Restricted Feed
       tags:
         - Feed
       responses:
@@ -1718,7 +1718,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Unrestricted Feed section search
+      summary: Unrestricted Feed section
       tags:
         - Feed
       responses:
@@ -1868,8 +1868,8 @@ paths:
         in: path
         required: true
     get:
-      summary: Restricted Feed Section Search
-      tags: 
+      summary: Restricted Feed Section
+      tags:
         - Feed
       responses:
         '200':
