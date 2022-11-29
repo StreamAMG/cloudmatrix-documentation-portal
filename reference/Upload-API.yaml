@@ -1838,7 +1838,7 @@ paths:
                           pageSize: 50
                           pageIndex: 0
       operationId: get-api-v1-apiUserId-apiKey-languageCode-feed-feedId-sections
-  '/api/v1/{apiUserId}/{apiKey}/{targetId:guid}/{languageCode}/feed/{feedId}/sections/':
+  '/api/v1/{apiUserId}/{apiKey}/{targetId}/{languageCode}/feed/{feedId}/sections/':
     parameters:
       - schema:
           type: string
@@ -1852,7 +1852,7 @@ paths:
         required: true
       - schema:
           type: string
-        name: 'targetId:guid'
+        name: 'targetId'
         in: path
         required: true
       - schema:
