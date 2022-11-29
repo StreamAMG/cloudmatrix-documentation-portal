@@ -1695,5 +1695,32 @@ paths:
                           pageSize: 50
                           pageIndex: 0
       operationId: get-api-v1-apiUserId-apiKey-targetId-languageCode-feed-feedId
+  '/api/v1/{apiUserId}/{apiKey}/{languageCode}/feed/{feedId}/sections':
+    parameters:
+      - schema:
+          type: string
+        name: apiUserId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: apiKey
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: languageCode
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: feedId
+        in: path
+        required: true
+    get:
+      summary: Search articles as per the condition of rule in the section identified by the section id
+      tags: []
+      responses: {}
+      operationId: get-api-v1-apiUserId-apiKey-languageCode-feed-feedId-sections
 components:
   schemas: {}
