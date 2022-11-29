@@ -1718,9 +1718,127 @@ paths:
         in: path
         required: true
     get:
-      summary: Search articles as per the condition of rule in the section identified by the section id
-      tags: []
-      responses: {}
+      summary: Unrestricted Feed section search
+      tags: 
+        - Feed
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  feedMetaData:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      title:
+                        type: string
+                      description:
+                        type: 'null'
+                      target:
+                        type: string
+                  sections:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        itemData:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              mediaData:
+                                type: object
+                                properties:
+                                  mediaType:
+                                    type: string
+                                  entryId:
+                                    type: string
+                                  entryStatus:
+                                    type: string
+                                  thumbnailUrl:
+                                    type: string
+                              metaData:
+                                type: object
+                                additionalProperties: true
+                        pagingData:
+                          type: object
+                          properties:
+                            totalCount:
+                              type: integer
+                            itemCount:
+                              type: integer
+                            pageCount:
+                              type: integer
+                            pageSize:
+                              type: integer
+                            pageIndex:
+                              type: integer
+                x-examples:
+                  Example 1:
+                    feedMetaData:
+                      id: d70db4a4-f454-428b-a2fe-df37950a6c35
+                      name: test_feed
+                      title: Test feed
+                      description: null
+                      target: Unrestricted
+                    sections:
+                      - id: 8df68bbf-dcb0-4882-aebe-ac8549081e2c
+                        name: Highlights
+                        itemData:
+                          - id: f7669a91-f4df-4dc0-950c-94bd087a9d33
+                            mediaData:
+                              mediaType: OnDemand
+                              entryId: 0_1o4osi6n
+                              entryStatus: Ready
+                              thumbnailUrl: 'https://open.http.mp.streamamg.com/p/3000759/sp/300075900/thumbnail/entry_id/0_1o4osi6n/'
+                            metaData:
+                              home_team: null
+                              body: ''
+                              home_players: []
+                              multiselectdd: []
+                              opta_fixture: null
+                              content_name: []
+                              away_players: []
+                              competition: null
+                              content_type: []
+                              away_team: null
+                              livescoreplayers: []
+                              sysentryentitlements: []
+                              ground: null
+                              tournaments: []
+                              country: null
+                              createdat: null
+                              VideoDuration: 183
+                              optaseriesdropdown: null
+                              opta_season: null
+                              title: sample_1280x720_surfing_with_audio
+                              episode: null
+                              tags:
+                                - ''
+                            publicationData:
+                              createdAt: '2022-11-25T16:34:19'
+                              updatedAt: '2022-11-25T16:37:08'
+                              released: true
+                              releaseFrom: '2022-11-25T16:34:19'
+                              releaseTo: '9999-12-31T23:59:59.9999999'
+                        pagingData:
+                          totalCount: 1
+                          itemCount: 1
+                          pageCount: 1
+                          pageSize: 50
+                          pageIndex: 0
       operationId: get-api-v1-apiUserId-apiKey-languageCode-feed-feedId-sections
 components:
   schemas: {}
