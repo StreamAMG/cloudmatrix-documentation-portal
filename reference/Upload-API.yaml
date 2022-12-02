@@ -1501,6 +1501,23 @@ paths:
                         metaData:
                           type: object
                           additionalProperties: true
+                        publicationData:
+                          type: object
+                          properties:
+                            createdAt:
+                              #UTC time  
+                              type: string
+                            updatedAt:
+                              #UTC time  
+                              type: string
+                            released:
+                              type: boolean
+                            releaseFrom:
+                              #UTC time  
+                              type: string
+                            releaseTo:
+                              #UTC time  
+                              type: string
                   pagingData:
                     type: object
                     properties:
@@ -1554,10 +1571,14 @@ paths:
                           tags:
                             - ''
                         publicationData:
+                          #UTC time  
                           createdAt: '2022-11-25T16:34:19'
+                          #UTC time  
                           updatedAt: '2022-11-29T16:09:40'
                           released: true
+                          #UTC time  
                           releaseFrom: '2022-11-25T16:34:19'
+                          #UTC time  
                           releaseTo: '9999-12-31T23:59:59.9999999'
                     pagingData:
                       totalCount: 1
