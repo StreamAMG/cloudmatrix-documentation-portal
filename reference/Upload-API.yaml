@@ -1579,6 +1579,8 @@ paths:
                       pageSize: 50
                       pageIndex: 0
       operationId: get-api-v1-apiUserId-apiKey-languageCode-feed-feedId
-      description: 'Returns the list of articles matching the rules defined in Feed and to be published without any restriction on location. '
+      description: |-
+        Returns the list of articles matching the rules defined in Feed and to be published without any restriction on location. 
+        *Note all datetimes returned are in UTC format
 components:
   schemas: {}
