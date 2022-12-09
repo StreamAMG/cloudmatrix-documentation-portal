@@ -184,7 +184,7 @@ paths:
         The initial API call should consist of attributes (metadata) you would like to store against your asset within the CloudMatrix Platform and any associated publication details for the entry you are uploading.
 
         **Note**: 
-        - This method of upload only supports upto 5GB per asset, for larger assets please refer to the multipart upload.
+        - This method of upload only supports up to 5GB per asset, for larger assets please refer to the multipart upload.
         - This endpoint uploads only the VOD entries
       tags:
         - Entry
@@ -195,6 +195,10 @@ paths:
               description: ''
               type: object
               properties:
+                filename:
+                  type: string
+                  minLength: 1
+                  description: The name of the file passed
                 attributes:
                   type: array
                   uniqueItems: true
@@ -302,6 +306,7 @@ paths:
             examples:
               Example:
                 value:
+                  filename: 'video.mp4'
                   attributes:
                     - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
                       value: Some Title
