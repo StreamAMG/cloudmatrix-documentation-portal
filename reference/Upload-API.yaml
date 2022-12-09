@@ -206,11 +206,11 @@ paths:
                       id:
                         type: string
                         minLength: 1
-                        description: CloudMatrix attribute id
+                        description: CloudMatrix attribute id (customer attribute conifguration identifier)
                       value:
                         type: string
                         minLength: 1
-                        description: CloudMatrix attribute value
+                        description: CloudMatrix attribute value (valid report option for a dropdown type)
                       items:
                         type: array
                         uniqueItems: true
@@ -223,11 +223,7 @@ paths:
                             value:
                               type: string
                               minLength: 1
-                              description: CloudMatrix attribute value
-                            alias:
-                              type: string
-                              minLength: 1
-                              description: 'CloudMatrix attribute report value, this should be used as an alias for 3rd party attribute value'
+                              description: CloudMatrix attribute value (valid report option for a dropdown type)
                           required:
                             - value
                     required:
@@ -315,10 +311,8 @@ paths:
                         - value: entitlement2
                     - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
                       items:
-                        - alias: '1234'
-                          value: Team A
-                        - alias: '6789'
-                          value: Team B
+                        - value: Team A Report Value
+                        - value: Team B Report Value
                   publication:
                     publish: true
                     from: '2022-03-06T22:51:25Z'
@@ -645,10 +639,8 @@ paths:
                     - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
                       value: Some Title
                       items:
-                        - alias: '1234'
-                          value: Team A
-                        - alias: '6789'
-                          value: Team B
+                        - value: Team A Report Value
+                        - value: Team B Report Value
                     - id: 57e816fb-03b7-4706-a99f-5c6ef8d18ada
                       value: Some Description
                     - id: 57e816fb-03b7-4706-a99f-5c6ef8d18adb
@@ -659,10 +651,8 @@ paths:
                         - value: entitlement2
                     - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
                       items:
-                        - alias: '1234'
-                          value: Team A
-                        - alias: '6789'
-                          value: Team B
+                        - value: Team A Report Value
+                        - value: Team B Report Value
                   publication:
                     publish: true
                     from: '2022-03-06T22:51:25Z'
@@ -699,7 +689,7 @@ paths:
                       value:
                         type: string
                         minLength: 1
-                        description: CloudMatrix attribute value
+                        description: CloudMatrix attribute value (valid report option for a dropdown type)
                       items:
                         type: array
                         uniqueItems: true
@@ -709,14 +699,10 @@ paths:
                           type: object
                           additionalProperties: false
                           properties:
-                            alias:
-                              type: string
-                              minLength: 1
-                              description: 'CloudMatrix attribute report value, this should be used as an alias for 3rd party attribute value '
                             value:
                               type: string
                               minLength: 1
-                              description: CloudMatrix attribute value
+                              description: CloudMatrix attribute value (valid report option for a dropdown type)
                           required:
                             - value
                     required:
@@ -804,10 +790,8 @@ paths:
                         - value: entitlement2
                     - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
                       items:
-                        - alias: '1234'
-                          value: Team A
-                        - alias: '6789'
-                          value: Team B
+                        - value: Team A Report Value
+                        - value: Team B Report Value
                   publication:
                     publish: true
                     from: '2022-03-06T22:51:25Z'
