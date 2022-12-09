@@ -51,7 +51,7 @@ There are two attribute ids we ask you to use:
 <!-- theme: warning -->
 > #### The Importance of the filename value in the XML
 >
-> The filename value in the XML must match the title of the video file for us to associated the two files.  If they do not match the video upload will fail.
+> The filename value in the XML must match the title of the video file for us to associate the two files.  If they do not match the video upload will fail.
 
 ## Upload logs
 After each upload attempt the service posts a text file to the `/result` folder in the clients S3 bucket.
