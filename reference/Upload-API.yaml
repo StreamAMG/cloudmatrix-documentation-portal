@@ -206,7 +206,7 @@ paths:
                       id:
                         type: string
                         minLength: 1
-                        description: CloudMatrix attribute id (customer attribute conifguration identifier)
+                        description: CloudMatrix attribute id (customer attribute configuration identifier)
                       value:
                         type: string
                         minLength: 1
