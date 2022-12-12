@@ -1583,6 +1583,8 @@ paths:
             {"Message":"The API Key is not present."}
             or
             {"Message":"The API Key is invalid."}
+        '404':
+          description: '{"Message":"The feed was not found."}'
         '500':
           description: Internal Server Error
       operationId: get-api-v1-apiUserId-apiKey-languageCode-feed-feedId
