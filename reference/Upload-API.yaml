@@ -1579,7 +1579,10 @@ paths:
                       pageSize: 50
                       pageIndex: 0
         '401':
-          description: '{"Message":"The API Key is not present."}'
+          description: |-
+            {"Message":"The API Key is not present."}
+            or
+            {"Message":"The API Key is invalid."}
         '500':
           description: Internal Server Error
       operationId: get-api-v1-apiUserId-apiKey-languageCode-feed-feedId
