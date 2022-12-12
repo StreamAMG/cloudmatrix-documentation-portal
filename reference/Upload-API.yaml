@@ -1580,6 +1580,8 @@ paths:
                       pageIndex: 0
         '401':
           description: |-
+            Invalid API key or id
+
             {"Message":"The API Key is not present."}
             or
             {"Message":"The API Key is invalid."}
