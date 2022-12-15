@@ -1585,11 +1585,31 @@ paths:
             {"Message":"The API Key is not present."}
             or
             {"Message":"The API Key is invalid."}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Message:
+                    type: string
+                x-examples:
+                  Example 1:
+                    Message: The API Key is not present.
         '404':
           description: |-
             Invalid FeedId
 
             {"Message":"The feed was not found."}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Message:
+                    type: string
+                x-examples:
+                  Example 1:
+                    Message: The feed was not found.
         '500':
           description: Internal Server Error
       operationId: get-api-v1-apiUserId-apiKey-languageCode-feed-feedId
