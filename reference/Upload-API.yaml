@@ -295,7 +295,7 @@ paths:
             examples:
               Example:
                 value:
-                  filename: 'video.mp4'
+                  filename: video.mp4
                   attributes:
                     - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
                       value: Some Title
@@ -332,6 +332,8 @@ paths:
                             to: '2022-06-06T22:51:25Z'
                             id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
         description: The body should contain the additional CloudMatrix Metadata you would like to store along side the entry.
+      security:
+        - x-api-key: []
   '/entry/{entryId}':
     parameters:
       - in: path
@@ -569,12 +571,9 @@ paths:
           Any error (validation or non-existent custom attribute etc) will result in no changes being updated in the 
           entire payload. If all the changes are valid and updates are possible then they will all be committed to the 
           database in one transaction.
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: x-api-key
-          description: Authorisation key
+      parameters: []
+      security:
+        - x-api-key: []
   /multipart/start:
     put:
       summary: Start multipart upload
@@ -803,6 +802,8 @@ paths:
                             to: '2022-06-06T22:51:25Z'
                             id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
         description: The body should contain the additional CloudMatrix Metadata you would like to store along side the entry.
+      security:
+        - x-api-key: []
   /multipart/upload:
     put:
       summary: Request a upload URL
@@ -878,7 +879,17 @@ paths:
                   filename: example-2.mp4
                   partNumber: 1
                   uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
         description: The request body must contain the part number and the upload id of the partial upload chunk.
+      security:
+        - x-api-key: []
     parameters: []
   '/api/v1/{apiUserId}/{apiKey}/{targetId}/{languageCode}/search':
     parameters:
@@ -1607,3 +1618,9 @@ paths:
         *Note all datetimes returned are in UTC format
 components:
   schemas: {}
+  securitySchemes:
+    x-api-key:
+      name: x-api-key
+      type: apiKey
+      in: header
+      description: ''
