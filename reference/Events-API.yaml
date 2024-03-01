@@ -40,6 +40,87 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Events'
+              examples:
+                footballMatchEvent:
+                  value:
+                    events:
+                      - id: 'cac5a29a-42ed-4218-b695-df8c89bf7049'
+                        priorityOrder: 1
+                        title: Football Match
+                        subtitle: Premier League
+                        description: Manchester United vs Chelsea
+                        venue: Old Trafford
+                        schedule:
+                          start: '2024-01-01T18:30:00'
+                          end: '2024-01-01T20:30:00'
+                          timezone: 'GMT'
+                          offset: '+00:00'
+                        metaData:
+                          type: footballMatch
+                          footballMatch:
+                            teams:
+                              home:
+                                name: Manchester United
+                                logo: https://example.com/manchester_united_logo.png
+                              away:
+                                name: Chelsea
+                                logo: https://example.com/chelsea_logo.png
+                            competition: Premier League
+                            season: 2023-2024
+                        media:
+                          - id: '37111304-c1f7-4c58-9944-9bfe64b53644'
+                            type: 'audio'
+                            thumbnailUrl: 'https://example.com/thumbnail.png'
+                            mediaData:
+                              legacyEntryId: '123'
+                            metadata:
+                              title: Football Match
+                              body: Exciting match between Manchester United and Chelsea
+                              tags:
+                                - football
+                                - premier league
+                              entitlements:
+                                - premium
+                            publicationData:
+                              createdAt: '2022-01-01T00:00:00'
+                              updatedAt: '2022-01-01T00:00:00'
+                              released: true
+                              releaseFrom: '2022-01-01T00:00:00'
+                              releaseTo: '2022-12-31T23:59:59'
+                        integrations:
+                          optaId: 'eventOptaId'
+                pressReleaseEvent:
+                  value:
+                    events:
+                      - id: 'cac5a29a-42ed-4218-b695-df8c89bf7048'
+                        priorityOrder: 2
+                        title: Press Release this week
+                        subtitle: New coach joining the team!
+                        schedule:
+                          start: '2024-03-01T18:30:00'
+                          end: '2024-03-01T20:30:00'
+                          timezone: 'GMT'
+                          offset: '+00:00'
+                        media:
+                          - id: '37111304-c1f7-4c58-9944-9bfe64b53644'
+                            type: 'video'
+                            thumbnailUrl: 'https://example.com/thumbnail.png'
+                            mediaData:
+                              legacyEntryId: '123'
+                            metadata:
+                              title: This week's press release
+                              body: First press release of our new coach
+                              tags:
+                                - press-release
+                                - news
+                              entitlements:
+                                - '*'
+                            publicationData:
+                              createdAt: '2024-03-01T00:00:00'
+                              updatedAt: '2024-03-01T00:00:00'
+                              released: true
+                              releaseFrom: '2024-03-01T00:00:00'
+                              releaseTo: '2024-12-31T23:59:59'
       x-stoplight:
         id: k574j72vdot2r
 components:
@@ -94,9 +175,11 @@ components:
     MediaPublicationData:
       type: object
       required:
-        - title
-        - body
-        - entitlements
+        - createdAt
+        - updatedAt
+        - released
+        - releaseFrom
+        - releaseTo
       properties:
         createdAt:
           type: string
