@@ -1616,8 +1616,309 @@ paths:
       description: |-
         Returns the list of articles matching the rules defined in Feed and to be published without any restriction on location. 
         *Note all datetimes returned are in UTC format
+    /events:
+    get:
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Events'
+              examples:          
+                footballMatchEvent:
+                  value:
+                    events:
+                      - id: 'cac5a29a-42ed-4218-b695-df8c89bf7049'
+                        priorityOrder: 1
+                        title: Football Match
+                        subtitle: Premier League
+                        description: Manchester United vs Chelsea
+                        venue: Old Trafford
+                        schedule:
+                          start: '2024-01-01T18:30:00'
+                          end: '2024-01-01T20:30:00'
+                          timezone: 'GMT'
+                          offset: '+00:00'
+                        metaData:
+                          type: footballMatch
+                          footballMatch:
+                            teams:
+                              home:
+                                name: Manchester United
+                                logo: https://example.com/manchester_united_logo.png
+                              away:
+                                name: Chelsea
+                                logo: https://example.com/chelsea_logo.png
+                            competition: Premier League
+                            season: 2023-2024
+                        media:
+                          - id: '37111304-c1f7-4c58-9944-9bfe64b53644'
+                            type: 'audio'
+                            thumbnailUrl: 'https://example.com/thumbnail.png'
+                            mediaData:
+                              legacyEntryId: '123'
+                            metadata:
+                              title: Football Match
+                              body: Exciting match between Manchester United and Chelsea
+                              tags:
+                                - football
+                                - premier league
+                              entitlements:
+                                - premium
+                            publicationData:
+                              createdAt: '2022-01-01T00:00:00'
+                              updatedAt: '2022-01-01T00:00:00'
+                              released: true
+                              releaseFrom: '2022-01-01T00:00:00'
+                              releaseTo: '2022-12-31T23:59:59'
+                        integrations:
+                          optaId: 'eventOptaId'
+                      id: 'cac5a29a-42ed-4218-b695-df8c89bf7049'
+                      priorityOrder: 1
+                      title: Football Match
+                      subtitle: Premier League
+                      description: Manchester United vs Chelsea
+                      venue: Old Trafford
+                      schedule:
+                        start: '2024-01-01T18:30:00'
+                        end: '2024-01-01T20:30:00'
+                        timezone: 'GMT'
+                        offset: '+00:00'
+                      metaData:
+                        type: footballMatch
+                        footballMatch:
+                          teams:
+                            home:
+                              name: Manchester United
+                              logo: https://example.com/manchester_united_logo.png
+                            away:
+                              name: Chelsea
+                              logo: https://example.com/chelsea_logo.png
+                            competition: Premier League
+                            season: 2023-2024
+                      media:
+                        - id: '37111304-c1f7-4c58-9944-9bfe64b53644'
+                          type: 'audio'
+                          thumbnailUrl: 'https://example.com/thumbnail.png'
+                          mediaData:
+                            legacyEntryId: '123'
+                          metadata:
+                            title: Football Match
+                            body: Exciting match between Manchester United and Chelsea
+                            tags:
+                              - football
+                              - premier league
+                            entitlements:
+                              - premium
+                          publicationData:
+                            createdAt: '2022-01-01T00:00:00'
+                            updatedAt: '2022-01-01T00:00:00'
+                            released: true
+                            releaseFrom: '2022-01-01T00:00:00'
+                            releaseTo: '2022-12-31T23:59:59'
+                      integrations:
+                        optaId: 'eventOptaId'
+                pressReleaseEvent:
+                  value:
+                    id: 'cac5a29a-42ed-4218-b695-df8c89bf7048'
+                    priorityOrder: 2
+                    title: Press Release this week
+                    subtitle: New coach joining the team!
+                    schedule:
+                      start: '2024-03-01T18:30:00'
+                      end: '2024-03-01T20:30:00'
+                      timezone: 'GMT'
+                      offset: '+00:00'
+                    media:
+                      - id: '37111304-c1f7-4c58-9944-9bfe64b53644'
+                        type: 'video'
+                        thumbnailUrl: 'https://example.com/thumbnail.png'
+                        mediaData:
+                          legacyEntryId: '123'
+                        metadata:
+                          title: This week's press release
+                          body: First press release of our new coach
+                          tags:
+                            - press-release
+                            - news
+                          entitlements:
+                            - "*"
+                        publicationData:
+                          createdAt: '2024-03-01T00:00:00'
+                          updatedAt: '2024-03-01T00:00:00'
+                          released: true
+                          releaseFrom: '2024-03-01T00:00:00'
+                          releaseTo: '2024-12-31T23:59:59'
 components:
-  schemas: {}
+  schemas: 
+        Events:
+      title: Events Schema
+      type: object
+      properties:
+        events: 
+          type: array
+          items: 
+            type: object
+            required:
+              - id
+              - priorityOrder
+              - title
+              - schedule
+            properties: 
+              id: 
+                description: 'event ID'
+                type: string
+              priorityOrder: 
+                description: 'priority order that allows sorting of events'
+                type: integer
+              title: 
+                description: 'main event title'
+                type: string
+              subtitle: 
+                description: 'secondary event title'
+                type: string
+              description: 
+                description: 'event description'
+                type: string
+              venue: 
+                type: string
+              schedule:
+                $ref: '#/components/schemas/EventSchedule'
+              metaData: 
+                $ref: '#/components/schemas/EventMetadata'
+              media: 
+                type: array
+                items:
+                  $ref: '#/components/schemas/Media'
+              integrations: 
+                type: object
+                properties: 
+                  optaId: 
+                    description: 'Opta ID'
+                    type: string
+    MediaPublicationData:
+      type: object
+      required:
+        - title
+        - body
+        - entitlements
+      properties:
+        createdAt: 
+          type: string
+        updatedAt: 
+          type: string
+        released: 
+          type: boolean
+        releaseFrom: 
+          type: string
+        releaseTo: 
+          type: string
+    MediaMetadata:
+      type: object
+      required:
+        - title
+        - body
+        - entitlements
+      properties:
+        title: 
+          type: string
+        body: 
+          type: string
+        tags: 
+          type: array
+          items: 
+            type: string
+        entitlements: 
+          type: array
+          items: 
+            type: string
+    Media:
+      type: object
+      required:
+        - id
+        - type
+      properties: 
+        id: 
+          type: string
+        type: 
+          type: string
+        thumbnailUrl: 
+          type: string
+        mediaData:
+          $ref: '#/components/schemas/MediaData'
+        metadata: 
+          $ref: '#/components/schemas/MediaMetadata'
+        publicationData:
+          $ref: '#/components/schemas/MediaPublicationData'
+    MediaData:
+      type: object
+      properties:
+        legacyEntryId:
+          type: string
+    EventMetadata:
+      type: object
+      required:
+        - type
+      properties:
+        type: 
+          type: string
+        footballMatch: 
+          $ref: '#/components/schemas/FootballMatchMetadata'
+        tennisEvent: 
+          $ref: '#/components/schemas/EmptyPlaceholder'
+        customEvent: 
+          $ref: '#/components/schemas/EmptyPlaceholder'
+    EmptyPlaceholder:
+      type: object
+    FootballMatchMetadata:
+      type: object
+      properties: 
+        teams: 
+          type: object
+          properties: 
+            home: 
+              type: object
+              properties: 
+                name: 
+                  type: string
+                logo: 
+                  type: string
+            away: 
+              type: object
+              properties: 
+                name: 
+                  type: string
+                logo: 
+                  type: string
+            competition: 
+              type: string
+            season: 
+              type: string
+    EventSchedule:
+      type: object
+      required:
+        - start
+        - timezone
+      properties: 
+        start: 
+          type: string
+        end: 
+          type: string
+        timezone: 
+          type: string
+        offset: 
+          type: string
   securitySchemes:
     x-api-key:
       name: x-api-key
