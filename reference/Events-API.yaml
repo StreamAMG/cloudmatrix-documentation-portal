@@ -53,8 +53,7 @@ paths:
                         schedule:
                           start: '2024-01-01T18:30:00'
                           end: '2024-01-01T20:30:00'
-                          timezone: 'GMT'
-                          offset: '+00:00'
+                          offset: 30
                         metaData:
                           type: footballMatch
                           footballMatch:
@@ -99,8 +98,6 @@ paths:
                         schedule:
                           start: '2024-03-01T18:30:00'
                           end: '2024-03-01T20:30:00'
-                          timezone: 'GMT'
-                          offset: '+00:00'
                         media:
                           - id: '37111304-c1f7-4c58-9944-9bfe64b53644'
                             type: 'video'
