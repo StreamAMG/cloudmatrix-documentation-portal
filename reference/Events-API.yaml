@@ -167,8 +167,8 @@ components:
               integrations:
                 type: object
                 properties:
-                  optaId:
-                    description: Opta ID
+                  optaFixtureId:
+                    description: Opta Fixture ID
                     type: string
       x-stoplight:
         id: ls7b7zj08799i
@@ -183,14 +183,19 @@ components:
       properties:
         createdAt:
           type: string
+          description: ISO 8601 created at datetime
         updatedAt:
           type: string
+          description: ISO 8601 updated at datetime
         released:
           type: boolean
+          description: flag indicating media entry being released
         releaseFrom:
           type: string
+          description: ISO 8601 release from datetime
         releaseTo:
           type: string
+          description: ISO 8601 release to datetime
       x-stoplight:
         id: yhxikhsbbi50h
     MediaMetadata:
@@ -222,10 +227,13 @@ components:
       properties:
         id:
           type: string
+          description: media entry Cloudmatrix ID
         type:
           type: string
+          description: media type (audio, video)
         thumbnailUrl:
           type: string
+          description: URL to media thumbnail
         mediaData:
           $ref: '#/components/schemas/MediaData'
         metadata:
@@ -239,6 +247,7 @@ components:
       properties:
         legacyEntryId:
           type: string
+          description: legacy media entry ID (e.g. Kaltura)
       x-stoplight:
         id: 9h3ccjkomv3kv
     EventMetadata:
@@ -290,15 +299,16 @@ components:
       type: object
       required:
         - start
-        - timezone
+        - end
       properties:
         start:
           type: string
+          description: ISO 8601 start datetime
         end:
           type: string
-        timezone:
-          type: string
+          description: ISO 8601 end datetime
         offset:
-          type: string
+          type: number
+          description: offset in minutes when the event starts
       x-stoplight:
         id: f3hmcyvnbe96m
