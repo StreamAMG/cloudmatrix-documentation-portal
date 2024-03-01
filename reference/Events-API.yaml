@@ -22,7 +22,7 @@ paths:
   /events:
     get:
       description: List events
-      operationId: get-events
+      operationId: List events
       responses:
         '200':
           description: 200 response
