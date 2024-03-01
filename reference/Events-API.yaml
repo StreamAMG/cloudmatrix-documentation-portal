@@ -11,8 +11,7 @@ info:
     name: Bartosz Zabuski
     email: bartosz.zabuski@pamediagroup.com
     url: N/A
-  description: |-
-    The CloudMatrix Events API allows clients to create fixutes like matches, competitions or press releases.
+  description: 'The CloudMatrix Events API allows clients to create fixutes like matches, competitions or press releases.'
 servers:
   - url: 'https://cloudmatrix.api.streamamg.com/events'
 tags:
@@ -44,7 +43,7 @@ paths:
                 footballMatchEvent:
                   value:
                     events:
-                      - id: 'cac5a29a-42ed-4218-b695-df8c89bf7049'
+                      - id: cac5a29a-42ed-4218-b695-df8c89bf7049
                         priorityOrder: 1
                         title: Football Match
                         subtitle: Premier League
@@ -60,15 +59,15 @@ paths:
                             teams:
                               home:
                                 name: Manchester United
-                                logo: https://example.com/manchester_united_logo.png
+                                logo: 'https://example.com/manchester_united_logo.png'
                               away:
                                 name: Chelsea
-                                logo: https://example.com/chelsea_logo.png
+                                logo: 'https://example.com/chelsea_logo.png'
                             competition: Premier League
                             season: 2023-2024
                         media:
-                          - id: '37111304-c1f7-4c58-9944-9bfe64b53644'
-                            type: 'audio'
+                          - id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                            type: audio
                             thumbnailUrl: 'https://example.com/thumbnail.png'
                             mediaData:
                               legacyEntryId: '123'
@@ -87,11 +86,11 @@ paths:
                               releaseFrom: '2022-01-01T00:00:00'
                               releaseTo: '2022-12-31T23:59:59'
                         integrations:
-                          optaId: 'eventOptaId'
+                          optaId: eventOptaId
                 pressReleaseEvent:
                   value:
                     events:
-                      - id: 'cac5a29a-42ed-4218-b695-df8c89bf7048'
+                      - id: cac5a29a-42ed-4218-b695-df8c89bf7048
                         priorityOrder: 2
                         title: Press Release this week
                         subtitle: New coach joining the team!
@@ -99,8 +98,8 @@ paths:
                           start: '2024-03-01T18:30:00'
                           end: '2024-03-01T20:30:00'
                         media:
-                          - id: '37111304-c1f7-4c58-9944-9bfe64b53644'
-                            type: 'video'
+                          - id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                            type: video
                             thumbnailUrl: 'https://example.com/thumbnail.png'
                             mediaData:
                               legacyEntryId: '123'
@@ -227,7 +226,7 @@ components:
           description: media entry Cloudmatrix ID
         type:
           type: string
-          description: media type (audio, video)
+          description: 'media type (audio, video)'
         thumbnailUrl:
           type: string
           description: URL to media thumbnail
@@ -309,3 +308,4 @@ components:
           description: offset in minutes when the event starts
       x-stoplight:
         id: f3hmcyvnbe96m
+x-internal: true
