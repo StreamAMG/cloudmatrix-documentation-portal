@@ -152,6 +152,7 @@ components:
                 type: string
               venue:
                 type: string
+                description: event's venue
               schedule:
                 $ref: '#/components/schemas/EventSchedule'
               metaData:
@@ -203,14 +204,18 @@ components:
       properties:
         title:
           type: string
+          description: media entry title
         body:
           type: string
+          description: media entry description
         tags:
           type: array
+          description: media entry tags
           items:
             type: string
         entitlements:
           type: array
+          description: entitlements for media entry that permit suitable users to view it
           items:
             type: string
       x-stoplight:
