@@ -6,8 +6,8 @@ info:
     name: N/A
     url: N/A
   contact:
-    name: Bartosz Zabuski
-    email: bartosz.zabuski@pamediagroup.com
+    name: ZEUS team
+    email: zeusdevs@pamediagroup.com
     url: N/A
   description: 'The CloudMatrix Events API allows clients get details on fixtures like matches, competitions or press releases.'
 servers:
