@@ -33,7 +33,15 @@ paths:
           schema:
             type: boolean
           required: false
-            description: In the absence of this parameter, the API will return all events. If set to true, the API will return only fixture events. If set to false, the API will return all events that are not fixtures.
+          description: In the absence of this parameter, the API will return all events. If set to true, the API will return only fixture events. If set to false, the API will return all events that are not fixtures.
+        - in: query
+          name: metadataTypes
+          schema:
+            type: array
+            items:
+              type: string
+          required: false
+          description: Array of metadata types to filter events by.
       responses:
         '500':
           description: Internal Server Error
@@ -70,7 +78,6 @@ paths:
                         subtitle: Premier League
                         description: Manchester United vs Chelsea
                         venue: Old Trafford
-                        isFixture: true
                         schedule:
                           start: '2024-01-01T18:30:00'
                           end: '2024-01-01T20:30:00'
@@ -110,7 +117,6 @@ paths:
                         priorityOrder: 2
                         title: Press Release this week
                         subtitle: New coach joining the team!
-                        isFixture: false
                         schedule:
                           start: '2024-03-01T18:30:00'
                           end: '2024-03-01T20:30:00'
@@ -201,9 +207,6 @@ components:
         venue:
           type: string
           description: event's venue
-        isFixture:
-          type: boolean
-          description: Depicting whether it is a fixture sport event or non-sport event like press release
         schedule:
           $ref: '#/components/schemas/EventSchedule'
         metaData:
