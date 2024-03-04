@@ -42,6 +42,20 @@ paths:
               type: string
           required: false
           description: Array of metadata types to filter events by.
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+            default: 10
+          required: false
+          description: Size of the page of results
+        - in: query
+          name: pageIndex
+          schema:
+            type: integer
+            default: 0
+          required: false
+          description: Page index of results page to be returned
       responses:
         '500':
           description: Internal Server Error
