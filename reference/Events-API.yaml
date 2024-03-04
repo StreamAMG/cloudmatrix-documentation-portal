@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: StreamAMG Events API
+  title: Events API
   version: '2024-02-29T13:57:07Z'
   license:
     name: N/A
