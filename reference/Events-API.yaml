@@ -1,6 +1,4 @@
 openapi: 3.0.1
-x-stoplight:
-  id: oc0m2rekg4mqs
 info:
   title: StreamAMG Events API
   version: '2024-02-29T13:57:07Z'
@@ -126,8 +124,41 @@ paths:
                               released: true
                               releaseFrom: '2024-03-01T00:00:00'
                               releaseTo: '2024-12-31T23:59:59'
-      x-stoplight:
-        id: k574j72vdot2r
+  /events/{id}:
+    get:
+      summary: Get a single event by ID
+      parameters:
+        - name: id
+          in: path
+          description: ID of the event to retrieve
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Event object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '404':
+          description: Event not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
 components:
   schemas:
     Events:
@@ -137,47 +168,47 @@ components:
         events:
           type: array
           items:
-            type: object
-            required:
-              - id
-              - priorityOrder
-              - title
-              - schedule
-            properties:
-              id:
-                description: event ID
-                type: string
-              priorityOrder:
-                description: priority order that allows sorting of events
-                type: integer
-              title:
-                description: main event title
-                type: string
-              subtitle:
-                description: secondary event title
-                type: string
-              description:
-                description: event description
-                type: string
-              venue:
-                type: string
-                description: event's venue
-              schedule:
-                $ref: '#/components/schemas/EventSchedule'
-              metaData:
-                $ref: '#/components/schemas/EventMetadata'
-              media:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Media'
-              integrations:
-                type: object
-                properties:
-                  optaFixtureId:
-                    description: Opta Fixture ID
-                    type: string
-      x-stoplight:
-        id: ls7b7zj08799i
+            - $ref: '#/components/schemas/Event'
+    Event:
+      type: object
+      required:
+        - id
+        - priorityOrder
+        - title
+        - schedule
+      properties:
+        id:
+          description: event ID
+          type: string
+        priorityOrder:
+          description: priority order that allows sorting of events
+          type: integer
+        title:
+          description: main event title
+          type: string
+        subtitle:
+          description: secondary event title
+          type: string
+        description:
+          description: event description
+          type: string
+        venue:
+          type: string
+          description: event's venue
+        schedule:
+          $ref: '#/components/schemas/EventSchedule'
+        metaData:
+          $ref: '#/components/schemas/EventMetadata'
+        media:
+          type: array
+          items:
+            $ref: '#/components/schemas/Media'
+        integrations:
+          type: object
+          properties:
+            optaFixtureId:
+              description: Opta Fixture ID
+              type: string
     MediaPublicationData:
       type: object
       required:
@@ -202,8 +233,6 @@ components:
         releaseTo:
           type: string
           description: ISO 8601 release to datetime
-      x-stoplight:
-        id: yhxikhsbbi50h
     MediaMetadata:
       type: object
       required:
@@ -227,8 +256,6 @@ components:
           description: entitlements for media entry that permit suitable users to view it
           items:
             type: string
-      x-stoplight:
-        id: 47p2xsdzlv5ih
     Media:
       type: object
       required:
@@ -250,16 +277,12 @@ components:
           $ref: '#/components/schemas/MediaMetadata'
         publicationData:
           $ref: '#/components/schemas/MediaPublicationData'
-      x-stoplight:
-        id: 4w4rve4j9mqa0
     MediaData:
       type: object
       properties:
         legacyEntryId:
           type: string
           description: legacy media entry ID (e.g. Kaltura)
-      x-stoplight:
-        id: 9h3ccjkomv3kv
     EventMetadata:
       type: object
       required:
@@ -273,12 +296,8 @@ components:
           $ref: '#/components/schemas/EmptyPlaceholder'
         customEvent:
           $ref: '#/components/schemas/EmptyPlaceholder'
-      x-stoplight:
-        id: ni4ne8z9jc9zh
     EmptyPlaceholder:
       type: object
-      x-stoplight:
-        id: cc9fdwgv0z45s
     FootballMatchMetadata:
       type: object
       properties:
@@ -303,8 +322,6 @@ components:
               type: string
             season:
               type: string
-      x-stoplight:
-        id: e5txlm1qm68ub
     EventSchedule:
       type: object
       required:
@@ -320,6 +337,4 @@ components:
         offset:
           type: number
           description: offset in minutes when the event starts
-      x-stoplight:
-        id: f3hmcyvnbe96m
 x-internal: true
