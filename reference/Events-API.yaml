@@ -19,8 +19,15 @@ paths:
   /events:
     get:
       summary: List available events
-      description: Lists events available for the end user depending the geo-restriction rules applied at creation of the event and based on provided parameters at the request time.
+      description: Lists events available for the end user depending the geo-restriction rules applied at creation of the event and based on provided parameters at the request time. By default endpoint returns active now and upcoming events only.
       operationId: list-events
+      parameters:
+        - in: query
+          name: pastFrom
+          schema:
+            type: string
+          required: false
+          description: ISO 8601 Date format specifying date from which to return past events
       responses:
         '500':
           description: Internal Server Error
@@ -117,7 +124,7 @@ paths:
     get:
       summary: Get a single event by ID
       operationId: get-event
-      description: Get specific event by id. If event is geo-resctriced for the location from which customer is accessing it. It will return Not Found.
+      description: Get specific event by id. If event is geo-resctriced for the location from which customer is accessing it. It will return Not Found. Both past and future events can be accessed by ID.
       parameters:
         - name: id
           in: path
