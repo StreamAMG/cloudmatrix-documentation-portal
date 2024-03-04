@@ -9,7 +9,7 @@ info:
     name: ZEUS team
     email: zeusdevs@pamediagroup.com
     url: N/A
-  description: 'The CloudMatrix Events API allows clients get details on fixtures like matches, competitions or press releases.'
+  description: 'The CloudMatrix Events API enables clients to retrieve information about fixtures such as matches, competitions, or press releases.'
 servers:
   - url: 'https://cloudmatrix.api.streamamg.com/v1'
 tags:
@@ -19,7 +19,7 @@ paths:
   /events:
     get:
       summary: List available events
-      description: Lists events available for the end user depending the geo-restriction rules applied at creation of the event and based on provided parameters at the request time. By default endpoint returns active now and upcoming events only.
+      description: This endpoint retrieves a list of events accessible to the end user, subject to the geo-restriction rules established during the event creation process. The returned events are determined based on the parameters provided at the time of the request. By default, the endpoint only returns events that are currently active or upcoming.
       operationId: list-events
       parameters:
         - in: query
@@ -33,7 +33,7 @@ paths:
           schema:
             type: boolean
           required: false
-          description: If absent, returns all events. If true, return only fixtures. If false, return all non-fixture events.
+            description: In the absence of this parameter, the API will return all events. If set to true, the API will return only fixture events. If set to false, the API will return all events that are not fixtures.
       responses:
         '500':
           description: Internal Server Error
