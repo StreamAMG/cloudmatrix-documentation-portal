@@ -23,6 +23,15 @@ paths:
       description: List events
       operationId: list-events
       responses:
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
         '200':
           description: 200 response
           headers:
