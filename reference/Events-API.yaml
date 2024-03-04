@@ -85,7 +85,6 @@ paths:
                         title: Football Match
                         subtitle: Premier League
                         description: Manchester United vs Chelsea
-                        venue: Old Trafford
                         schedule:
                           start: '2024-01-01T18:30:00'
                           end: '2024-01-01T20:30:00'
@@ -237,9 +236,6 @@ components:
         description:
           description: event description
           type: string
-        venue:
-          type: string
-          description: event's venue
         schedule:
           $ref: '#/components/schemas/EventSchedule'
         metaData:
@@ -337,10 +333,10 @@ components:
                   type: string
                 logo:
                   type: string
-            competition:
-              type: string
-            season:
-              type: string
+        competition:
+          type: string
+        season:
+          type: string
     EventSchedule:
       type: object
       required:
