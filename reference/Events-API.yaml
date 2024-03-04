@@ -9,7 +9,7 @@ info:
     name: Bartosz Zabuski
     email: bartosz.zabuski@pamediagroup.com
     url: N/A
-  description: 'The CloudMatrix Events API allows clients to create fixutes like matches, competitions or press releases.'
+  description: 'The CloudMatrix Events API allows clients get details on fixtures like matches, competitions or press releases.'
 servers:
   - url: 'https://cloudmatrix.api.streamamg.com/events'
 tags:
@@ -18,7 +18,8 @@ tags:
 paths:
   /events:
     get:
-      description: List events
+      summary: List available events
+      description: Lists events available for the end user depending the geo-restriction rules applied at creation of the event and based on provided parameters at the request time.
       operationId: list-events
       responses:
         '500':
@@ -127,6 +128,7 @@ paths:
   /events/{id}:
     get:
       summary: Get a single event by ID
+      description: Get specific event by id. If event is geo-resctriced for the location from which customer is accessing it. It will return Not Found.
       parameters:
         - name: id
           in: path
@@ -142,7 +144,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Event'
         '404':
-          description: Event not found
+          description: Event not found or not available in user's location
           content:
             application/json:
               schema:
