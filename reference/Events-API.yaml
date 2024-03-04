@@ -28,6 +28,12 @@ paths:
             type: string
           required: false
           description: ISO 8601 Date format specifying date from which to return past events
+        - in: query
+          name: fixturesOnly
+          schema:
+            type: boolean
+          required: false
+          description: If absent, returns all events. If true, return only fixtures. If false, return all non-fixture events.
       responses:
         '500':
           description: Internal Server Error
@@ -64,6 +70,7 @@ paths:
                         subtitle: Premier League
                         description: Manchester United vs Chelsea
                         venue: Old Trafford
+                        isFixture: true
                         schedule:
                           start: '2024-01-01T18:30:00'
                           end: '2024-01-01T20:30:00'
@@ -103,6 +110,7 @@ paths:
                         priorityOrder: 2
                         title: Press Release this week
                         subtitle: New coach joining the team!
+                        isFixture: false
                         schedule:
                           start: '2024-03-01T18:30:00'
                           end: '2024-03-01T20:30:00'
@@ -193,6 +201,9 @@ components:
         venue:
           type: string
           description: event's venue
+        isFixture:
+          type: boolean
+          description: Depicting whether it is a fixture sport event or non-sport event like press release
         schedule:
           $ref: '#/components/schemas/EventSchedule'
         metaData:
