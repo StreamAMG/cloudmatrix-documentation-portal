@@ -29,12 +29,6 @@ paths:
           required: false
           description: ISO 8601 Date format specifying date from which to return past events
         - in: query
-          name: fixturesOnly
-          schema:
-            type: boolean
-          required: false
-          description: In the absence of this parameter, the API will return all events. If set to true, the API will return only fixture events. If set to false, the API will return all events that are not fixtures.
-        - in: query
           name: metadataTypes
           schema:
             type: array
