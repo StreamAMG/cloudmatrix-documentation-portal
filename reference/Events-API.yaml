@@ -110,6 +110,12 @@ paths:
                                 - premium
                         integrations:
                           optaId: eventOptaId
+                    pagingData:
+                      totalCount: 1
+                      itemCount: 1
+                      pageCount: 1
+                      pageSize: 10
+                      pageIndex: 0
                 pressReleaseEvent:
                   value:
                     events:
@@ -134,6 +140,12 @@ paths:
                                 - news
                               entitlements:
                                 - '*'
+                    pagingData:
+                      totalCount: 1
+                      itemCount: 1
+                      pageCount: 1
+                      pageSize: 10
+                      pageIndex: 0
   /events/{id}:
     get:
       summary: Get a single event by ID
@@ -181,6 +193,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Event'
+        pagingData:
+          type: object
+          properties:
+            totalCount:
+              type: integer
+            itemCount:
+              type: integer
+            pageCount:
+              type: integer
+            pageSize:
+              type: integer
+            pageIndex:
+              type: integer
     Event:
       type: object
       required:
