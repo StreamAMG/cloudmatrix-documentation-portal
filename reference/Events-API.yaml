@@ -11,7 +11,7 @@ info:
     url: N/A
   description: 'The CloudMatrix Events API allows clients get details on fixtures like matches, competitions or press releases.'
 servers:
-  - url: 'https://cloudmatrix.api.streamamg.com/events'
+  - url: 'https://cloudmatrix.api.streamamg.com/v1'
 tags:
   - name: EventsAPI
     description: EventsAPI
