@@ -89,7 +89,7 @@ paths:
                           start: '2024-01-01T18:30:00'
                           end: '2024-01-01T20:30:00'
                           offset: 30
-                        metaData:
+                        metadata:
                           type: footballMatch
                           footballMatch:
                             teams:
@@ -101,6 +101,7 @@ paths:
                                 logo: 'https://example.com/chelsea_logo.png'
                             competition: Premier League
                             season: 2023-2024
+                            venue: Stadium
                         media:
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
                             type: audio
@@ -133,6 +134,9 @@ paths:
                         schedule:
                           start: '2024-03-01T18:30:00'
                           end: '2024-03-01T20:30:00'
+                        metadata:
+                          type: pressRelease
+                          pressRelease: {}
                         media:
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
                             type: video
@@ -238,7 +242,7 @@ components:
           type: string
         schedule:
           $ref: '#/components/schemas/EventSchedule'
-        metaData:
+        metadata:
           $ref: '#/components/schemas/EventMetadata'
         media:
           type: array
@@ -336,6 +340,8 @@ components:
         competition:
           type: string
         season:
+          type: string
+        venue:
           type: string
     EventSchedule:
       type: object
