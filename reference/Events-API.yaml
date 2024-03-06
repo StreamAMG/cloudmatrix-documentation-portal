@@ -92,7 +92,7 @@ paths:
               examples:
                 footballMatchEvent:
                   value:
-                    events:
+                    eventData:
                       - id: cac5a29a-42ed-4218-b695-df8c89bf7049
                         priorityOrder: 1
                         title: Football Match
@@ -139,7 +139,7 @@ paths:
                       pageIndex: 0
                 pressReleaseEvent:
                   value:
-                    events:
+                    eventData:
                       - id: cac5a29a-42ed-4218-b695-df8c89bf7048
                         priorityOrder: 2
                         title: Press Release this week
@@ -222,7 +222,7 @@ components:
       title: Events Schema
       type: object
       properties:
-        events:
+        eventData:
           type: array
           items:
             $ref: '#/components/schemas/Event'
