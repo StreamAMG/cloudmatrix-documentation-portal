@@ -101,7 +101,7 @@ paths:
                         scheduleData:
                           start: '2024-01-01T18:30:00'
                           end: '2024-01-01T20:30:00'
-                          offset: 30
+                          offset: '2024-01-01T18:00:00'
                         metaData:
                           type: footballMatch
                           footballMatch:
@@ -378,6 +378,6 @@ components:
           type: string
           description: ISO 8601 end datetime
         offset:
-          type: number
-          description: offset in minutes when the event starts
+          type: string
+          description: ISO 8601 offset datetime when event can be advertised
 x-internal: true
