@@ -19,17 +19,39 @@ paths:
   /events:
     get:
       summary: List available events
-      description: This endpoint retrieves a list of events accessible to the end user, subject to the geo-restriction rules established during the event creation process. The returned events are determined based on the parameters provided at the time of the request. By default, the endpoint only returns events that are currently active or upcoming.
+      description: 'This endpoint retrieves a list of events accessible to the end user, subject to the geo-restriction rules established during the event creation process. The returned events are determined based on the parameters provided at the time of the request. By default, the endpoint only returns events that are currently active or upcoming.'
       operationId: list-events
       parameters:
         - in: query
-          name: pastFrom
+          name: start
           schema:
             type: string
+            enum:
+              - YYYY-MM-DD
+              - YYYY-MM-DD[T]HH:mm
+              - now
+              - today
+              - tomorrow
+              - now.plus.n
+              - now.minus.n
           required: false
-          description: ISO 8601 Date format specifying date from which to return past events
+          description: Limit the events to ones within the specified range. The 'end' parameter is typically used in combination with the 'start' param to form a date range. Example 'now.plus.n' should be provided in form now.plus.1 which resolved to now plus 1 day.
         - in: query
-          name: metadataTypes
+          name: end
+          schema:
+            type: string
+            enum:
+              - YYYY-MM-DD
+              - YYYY-MM-DD[T]HH:mm
+              - now
+              - today
+              - tomorrow
+              - now.plus.n
+              - now.minus.n
+          required: false
+          description: Limit the events to ones within the specified range. The 'end' parameter is typically used in combination with the 'start' param to form a date range.  Example 'now.plus.n' should be provided in form now.plus.1 which resolved to now plus 1 day.
+        - in: query
+          name: metaDataTypes
           schema:
             type: array
             items:
@@ -51,15 +73,6 @@ paths:
           required: false
           description: Page index of results page to be returned
       responses:
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
         '200':
           description: 200 response
           headers:
@@ -157,7 +170,16 @@ paths:
                       pageCount: 1
                       pageSize: 10
                       pageIndex: 0
-  /events/{id}:
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  '/events/{id}':
     get:
       summary: Get a single event by ID
       operationId: get-event
