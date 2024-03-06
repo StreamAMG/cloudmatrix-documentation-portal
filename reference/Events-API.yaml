@@ -51,7 +51,7 @@ paths:
           required: false
           description: Limit the events to ones within the specified range. The 'end' parameter is typically used in combination with the 'start' param to form a date range.  Example 'now.plus.n' should be provided in form now.plus.1 which resolved to now plus 1 day.
         - in: query
-          name: metaDataTypes
+          name: metaDataType
           schema:
             type: array
             items:
