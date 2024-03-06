@@ -102,7 +102,7 @@ paths:
                           start: '2024-01-01T18:30:00'
                           end: '2024-01-01T20:30:00'
                           offset: 30
-                        metadata:
+                        metaData:
                           type: footballMatch
                           footballMatch:
                             teams:
@@ -121,7 +121,7 @@ paths:
                             thumbnailUrl: 'https://example.com/thumbnail.png'
                             mediaData:
                               legacyEntryId: '123'
-                            metadata:
+                            metaData:
                               title: Football Match
                               body: Exciting match between Manchester United and Chelsea
                               tags:
@@ -147,7 +147,7 @@ paths:
                         schedule:
                           start: '2024-03-01T18:30:00'
                           end: '2024-03-01T20:30:00'
-                        metadata:
+                        metaData:
                           type: pressRelease
                           pressRelease: {}
                         media:
@@ -156,7 +156,7 @@ paths:
                             thumbnailUrl: 'https://example.com/thumbnail.png'
                             mediaData:
                               legacyEntryId: '123'
-                            metadata:
+                            metaData:
                               title: This week's press release
                               body: First press release of our new coach
                               tags:
@@ -264,7 +264,7 @@ components:
           type: string
         schedule:
           $ref: '#/components/schemas/EventSchedule'
-        metadata:
+        metaData:
           $ref: '#/components/schemas/EventMetadata'
         media:
           type: array
@@ -316,7 +316,7 @@ components:
           description: URL to media thumbnail
         mediaData:
           $ref: '#/components/schemas/MediaData'
-        metadata:
+        metaData:
           $ref: '#/components/schemas/MediaMetadata'
     MediaData:
       type: object
