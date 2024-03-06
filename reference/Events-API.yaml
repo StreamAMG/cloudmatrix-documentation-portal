@@ -127,7 +127,7 @@ paths:
                               tags:
                                 - football
                                 - premier league
-                              entitlements:
+                              sysentryentitlements:
                                 - premium
                         integrations:
                           optaId: eventOptaId
@@ -162,7 +162,7 @@ paths:
                               tags:
                                 - press-release
                                 - news
-                              entitlements:
+                              sysentryentitlements:
                                 - '*'
                     pagingData:
                       totalCount: 1
@@ -281,7 +281,7 @@ components:
       required:
         - title
         - body
-        - entitlements
+        - sysentryentitlements
       properties:
         title:
           type: string
@@ -294,7 +294,7 @@ components:
           description: media entry tags
           items:
             type: string
-        entitlements:
+        sysentryentitlements:
           type: array
           description: entitlements for media entry that permit suitable users to view it
           items:
