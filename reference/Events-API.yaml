@@ -129,7 +129,7 @@ paths:
                                 - premier league
                               sysentryentitlements:
                                 - premium
-                        integrations:
+                        integrationData:
                           optaId: eventOptaId
                     pagingData:
                       totalCount: 1
@@ -270,7 +270,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Media'
-        integrations:
+        integrationData:
           type: object
           properties:
             optaFixtureId:
