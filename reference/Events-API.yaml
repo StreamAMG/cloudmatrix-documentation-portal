@@ -23,6 +23,14 @@ paths:
       operationId: list-events
       parameters:
         - in: query
+          name: metaDataType
+          schema:
+            type: array
+            items:
+              type: string
+          required: false
+          description: Array of metadata types to filter events by.
+        - in: query
           name: start
           schema:
             type: string
@@ -32,8 +40,8 @@ paths:
               - now
               - today
               - tomorrow
-              - now.plus.n
-              - now.minus.n
+              - now.plus.1
+              - now.minus.1
           required: false
           description: Limit the events to ones within the specified range. The 'end' parameter is typically used in combination with the 'start' param to form a date range. Example 'now.plus.n' should be provided in form now.plus.1 which resolved to now plus 1 day.
         - in: query
@@ -46,18 +54,10 @@ paths:
               - now
               - today
               - tomorrow
-              - now.plus.n
-              - now.minus.n
+              - now.plus.1
+              - now.minus.1
           required: false
           description: Limit the events to ones within the specified range. The 'end' parameter is typically used in combination with the 'start' param to form a date range.  Example 'now.plus.n' should be provided in form now.plus.1 which resolved to now plus 1 day.
-        - in: query
-          name: metaDataType
-          schema:
-            type: array
-            items:
-              type: string
-          required: false
-          description: Array of metadata types to filter events by.
         - in: query
           name: pageSize
           schema:
