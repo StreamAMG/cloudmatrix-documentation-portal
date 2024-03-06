@@ -115,7 +115,7 @@ paths:
                             competition: Premier League
                             season: 2023-2024
                             venue: Stadium
-                        media:
+                        itemData:
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
                             type: audio
                             thumbnailUrl: 'https://example.com/thumbnail.png'
@@ -150,7 +150,7 @@ paths:
                         metaData:
                           type: pressRelease
                           pressRelease: {}
-                        media:
+                        itemData:
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
                             type: video
                             thumbnailUrl: 'https://example.com/thumbnail.png'
@@ -266,7 +266,7 @@ components:
           $ref: '#/components/schemas/EventSchedule'
         metaData:
           $ref: '#/components/schemas/EventMetadata'
-        media:
+        itemData:
           type: array
           items:
             $ref: '#/components/schemas/Media'
