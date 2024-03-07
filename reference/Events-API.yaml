@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Events API
-  version: '2024-02-29T13:57:07Z'
+  version: 'ersion: DRAFT'
   license:
     name: N/A
     url: N/A
@@ -36,7 +36,7 @@ paths:
             type: string
             enum:
               - YYYY-MM-DD
-              - YYYY-MM-DD[T]HH:mm
+              - 'YYYY-MM-DD[T]HH:mm'
               - now
               - today
               - tomorrow
@@ -50,7 +50,7 @@ paths:
             type: string
             enum:
               - YYYY-MM-DD
-              - YYYY-MM-DD[T]HH:mm
+              - 'YYYY-MM-DD[T]HH:mm'
               - now
               - today
               - tomorrow
@@ -380,4 +380,4 @@ components:
         offset:
           type: string
           description: ISO 8601 offset datetime when event can be advertised
-x-internal: true
+x-internal: false
