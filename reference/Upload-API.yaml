@@ -16,6 +16,7 @@ tags:
   - name: Search
   - name: Entitlement
   - name: Feed
+  - name: Event
 servers:
   - url: 'https://cloudmatrix.api.streamamg.com'
 paths:
@@ -1795,6 +1796,8 @@ paths:
           required: true
           schema:
             type: string
+      tags:
+        - Event
       responses:
         '200':
           description: Event object
