@@ -16,6 +16,7 @@ tags:
   - name: Search
   - name: Entitlement
   - name: Feed
+  - name: Event
 servers:
   - url: 'https://cloudmatrix.api.streamamg.com'
 paths:
@@ -1616,8 +1617,382 @@ paths:
       description: |-
         Returns the list of articles matching the rules defined in Feed and to be published without any restriction on location. 
         *Note all datetimes returned are in UTC format
+  /events:
+    get:
+      summary: List available events
+      description: |-
+        ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
+        Events API enables clients to retrieve information about fixtures such as matches, competitions, or press releases.
+        
+         This endpoint retrieves a list of events accessible to the end user, subject to the geo-restriction rules established during the event creation process. The returned events are determined based on the parameters provided at the time of the request. By default, the endpoint only returns events that are currently active or upcoming.
+      operationId: list-events
+      parameters:
+        - in: query
+          name: metaDataType
+          schema:
+            type: array
+            items:
+              type: string
+          required: false
+          description: Array of metadata types to filter events by.
+        - in: query
+          name: start
+          schema:
+            type: string
+            enum:
+              - YYYY-MM-DD
+              - 'YYYY-MM-DD[T]HH:mm'
+              - now
+              - today
+              - tomorrow
+              - now.plus.1
+              - now.minus.1
+          required: false
+          description: Limit the events to ones within the specified range. The 'end' parameter is typically used in combination with the 'start' param to form a date range. Example 'now.plus.n' should be provided in form now.plus.1 which resolved to now plus 1 day.
+        - in: query
+          name: end
+          schema:
+            type: string
+            enum:
+              - YYYY-MM-DD
+              - 'YYYY-MM-DD[T]HH:mm'
+              - now
+              - today
+              - tomorrow
+              - now.plus.1
+              - now.minus.1
+          required: false
+          description: Limit the events to ones within the specified range. The 'end' parameter is typically used in combination with the 'start' param to form a date range.  Example 'now.plus.n' should be provided in form now.plus.1 which resolved to now plus 1 day.
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+            default: 10
+          required: false
+          description: Size of the page of results
+        - in: query
+          name: pageIndex
+          schema:
+            type: integer
+            default: 0
+          required: false
+          description: Page index of results page to be returned
+      tags:
+        - Event
+      responses:
+        '200':
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Events'
+              examples:
+                footballMatchEvent:
+                  value:
+                    eventData:
+                      - id: cac5a29a-42ed-4218-b695-df8c89bf7049
+                        priorityOrder: 1
+                        title: Football Match
+                        subtitle: Premier League
+                        description: Manchester United vs Chelsea
+                        scheduleData:
+                          start: '2024-01-01T18:30:00'
+                          end: '2024-01-01T20:30:00'
+                          offset: '2024-01-01T18:00:00'
+                        metaData:
+                          type: footballMatch
+                          footballMatch:
+                            teams:
+                              home:
+                                name: Manchester United
+                                logo: 'https://example.com/manchester_united_logo.png'
+                              away:
+                                name: Chelsea
+                                logo: 'https://example.com/chelsea_logo.png'
+                            competition: Premier League
+                            season: 2023-2024
+                            venue: Stadium
+                        itemData:
+                          - id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                            type: audio
+                            thumbnailUrl: 'https://example.com/thumbnail.png'
+                            mediaData:
+                              legacyEntryId: '123'
+                            metaData:
+                              title: Football Match
+                              body: Exciting match between Manchester United and Chelsea
+                              tags:
+                                - football
+                                - premier league
+                              sysentryentitlements:
+                                - premium
+                        integrationData:
+                          optaId: eventOptaId
+                    pagingData:
+                      totalCount: 1
+                      itemCount: 1
+                      pageCount: 1
+                      pageSize: 10
+                      pageIndex: 0
+                pressReleaseEvent:
+                  value:
+                    eventData:
+                      - id: cac5a29a-42ed-4218-b695-df8c89bf7048
+                        priorityOrder: 2
+                        title: Press Release this week
+                        subtitle: New coach joining the team!
+                        scheduleData:
+                          start: '2024-03-01T18:30:00'
+                          end: '2024-03-01T20:30:00'
+                        metaData:
+                          type: pressRelease
+                          pressRelease: {}
+                        itemData:
+                          - id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                            type: video
+                            thumbnailUrl: 'https://example.com/thumbnail.png'
+                            mediaData:
+                              legacyEntryId: '123'
+                            metaData:
+                              title: This week's press release
+                              body: First press release of our new coach
+                              tags:
+                                - press-release
+                                - news
+                              sysentryentitlements:
+                                - '*'
+                    pagingData:
+                      totalCount: 1
+                      itemCount: 1
+                      pageCount: 1
+                      pageSize: 10
+                      pageIndex: 0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  '/events/{id}':
+    get:
+      summary: Get a single event by ID
+      operationId: get-event
+      description: |-
+        ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
+        Events API enables clients to retrieve information about fixtures such as matches, competitions, or press releases. 
+        
+        Get specific event by id. If event is geo-resctriced for the location from which customer is accessing it. It will return Not Found. Both past and future events can be accessed by ID.
+      parameters:
+        - name: id
+          in: path
+          description: ID of the event to retrieve
+          required: true
+          schema:
+            type: string
+      tags:
+        - Event
+      responses:
+        '200':
+          description: Event object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '404':
+          description: Event not found or not available in user's location
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
 components:
-  schemas: {}
+  schemas:
+    Events:
+      title: Events Schema
+      type: object
+      properties:
+        eventData:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        pagingData:
+          type: object
+          properties:
+            totalCount:
+              type: integer
+            itemCount:
+              type: integer
+            pageCount:
+              type: integer
+            pageSize:
+              type: integer
+            pageIndex:
+              type: integer
+    Event:
+      type: object
+      required:
+        - id
+        - priorityOrder
+        - title
+        - scheduleData
+      properties:
+        id:
+          description: event ID
+          type: string
+        priorityOrder:
+          description: priority order that allows sorting of events
+          type: integer
+        title:
+          description: main event title
+          type: string
+        subtitle:
+          description: secondary event title
+          type: string
+        description:
+          description: event description
+          type: string
+        scheduleData:
+          $ref: '#/components/schemas/EventSchedule'
+        metaData:
+          $ref: '#/components/schemas/EventMetadata'
+        itemData:
+          type: array
+          items:
+            $ref: '#/components/schemas/Media'
+        integrationData:
+          type: object
+          properties:
+            optaFixtureId:
+              description: Opta Fixture ID
+              type: string
+    MediaMetadata:
+      type: object
+      required:
+        - title
+        - body
+        - sysentryentitlements
+      properties:
+        title:
+          type: string
+          description: media entry title
+        body:
+          type: string
+          description: media entry description
+        tags:
+          type: array
+          description: media entry tags
+          items:
+            type: string
+        sysentryentitlements:
+          type: array
+          description: entitlements for media entry that permit suitable users to view it
+          items:
+            type: string
+    Media:
+      type: object
+      required:
+        - id
+        - type
+      properties:
+        id:
+          type: string
+          description: media entry Cloudmatrix ID
+        type:
+          type: string
+          description: 'media type (audio, video)'
+        thumbnailUrl:
+          type: string
+          description: URL to media thumbnail
+        mediaData:
+          $ref: '#/components/schemas/MediaData'
+        metaData:
+          $ref: '#/components/schemas/MediaMetadata'
+    MediaData:
+      type: object
+      properties:
+        legacyEntryId:
+          type: string
+          description: legacy media entry ID (e.g. Kaltura)
+    EventMetadata:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+        footballMatch:
+          $ref: '#/components/schemas/FootballMatchMetadata'
+        tennisEvent:
+          $ref: '#/components/schemas/EmptyPlaceholder'
+        customEvent:
+          $ref: '#/components/schemas/EmptyPlaceholder'
+    EmptyPlaceholder:
+      type: object
+    FootballMatchMetadata:
+      type: object
+      properties:
+        teams:
+          type: object
+          properties:
+            home:
+              type: object
+              properties:
+                name:
+                  type: string
+                logo:
+                  type: string
+            away:
+              type: object
+              properties:
+                name:
+                  type: string
+                logo:
+                  type: string
+        competition:
+          type: string
+        season:
+          type: string
+        venue:
+          type: string
+    EventSchedule:
+      type: object
+      required:
+        - start
+        - end
+      properties:
+        start:
+          type: string
+          description: ISO 8601 start datetime
+        end:
+          type: string
+          description: ISO 8601 end datetime
+        offset:
+          type: string
+          description: ISO 8601 offset datetime when event can be advertised
   securitySchemes:
     x-api-key:
       name: x-api-key
