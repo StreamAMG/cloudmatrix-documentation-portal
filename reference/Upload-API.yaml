@@ -1680,7 +1680,7 @@ paths:
         - schema:
             type: string
           in: query
-          name: integrationOptaId
+          name: integrationDataOptaId
           description: Fixture OptaID used to filter events
       tags:
         - Event
