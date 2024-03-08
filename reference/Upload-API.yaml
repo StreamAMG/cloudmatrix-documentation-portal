@@ -1675,6 +1675,8 @@ paths:
             default: 0
           required: false
           description: Page index of results page to be returned
+      tags:
+        - Event
       responses:
         '200':
           description: 200 response
