@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Events API
-  version: 'ersion: DRAFT'
+  version: ''
   license:
     name: N/A
     url: N/A
@@ -9,7 +9,7 @@ info:
     name: ZEUS team
     email: zeusdevs@pamediagroup.com
     url: N/A
-  description: 'The CloudMatrix Events API enables clients to retrieve information about fixtures such as matches, competitions, or press releases.'
+  description: The CloudMatrix Events API enables clients to retrieve information about fixtures such as matches, competitions, or press releases.
 servers:
   - url: 'https://cloudmatrix.api.streamamg.com/v1'
 tags:
