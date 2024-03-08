@@ -1623,7 +1623,7 @@ paths:
       description: |-
         ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
         Events API enables clients to retrieve information about fixtures such as matches, competitions, or press releases.
-        
+
          This endpoint retrieves a list of events accessible to the end user, subject to the geo-restriction rules established during the event creation process. The returned events are determined based on the parameters provided at the time of the request. By default, the endpoint only returns events that are currently active or upcoming.
       operationId: list-events
       parameters:
@@ -1677,6 +1677,11 @@ paths:
             default: 0
           required: false
           description: Page index of results page to be returned
+        - schema:
+            type: string
+          in: query
+          name: integrationOptaId
+          description: Fixture OptaID used to filter events
       tags:
         - Event
       responses:
@@ -1793,7 +1798,7 @@ paths:
       description: |-
         ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
         Events API enables clients to retrieve information about fixtures such as matches, competitions, or press releases. 
-        
+
         Get specific event by id. If event is geo-resctriced for the location from which customer is accessing it. It will return Not Found. Both past and future events can be accessed by ID.
       parameters:
         - name: id
