@@ -18,6 +18,50 @@ tags:
 servers:
   - url: 'https://images.streamamg.com'
 paths:
+  /images/{id}/renditions:
+    get:
+      operationId: get-image-renditions
+      summary: Fetch all available renditions of an image
+      description: // TODO
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Unique ID of the image
+      responses:
+        '200':
+          description: //TODO
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  renditions:
+                    type: object
+                    additionalProperties:
+                      type: object
+                      properties:
+                        width:
+                          type: integer
+                        url:
+                          type: string
+                          format: uri
+                examples:
+                  value:
+                    renditions:
+                      '320w.jpg':
+                        width: 320
+                        url: https://yourwebsite.com/images/image-src-320w.jpg
+                      '480w.jpg':
+                        width: 480
+                        url: https://yourwebsite.com/images/image-src-480w.jpg
+        '404':
+          description: Image not found 
+        '500':
+          description: Server error
   /images/{id}:
     get:
       operationId: get-by-id
@@ -45,7 +89,7 @@ paths:
         description: Desired height of the image
       responses:
         '200':
-          description: Image details and image binary data
+          description: Image details and url
           content:
             application/json:
               schema:
@@ -60,9 +104,9 @@ paths:
                     type: integer
                   format:
                     type: string
-                  binaryData:
+                  url:
                     type: string
-                    format: binary
+
         '404':
           description: Image not found
         '500':
