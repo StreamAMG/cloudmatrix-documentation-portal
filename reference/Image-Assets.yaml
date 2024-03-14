@@ -46,18 +46,17 @@ paths:
                       properties:
                         width:
                           type: integer
+                        height:
+                          type: integer
+                        type:
+                          type: string
+                          enum:
+                            - png
+                            - jpeg
+                            - gif
+                            - webp
                         url:
                           type: string
-                          format: uri
-                examples:
-                  value:
-                    renditions:
-                      '320w.jpg':
-                        width: 320
-                        url: https://yourwebsite.com/images/image-src-320w.jpg
-                      '480w.jpg':
-                        width: 480
-                        url: https://yourwebsite.com/images/image-src-480w.jpg
         '404':
           description: Image not found 
         '500':
