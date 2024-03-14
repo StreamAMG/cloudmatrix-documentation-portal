@@ -130,7 +130,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-          description: Desired width of the image
+          description: Desired width of the image (if used together with height will take precedence)
         - name: height
           in: query
           schema:
@@ -141,21 +141,22 @@ paths:
         '200':
           description: Image details and url
           content:
-            application/json:
+            image/jpeg:
               schema:
                 type: object
-                properties:
-                  id:
-                    type: string
-                    format: uuid
-                  width:
-                    type: integer
-                  height:
-                    type: integer
-                  format:
-                    type: string
-                  url:
-                    type: string
+                properties: {}
+            image/png:
+              schema:
+                type: object
+                properties: {}
+            image/webp:
+              schema:
+                type: object
+                properties: {}
+            image/gif:
+              schema:
+                type: object
+                properties: {}
         '404':
           description: Image not found
         '500':
