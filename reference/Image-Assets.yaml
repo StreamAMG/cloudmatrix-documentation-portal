@@ -2,35 +2,34 @@ openapi: 3.1.0
 info:
   title: Image Service API
   version: 1.0.0
-  license: 
+  license:
     name: N/A
-    url: https://notapplicable.com
+    url: 'https://notapplicable.com'
   contact:
     name: Zeus Team
     email: zeusdevs@pamediagroup.com
     url: N/A
   summary: An API to retrieve multiple formats of image assets. // TODO improve
-  description: |-
-    // TODO improve
+  description: // TODO improve
 tags:
   - name: Images
     description: Images tag
 servers:
   - url: 'https://images.streamamg.com'
 paths:
-  /images/{id}/renditions:
+  '/images/{id}/renditions':
     get:
       operationId: get-image-renditions
       summary: Fetch all available renditions of an image
       description: // TODO
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: Unique ID of the image
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: Unique ID of the image
       responses:
         '200':
           description: //TODO
@@ -57,35 +56,87 @@ paths:
                             - webp
                         url:
                           type: string
+              examples:
+                1x1:
+                  value:
+                    renditions:
+                      550x550:
+                        width: 550
+                        height: 550
+                        type: jpeg
+                        url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=550'
+                      500x500:
+                        width: 500
+                        height: 500
+                        type: jpeg
+                        url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=500'
+                      400x400:
+                        width: 400
+                        height: 400
+                        type: jpeg
+                        url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=400'
+                      300x300:
+                        width: 300
+                        height: 300
+                        type: jpeg
+                        url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=300'
+                      200x200:
+                        width: 200
+                        height: 200
+                        type: jpeg
+                        url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=200'
+                      100x100:
+                        width: 100
+                        height: 100
+                        type: jpeg
+                        url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=100'
+                      50x50:
+                        width: 50
+                        height: 50
+                        type: jpeg
+                        url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=50'
+                Example 2:
+                  value:
+                    renditions:
+                      property1:
+                        width: 0
+                        height: 0
+                        type: png
+                        url: string
+                      property2:
+                        width: 0
+                        height: 0
+                        type: png
+                        url: string
         '404':
-          description: Image not found 
+          description: Image not found
         '500':
           description: Server error
-  /images/{id}:
+  '/images/{id}':
     get:
       operationId: get-by-id
       summary: Fetch image details and the image
       description: Fetch image details and the image // TODO
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: Unique ID of the image
-      - name: width
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-        description: Desired width of the image
-      - name: height
-        in: query
-        schema:
-          type: integer
-          minimum: 1
-        description: Desired height of the image
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: Unique ID of the image
+        - name: width
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+          description: Desired width of the image
+        - name: height
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+          description: Desired height of the image
       responses:
         '200':
           description: Image details and url
@@ -105,7 +156,6 @@ paths:
                     type: string
                   url:
                     type: string
-
         '404':
           description: Image not found
         '500':
