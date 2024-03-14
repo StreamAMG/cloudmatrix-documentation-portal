@@ -1882,6 +1882,8 @@ components:
           type: string
         scheduleData:
           $ref: '#/components/schemas/EventSchedule'
+        imageAssetData:
+          $ref: '#/components/schemas/ImageAsset'
         metaData:
           $ref: '#/components/schemas/EventMetadata'
         itemData:
@@ -1998,6 +2000,24 @@ components:
         offset:
           type: string
           description: ISO 8601 offset datetime when event can be advertised
+    ImageAsset:
+      type: object
+      additionalProperties:
+          type: object
+          properties:
+            width:
+              type: integer
+            height:
+              type: integer
+            type:
+              type: string
+              enum:
+                - png
+                - jpeg
+                - gif
+                - webp
+            url:
+              type: string
   securitySchemes:
     x-api-key:
       name: x-api-key
