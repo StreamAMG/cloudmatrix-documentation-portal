@@ -1716,64 +1716,21 @@ paths:
                           offset: '2024-01-01T18:00:00'
                         imageAssets:
                           logo:
+                            title: image alt title
                             renditions:
                               original:
                                 width: 550
                                 height: 550
                                 type: jpeg
                                 url: http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=550
-                              500x500:
-                                width: 500
-                                height: 500
-                                type: jpeg
-                                url: http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=500
-                              400x400:
-                                width: 400
-                                height: 400
-                                type: jpeg
-                                url: http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=400
-                              300x300:
-                                width: 300
-                                height: 300
-                                type: jpeg
-                                url: http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=300
-                              200x200:
-                                width: 200
-                                height: 200
-                                type: jpeg
-                                url: http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=200
-                              100x100:
-                                width: 100
-                                height: 100
-                                type: jpeg
-                                url: http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=100
-                              50x50:
-                                width: 50
-                                height: 50
-                                type: jpeg
-                                url: http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=50
                           teamA:
+                            title: image alt title
                             renditions:
                               original:
                                 width: 2560
                                 height: 1400
                                 type: jpeg
                                 url: http://images.streamamg.com/345455b2-8f0f-4442-b317-da5839674288?width=2560
-                              1920x1080:
-                                width: 1920
-                                height: 1080
-                                type: jpeg
-                                url: http://images.streamamg.com/345455b2-8f0f-4442-b317-da5839674288?width=1920
-                              1280x720:
-                                width: 1280
-                                height: 720
-                                type: jpeg
-                                url: http://images.streamamg.com/345455b2-8f0f-4442-b317-da5839674288?width=1280
-                              640x:
-                                width: 640
-                                height: 360
-                                type: jpeg
-                                url: http://images.streamamg.com/345455b2-8f0f-4442-b317-da5839674288?width=640
                         metaData:
                           type: footballMatch
                           footballMatch:

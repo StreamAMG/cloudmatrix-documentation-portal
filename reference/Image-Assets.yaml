@@ -38,6 +38,9 @@ paths:
               schema:
                 type: object
                 properties:
+                  title:
+                    type: string
+                    description: image title can be used for alt attribute when embedding into HTML
                   renditions:
                     type: object
                     additionalProperties:
@@ -59,42 +62,13 @@ paths:
               examples:
                 1x1:
                   value:
+                    title: test image title
                     renditions:
-                      550x550:
+                      'original':
                         width: 550
                         height: 550
                         type: jpeg
                         url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=550'
-                      500x500:
-                        width: 500
-                        height: 500
-                        type: jpeg
-                        url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=500'
-                      400x400:
-                        width: 400
-                        height: 400
-                        type: jpeg
-                        url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=400'
-                      300x300:
-                        width: 300
-                        height: 300
-                        type: jpeg
-                        url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=300'
-                      200x200:
-                        width: 200
-                        height: 200
-                        type: jpeg
-                        url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=200'
-                      100x100:
-                        width: 100
-                        height: 100
-                        type: jpeg
-                        url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=100'
-                      50x50:
-                        width: 50
-                        height: 50
-                        type: jpeg
-                        url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=50'
                 Example 2:
                   value:
                     renditions:
