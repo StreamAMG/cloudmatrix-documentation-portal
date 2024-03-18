@@ -2019,7 +2019,7 @@ components:
           description: ISO 8601 offset datetime when event can be advertised
     ImageData:
       type: object
-      description: Map of the pre-configured image assets that will be specific to your Event.
+      description: Map of the pre-configured named image assets that will be specific to your Event. See examples.
       x-stoplight:
         id: ff1c3df07db85
       additionalProperties:
@@ -2027,21 +2027,23 @@ components:
         properties:
           title:
             type: string
-            description: image title can be used for alt attribute when embedding into HTML
+            description: image title can be used for an alt attribute when embedding images into HTML
           renditions:
             type: object
-            properties:
-              width:
-                type: integer
-              height:
-                type: integer
-              type:
-                type: string
-                enum:
-                  - png
-                  - jpeg
-                  - gif
-                  - webp
+            additionalProperties:
+              type: object
+              properties:
+                width:
+                  type: integer
+                height:
+                  type: integer
+                type:
+                  type: string
+                  enum:
+                    - png
+                    - jpeg
+                    - gif
+                    - webp
                 url:
                   type: string
   securitySchemes:
