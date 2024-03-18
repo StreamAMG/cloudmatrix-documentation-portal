@@ -1714,36 +1714,44 @@ paths:
                           start: '2024-01-01T18:30:00'
                           end: '2024-01-01T20:30:00'
                           offset: '2024-01-01T18:00:00'
-                        imageData:
-                          logo:
-                            title: image alt title
-                            renditions:
-                              original:
-                                width: 550
-                                height: 550
-                                type: jpeg
-                                url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
-                          teamA:
-                            title: image alt title
-                            renditions:
-                              original:
-                                width: 2560
-                                height: 1400
-                                type: jpeg
-                                url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da5839674288'
                         metaData:
                           type: footballMatch
                           footballMatch:
                             teams:
                               home:
                                 name: Manchester United
-                                logo: 'https://example.com/manchester_united_logo.png'
+                                logo:
+                                  type: image
+                                  title: image alt title
+                                  renditions:
+                                    original:
+                                      width: 550
+                                      height: 550
+                                      type: jpeg
+                                      url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
                               away:
                                 name: Chelsea
-                                logo: 'https://example.com/chelsea_logo.png'
+                                logo:
+                                  type: image
+                                  title: image alt title
+                                  renditions:
+                                    original:
+                                      width: 550
+                                      height: 550
+                                      type: jpeg
+                                      url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
                             competition: Premier League
                             season: 2023-2024
                             venue: Stadium
+                            eventLogo: 
+                              type: image
+                              title: image alt title
+                              renditions:
+                                original:
+                                  width: 550
+                                  height: 550
+                                  type: jpeg
+                                  url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'                              
                         itemData:
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
                             type: audio
@@ -1899,8 +1907,6 @@ components:
           type: string
         scheduleData:
           $ref: '#/components/schemas/EventSchedule'
-        imageData:
-          $ref: '#/components/schemas/ImageData'
         metaData:
           $ref: '#/components/schemas/EventMetadata'
         itemData:
@@ -1988,20 +1994,22 @@ components:
                 name:
                   type: string
                 logo:
-                  type: string
+                  $ref: '#/components/schemas/ImageDataType'
             away:
               type: object
               properties:
                 name:
                   type: string
                 logo:
-                  type: string
+                  $ref: '#/components/schemas/ImageDataType'
         competition:
           type: string
         season:
           type: string
         venue:
           type: string
+        eventLogo:
+          $ref: '#/components/schemas/ImageDataType'
     EventSchedule:
       type: object
       required:
@@ -2017,14 +2025,13 @@ components:
         offset:
           type: string
           description: ISO 8601 offset datetime when event can be advertised
-    ImageData:
+    ImageDataType:
       type: object
-      description: Map of the pre-configured named image assets that will be specific to your Event. See examples.
-      x-stoplight:
-        id: ff1c3df07db85
-      additionalProperties:
-        type: object
-        properties:
+      properties:
+          type:
+            type: string
+            enum:
+              - image
           title:
             type: string
             description: image title can be used for an alt attribute when embedding images into HTML
@@ -2046,6 +2053,8 @@ components:
                     - webp
                 url:
                   type: string
+      x-stoplight:
+        id: ff1c3df07db85
   securitySchemes:
     x-api-key:
       name: x-api-key
