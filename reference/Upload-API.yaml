@@ -1714,7 +1714,7 @@ paths:
                           start: '2024-01-01T18:30:00'
                           end: '2024-01-01T20:30:00'
                           offset: '2024-01-01T18:00:00'
-                        imageAssets:
+                        imageData:
                           logo:
                             title: image alt title
                             renditions:
@@ -1722,7 +1722,7 @@ paths:
                                 width: 550
                                 height: 550
                                 type: jpeg
-                                url: http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9?width=550
+                                url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
                           teamA:
                             title: image alt title
                             renditions:
@@ -1730,7 +1730,7 @@ paths:
                                 width: 2560
                                 height: 1400
                                 type: jpeg
-                                url: http://images.streamamg.com/345455b2-8f0f-4442-b317-da5839674288?width=2560
+                                url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da5839674288'
                         metaData:
                           type: footballMatch
                           footballMatch:
@@ -1899,8 +1899,8 @@ components:
           type: string
         scheduleData:
           $ref: '#/components/schemas/EventSchedule'
-        imageAssetsData:
-          $ref: '#/components/schemas/ImageAsset'
+        imageData:
+          $ref: '#/components/schemas/ImageData'
         metaData:
           $ref: '#/components/schemas/EventMetadata'
         itemData:
@@ -2017,24 +2017,26 @@ components:
         offset:
           type: string
           description: ISO 8601 offset datetime when event can be advertised
-    ImageAsset:
+    ImageData:
       type: object
+      x-stoplight:
+        id: ff1c3df07db85
       additionalProperties:
-          type: object
-          properties:
-            width:
-              type: integer
-            height:
-              type: integer
-            type:
-              type: string
-              enum:
-                - png
-                - jpeg
-                - gif
-                - webp
-            url:
-              type: string
+        type: object
+        properties:
+          width:
+            type: integer
+          height:
+            type: integer
+          type:
+            type: string
+            enum:
+              - png
+              - jpeg
+              - gif
+              - webp
+          url:
+            type: string
   securitySchemes:
     x-api-key:
       name: x-api-key
