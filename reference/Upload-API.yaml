@@ -1935,6 +1935,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Event'
+              examples:
+                pressRelease:
+                  value:
+                    id: cac5a29a-42ed-4218-b695-df8c89bf7048
+                    priorityOrder: 2
+                    title: Press Release this week
+                    subtitle: New coach joining the team!
+                    scheduleData:
+                      start: '2024-03-01T18:30:00'
+                      end: '2024-03-01T20:30:00'
+                    metaData:
+                      type: pressRelease
+                      pressRelease:
+                        posterImage:
+                          type: image
+                          title: Coach Steve R. during press release
+                          renditions:
+                            original:
+                              width: 550
+                              height: 550
+                              type: jpeg
+                              url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                    itemData:
+                      - id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                        type: video
+                        thumbnailUrl: 'https://example.com/thumbnail.png'
+                        mediaData:
+                          legacyEntryId: '123'
+                        metaData:
+                          title: This week's press release
+                          body: First press release of our new coach
+                          tags:
+                            - press-release
+                            - news
+                          sysentryentitlements:
+                            - '*'
         '404':
           description: Event not found or not available in user's location
           content:
