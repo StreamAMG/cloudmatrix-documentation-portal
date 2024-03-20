@@ -1702,18 +1702,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Events'
               examples:
-                footballMatchEvent:
+                footballMatch with audio only:
                   value:
                     eventData:
                       - id: cac5a29a-42ed-4218-b695-df8c89bf7049
                         priorityOrder: 1
                         title: Football Match
                         subtitle: Premier League
-                        description: Manchester United vs Chelsea
+                        description: Manchester United vs Fulham
                         scheduleData:
-                          start: '2024-01-01T18:30:00'
-                          end: '2024-01-01T20:30:00'
-                          offset: '2024-01-01T18:00:00'
+                          start: '2024-02-25T15:00:00'
+                          end: '2024-02-24T17:00:00'
+                          offset: '2024-02-24T14:55:00'
                         metaData:
                           type: footballMatch
                           footballMatch:
@@ -1722,7 +1722,7 @@ paths:
                                 name: Manchester United
                                 logo:
                                   type: image
-                                  title: image alt title
+                                  title: Manchester United logo
                                   renditions:
                                     original:
                                       width: 550
@@ -1730,10 +1730,10 @@ paths:
                                       type: jpeg
                                       url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
                               away:
-                                name: Chelsea
+                                name: Fulham
                                 logo:
                                   type: image
-                                  title: image alt title
+                                  title: Fulham logo
                                   renditions:
                                     original:
                                       width: 550
@@ -1742,8 +1742,8 @@ paths:
                                       url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
                             competition: Premier League
                             season: 2023-2024
-                            venue: Stadium
-                            eventLogo: 
+                            venue: Old Trafford
+                            eventLogo:
                               type: image
                               title: image alt title
                               renditions:
@@ -1751,7 +1751,7 @@ paths:
                                   width: 550
                                   height: 550
                                   type: jpeg
-                                  url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'                              
+                                  url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
                         itemData:
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
                             type: audio
@@ -1760,21 +1760,106 @@ paths:
                               legacyEntryId: '123'
                             metaData:
                               title: Football Match
-                              body: Exciting match between Manchester United and Chelsea
+                              body: Exciting match between Manchester United and Fulham
                               tags:
                                 - football
                                 - premier league
                               sysentryentitlements:
-                                - premium
+                                - audio
                         integrationData:
-                          optaId: eventOptaId
+                          optaId: '2367795'
                     pagingData:
                       totalCount: 1
                       itemCount: 1
                       pageCount: 1
                       pageSize: 10
                       pageIndex: 0
-                pressReleaseEvent:
+                footballMatch with video & audio:
+                  value:
+                    eventData:
+                      - id: cac5a29a-42ed-4218-b695-df8c89bf7049
+                        priorityOrder: 1
+                        title: Football Match
+                        subtitle: Premier League
+                        description: Manchester United vs Fulham
+                        scheduleData:
+                          start: '2024-02-25T15:00:00'
+                          end: '2024-02-24T17:00:00'
+                          offset: '2024-02-24T14:55:00'
+                        metaData:
+                          type: footballMatch
+                          footballMatch:
+                            teams:
+                              home:
+                                name: Manchester United
+                                logo:
+                                  type: image
+                                  title: Manchester United logo
+                                  renditions:
+                                    original:
+                                      width: 550
+                                      height: 550
+                                      type: jpeg
+                                      url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                              away:
+                                name: Fulham
+                                logo:
+                                  type: image
+                                  title: Fulham logo
+                                  renditions:
+                                    original:
+                                      width: 550
+                                      height: 550
+                                      type: jpeg
+                                      url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                            competition: Premier League
+                            season: 2023-2024
+                            venue: Old Trafford
+                            eventLogo:
+                              type: image
+                              title: image alt title
+                              renditions:
+                                original:
+                                  width: 550
+                                  height: 550
+                                  type: jpeg
+                                  url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                        itemData:
+                          - id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                            type: audio
+                            thumbnailUrl: 'https://example.com/thumbnail.png'
+                            mediaData:
+                              legacyEntryId: '123'
+                            metaData:
+                              title: Football Match
+                              body: Exciting match between Manchester United and Fulham
+                              tags:
+                                - football
+                                - premier league
+                              sysentryentitlements:
+                                - audio
+                          - id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                            type: video
+                            thumbnailUrl: 'https://example.com/thumbnail.png'
+                            mediaData:
+                              legacyEntryId: '123'
+                            metaData:
+                              title: Football Match
+                              body: Exciting match between Manchester United and Fulham
+                              tags:
+                                - football
+                                - premier league
+                              sysentryentitlements:
+                                - video
+                        integrationData:
+                          optaId: '2367795'
+                    pagingData:
+                      totalCount: 1
+                      itemCount: 1
+                      pageCount: 1
+                      pageSize: 10
+                      pageIndex: 0
+                pressRelease:
                   value:
                     eventData:
                       - id: cac5a29a-42ed-4218-b695-df8c89bf7048
@@ -1786,7 +1871,16 @@ paths:
                           end: '2024-03-01T20:30:00'
                         metaData:
                           type: pressRelease
-                          pressRelease: {}
+                          pressRelease:
+                            posterImage:
+                              type: image
+                              title: Coach Steve R. during press release
+                              renditions:
+                                original:
+                                  width: 550
+                                  height: 550
+                                  type: jpeg
+                                  url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
                         itemData:
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
                             type: video
@@ -2028,31 +2122,31 @@ components:
     ImageDataType:
       type: object
       properties:
-          type:
-            type: string
-            enum:
-              - image
-          title:
-            type: string
-            description: image title can be used for an alt attribute when embedding images into HTML
-          renditions:
+        type:
+          type: string
+          enum:
+            - image
+        title:
+          type: string
+          description: image title can be used for an alt attribute when embedding images into HTML
+        renditions:
+          type: object
+          additionalProperties:
             type: object
-            additionalProperties:
-              type: object
-              properties:
-                width:
-                  type: integer
-                height:
-                  type: integer
-                type:
-                  type: string
-                  enum:
-                    - png
-                    - jpeg
-                    - gif
-                    - webp
-                url:
-                  type: string
+            properties:
+              width:
+                type: integer
+              height:
+                type: integer
+              type:
+                type: string
+                enum:
+                  - png
+                  - jpeg
+                  - gif
+                  - webp
+              url:
+                type: string
       x-stoplight:
         id: ff1c3df07db85
   securitySchemes:
