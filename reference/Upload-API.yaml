@@ -2070,12 +2070,16 @@ components:
           type: string
         footballMatch:
           $ref: '#/components/schemas/FootballMatchMetadata'
-        tennisEvent:
-          $ref: '#/components/schemas/EmptyPlaceholder'
-        customEvent:
-          $ref: '#/components/schemas/EmptyPlaceholder'
-    EmptyPlaceholder:
+        pressRelease:
+          $ref: '#/components/schemas/PressRelease'
+    PressRelease:
       type: object
+      properties:
+        posterImage:
+          type:
+            $ref: '#/components/schemas/ImageDataType'
+      x-stoplight:
+        id: 3a11a10737734
     FootballMatchMetadata:
       type: object
       properties:
