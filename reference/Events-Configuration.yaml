@@ -1,0 +1,1628 @@
+openapi: 3.1.0
+x-stoplight:
+  id: mvcuji92q28ni
+info:
+  title: Events Configuration
+  version: '1.0'
+  summary: Protected Events Configuration API that allows us to perform management operations on our Events.
+servers:
+  - url: 'https://api.events-configuration.streamamg.com'
+    description: prod
+  - url: 'https://api.events-configuration.staging.streamamg.com'
+    description: staging
+  - url: 'https://api.events-configuration.dev.streamamg.com'
+    description: dev
+paths:
+  /events:
+    get:
+      summary: list events
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  eventData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        priorityOrder:
+                          type: integer
+                        title:
+                          type: string
+                        subtitle:
+                          type: string
+                        description:
+                          type: string
+                        scheduleData:
+                          type: object
+                          properties:
+                            start:
+                              type: string
+                            end:
+                              type: string
+                            offset:
+                              type: string
+                        metaData:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                            footballMatch:
+                              type: object
+                              properties:
+                                teams:
+                                  type: object
+                                  properties:
+                                    home:
+                                      type: object
+                                      properties:
+                                        name:
+                                          type: string
+                                        logo:
+                                          type: object
+                                          properties:
+                                            type:
+                                              type: string
+                                            title:
+                                              type: string
+                                            renditions:
+                                              type: object
+                                              properties:
+                                                original:
+                                                  type: object
+                                                  properties:
+                                                    width:
+                                                      type: integer
+                                                    height:
+                                                      type: integer
+                                                    type:
+                                                      type: string
+                                                    url:
+                                                      type: string
+                                    away:
+                                      type: object
+                                      properties:
+                                        name:
+                                          type: string
+                                        logo:
+                                          type: object
+                                          properties:
+                                            type:
+                                              type: string
+                                            title:
+                                              type: string
+                                            renditions:
+                                              type: object
+                                              properties:
+                                                original:
+                                                  type: object
+                                                  properties:
+                                                    width:
+                                                      type: integer
+                                                    height:
+                                                      type: integer
+                                                    type:
+                                                      type: string
+                                                    url:
+                                                      type: string
+                                competition:
+                                  type: string
+                                season:
+                                  type: string
+                                venue:
+                                  type: string
+                                eventLogo:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    title:
+                                      type: string
+                                    renditions:
+                                      type: object
+                                      properties:
+                                        original:
+                                          type: object
+                                          properties:
+                                            width:
+                                              type: integer
+                                            height:
+                                              type: integer
+                                            type:
+                                              type: string
+                                            url:
+                                              type: string
+                        itemData:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              type:
+                                type: string
+                              thumbnailUrl:
+                                type: string
+                              mediaData:
+                                type: object
+                                properties:
+                                  legacyEntryId:
+                                    type: string
+                              metaData:
+                                type: object
+                                properties:
+                                  title:
+                                    type: string
+                                  body:
+                                    type: string
+                                  tags:
+                                    type: array
+                                    items:
+                                      type: string
+                                  sysentryentitlements:
+                                    type: array
+                                    items:
+                                      type: string
+                        integrationData:
+                          type: object
+                          properties:
+                            optaId:
+                              type: string
+                  pagingData:
+                    type: object
+                    properties:
+                      totalCount:
+                        type: integer
+                      itemCount:
+                        type: integer
+                      pageCount:
+                        type: integer
+                      pageSize:
+                        type: integer
+                      pageIndex:
+                        type: integer
+                x-examples:
+                  Example 1:
+                    eventData:
+                      - id: cac5a29a-42ed-4218-b695-df8c89bf7049
+                        priorityOrder: 1
+                        title: Football Match
+                        subtitle: Premier League
+                        description: Manchester United vs Fulham
+                        scheduleData:
+                          start: '2024-02-25T15:00:00'
+                          end: '2024-02-24T17:00:00'
+                          offset: '2024-02-24T14:55:00'
+                        metaData:
+                          type: footballMatch
+                          footballMatch:
+                            teams:
+                              home:
+                                name: Manchester United
+                                logo:
+                                  type: image
+                                  title: Manchester United logo
+                                  renditions:
+                                    original:
+                                      width: 550
+                                      height: 550
+                                      type: jpeg
+                                      url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                              away:
+                                name: Fulham
+                                logo:
+                                  type: image
+                                  title: Fulham logo
+                                  renditions:
+                                    original:
+                                      width: 550
+                                      height: 550
+                                      type: jpeg
+                                      url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                            competition: Premier League
+                            season: 2023-2024
+                            venue: Old Trafford
+                            eventLogo:
+                              type: image
+                              title: image alt title
+                              renditions:
+                                original:
+                                  width: 550
+                                  height: 550
+                                  type: jpeg
+                                  url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                        itemData:
+                          - id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                            type: audio
+                            thumbnailUrl: 'https://example.com/thumbnail.png'
+                            mediaData:
+                              legacyEntryId: '123'
+                            metaData:
+                              title: Football Match
+                              body: Exciting match between Manchester United and Fulham
+                              tags:
+                                - football
+                                - premier league
+                              sysentryentitlements:
+                                - audio
+                        integrationData:
+                          optaId: '2367795'
+                    pagingData:
+                      totalCount: 1
+                      itemCount: 1
+                      pageCount: 1
+                      pageSize: 10
+                      pageIndex: 0
+              examples:
+                Events list:
+                  value:
+                    eventData:
+                      - id: cac5a29a-42ed-4218-b695-df8c89bf7049
+                        priorityOrder: 1
+                        title: Football Match
+                        subtitle: Premier League
+                        description: Manchester United vs Fulham
+                        scheduleData:
+                          start: '2024-02-25T15:00:00'
+                          end: '2024-02-24T17:00:00'
+                          offset: '2024-02-24T14:55:00'
+                        metaData:
+                          type: footballMatch
+                          footballMatch:
+                            teams:
+                              home:
+                                name: Manchester United
+                                logo:
+                                  type: image
+                                  title: Manchester United logo
+                                  renditions:
+                                    original:
+                                      width: 550
+                                      height: 550
+                                      type: jpeg
+                                      url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                              away:
+                                name: Fulham
+                                logo:
+                                  type: image
+                                  title: Fulham logo
+                                  renditions:
+                                    original:
+                                      width: 550
+                                      height: 550
+                                      type: jpeg
+                                      url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                            competition: Premier League
+                            season: 2023-2024
+                            venue: Old Trafford
+                            eventLogo:
+                              type: image
+                              title: image alt title
+                              renditions:
+                                original:
+                                  width: 550
+                                  height: 550
+                                  type: jpeg
+                                  url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                        itemData:
+                          - id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                            type: audio
+                            thumbnailUrl: 'https://example.com/thumbnail.png'
+                            mediaData:
+                              legacyEntryId: '123'
+                            metaData:
+                              title: Football Match
+                              body: Exciting match between Manchester United and Fulham
+                              tags:
+                                - football
+                                - premier league
+                              sysentryentitlements:
+                                - audio
+                        integrationData:
+                          optaId: '2367795'
+                    pagingData:
+                      totalCount: 1
+                      itemCount: 1
+                      pageCount: 1
+                      pageSize: 10
+                      pageIndex: 0
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: get-events
+      x-stoplight:
+        id: n3aj56qy7v6ei
+      x-internal: true
+      parameters: []
+    parameters:
+      - schema:
+          type: string
+        in: header
+        name: x-api-key
+        description: API key to access admin endpoint
+      - schema:
+          type: string
+        in: header
+        name: tennant-id
+        description: Tennant ID
+    post:
+      summary: create event
+      tags: []
+      responses: {}
+      operationId: create-event
+      x-stoplight:
+        id: 3ibg2w821os3y
+      x-internal: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                priorityOrder:
+                  type: integer
+                title:
+                  type: string
+                subtitle:
+                  type: string
+                description:
+                  type: string
+                scheduleData:
+                  type: object
+                  properties:
+                    start:
+                      type: string
+                    end:
+                      type: string
+                    offset:
+                      type: string
+                metaData:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    footballMatch:
+                      type: object
+                      properties:
+                        teams:
+                          type: object
+                          properties:
+                            home:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                logo:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    title:
+                                      type: string
+                                    renditions:
+                                      type: object
+                                      properties:
+                                        original:
+                                          type: object
+                                          properties:
+                                            width:
+                                              type: integer
+                                            height:
+                                              type: integer
+                                            type:
+                                              type: string
+                                            url:
+                                              type: string
+                            away:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                logo:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    title:
+                                      type: string
+                                    renditions:
+                                      type: object
+                                      properties:
+                                        original:
+                                          type: object
+                                          properties:
+                                            width:
+                                              type: integer
+                                            height:
+                                              type: integer
+                                            type:
+                                              type: string
+                                            url:
+                                              type: string
+                        competition:
+                          type: string
+                        season:
+                          type: string
+                        venue:
+                          type: string
+                        eventLogo:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                            title:
+                              type: string
+                            renditions:
+                              type: object
+                              properties:
+                                original:
+                                  type: object
+                                  properties:
+                                    width:
+                                      type: integer
+                                    height:
+                                      type: integer
+                                    type:
+                                      type: string
+                                    url:
+                                      type: string
+                itemData:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      thumbnailUrl:
+                        type: string
+                      mediaData:
+                        type: object
+                        properties:
+                          legacyEntryId:
+                            type: string
+                      metaData:
+                        type: object
+                        properties:
+                          title:
+                            type: string
+                          body:
+                            type: string
+                          tags:
+                            type: array
+                            items:
+                              type: string
+                          sysentryentitlements:
+                            type: array
+                            items:
+                              type: string
+                integrationData:
+                  type: object
+                  properties:
+                    optaId:
+                      type: string
+              x-examples:
+                Example 1:
+                  priorityOrder: 1
+                  title: Football Match
+                  subtitle: Premier League
+                  description: Manchester United vs Fulham
+                  scheduleData:
+                    start: '2024-02-25T15:00:00'
+                    end: '2024-02-24T17:00:00'
+                    offset: '2024-02-24T14:55:00'
+                  metaData:
+                    type: footballMatch
+                    footballMatch:
+                      teams:
+                        home:
+                          name: Manchester United
+                          logo:
+                            type: image
+                            title: Manchester United logo
+                            renditions:
+                              original:
+                                width: 550
+                                height: 550
+                                type: jpeg
+                                url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                        away:
+                          name: Fulham
+                          logo:
+                            type: image
+                            title: Fulham logo
+                            renditions:
+                              original:
+                                width: 550
+                                height: 550
+                                type: jpeg
+                                url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                      competition: Premier League
+                      season: 2023-2024
+                      venue: Old Trafford
+                      eventLogo:
+                        type: image
+                        title: image alt title
+                        renditions:
+                          original:
+                            width: 550
+                            height: 550
+                            type: jpeg
+                            url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                  itemData:
+                    - id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                      type: audio
+                      thumbnailUrl: 'https://example.com/thumbnail.png'
+                      mediaData:
+                        legacyEntryId: '123'
+                      metaData:
+                        title: Football Match
+                        body: Exciting match between Manchester United and Fulham
+                        tags:
+                          - football
+                          - premier league
+                        sysentryentitlements:
+                          - audio
+                  integrationData:
+                    optaId: '2367795'
+            examples:
+              Example 1:
+                value:
+                  priorityOrder: 1
+                  title: Football Match
+                  subtitle: Premier League
+                  description: Manchester United vs Fulham
+                  scheduleData:
+                    start: '2024-02-25T15:00:00'
+                    end: '2024-02-24T17:00:00'
+                    offset: '2024-02-24T14:55:00'
+                  metaData:
+                    type: footballMatch
+                    footballMatch:
+                      teams:
+                        home:
+                          name: Manchester United
+                          logo:
+                            type: image
+                            title: Manchester United logo
+                            renditions:
+                              original:
+                                width: 550
+                                height: 550
+                                type: jpeg
+                                url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                        away:
+                          name: Fulham
+                          logo:
+                            type: image
+                            title: Fulham logo
+                            renditions:
+                              original:
+                                width: 550
+                                height: 550
+                                type: jpeg
+                                url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                      competition: Premier League
+                      season: 2023-2024
+                      venue: Old Trafford
+                      eventLogo:
+                        type: image
+                        title: image alt title
+                        renditions:
+                          original:
+                            width: 550
+                            height: 550
+                            type: jpeg
+                            url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                  itemData:
+                    - id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                      type: audio
+                      thumbnailUrl: 'https://example.com/thumbnail.png'
+                      mediaData:
+                        legacyEntryId: '123'
+                      metaData:
+                        title: Football Match
+                        body: Exciting match between Manchester United and Fulham
+                        tags:
+                          - football
+                          - premier league
+                        sysentryentitlements:
+                          - audio
+                  integrationData:
+                    optaId: '2367795'
+    patch:
+      summary: update event
+      tags: []
+      responses: {}
+      operationId: update-event
+      x-stoplight:
+        id: otcveam94glus
+      x-internal: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  id: cac5a29a-42ed-4218-b695-df8c89bf7049
+                  priorityOrder: 1
+                  title: Football Match
+                  subtitle: Premier League
+                  description: Manchester United vs Fulham
+                  scheduleData:
+                    start: '2024-02-25T15:00:00'
+                    end: '2024-02-24T17:00:00'
+                    offset: '2024-02-24T14:55:00'
+                  metaData:
+                    type: footballMatch
+                    footballMatch:
+                      teams:
+                        home:
+                          name: Manchester United
+                          logo:
+                            type: image
+                            title: Manchester United logo
+                            renditions:
+                              original:
+                                width: 550
+                                height: 550
+                                type: jpeg
+                                url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                        away:
+                          name: Fulham
+                          logo:
+                            type: image
+                            title: Fulham logo
+                            renditions:
+                              original:
+                                width: 550
+                                height: 550
+                                type: jpeg
+                                url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                      competition: Premier League
+                      season: 2023-2024
+                      venue: Old Trafford
+                      eventLogo:
+                        type: image
+                        title: image alt title
+                        renditions:
+                          original:
+                            width: 550
+                            height: 550
+                            type: jpeg
+                            url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                  itemData:
+                    - id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                      type: audio
+                      thumbnailUrl: 'https://example.com/thumbnail.png'
+                      mediaData:
+                        legacyEntryId: '123'
+                      metaData:
+                        title: Football Match
+                        body: Exciting match between Manchester United and Fulham
+                        tags:
+                          - football
+                          - premier league
+                        sysentryentitlements:
+                          - audio
+                  integrationData:
+                    optaId: '2367795'
+              properties:
+                priorityOrder:
+                  type: integer
+                title:
+                  type: string
+                subtitle:
+                  type: string
+                description:
+                  type: string
+                scheduleData:
+                  type: object
+                  properties:
+                    start:
+                      type: string
+                    end:
+                      type: string
+                    offset:
+                      type: string
+                metaData:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    footballMatch:
+                      type: object
+                      properties:
+                        teams:
+                          type: object
+                          properties:
+                            home:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                logo:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    title:
+                                      type: string
+                                    renditions:
+                                      type: object
+                                      properties:
+                                        original:
+                                          type: object
+                                          properties:
+                                            width:
+                                              type: integer
+                                            height:
+                                              type: integer
+                                            type:
+                                              type: string
+                                            url:
+                                              type: string
+                            away:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                logo:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    title:
+                                      type: string
+                                    renditions:
+                                      type: object
+                                      properties:
+                                        original:
+                                          type: object
+                                          properties:
+                                            width:
+                                              type: integer
+                                            height:
+                                              type: integer
+                                            type:
+                                              type: string
+                                            url:
+                                              type: string
+                        competition:
+                          type: string
+                        season:
+                          type: string
+                        venue:
+                          type: string
+                        eventLogo:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                            title:
+                              type: string
+                            renditions:
+                              type: object
+                              properties:
+                                original:
+                                  type: object
+                                  properties:
+                                    width:
+                                      type: integer
+                                    height:
+                                      type: integer
+                                    type:
+                                      type: string
+                                    url:
+                                      type: string
+                itemData:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      thumbnailUrl:
+                        type: string
+                      mediaData:
+                        type: object
+                        properties:
+                          legacyEntryId:
+                            type: string
+                      metaData:
+                        type: object
+                        properties:
+                          title:
+                            type: string
+                          body:
+                            type: string
+                          tags:
+                            type: array
+                            items:
+                              type: string
+                          sysentryentitlements:
+                            type: array
+                            items:
+                              type: string
+                integrationData:
+                  type: object
+                  properties:
+                    optaId:
+                      type: string
+            examples:
+              update priority:
+                value:
+                  priorityOrder: 1
+              update endTime:
+                value:
+                  integrationData:
+                    optaId: '2367795'
+  '/events/{eventID}':
+    parameters:
+      - schema:
+          type: string
+        name: eventID
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: eventID
+        in: path
+        required: true
+        description: id of the event
+      - schema:
+          type: string
+        in: header
+        description: API key to access admin endpoint
+        name: x-api-key
+      - schema:
+          type: string
+        in: header
+        description: Tennant ID
+        name: tennant-id
+    get:
+      summary: get event
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  priorityOrder:
+                    type: integer
+                  title:
+                    type: string
+                  subtitle:
+                    type: string
+                  description:
+                    type: string
+                  scheduleData:
+                    type: object
+                    properties:
+                      start:
+                        type: string
+                      end:
+                        type: string
+                      offset:
+                        type: string
+                  metaData:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                      footballMatch:
+                        type: object
+                        properties:
+                          teams:
+                            type: object
+                            properties:
+                              home:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  logo:
+                                    type: object
+                                    properties:
+                                      type:
+                                        type: string
+                                      title:
+                                        type: string
+                                      renditions:
+                                        type: object
+                                        properties:
+                                          original:
+                                            type: object
+                                            properties:
+                                              width:
+                                                type: integer
+                                              height:
+                                                type: integer
+                                              type:
+                                                type: string
+                                              url:
+                                                type: string
+                              away:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  logo:
+                                    type: object
+                                    properties:
+                                      type:
+                                        type: string
+                                      title:
+                                        type: string
+                                      renditions:
+                                        type: object
+                                        properties:
+                                          original:
+                                            type: object
+                                            properties:
+                                              width:
+                                                type: integer
+                                              height:
+                                                type: integer
+                                              type:
+                                                type: string
+                                              url:
+                                                type: string
+                          competition:
+                            type: string
+                          season:
+                            type: string
+                          venue:
+                            type: string
+                          eventLogo:
+                            type: object
+                            properties:
+                              type:
+                                type: string
+                              title:
+                                type: string
+                              renditions:
+                                type: object
+                                properties:
+                                  original:
+                                    type: object
+                                    properties:
+                                      width:
+                                        type: integer
+                                      height:
+                                        type: integer
+                                      type:
+                                        type: string
+                                      url:
+                                        type: string
+                  itemData:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        type:
+                          type: string
+                        thumbnailUrl:
+                          type: string
+                        mediaData:
+                          type: object
+                          properties:
+                            legacyEntryId:
+                              type: string
+                        metaData:
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                            body:
+                              type: string
+                            tags:
+                              type: array
+                              items:
+                                type: string
+                            sysentryentitlements:
+                              type: array
+                              items:
+                                type: string
+                  integrationData:
+                    type: object
+                    properties:
+                      optaId:
+                        type: string
+                x-examples:
+                  Example 1:
+                    id: cac5a29a-42ed-4218-b695-df8c89bf7049
+                    priorityOrder: 1
+                    title: Football Match
+                    subtitle: Premier League
+                    description: Manchester United vs Fulham
+                    scheduleData:
+                      start: '2024-02-25T15:00:00'
+                      end: '2024-02-24T17:00:00'
+                      offset: '2024-02-24T14:55:00'
+                    metaData:
+                      type: footballMatch
+                      footballMatch:
+                        teams:
+                          home:
+                            name: Manchester United
+                            logo:
+                              type: image
+                              title: Manchester United logo
+                              renditions:
+                                original:
+                                  width: 550
+                                  height: 550
+                                  type: jpeg
+                                  url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                          away:
+                            name: Fulham
+                            logo:
+                              type: image
+                              title: Fulham logo
+                              renditions:
+                                original:
+                                  width: 550
+                                  height: 550
+                                  type: jpeg
+                                  url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                        competition: Premier League
+                        season: 2023-2024
+                        venue: Old Trafford
+                        eventLogo:
+                          type: image
+                          title: image alt title
+                          renditions:
+                            original:
+                              width: 550
+                              height: 550
+                              type: jpeg
+                              url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                    itemData:
+                      - id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                        type: audio
+                        thumbnailUrl: 'https://example.com/thumbnail.png'
+                        mediaData:
+                          legacyEntryId: '123'
+                        metaData:
+                          title: Football Match
+                          body: Exciting match between Manchester United and Fulham
+                          tags:
+                            - football
+                            - premier league
+                          sysentryentitlements:
+                            - audio
+                    integrationData:
+                      optaId: '2367795'
+              examples:
+                Example 1:
+                  value:
+                    id: cac5a29a-42ed-4218-b695-df8c89bf7049
+                    priorityOrder: 1
+                    title: Football Match
+                    subtitle: Premier League
+                    description: Manchester United vs Fulham
+                    scheduleData:
+                      start: '2024-02-25T15:00:00'
+                      end: '2024-02-24T17:00:00'
+                      offset: '2024-02-24T14:55:00'
+                    metaData:
+                      type: footballMatch
+                      footballMatch:
+                        teams:
+                          home:
+                            name: Manchester United
+                            logo:
+                              type: image
+                              title: Manchester United logo
+                              renditions:
+                                original:
+                                  width: 550
+                                  height: 550
+                                  type: jpeg
+                                  url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                          away:
+                            name: Fulham
+                            logo:
+                              type: image
+                              title: Fulham logo
+                              renditions:
+                                original:
+                                  width: 550
+                                  height: 550
+                                  type: jpeg
+                                  url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                        competition: Premier League
+                        season: 2023-2024
+                        venue: Old Trafford
+                        eventLogo:
+                          type: image
+                          title: image alt title
+                          renditions:
+                            original:
+                              width: 550
+                              height: 550
+                              type: jpeg
+                              url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                    itemData:
+                      - id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                        type: audio
+                        thumbnailUrl: 'https://example.com/thumbnail.png'
+                        mediaData:
+                          legacyEntryId: '123'
+                        metaData:
+                          title: Football Match
+                          body: Exciting match between Manchester United and Fulham
+                          tags:
+                            - football
+                            - premier league
+                          sysentryentitlements:
+                            - audio
+                    integrationData:
+                      optaId: '2367795'
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: get-events-by-id
+      description: Retrieve Events details by providing Event ID.
+      x-stoplight:
+        id: 13dtmd8mbzu6n
+      x-internal: true
+      parameters: []
+    patch:
+      summary: update event
+      tags: []
+      responses: {}
+      operationId: update-event
+      x-stoplight:
+        id: 1418g4ebpjllr
+      x-internal: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                priorityOrder:
+                  type: integer
+                title:
+                  type: string
+                subtitle:
+                  type: string
+                description:
+                  type: string
+                scheduleData:
+                  type: object
+                  properties:
+                    start:
+                      type: string
+                    end:
+                      type: string
+                    offset:
+                      type: string
+                metaData:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    footballMatch:
+                      type: object
+                      properties:
+                        teams:
+                          type: object
+                          properties:
+                            home:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                logo:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    title:
+                                      type: string
+                                    renditions:
+                                      type: object
+                                      properties:
+                                        original:
+                                          type: object
+                                          properties:
+                                            width:
+                                              type: integer
+                                            height:
+                                              type: integer
+                                            type:
+                                              type: string
+                                            url:
+                                              type: string
+                            away:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                logo:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: string
+                                    title:
+                                      type: string
+                                    renditions:
+                                      type: object
+                                      properties:
+                                        original:
+                                          type: object
+                                          properties:
+                                            width:
+                                              type: integer
+                                            height:
+                                              type: integer
+                                            type:
+                                              type: string
+                                            url:
+                                              type: string
+                        competition:
+                          type: string
+                        season:
+                          type: string
+                        venue:
+                          type: string
+                        eventLogo:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                            title:
+                              type: string
+                            renditions:
+                              type: object
+                              properties:
+                                original:
+                                  type: object
+                                  properties:
+                                    width:
+                                      type: integer
+                                    height:
+                                      type: integer
+                                    type:
+                                      type: string
+                                    url:
+                                      type: string
+                itemData:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                      thumbnailUrl:
+                        type: string
+                      mediaData:
+                        type: object
+                        properties:
+                          legacyEntryId:
+                            type: string
+                      metaData:
+                        type: object
+                        properties:
+                          title:
+                            type: string
+                          body:
+                            type: string
+                          tags:
+                            type: array
+                            items:
+                              type: string
+                          sysentryentitlements:
+                            type: array
+                            items:
+                              type: string
+                integrationData:
+                  type: object
+                  properties:
+                    optaId:
+                      type: string
+              x-examples:
+                Example 1:
+                  id: cac5a29a-42ed-4218-b695-df8c89bf7049
+                  priorityOrder: 1
+                  title: Football Match
+                  subtitle: Premier League
+                  description: Manchester United vs Fulham
+                  scheduleData:
+                    start: '2024-02-25T15:00:00'
+                    end: '2024-02-24T17:00:00'
+                    offset: '2024-02-24T14:55:00'
+                  metaData:
+                    type: footballMatch
+                    footballMatch:
+                      teams:
+                        home:
+                          name: Manchester United
+                          logo:
+                            type: image
+                            title: Manchester United logo
+                            renditions:
+                              original:
+                                width: 550
+                                height: 550
+                                type: jpeg
+                                url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                        away:
+                          name: Fulham
+                          logo:
+                            type: image
+                            title: Fulham logo
+                            renditions:
+                              original:
+                                width: 550
+                                height: 550
+                                type: jpeg
+                                url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                      competition: Premier League
+                      season: 2023-2024
+                      venue: Old Trafford
+                      eventLogo:
+                        type: image
+                        title: image alt title
+                        renditions:
+                          original:
+                            width: 550
+                            height: 550
+                            type: jpeg
+                            url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                  itemData:
+                    - id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                      type: audio
+                      thumbnailUrl: 'https://example.com/thumbnail.png'
+                      mediaData:
+                        legacyEntryId: '123'
+                      metaData:
+                        title: Football Match
+                        body: Exciting match between Manchester United and Fulham
+                        tags:
+                          - football
+                          - premier league
+                        sysentryentitlements:
+                          - audio
+                  integrationData:
+                    optaId: '2367795'
+            examples:
+              update title:
+                value:
+                  title: new title
+              update integration:
+                value:
+                  integrationData:
+                    optaId: new-opta-ID
+components:
+  schemas:
+    Events:
+      title: Events Schema
+      type: object
+      properties:
+        eventData:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        pagingData:
+          type: object
+          properties:
+            totalCount:
+              type: integer
+            itemCount:
+              type: integer
+            pageCount:
+              type: integer
+            pageSize:
+              type: integer
+            pageIndex:
+              type: integer
+    Event:
+      type: object
+      required:
+        - id
+        - priorityOrder
+        - title
+        - scheduleData
+      properties:
+        id:
+          description: event ID
+          type: string
+        priorityOrder:
+          description: priority order that allows sorting of events
+          type: integer
+        title:
+          description: main event title
+          type: string
+        subtitle:
+          description: secondary event title
+          type: string
+        description:
+          description: event description
+          type: string
+        scheduleData:
+          $ref: '#/components/schemas/EventSchedule'
+        metaData:
+          $ref: '#/components/schemas/EventMetadata'
+        itemData:
+          type: array
+          items:
+            $ref: '#/components/schemas/Media'
+        integrationData:
+          type: object
+          properties:
+            optaFixtureId:
+              description: Opta Fixture ID
+              type: string
+    MediaMetadata:
+      type: object
+      required:
+        - title
+        - body
+        - sysentryentitlements
+      properties:
+        title:
+          type: string
+          description: media entry title
+        body:
+          type: string
+          description: media entry description
+        tags:
+          type: array
+          description: media entry tags
+          items:
+            type: string
+        sysentryentitlements:
+          type: array
+          description: entitlements for media entry that permit suitable users to view it
+          items:
+            type: string
+    Media:
+      type: object
+      required:
+        - id
+        - type
+      properties:
+        id:
+          type: string
+          description: media entry Cloudmatrix ID
+        type:
+          type: string
+          description: 'media type (audio, video)'
+        thumbnailUrl:
+          type: string
+          description: URL to media thumbnail
+        mediaData:
+          $ref: '#/components/schemas/MediaData'
+        metaData:
+          $ref: '#/components/schemas/MediaMetadata'
+    MediaData:
+      type: object
+      properties:
+        legacyEntryId:
+          type: string
+          description: legacy media entry ID (e.g. Kaltura)
+    EventMetadata:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+        footballMatch:
+          $ref: '#/components/schemas/FootballMatchMetadata'
+        pressRelease:
+          $ref: '#/components/schemas/PressRelease'
+    PressRelease:
+      type: object
+      properties:
+        posterImage:
+          type:
+            $ref: '#/components/schemas/ImageDataType'
+      x-stoplight:
+        id: 3a11a10737734
+    FootballMatchMetadata:
+      type: object
+      properties:
+        teams:
+          type: object
+          properties:
+            home:
+              type: object
+              properties:
+                name:
+                  type: string
+                logo:
+                  $ref: '#/components/schemas/ImageDataType'
+            away:
+              type: object
+              properties:
+                name:
+                  type: string
+                logo:
+                  $ref: '#/components/schemas/ImageDataType'
+        competition:
+          type: string
+        season:
+          type: string
+        venue:
+          type: string
+        eventLogo:
+          $ref: '#/components/schemas/ImageDataType'
+    EventSchedule:
+      type: object
+      required:
+        - start
+        - end
+      properties:
+        start:
+          type: string
+          description: ISO 8601 start datetime
+        end:
+          type: string
+          description: ISO 8601 end datetime
+        offset:
+          type: string
+          description: ISO 8601 offset datetime when event can be advertised
+    ImageDataType:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - image
+        title:
+          type: string
+          description: image title can be used for an alt attribute when embedding images into HTML
+        renditions:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              width:
+                type: integer
+              height:
+                type: integer
+              type:
+                type: string
+                enum:
+                  - png
+                  - jpeg
+                  - gif
+                  - webp
+              url:
+                type: string
+      x-stoplight:
+        id: ff1c3df07db85
+x-internal: true
