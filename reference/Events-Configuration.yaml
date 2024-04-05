@@ -197,7 +197,7 @@ paths:
                       pageIndex:
                         type: integer
               examples:
-                Events list:
+                successful response:
                   value:
                     eventData:
                       - id: cac5a29a-42ed-4218-b695-df8c89bf7049
@@ -215,52 +215,14 @@ paths:
                             teams:
                               home:
                                 name: Manchester United
-                                logo:
-                                  type: image
-                                  title: Manchester United logo
-                                  renditions:
-                                    original:
-                                      width: 550
-                                      height: 550
-                                      type: jpeg
-                                      url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
                               away:
                                 name: Fulham
-                                logo:
-                                  type: image
-                                  title: Fulham logo
-                                  renditions:
-                                    original:
-                                      width: 550
-                                      height: 550
-                                      type: jpeg
-                                      url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
                             competition: Premier League
                             season: 2023-2024
                             venue: Old Trafford
-                            eventLogo:
-                              type: image
-                              title: image alt title
-                              renditions:
-                                original:
-                                  width: 550
-                                  height: 550
-                                  type: jpeg
-                                  url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
                         itemData:
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
                             type: audio
-                            thumbnailUrl: 'https://example.com/thumbnail.png'
-                            mediaData:
-                              legacyEntryId: '123'
-                            metaData:
-                              title: Football Match
-                              body: Exciting match between Manchester United and Fulham
-                              tags:
-                                - football
-                                - premier league
-                              sysentryentitlements:
-                                - audio
                         integrationData:
                           optaId: '2367795'
                     pagingData:
@@ -453,7 +415,7 @@ paths:
                     optaId:
                       type: string
             examples:
-              Example 1:
+              request example:
                 value:
                   priorityOrder: 1
                   title: Football Match
@@ -469,52 +431,14 @@ paths:
                       teams:
                         home:
                           name: Manchester United
-                          logo:
-                            type: image
-                            title: Manchester United logo
-                            renditions:
-                              original:
-                                width: 550
-                                height: 550
-                                type: jpeg
-                                url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
                         away:
                           name: Fulham
-                          logo:
-                            type: image
-                            title: Fulham logo
-                            renditions:
-                              original:
-                                width: 550
-                                height: 550
-                                type: jpeg
-                                url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
                       competition: Premier League
                       season: 2023-2024
                       venue: Old Trafford
-                      eventLogo:
-                        type: image
-                        title: image alt title
-                        renditions:
-                          original:
-                            width: 550
-                            height: 550
-                            type: jpeg
-                            url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
                   itemData:
                     - id: 37111304-c1f7-4c58-9944-9bfe64b53644
                       type: audio
-                      thumbnailUrl: 'https://example.com/thumbnail.png'
-                      mediaData:
-                        legacyEntryId: '123'
-                      metaData:
-                        title: Football Match
-                        body: Exciting match between Manchester United and Fulham
-                        tags:
-                          - football
-                          - premier league
-                        sysentryentitlements:
-                          - audio
                   integrationData:
                     optaId: '2367795'
   '/events/{eventID}':
@@ -688,7 +612,7 @@ paths:
                       optaId:
                         type: string
               examples:
-                Example 1:
+                successful response:
                   value:
                     id: cac5a29a-42ed-4218-b695-df8c89bf7049
                     priorityOrder: 1
@@ -705,52 +629,14 @@ paths:
                         teams:
                           home:
                             name: Manchester United
-                            logo:
-                              type: image
-                              title: Manchester United logo
-                              renditions:
-                                original:
-                                  width: 550
-                                  height: 550
-                                  type: jpeg
-                                  url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
                           away:
                             name: Fulham
-                            logo:
-                              type: image
-                              title: Fulham logo
-                              renditions:
-                                original:
-                                  width: 550
-                                  height: 550
-                                  type: jpeg
-                                  url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
                         competition: Premier League
                         season: 2023-2024
                         venue: Old Trafford
-                        eventLogo:
-                          type: image
-                          title: image alt title
-                          renditions:
-                            original:
-                              width: 550
-                              height: 550
-                              type: jpeg
-                              url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
                     itemData:
                       - id: 37111304-c1f7-4c58-9944-9bfe64b53644
                         type: audio
-                        thumbnailUrl: 'https://example.com/thumbnail.png'
-                        mediaData:
-                          legacyEntryId: '123'
-                        metaData:
-                          title: Football Match
-                          body: Exciting match between Manchester United and Fulham
-                          tags:
-                            - football
-                            - premier league
-                          sysentryentitlements:
-                            - audio
                     integrationData:
                       optaId: '2367795'
         '403':
@@ -765,24 +651,22 @@ paths:
         id: 13dtmd8mbzu6n
       x-internal: true
       parameters: []
-    patch:
+    put:
       summary: update event
       tags:
         - events
       responses:
         '200':
-          description: event updated
+          description: OK
         '400':
           description: Bad Request - validation fails
         '403':
           description: Forbidden
-        '404':
-          description: Not Found
         '500':
           description: Internal Server Error
       operationId: update-event
       x-stoplight:
-        id: 1418g4ebpjllr
+        id: 3ibg2w821os3y
       x-internal: true
       requestBody:
         content:
@@ -791,7 +675,6 @@ paths:
               type: object
               x-examples:
                 Example 1:
-                  id: cac5a29a-42ed-4218-b695-df8c89bf7049
                   priorityOrder: 1
                   title: Football Match
                   subtitle: Premier League
@@ -854,6 +737,12 @@ paths:
                           - audio
                   integrationData:
                     optaId: '2367795'
+              required:
+                - priorityOrder
+                - title
+                - scheduleData
+                - metaData
+                - itemData
               properties:
                 priorityOrder:
                   type: integer
@@ -865,6 +754,9 @@ paths:
                   type: string
                 scheduleData:
                   type: object
+                  required:
+                    - start
+                    - end
                   properties:
                     start:
                       type: string
@@ -874,6 +766,8 @@ paths:
                       type: string
                 metaData:
                   type: object
+                  required:
+                    - type
                   properties:
                     type:
                       type: string
@@ -903,340 +797,46 @@ paths:
                   type: array
                   items:
                     type: object
+                    required:
+                      - id
+                      - type
                     properties:
                       id:
                         type: string
                       type:
                         type: string
+                        x-stoplight:
+                          id: mq5snj1yzrkak
                 integrationData:
                   type: object
                   properties:
                     optaId:
                       type: string
             examples:
-              update title:
+              request example:
                 value:
-                  title: new title
-              'update title, description & priority':
-                value:
-                  priorityOrder: 0
-                  title: string
-                  description: string
-      description: Used to update any root level fields in the Event.
-  '/events/{eventID}/scheduleData':
-    parameters:
-      - schema:
-          type: string
-        name: eventID
-        in: path
-        required: true
-        description: id of the event
-      - schema:
-          type: string
-        in: header
-        description: API key to access admin endpoint
-        name: x-api-key
-      - schema:
-          type: string
-        in: header
-        description: Tennant ID
-        name: tennant-id
-    patch:
-      summary: update event's schedule
-      tags:
-        - events/scheduleData
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Bad Request - validation fails
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-        '500':
-          description: Internal Server Error
-      operationId: update-event-scheduleData
-      x-internal: true
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                start:
-                  type: string
-                end:
-                  type: string
-                offset:
-                  type: string
-              x-examples:
-                Example 1:
-                  start: new start date/time
-                  end: new end date/time
-                  offset: new offset value
-            examples:
-              update title:
-                value:
-                  title: new title
-              'update title, description & priority':
-                value:
-                  priorityOrder: 0
-                  title: string
-                  description: string
-      description: Used to update schedule information in the Event.
-      x-stoplight:
-        id: nid6oq4a3gytf
-  '/events/{eventID}/integrationData':
-    parameters:
-      - schema:
-          type: string
-        name: eventID
-        in: path
-        required: true
-        description: id of the event
-      - schema:
-          type: string
-        in: header
-        description: API key to access admin endpoint
-        name: x-api-key
-      - schema:
-          type: string
-        in: header
-        description: Tennant ID
-        name: tennant-id
-    patch:
-      summary: update event's integrations
-      tags:
-        - events/integrationData
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Bad Request - validation fails
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-        '500':
-          description: Internal Server Error
-      operationId: update-event-integrationData
-      x-internal: true
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                optaId:
-                  type: string
-              x-examples:
-                Example 1:
-                  optaId: '2367795'
-            examples:
-              update title:
-                value:
-                  title: new title
-              'update title, description & priority':
-                value:
-                  priorityOrder: 0
-                  title: string
-                  description: string
-      description: Used to update integration information in the Event.
-      x-stoplight:
-        id: r44secwiguq6t
-  '/events/{eventID}/itemData':
-    parameters:
-      - schema:
-          type: string
-        name: eventID
-        in: path
-        required: true
-        description: id of the event
-      - schema:
-          type: string
-        in: header
-        description: API key to access admin endpoint
-        name: x-api-key
-      - schema:
-          type: string
-        in: header
-        description: Tennant ID
-        name: tennant-id
-    post:
-      summary: add entry
-      tags:
-        - events/itemData
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Bad Request - validation fails
-        '403':
-          description: Forbidden
-        '500':
-          description: Internal Server Error
-      operationId: add-event-itemData
-      x-internal: true
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              x-examples:
-                Example 1:
-                  id: 37111304-c1f7-4c58-9944-9bfe64b53644
-                  type: audio
-              required:
-                - id
-                - type
-              properties:
-                id:
-                  type: string
-                type:
-                  type: string
-            examples:
-              Example 1:
-                value:
-                  id: <uuid>
-                  type: video
-      description: Used to add new video or audio entry to the Event.
-      x-stoplight:
-        id: jtvhhaqvuh9a6
-  '/events/{eventID}/itemData/{itemDataId}':
-    parameters:
-      - schema:
-          type: string
-        name: eventID
-        in: path
-        required: true
-        description: id of the event
-      - schema:
-          type: string
-        name: itemDataId
-        in: path
-        required: true
-        description: Cloudmatrix article ID
-      - schema:
-          type: string
-        in: header
-        description: API key to access admin endpoint
-        name: x-api-key
-      - schema:
-          type: string
-        in: header
-        description: Tennant ID
-        name: tennant-id
-    delete:
-      summary: delete entry
-      tags:
-        - events/itemData
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Bad Request - validation fails
-        '403':
-          description: Forbidden
-        '500':
-          description: Internal Server Error
-      operationId: delete-event-itemData
-      x-internal: true
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              x-examples:
-                Example 1:
-                  id: 37111304-c1f7-4c58-9944-9bfe64b53644
-                  type: audio
-              required:
-                - id
-                - type
-              properties:
-                id:
-                  type: string
-                type:
-                  type: string
-            examples:
-              Example 1:
-                value:
-                  id: <uuid>
-                  type: video
-      description: Used to remove video or audio entry to the Event.
-      x-stoplight:
-        id: ik26irvlpruh5
-  '/events/{eventID}/metadata':
-    parameters:
-      - schema:
-          type: string
-        name: eventID
-        in: path
-        required: true
-        description: id of the event
-      - schema:
-          type: string
-        in: header
-        description: API key to access admin endpoint
-        name: x-api-key
-      - schema:
-          type: string
-        in: header
-        description: Tennant ID
-        name: tennant-id
-    patch:
-      summary: update metadata
-      tags:
-        - events/metaData
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Bad Request - validation fails
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-        '500':
-          description: Internal Server Error
-      operationId: update-event-matadata
-      x-internal: true
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                type:
-                  type: string
-                fieldsToUpdate:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      key:
-                        type: string
-                      value:
-                        type: string
-              x-examples:
-                Example 1:
-                  type: footballMatch
-                  fieldsToUpdate:
-                    - key: metaData.footballMatch.teams.home.name
-                      value: NewHomeTeamName
-                    - key: metaData.footballMatch.competition
-                      value: NewCompetition
-            examples:
-              example footballMatch update:
-                value:
-                  type: footballMatch
-                  fieldsToUpdate:
-                    - key: metaData.footballMatch.teams.home.name
-                      value: NewHomeTeamName
-                    - key: metaData.footballMatch.competition
-                      value: NewCompetition
-      description: Used to update Event specific metadata.
-      x-stoplight:
-        id: 1vi5e4jiuhhjp
+                  priorityOrder: 1
+                  title: Football Match
+                  subtitle: Premier League
+                  description: Manchester United vs Fulham
+                  scheduleData:
+                    start: '2024-02-25T15:00:00'
+                    end: '2024-02-24T17:00:00'
+                    offset: '2024-02-24T14:55:00'
+                  metaData:
+                    type: footballMatch
+                    footballMatch:
+                      teams:
+                        home:
+                          name: Manchester United
+                        away:
+                          name: Fulham
+                      competition: Premier League
+                      season: 2023-2024
+                      venue: Old Trafford
+                  itemData:
+                    - id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                      type: audio
+                  integrationData:
+                    optaId: '2367795'
 x-internal: true
