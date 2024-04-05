@@ -148,80 +148,17 @@ paths:
                                       properties:
                                         name:
                                           type: string
-                                        logo:
-                                          type: object
-                                          properties:
-                                            type:
-                                              type: string
-                                            title:
-                                              type: string
-                                            renditions:
-                                              type: object
-                                              properties:
-                                                original:
-                                                  type: object
-                                                  properties:
-                                                    width:
-                                                      type: integer
-                                                    height:
-                                                      type: integer
-                                                    type:
-                                                      type: string
-                                                    url:
-                                                      type: string
                                     away:
                                       type: object
                                       properties:
                                         name:
                                           type: string
-                                        logo:
-                                          type: object
-                                          properties:
-                                            type:
-                                              type: string
-                                            title:
-                                              type: string
-                                            renditions:
-                                              type: object
-                                              properties:
-                                                original:
-                                                  type: object
-                                                  properties:
-                                                    width:
-                                                      type: integer
-                                                    height:
-                                                      type: integer
-                                                    type:
-                                                      type: string
-                                                    url:
-                                                      type: string
                                 competition:
                                   type: string
                                 season:
                                   type: string
                                 venue:
                                   type: string
-                                eventLogo:
-                                  type: object
-                                  properties:
-                                    type:
-                                      type: string
-                                    title:
-                                      type: string
-                                    renditions:
-                                      type: object
-                                      properties:
-                                        original:
-                                          type: object
-                                          properties:
-                                            width:
-                                              type: integer
-                                            height:
-                                              type: integer
-                                            type:
-                                              type: string
-                                            url:
-                                              type: string
                         itemData:
                           type: array
                           items:
@@ -229,38 +166,11 @@ paths:
                             required:
                               - id
                               - type
-                              - metaData
                             properties:
                               id:
                                 type: string
                               type:
                                 type: string
-                              thumbnailUrl:
-                                type: string
-                              mediaData:
-                                type: object
-                                properties:
-                                  legacyEntryId:
-                                    type: string
-                              metaData:
-                                type: object
-                                required:
-                                  - title
-                                  - body
-                                  - sysentryentitlements
-                                properties:
-                                  title:
-                                    type: string
-                                  body:
-                                    type: string
-                                  tags:
-                                    type: array
-                                    items:
-                                      type: string
-                                  sysentryentitlements:
-                                    type: array
-                                    items:
-                                      type: string
                         integrationData:
                           type: object
                           properties:
@@ -745,80 +655,17 @@ paths:
                                 properties:
                                   name:
                                     type: string
-                                  logo:
-                                    type: object
-                                    properties:
-                                      type:
-                                        type: string
-                                      title:
-                                        type: string
-                                      renditions:
-                                        type: object
-                                        properties:
-                                          original:
-                                            type: object
-                                            properties:
-                                              width:
-                                                type: integer
-                                              height:
-                                                type: integer
-                                              type:
-                                                type: string
-                                              url:
-                                                type: string
                               away:
                                 type: object
                                 properties:
                                   name:
                                     type: string
-                                  logo:
-                                    type: object
-                                    properties:
-                                      type:
-                                        type: string
-                                      title:
-                                        type: string
-                                      renditions:
-                                        type: object
-                                        properties:
-                                          original:
-                                            type: object
-                                            properties:
-                                              width:
-                                                type: integer
-                                              height:
-                                                type: integer
-                                              type:
-                                                type: string
-                                              url:
-                                                type: string
                           competition:
                             type: string
                           season:
                             type: string
                           venue:
                             type: string
-                          eventLogo:
-                            type: object
-                            properties:
-                              type:
-                                type: string
-                              title:
-                                type: string
-                              renditions:
-                                type: object
-                                properties:
-                                  original:
-                                    type: object
-                                    properties:
-                                      width:
-                                        type: integer
-                                      height:
-                                        type: integer
-                                      type:
-                                        type: string
-                                      url:
-                                        type: string
                   itemData:
                     type: array
                     items:
@@ -826,38 +673,11 @@ paths:
                       required:
                         - id
                         - type
-                        - metaData
                       properties:
                         id:
                           type: string
                         type:
                           type: string
-                        thumbnailUrl:
-                          type: string
-                        mediaData:
-                          type: object
-                          properties:
-                            legacyEntryId:
-                              type: string
-                        metaData:
-                          type: object
-                          required:
-                            - title
-                            - body
-                            - sysentryentitlements
-                          properties:
-                            title:
-                              type: string
-                            body:
-                              type: string
-                            tags:
-                              type: array
-                              items:
-                                type: string
-                            sysentryentitlements:
-                              type: array
-                              items:
-                                type: string
                   integrationData:
                     type: object
                     properties:
