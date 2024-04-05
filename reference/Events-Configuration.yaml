@@ -516,11 +516,6 @@ paths:
         name: eventID
         in: path
         required: true
-      - schema:
-          type: string
-        name: eventID
-        in: path
-        required: true
         description: id of the event
       - schema:
           type: string
@@ -981,6 +976,183 @@ paths:
       description: Used to update schedule information in the Event.
       x-stoplight:
         id: nid6oq4a3gytf
+  '/events/{eventID}/integrationData':
+    parameters:
+      - schema:
+          type: string
+        name: eventID
+        in: path
+        required: true
+        description: id of the event
+      - schema:
+          type: string
+        in: header
+        description: API key to access admin endpoint
+        name: x-api-key
+      - schema:
+          type: string
+        in: header
+        description: Tennant ID
+        name: tennant-id
+    patch:
+      summary: update event's integrations
+      tags: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request - validation fails
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: update-event-integrationData
+      x-internal: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                optaId:
+                  type: string
+              x-examples:
+                Example 1:
+                  optaId: '2367795'
+            examples:
+              update title:
+                value:
+                  title: new title
+              'update title, description & priority':
+                value:
+                  priorityOrder: 0
+                  title: string
+                  description: string
+      description: Used to update integration information in the Event.
+      x-stoplight:
+        id: r44secwiguq6t
+  '/events/{eventID}/itemData':
+    parameters:
+      - schema:
+          type: string
+        name: eventID
+        in: path
+        required: true
+        description: id of the event
+      - schema:
+          type: string
+        in: header
+        description: API key to access admin endpoint
+        name: x-api-key
+      - schema:
+          type: string
+        in: header
+        description: Tennant ID
+        name: tennant-id
+    post:
+      summary: add entry
+      tags: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request - validation fails
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      operationId: add-event-itemData
+      x-internal: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                  type: audio
+              required:
+                - id
+                - type
+              properties:
+                id:
+                  type: string
+                type:
+                  type: string
+            examples:
+              Example 1:
+                value:
+                  id: <uuid>
+                  type: video
+      description: Used to add new video or audio entry to the Event.
+      x-stoplight:
+        id: jtvhhaqvuh9a6
+  '/events/{eventID}/itemData/{itemDataId}':
+    parameters:
+      - schema:
+          type: string
+        name: eventID
+        in: path
+        required: true
+        description: id of the event
+      - schema:
+          type: string
+        name: itemDataId
+        in: path
+        required: true
+        description: Cloudmatrix article ID
+      - schema:
+          type: string
+        in: header
+        description: API key to access admin endpoint
+        name: x-api-key
+      - schema:
+          type: string
+        in: header
+        description: Tennant ID
+        name: tennant-id
+    delete:
+      summary: delete entry
+      tags: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request - validation fails
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      operationId: delete-event-itemData
+      x-internal: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                  type: audio
+              required:
+                - id
+                - type
+              properties:
+                id:
+                  type: string
+                type:
+                  type: string
+            examples:
+              Example 1:
+                value:
+                  id: <uuid>
+                  type: video
+      description: Used to remove video or audio entry to the Event.
+      x-stoplight:
+        id: ik26irvlpruh5
 components:
   schemas:
     Events:
