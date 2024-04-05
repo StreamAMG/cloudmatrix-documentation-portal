@@ -12,11 +12,18 @@ servers:
     description: staging
   - url: 'https://api.events-configuration.dev.streamamg.com/api/v1'
     description: dev
+tags:
+  - name: events
+  - name: events/schedule
+  - name: events/itemData
+  - name: events/integrationData
+  - name: events/metadata
 paths:
   /events:
     get:
       summary: list events
-      tags: []
+      tags:
+        - events
       responses:
         '200':
           description: OK
@@ -286,7 +293,8 @@ paths:
         description: Tennant ID
     post:
       summary: create event
-      tags: []
+      tags:
+        - events
       responses:
         '200':
           description: OK
@@ -529,7 +537,8 @@ paths:
         name: tennant-id
     get:
       summary: get event
-      tags: []
+      tags:
+        - events
       responses:
         '200':
           description: OK
@@ -758,7 +767,8 @@ paths:
       parameters: []
     patch:
       summary: update event
-      tags: []
+      tags:
+        - events
       responses:
         '200':
           description: event updated
@@ -933,7 +943,8 @@ paths:
         name: tennant-id
     patch:
       summary: update event's schedule
-      tags: []
+      tags:
+        - events/scheduleData
       responses:
         '200':
           description: OK
@@ -996,7 +1007,8 @@ paths:
         name: tennant-id
     patch:
       summary: update event's integrations
-      tags: []
+      tags:
+        - events/integrationData
       responses:
         '200':
           description: OK
@@ -1053,7 +1065,8 @@ paths:
         name: tennant-id
     post:
       summary: add entry
-      tags: []
+      tags:
+        - events/itemData
       responses:
         '200':
           description: OK
@@ -1116,7 +1129,8 @@ paths:
         name: tennant-id
     delete:
       summary: delete entry
-      tags: []
+      tags:
+        - events/itemData
       responses:
         '200':
           description: OK
@@ -1173,7 +1187,8 @@ paths:
         name: tennant-id
     patch:
       summary: update metadata
-      tags: []
+      tags:
+        - events/metaData
       responses:
         '200':
           description: OK
