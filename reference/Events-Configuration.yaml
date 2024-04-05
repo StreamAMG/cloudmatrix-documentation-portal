@@ -377,7 +377,15 @@ paths:
     post:
       summary: create event
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request - validation fails
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
       operationId: create-event
       x-stoplight:
         id: 3ibg2w821os3y
@@ -513,9 +521,14 @@ paths:
                     type: object
                     required:
                       - id
+                      - type
                     properties:
                       id:
                         type: string
+                      type:
+                        type: string
+                        x-stoplight:
+                          id: mq5snj1yzrkak
                 integrationData:
                   type: object
                   properties:
@@ -931,7 +944,17 @@ paths:
     patch:
       summary: update event
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: event updated
+        '400':
+          description: Bad Request - validation fails
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: update-event
       x-stoplight:
         id: 1418g4ebpjllr
@@ -941,152 +964,6 @@ paths:
           application/json:
             schema:
               type: object
-              properties:
-                id:
-                  type: string
-                priorityOrder:
-                  type: integer
-                title:
-                  type: string
-                subtitle:
-                  type: string
-                description:
-                  type: string
-                scheduleData:
-                  type: object
-                  properties:
-                    start:
-                      type: string
-                    end:
-                      type: string
-                    offset:
-                      type: string
-                metaData:
-                  type: object
-                  properties:
-                    type:
-                      type: string
-                    footballMatch:
-                      type: object
-                      properties:
-                        teams:
-                          type: object
-                          properties:
-                            home:
-                              type: object
-                              properties:
-                                name:
-                                  type: string
-                                logo:
-                                  type: object
-                                  properties:
-                                    type:
-                                      type: string
-                                    title:
-                                      type: string
-                                    renditions:
-                                      type: object
-                                      properties:
-                                        original:
-                                          type: object
-                                          properties:
-                                            width:
-                                              type: integer
-                                            height:
-                                              type: integer
-                                            type:
-                                              type: string
-                                            url:
-                                              type: string
-                            away:
-                              type: object
-                              properties:
-                                name:
-                                  type: string
-                                logo:
-                                  type: object
-                                  properties:
-                                    type:
-                                      type: string
-                                    title:
-                                      type: string
-                                    renditions:
-                                      type: object
-                                      properties:
-                                        original:
-                                          type: object
-                                          properties:
-                                            width:
-                                              type: integer
-                                            height:
-                                              type: integer
-                                            type:
-                                              type: string
-                                            url:
-                                              type: string
-                        competition:
-                          type: string
-                        season:
-                          type: string
-                        venue:
-                          type: string
-                        eventLogo:
-                          type: object
-                          properties:
-                            type:
-                              type: string
-                            title:
-                              type: string
-                            renditions:
-                              type: object
-                              properties:
-                                original:
-                                  type: object
-                                  properties:
-                                    width:
-                                      type: integer
-                                    height:
-                                      type: integer
-                                    type:
-                                      type: string
-                                    url:
-                                      type: string
-                itemData:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                      type:
-                        type: string
-                      thumbnailUrl:
-                        type: string
-                      mediaData:
-                        type: object
-                        properties:
-                          legacyEntryId:
-                            type: string
-                      metaData:
-                        type: object
-                        properties:
-                          title:
-                            type: string
-                          body:
-                            type: string
-                          tags:
-                            type: array
-                            items:
-                              type: string
-                          sysentryentitlements:
-                            type: array
-                            items:
-                              type: string
-                integrationData:
-                  type: object
-                  properties:
-                    optaId:
-                      type: string
               x-examples:
                 Example 1:
                   id: cac5a29a-42ed-4218-b695-df8c89bf7049
@@ -1152,14 +1029,138 @@ paths:
                           - audio
                   integrationData:
                     optaId: '2367795'
+              properties:
+                priorityOrder:
+                  type: integer
+                title:
+                  type: string
+                subtitle:
+                  type: string
+                description:
+                  type: string
+                scheduleData:
+                  type: object
+                  properties:
+                    start:
+                      type: string
+                    end:
+                      type: string
+                    offset:
+                      type: string
+                metaData:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    footballMatch:
+                      type: object
+                      properties:
+                        teams:
+                          type: object
+                          properties:
+                            home:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                            away:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                        competition:
+                          type: string
+                        season:
+                          type: string
+                        venue:
+                          type: string
+                itemData:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                integrationData:
+                  type: object
+                  properties:
+                    optaId:
+                      type: string
             examples:
               update title:
                 value:
                   title: new title
-              update integration:
+              'update title, description & priority':
                 value:
-                  integrationData:
-                    optaId: new-opta-ID
+                  priorityOrder: 0
+                  title: string
+                  description: string
+      description: Used to update any root level fields in the Event.
+  '/events/{eventID}/scheduleData':
+    parameters:
+      - schema:
+          type: string
+        name: eventID
+        in: path
+        required: true
+        description: id of the event
+      - schema:
+          type: string
+        in: header
+        description: API key to access admin endpoint
+        name: x-api-key
+      - schema:
+          type: string
+        in: header
+        description: Tennant ID
+        name: tennant-id
+    patch:
+      summary: update event's schedule
+      tags: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request - validation fails
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: update-event-scheduleData
+      x-internal: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                start:
+                  type: string
+                end:
+                  type: string
+                offset:
+                  type: string
+              x-examples:
+                Example 1:
+                  start: new start date/time
+                  end: new end date/time
+                  offset: new offset value
+            examples:
+              update title:
+                value:
+                  title: new title
+              'update title, description & priority':
+                value:
+                  priorityOrder: 0
+                  title: string
+                  description: string
+      description: Used to update schedule information in the Event.
+      x-stoplight:
+        id: nid6oq4a3gytf
 components:
   schemas:
     Events:
