@@ -1153,4 +1153,75 @@ paths:
       description: Used to remove video or audio entry to the Event.
       x-stoplight:
         id: ik26irvlpruh5
+  '/events/{eventID}/metadata':
+    parameters:
+      - schema:
+          type: string
+        name: eventID
+        in: path
+        required: true
+        description: id of the event
+      - schema:
+          type: string
+        in: header
+        description: API key to access admin endpoint
+        name: x-api-key
+      - schema:
+          type: string
+        in: header
+        description: Tennant ID
+        name: tennant-id
+    patch:
+      summary: update metadata
+      tags: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request - validation fails
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: update-event-matadata
+      x-internal: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                fieldsToUpdate:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      key:
+                        type: string
+                      value:
+                        type: string
+              x-examples:
+                Example 1:
+                  type: footballMatch
+                  fieldsToUpdate:
+                    - key: metaData.footballMatch.teams.home.name
+                      value: NewHomeTeamName
+                    - key: metaData.footballMatch.competition
+                      value: NewCompetition
+            examples:
+              example footballMatch update:
+                value:
+                  type: footballMatch
+                  fieldsToUpdate:
+                    - key: metaData.footballMatch.teams.home.name
+                      value: NewHomeTeamName
+                    - key: metaData.footballMatch.competition
+                      value: NewCompetition
+      description: Used to update Event specific metadata.
+      x-stoplight:
+        id: 1vi5e4jiuhhjp
 x-internal: true
