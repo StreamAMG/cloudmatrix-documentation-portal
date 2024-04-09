@@ -2011,7 +2011,7 @@ components:
         scheduleData:
           $ref: '#/components/schemas/EventSchedule'
         metaData:
-          $ref: '#/components/schemas/EventMetadata'
+          $ref: '#/components/schemas/EmptyObject'
         itemData:
           type: array
           items:
@@ -2079,6 +2079,10 @@ components:
         offset:
           type: string
           description: ISO 8601 offset datetime when event can be advertised
+    EmptyObject:
+      type: object
+      x-stoplight:
+        id: e28df6d89f182
     ImageDataType:
       type: object
       properties:
