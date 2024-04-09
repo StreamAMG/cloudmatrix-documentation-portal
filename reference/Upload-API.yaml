@@ -1686,6 +1686,12 @@ paths:
           in: query
           name: <exact-fields-matching>
           description: The field name qualified with the section in the body like metadata.title with exact matching value.
+        - schema:
+            type: string
+            example: '"asc" or "desc"'
+          in: query
+          name: sortOrder
+          description: Sorting order
       tags:
         - Event
       responses:
