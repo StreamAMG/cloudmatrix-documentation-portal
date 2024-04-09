@@ -1702,7 +1702,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Events'
               examples:
-                footballMatch with audio only:
+                football match with audio only:
                   value:
                     eventData:
                       - id: cac5a29a-42ed-4218-b695-df8c89bf7049
@@ -1744,7 +1744,7 @@ paths:
                       pageCount: 1
                       pageSize: 10
                       pageIndex: 0
-                footballMatch with video & audio:
+                football match with video & audio:
                   value:
                     eventData:
                       - id: cac5a29a-42ed-4218-b695-df8c89bf7049
@@ -1799,7 +1799,7 @@ paths:
                       pageCount: 1
                       pageSize: 10
                       pageIndex: 0
-                pressRelease:
+                press release:
                   value:
                     eventData:
                       - id: cac5a29a-42ed-4218-b695-df8c89bf7049
@@ -1868,27 +1868,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/Event'
               examples:
-                pressRelease:
+                press release:
                   value:
-                    id: cac5a29a-42ed-4218-b695-df8c89bf7048
-                    priorityOrder: 2
-                    title: Press Release this week
-                    subtitle: New coach joining the team!
+                    id: cac5a29a-42ed-4218-b695-df8c89bf7049
+                    type: press-release
+                    priorityOrder: 1
+                    title: Football Match
+                    subtitle: Premier League
+                    description: Manchester United vs Fulham
                     scheduleData:
-                      start: '2024-03-01T18:30:00'
-                      end: '2024-03-01T20:30:00'
-                    metaData:
-                      type: pressRelease
-                      pressRelease:
-                        posterImage:
-                          type: image
-                          title: Coach Steve R. during press release
-                          renditions:
-                            original:
-                              width: 550
-                              height: 550
-                              type: jpeg
-                              url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                      start: '2024-02-25T15:00:00'
+                      end: '2024-02-24T17:00:00'
+                      offset: '2024-02-24T14:55:00'
+                    metaData: {}
                     itemData:
                       - id: 37111304-c1f7-4c58-9944-9bfe64b53644
                         type: video
@@ -1903,6 +1895,41 @@ paths:
                             - news
                           sysentryentitlements:
                             - '*'
+                football match:
+                  value:
+                    id: cac5a29a-42ed-4218-b695-df8c89bf7049
+                    type: football-match
+                    priorityOrder: 1
+                    title: Football Match
+                    subtitle: Premier League
+                    description: Manchester United vs Fulham
+                    scheduleData:
+                      start: '2024-02-25T15:00:00'
+                      end: '2024-02-24T17:00:00'
+                      offset: '2024-02-24T14:55:00'
+                    metaData:
+                      homeTeamName: Manchester United
+                      homeTeamOptaId: '123123213123123'
+                      awayTeamName: Fulham
+                      awayTeamOptaId: '123123213123122'
+                      competition: Premier League
+                      season: 2023-2024
+                      venue: Old Trafford
+                      optaId: '123123213123121'
+                    itemData:
+                      - id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                        type: audio
+                        thumbnailUrl: 'https://example.com/thumbnail.png'
+                        mediaData:
+                          legacyEntryId: '123'
+                        metaData:
+                          title: Football Match
+                          body: Exciting match between Manchester United and Fulham
+                          tags:
+                            - football
+                            - premier league
+                          sysentryentitlements:
+                            - audio
         '404':
           description: Event not found or not available in user's location
           content:
@@ -1948,6 +1975,7 @@ components:
       type: object
       required:
         - id
+        - type
         - priorityOrder
         - title
         - scheduleData
@@ -2026,53 +2054,6 @@ components:
         legacyEntryId:
           type: string
           description: legacy media entry ID (e.g. Kaltura)
-    EventMetadata:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-        footballMatch:
-          $ref: '#/components/schemas/FootballMatchMetadata'
-        pressRelease:
-          $ref: '#/components/schemas/PressRelease'
-    PressRelease:
-      type: object
-      properties:
-        posterImage:
-          type:
-            $ref: '#/components/schemas/ImageDataType'
-      x-stoplight:
-        id: 3a11a10737734
-    FootballMatchMetadata:
-      type: object
-      properties:
-        teams:
-          type: object
-          properties:
-            home:
-              type: object
-              properties:
-                name:
-                  type: string
-                logo:
-                  $ref: '#/components/schemas/ImageDataType'
-            away:
-              type: object
-              properties:
-                name:
-                  type: string
-                logo:
-                  $ref: '#/components/schemas/ImageDataType'
-        competition:
-          type: string
-        season:
-          type: string
-        venue:
-          type: string
-        eventLogo:
-          $ref: '#/components/schemas/ImageDataType'
     EventSchedule:
       type: object
       required:
