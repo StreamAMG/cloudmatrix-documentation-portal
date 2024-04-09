@@ -1628,14 +1628,6 @@ paths:
       operationId: list-events
       parameters:
         - in: query
-          name: metaDataType
-          schema:
-            type: array
-            items:
-              type: string
-          required: false
-          description: Array of metadata types to filter events by.
-        - in: query
           name: start
           schema:
             type: string
@@ -1679,9 +1671,21 @@ paths:
           description: Page index of results page to be returned
         - schema:
             type: string
+            example: /events?query=Football
           in: query
-          name: integrationDataOptaId
-          description: Fixture OptaID used to filter events
+          name: query
+          description: Elastic search query string query. The field must be qualified with the section in the body like metadata.title
+        - schema:
+            type: string
+          in: query
+          name: sortBy
+          description: The field name qualified with the section in the body like metadata.title.
+        - schema:
+            type: string
+            example: /events?type=football-match&metaData.homeTeamName=Manchester%20United
+          in: query
+          name: <exact-fields-matching>
+          description: The field name qualified with the section in the body like metadata.title with exact matching value.
       tags:
         - Event
       responses:
