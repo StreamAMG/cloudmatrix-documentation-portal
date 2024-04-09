@@ -1671,7 +1671,7 @@ paths:
           description: Page index of results page to be returned
         - schema:
             type: string
-            example: '/events?query=(publicationData.createdAt:%3E2023-07-27T15%5C%5C:38%5C%5C:25.603903)'
+            example: '/events?query=(scheduleData.offset:%3E2023-07-27T15%5C%5C:38%5C%5C:25.603903)'
           in: query
           name: query
           description: Elastic search query string query. The field must be qualified with the section in the body like metadata.title
