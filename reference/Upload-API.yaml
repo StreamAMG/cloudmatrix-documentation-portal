@@ -1712,7 +1712,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Events'
               examples:
-                football match with audio only:
+                EFL football match with audio only:
                   value:
                     eventData:
                       - id: cac5a29a-42ed-4218-b695-df8c89bf7049
@@ -1736,7 +1736,6 @@ paths:
                           opta_id: '123123213123121'
                         itemData:
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
-                            type: audio
                             thumbnailUrl: 'https://example.com/thumbnail.png'
                             mediaData:
                               legacyEntryId: '123'
@@ -1747,14 +1746,17 @@ paths:
                                 - football
                                 - premier league
                               sysentryentitlements:
+                                - paid
+                              classification:
                                 - audio
+                                - featuregroup1
                     pagingData:
                       totalCount: 1
                       itemCount: 1
                       pageCount: 1
                       pageSize: 10
                       pageIndex: 0
-                football match with video & audio:
+                EFL football match with video & audio:
                   value:
                     eventData:
                       - id: cac5a29a-42ed-4218-b695-df8c89bf7049
@@ -1778,7 +1780,6 @@ paths:
                           opta_id: '123123213123121'
                         itemData:
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
-                            type: audio
                             thumbnailUrl: 'https://example.com/thumbnail.png'
                             mediaData:
                               legacyEntryId: '123'
@@ -1789,9 +1790,10 @@ paths:
                                 - football
                                 - premier league
                               sysentryentitlements:
+                                - paid
+                              classification:
                                 - audio
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
-                            type: video
                             thumbnailUrl: 'https://example.com/thumbnail.png'
                             mediaData:
                               legacyEntryId: '123'
@@ -1802,6 +1804,8 @@ paths:
                                 - football
                                 - premier league
                               sysentryentitlements:
+                                - paid
+                              classification:
                                 - video
                     pagingData:
                       totalCount: 1
@@ -1809,7 +1813,7 @@ paths:
                       pageCount: 1
                       pageSize: 10
                       pageIndex: 0
-                press release:
+                EFL press release:
                   value:
                     eventData:
                       - id: cac5a29a-42ed-4218-b695-df8c89bf7049
@@ -1825,7 +1829,6 @@ paths:
                         metaData: {}
                         itemData:
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
-                            type: video
                             thumbnailUrl: 'https://example.com/thumbnail.png'
                             mediaData:
                               legacyEntryId: '123'
@@ -1837,6 +1840,8 @@ paths:
                                 - news
                               sysentryentitlements:
                                 - '*'
+                              classification:
+                                - video
                     pagingData:
                       totalCount: 1
                       itemCount: 1
@@ -1896,7 +1901,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Event'
               examples:
-                football match:
+                EFL football match:
                   value:
                     id: cac5a29a-42ed-4218-b695-df8c89bf7049
                     type: football-match
@@ -1908,10 +1913,17 @@ paths:
                       start: '2024-02-25T15:00:00'
                       end: '2024-02-24T17:00:00'
                       offset: '2024-02-24T14:55:00'
-                    metaData: {}
+                    metaData:
+                      home_team_name: Manchester United
+                      home_team_opta_id: '123123213123123'
+                      away_team_name: Fulham
+                      away_team_opta_id: '123123213123122'
+                      competition: Premier League
+                      season: 2023-2024
+                      venue: Old Trafford
+                      opta_id: '123123213123121'
                     itemData:
                       - id: 37111304-c1f7-4c58-9944-9bfe64b53644
-                        type: audio
                         thumbnailUrl: 'https://example.com/thumbnail.png'
                         mediaData:
                           legacyEntryId: '123'
@@ -1922,8 +1934,11 @@ paths:
                             - football
                             - premier league
                           sysentryentitlements:
+                            - paid
+                          classification:
                             - audio
-                press release:
+                            - featureGroup1
+                EFL press release:
                   value:
                     id: cac5a29a-42ed-4218-b695-df8c89bf7049
                     type: press-release
@@ -1950,6 +1965,8 @@ paths:
                             - news
                           sysentryentitlements:
                             - '*'
+                          classification:
+                            - video
         '404':
           description: Event not found or not available in user's location
           content:
