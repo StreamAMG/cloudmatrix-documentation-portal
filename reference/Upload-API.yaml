@@ -1675,23 +1675,6 @@ paths:
           in: query
           name: query
           description: Elastic search query string query. The field must be qualified with the section in the body like metadata.title
-        - schema:
-            type: string
-          in: query
-          name: sortBy
-          description: The field name qualified with the section in the body like metadata.title.
-        - schema:
-            type: string
-            example: /events?type=football-match&metaData.homeTeamName=Manchester%20United
-          in: query
-          name: <exact-fields-matching>
-          description: The field name qualified with the section in the body like metadata.title with exact matching value.
-        - schema:
-            type: string
-            example: '"asc" or "desc"'
-          in: query
-          name: sortOrder
-          description: Sorting order
       tags:
         - Event
       responses:
