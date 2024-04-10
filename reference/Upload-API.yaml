@@ -2068,39 +2068,14 @@ components:
             $ref: '#/components/schemas/Media'
     MediaMetadata:
       type: object
-      required:
-        - title
-        - body
-        - sysentryentitlements
-      properties:
-        title:
-          type: string
-          description: media entry title
-        body:
-          type: string
-          description: media entry description
-        tags:
-          type: array
-          description: media entry tags
-          items:
-            type: string
-        sysentryentitlements:
-          type: array
-          description: entitlements for media entry that permit suitable users to view it
-          items:
-            type: string
     Media:
       type: object
       required:
         - id
-        - type
       properties:
         id:
           type: string
           description: media entry Cloudmatrix ID
-        type:
-          type: string
-          description: 'media type (audio, video)'
         thumbnailUrl:
           type: string
           description: URL to media thumbnail
