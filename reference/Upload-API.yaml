@@ -1726,14 +1726,14 @@ paths:
                           end: '2024-02-24T17:00:00'
                           offset: '2024-02-24T14:55:00'
                         metaData:
-                          homeTeamName: Manchester United
-                          homeTeamOptaId: '123123213123123'
-                          awayTeamName: Fulham
-                          awayTeamOptaId: '123123213123122'
+                          home_team_name: Manchester United
+                          home_team_opta_id: '123123213123123'
+                          away_team_name: Fulham
+                          away_team_opta_id: '123123213123122'
                           competition: Premier League
                           season: 2023-2024
                           venue: Old Trafford
-                          optaId: '123123213123121'
+                          opta_id: '123123213123121'
                         itemData:
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
                             type: audio
@@ -1768,14 +1768,14 @@ paths:
                           end: '2024-02-24T17:00:00'
                           offset: '2024-02-24T14:55:00'
                         metaData:
-                          homeTeamName: Manchester United
-                          homeTeamOptaId: '123123213123123'
-                          awayTeamName: Fulham
-                          awayTeamOptaId: '123123213123122'
+                          home_team_name: Manchester United
+                          home_team_opta_id: '123123213123123'
+                          away_team_name: Fulham
+                          away_team_opta_id: '123123213123122'
                           competition: Premier League
                           season: 2023-2024
                           venue: Old Trafford
-                          optaId: '123123213123121'
+                          opta_id: '123123213123121'
                         itemData:
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
                             type: audio
@@ -1908,15 +1908,7 @@ paths:
                       start: '2024-02-25T15:00:00'
                       end: '2024-02-24T17:00:00'
                       offset: '2024-02-24T14:55:00'
-                    metaData:
-                      homeTeamName: Manchester United
-                      homeTeamOptaId: '123123213123123'
-                      awayTeamName: Fulham
-                      awayTeamOptaId: '123123213123122'
-                      competition: Premier League
-                      season: 2023-2024
-                      venue: Old Trafford
-                      optaId: '123123213123121'
+                    metaData: {}
                     itemData:
                       - id: 37111304-c1f7-4c58-9944-9bfe64b53644
                         type: audio
