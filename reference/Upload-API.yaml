@@ -1719,9 +1719,11 @@ paths:
                           opta_id: '123123213123121'
                         itemData:
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
-                            thumbnailUrl: 'https://example.com/thumbnail.png'
                             mediaData:
-                              legacyEntryId: '123'
+                              mediaType: OnDemand
+                              entryId: 0_1o4os161
+                              entryStatus: Ready
+                              thumbnailUrl: 'https://example.com/thumbnail.png'
                             metaData:
                               title: Football Match
                               body: Exciting match between Manchester United and Fulham
@@ -1730,9 +1732,14 @@ paths:
                                 - premier league
                               sysentryentitlements:
                                 - paid
-                              classification:
-                                - audio
-                                - featuregroup1
+                              classification: audio
+                              category: Features
+                            publicationData:
+                              createdAt: '2022-11-25T16:34:19'
+                              updatedAt: '2024-04-10T07:30:53'
+                              released: true
+                              releaseFrom: '2022-11-25T16:34:19'
+                              releaseTo: '9999-12-31T23:59:59.9999999'
                     pagingData:
                       totalCount: 1
                       itemCount: 1
@@ -1763,9 +1770,11 @@ paths:
                           opta_id: '123123213123121'
                         itemData:
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
-                            thumbnailUrl: 'https://example.com/thumbnail.png'
                             mediaData:
-                              legacyEntryId: '123'
+                              mediaType: OnDemand
+                              entryId: 0_1o4os161
+                              entryStatus: Ready
+                              thumbnailUrl: 'https://example.com/thumbnail.png'
                             metaData:
                               title: Football Match
                               body: Exciting match between Manchester United and Fulham
@@ -1774,12 +1783,20 @@ paths:
                                 - premier league
                               sysentryentitlements:
                                 - paid
-                              classification:
-                                - audio
+                              classification: audio
+                              category: Features
+                            publicationData:
+                              createdAt: '2022-11-25T16:34:19'
+                              updatedAt: '2024-04-10T07:30:53'
+                              released: true
+                              releaseFrom: '2022-11-25T16:34:19'
+                              releaseTo: '9999-12-31T23:59:59.9999999'
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
-                            thumbnailUrl: 'https://example.com/thumbnail.png'
                             mediaData:
-                              legacyEntryId: '123'
+                              mediaType: OnDemand
+                              entryId: 0_1o4os162
+                              entryStatus: Ready
+                              thumbnailUrl: 'https://example.com/thumbnail.png'
                             metaData:
                               title: Football Match
                               body: Exciting match between Manchester United and Fulham
@@ -1788,8 +1805,14 @@ paths:
                                 - premier league
                               sysentryentitlements:
                                 - paid
-                              classification:
-                                - video
+                              classification: video
+                              category: Features
+                            publicationData:
+                              createdAt: '2022-11-25T16:34:19'
+                              updatedAt: '2024-04-10T07:30:53'
+                              released: true
+                              releaseFrom: '2022-11-25T16:34:19'
+                              releaseTo: '9999-12-31T23:59:59.9999999'
                     pagingData:
                       totalCount: 1
                       itemCount: 1
@@ -1812,9 +1835,11 @@ paths:
                         metaData: {}
                         itemData:
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
-                            thumbnailUrl: 'https://example.com/thumbnail.png'
                             mediaData:
-                              legacyEntryId: '123'
+                              mediaType: OnDemand
+                              entryId: 0_1o4os161
+                              entryStatus: Ready
+                              thumbnailUrl: 'https://example.com/thumbnail.png'
                             metaData:
                               title: This week's press release
                               body: First press release of our new coach
@@ -1823,8 +1848,14 @@ paths:
                                 - news
                               sysentryentitlements:
                                 - '*'
-                              classification:
-                                - video
+                              classification: video
+                              category: PressRelease
+                            publicationData:
+                              createdAt: '2022-11-25T16:34:19'
+                              updatedAt: '2024-04-10T07:30:53'
+                              released: true
+                              releaseFrom: '2022-11-25T16:34:19'
+                              releaseTo: '9999-12-31T23:59:59.9999999'
                     pagingData:
                       totalCount: 1
                       itemCount: 1
@@ -1907,9 +1938,11 @@ paths:
                       opta_id: '123123213123121'
                     itemData:
                       - id: 37111304-c1f7-4c58-9944-9bfe64b53644
-                        thumbnailUrl: 'https://example.com/thumbnail.png'
                         mediaData:
-                          legacyEntryId: '123'
+                          mediaType: OnDemand
+                          entryId: 0_1o4os161
+                          entryStatus: Ready
+                          thumbnailUrl: 'https://example.com/thumbnail.png'
                         metaData:
                           title: Football Match
                           body: Exciting match between Manchester United and Fulham
@@ -1918,9 +1951,14 @@ paths:
                             - premier league
                           sysentryentitlements:
                             - paid
-                          classification:
-                            - audio
-                            - featureGroup1
+                          classification: audio
+                          category: Features
+                        publicationData:
+                          createdAt: '2022-11-25T16:34:19'
+                          updatedAt: '2024-04-10T07:30:53'
+                          released: true
+                          releaseFrom: '2022-11-25T16:34:19'
+                          releaseTo: '9999-12-31T23:59:59.9999999'
                 EFL press release:
                   value:
                     id: cac5a29a-42ed-4218-b695-df8c89bf7049
@@ -1936,10 +1974,11 @@ paths:
                     metaData: {}
                     itemData:
                       - id: 37111304-c1f7-4c58-9944-9bfe64b53644
-                        type: video
-                        thumbnailUrl: 'https://example.com/thumbnail.png'
                         mediaData:
-                          legacyEntryId: '123'
+                          mediaType: OnDemand
+                          entryId: 0_1o4os161
+                          entryStatus: Ready
+                          thumbnailUrl: 'https://example.com/thumbnail.png'
                         metaData:
                           title: This week's press release
                           body: First press release of our new coach
@@ -1948,8 +1987,14 @@ paths:
                             - news
                           sysentryentitlements:
                             - '*'
-                          classification:
-                            - video
+                          classification: video
+                          category: PressRelease
+                        publicationData:
+                          createdAt: '2022-11-25T16:34:19'
+                          updatedAt: '2024-04-10T07:30:53'
+                          released: true
+                          releaseFrom: '2022-11-25T16:34:19'
+                          releaseTo: '9999-12-31T23:59:59.9999999'
         '404':
           description: Event not found or not available in user's location
           content:
@@ -2048,53 +2093,47 @@ components:
         itemData:
           type: array
           items:
-            $ref: '#/components/schemas/Media'
-    MediaMetadata:
+            $ref: '#/components/schemas/ItemData'
+    ItemData:
       type: object
-    Media:
-      type: object
+      x-stoplight:
+        id: 0bd4a7a27f9e0
       required:
         - id
       properties:
-          id:
-            type: string
-          mediaData:
-            type: object
-            properties:
-              mediaType:
-                type: string
-              entryId:
-                type: string
-              entryStatus:
-                type: string
-              thumbnailUrl:
-                type: string
-          sortData:
-            type: array
-            items:
-              type: object
-          metaData:
-            type: object
-            additionalProperties: true
-          publicationData:
-            type: object
-            properties:
-              createdAt:
-                type: string
-              updatedAt:
-                type: string
-              released:
-                type: boolean
-              releaseFrom:
-                type: string
-              releaseTo:
-                type: string
-    MediaData:
-      type: object
-      properties:
-        legacyEntryId:
+        id:
           type: string
-          description: legacy media entry ID (e.g. Kaltura)
+        mediaData:
+          type: object
+          properties:
+            mediaType:
+              type: string
+            entryId:
+              type: string
+            entryStatus:
+              type: string
+            thumbnailUrl:
+              type: string
+        sortData:
+          type: array
+          items:
+            type: object
+        metaData:
+          type: object
+          additionalProperties: true
+        publicationData:
+          type: object
+          properties:
+            createdAt:
+              type: string
+            updatedAt:
+              type: string
+            released:
+              type: boolean
+            releaseFrom:
+              type: string
+            releaseTo:
+              type: string
     EventSchedule:
       type: object
       required:
