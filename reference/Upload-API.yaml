@@ -892,6 +892,76 @@ paths:
       security:
         - x-api-key: []
     parameters: []
+  /multipart/complete:
+    parameters: []
+    put:
+      summary: Complete a multipart upload
+      operationId: put-multipart-complete
+      responses:
+        '200':
+          description: OK
+      description: |-
+        <!--
+        focus: false
+        -->
+        ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
+
+        The final part of the multipart upload is the completion step. This request should be called when all chunks of the data have been sent. 
+      tags:
+        - Multipart
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+                  parts:
+                    - partNumber: 1
+                      etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
+                    - partNumber: 2
+                      etag: 44a64df551425fcc55e4d42a148795d9f25f89d5
+                    - partNumber: 2
+                      etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
+              properties:
+                filename:
+                  type: string
+                uploadId:
+                  type: string
+                  minLength: 1
+                parts:
+                  type: array
+                  uniqueItems: true
+                  minItems: 1
+                  items:
+                    type: object
+                    properties:
+                      partNumber:
+                        type: number
+                      etag:
+                        type: string
+                        minLength: 1
+                    required:
+                      - partNumber
+                      - etag
+              required:
+                - uploadId
+                - parts
+            examples:
+              Example:
+                value:
+                  filename: example-2.mp4
+                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+                  parts:
+                    - partNumber: 1
+                      etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
+                    - partNumber: 2
+                      etag: 44a64df551425fcc55e4d42a148795d9f25f89d5
+                    - partNumber: 2
+                      etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
+        description: The request body should contain a reference to each part along with the Etag of each upload.
   '/api/v1/{apiUserId}/{apiKey}/{targetId}/{languageCode}/search':
     parameters:
       - schema:
@@ -1130,76 +1200,6 @@ paths:
             examples:
               example-1:
                 value: {}
-  /multipart/complete:
-    put:
-      summary: Complete a multipart upload
-      operationId: put-multipart-complete
-      responses:
-        '200':
-          description: OK
-      description: |-
-        <!--
-        focus: false
-        -->
-        ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
-
-        The final part of the multipart upload is the completion step. This request should be called when all chunks of the data have been sent. 
-      tags:
-        - Multipart
-      requestBody:
-        content:
-          application/json:
-            schema:
-              description: ''
-              type: object
-              x-examples:
-                example-1:
-                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
-                  parts:
-                    - partNumber: 1
-                      etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
-                    - partNumber: 2
-                      etag: 44a64df551425fcc55e4d42a148795d9f25f89d5
-                    - partNumber: 2
-                      etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
-              properties:
-                filename:
-                  type: string
-                uploadId:
-                  type: string
-                  minLength: 1
-                parts:
-                  type: array
-                  uniqueItems: true
-                  minItems: 1
-                  items:
-                    type: object
-                    properties:
-                      partNumber:
-                        type: number
-                      etag:
-                        type: string
-                        minLength: 1
-                    required:
-                      - partNumber
-                      - etag
-              required:
-                - uploadId
-                - parts
-            examples:
-              Example:
-                value:
-                  filename: example-2.mp4
-                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
-                  parts:
-                    - partNumber: 1
-                      etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
-                    - partNumber: 2
-                      etag: 44a64df551425fcc55e4d42a148795d9f25f89d5
-                    - partNumber: 2
-                      etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
-        description: The request body should contain a reference to each part along with the Etag of each upload.
-    parameters: []
   '/api/v1/{apiUserId}/{apiKey}/{languageCode}/search':
     parameters:
       - schema:
@@ -1617,7 +1617,7 @@ paths:
       description: |-
         Returns the list of articles matching the rules defined in Feed and to be published without any restriction on location. 
         *Note all datetimes returned are in UTC format
-  /events:
+  '/api/v1/{apiUserId}/{apiKey}/{languageCode}/event':
     get:
       summary: List available events
       description: |-
@@ -1627,14 +1627,6 @@ paths:
          This endpoint retrieves a list of events accessible to the end user, subject to the geo-restriction rules established during the event creation process. The returned events are determined based on the parameters provided at the time of the request. By default, the endpoint only returns events that are currently active or upcoming.
       operationId: list-events
       parameters:
-        - in: query
-          name: metaDataType
-          schema:
-            type: array
-            items:
-              type: string
-          required: false
-          description: Array of metadata types to filter events by.
         - in: query
           name: start
           schema:
@@ -1679,9 +1671,10 @@ paths:
           description: Page index of results page to be returned
         - schema:
             type: string
+            example: /event?query=(metaData.opta_id%3D123123213123121)
           in: query
-          name: integrationDataOptaId
-          description: Fixture OptaID used to filter events
+          name: query
+          description: Elastic search query string query. The field must be qualified with the section in the body like metadata.title
       tags:
         - Event
       responses:
@@ -1702,10 +1695,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Events'
               examples:
-                footballMatch with audio only:
+                EFL football match with audio only:
                   value:
                     eventData:
                       - id: cac5a29a-42ed-4218-b695-df8c89bf7049
+                        type: football-match
                         priorityOrder: 1
                         title: Football Match
                         subtitle: Premier League
@@ -1715,49 +1709,21 @@ paths:
                           end: '2024-02-24T17:00:00'
                           offset: '2024-02-24T14:55:00'
                         metaData:
-                          type: footballMatch
-                          footballMatch:
-                            teams:
-                              home:
-                                name: Manchester United
-                                logo:
-                                  type: image
-                                  title: Manchester United logo
-                                  renditions:
-                                    original:
-                                      width: 550
-                                      height: 550
-                                      type: jpeg
-                                      url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
-                              away:
-                                name: Fulham
-                                logo:
-                                  type: image
-                                  title: Fulham logo
-                                  renditions:
-                                    original:
-                                      width: 550
-                                      height: 550
-                                      type: jpeg
-                                      url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
-                            competition: Premier League
-                            season: 2023-2024
-                            venue: Old Trafford
-                            eventLogo:
-                              type: image
-                              title: image alt title
-                              renditions:
-                                original:
-                                  width: 550
-                                  height: 550
-                                  type: jpeg
-                                  url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                          home_team_name: Manchester United
+                          home_team_opta_id: '123123213123123'
+                          away_team_name: Fulham
+                          away_team_opta_id: '123123213123122'
+                          competition: Premier League
+                          season: 2023-2024
+                          venue: Old Trafford
+                          opta_id: '123123213123121'
                         itemData:
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
-                            type: audio
-                            thumbnailUrl: 'https://example.com/thumbnail.png'
                             mediaData:
-                              legacyEntryId: '123'
+                              mediaType: Live
+                              entryId: 0_1o4os161
+                              entryStatus: Ready
+                              thumbnailUrl: 'https://example.com/thumbnail.png'
                             metaData:
                               title: Football Match
                               body: Exciting match between Manchester United and Fulham
@@ -1765,19 +1731,26 @@ paths:
                                 - football
                                 - premier league
                               sysentryentitlements:
-                                - audio
-                        integrationData:
-                          optaId: '2367795'
+                                - paid
+                              classification: audio
+                              category: Features
+                            publicationData:
+                              createdAt: '2022-11-25T16:34:19'
+                              updatedAt: '2024-04-10T07:30:53'
+                              released: true
+                              releaseFrom: '2022-11-25T16:34:19'
+                              releaseTo: '9999-12-31T23:59:59.9999999'
                     pagingData:
                       totalCount: 1
                       itemCount: 1
                       pageCount: 1
                       pageSize: 10
                       pageIndex: 0
-                footballMatch with video & audio:
+                EFL football match with video & audio:
                   value:
                     eventData:
                       - id: cac5a29a-42ed-4218-b695-df8c89bf7049
+                        type: football-match
                         priorityOrder: 1
                         title: Football Match
                         subtitle: Premier League
@@ -1787,49 +1760,21 @@ paths:
                           end: '2024-02-24T17:00:00'
                           offset: '2024-02-24T14:55:00'
                         metaData:
-                          type: footballMatch
-                          footballMatch:
-                            teams:
-                              home:
-                                name: Manchester United
-                                logo:
-                                  type: image
-                                  title: Manchester United logo
-                                  renditions:
-                                    original:
-                                      width: 550
-                                      height: 550
-                                      type: jpeg
-                                      url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
-                              away:
-                                name: Fulham
-                                logo:
-                                  type: image
-                                  title: Fulham logo
-                                  renditions:
-                                    original:
-                                      width: 550
-                                      height: 550
-                                      type: jpeg
-                                      url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
-                            competition: Premier League
-                            season: 2023-2024
-                            venue: Old Trafford
-                            eventLogo:
-                              type: image
-                              title: image alt title
-                              renditions:
-                                original:
-                                  width: 550
-                                  height: 550
-                                  type: jpeg
-                                  url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                          home_team_name: Manchester United
+                          home_team_opta_id: '123123213123123'
+                          away_team_name: Fulham
+                          away_team_opta_id: '123123213123122'
+                          competition: Premier League
+                          season: 2023-2024
+                          venue: Old Trafford
+                          opta_id: '123123213123121'
                         itemData:
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
-                            type: audio
-                            thumbnailUrl: 'https://example.com/thumbnail.png'
                             mediaData:
-                              legacyEntryId: '123'
+                              mediaType: Live
+                              entryId: 0_1o4os161
+                              entryStatus: Ready
+                              thumbnailUrl: 'https://example.com/thumbnail.png'
                             metaData:
                               title: Football Match
                               body: Exciting match between Manchester United and Fulham
@@ -1837,12 +1782,21 @@ paths:
                                 - football
                                 - premier league
                               sysentryentitlements:
-                                - audio
+                                - paid
+                              classification: audio
+                              category: Features
+                            publicationData:
+                              createdAt: '2022-11-25T16:34:19'
+                              updatedAt: '2024-04-10T07:30:53'
+                              released: true
+                              releaseFrom: '2022-11-25T16:34:19'
+                              releaseTo: '9999-12-31T23:59:59.9999999'
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
-                            type: video
-                            thumbnailUrl: 'https://example.com/thumbnail.png'
                             mediaData:
-                              legacyEntryId: '123'
+                              mediaType: Live
+                              entryId: 0_1o4os162
+                              entryStatus: Ready
+                              thumbnailUrl: 'https://example.com/thumbnail.png'
                             metaData:
                               title: Football Match
                               body: Exciting match between Manchester United and Fulham
@@ -1850,43 +1804,42 @@ paths:
                                 - football
                                 - premier league
                               sysentryentitlements:
-                                - video
-                        integrationData:
-                          optaId: '2367795'
+                                - paid
+                              classification: video
+                              category: Features
+                            publicationData:
+                              createdAt: '2022-11-25T16:34:19'
+                              updatedAt: '2024-04-10T07:30:53'
+                              released: true
+                              releaseFrom: '2022-11-25T16:34:19'
+                              releaseTo: '9999-12-31T23:59:59.9999999'
                     pagingData:
                       totalCount: 1
                       itemCount: 1
                       pageCount: 1
                       pageSize: 10
                       pageIndex: 0
-                pressRelease:
+                EFL press release:
                   value:
                     eventData:
-                      - id: cac5a29a-42ed-4218-b695-df8c89bf7048
-                        priorityOrder: 2
-                        title: Press Release this week
-                        subtitle: New coach joining the team!
+                      - id: cac5a29a-42ed-4218-b695-df8c89bf7049
+                        type: press-release
+                        priorityOrder: 1
+                        title: Football Match
+                        subtitle: Premier League
+                        description: Manchester United vs Fulham
                         scheduleData:
-                          start: '2024-03-01T18:30:00'
-                          end: '2024-03-01T20:30:00'
-                        metaData:
-                          type: pressRelease
-                          pressRelease:
-                            posterImage:
-                              type: image
-                              title: Coach Steve R. during press release
-                              renditions:
-                                original:
-                                  width: 550
-                                  height: 550
-                                  type: jpeg
-                                  url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                          start: '2024-02-25T15:00:00'
+                          end: '2024-02-24T17:00:00'
+                          offset: '2024-02-24T14:55:00'
+                        metaData: {}
                         itemData:
                           - id: 37111304-c1f7-4c58-9944-9bfe64b53644
-                            type: video
-                            thumbnailUrl: 'https://example.com/thumbnail.png'
                             mediaData:
-                              legacyEntryId: '123'
+                              mediaType: Live
+                              entryId: 0_1o4os161
+                              entryStatus: Ready
+                              thumbnailUrl: 'https://example.com/thumbnail.png'
                             metaData:
                               title: This week's press release
                               body: First press release of our new coach
@@ -1895,6 +1848,14 @@ paths:
                                 - news
                               sysentryentitlements:
                                 - '*'
+                              classification: video
+                              category: PressRelease
+                            publicationData:
+                              createdAt: '2022-11-25T16:34:19'
+                              updatedAt: '2024-04-10T07:30:53'
+                              released: true
+                              releaseFrom: '2022-11-25T16:34:19'
+                              releaseTo: '9999-12-31T23:59:59.9999999'
                     pagingData:
                       totalCount: 1
                       itemCount: 1
@@ -1910,7 +1871,25 @@ paths:
                 properties:
                   error:
                     type: string
-  '/events/{id}':
+      x-stoplight:
+        id: pe03y4h6vqo9r
+    parameters:
+      - schema:
+          type: string
+        name: apiUserId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: apiKey
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: languageCode
+        in: path
+        required: true
+  '/api/v1/{apiUserId}/{apiKey}/{languageCode}/event/{id}':
     get:
       summary: Get a single event by ID
       operationId: get-event
@@ -1936,33 +1915,70 @@ paths:
               schema:
                 $ref: '#/components/schemas/Event'
               examples:
-                pressRelease:
+                EFL football match:
                   value:
-                    id: cac5a29a-42ed-4218-b695-df8c89bf7048
-                    priorityOrder: 2
-                    title: Press Release this week
-                    subtitle: New coach joining the team!
+                    id: cac5a29a-42ed-4218-b695-df8c89bf7049
+                    type: football-match
+                    priorityOrder: 1
+                    title: Football Match
+                    subtitle: Premier League
+                    description: Manchester United vs Fulham
                     scheduleData:
-                      start: '2024-03-01T18:30:00'
-                      end: '2024-03-01T20:30:00'
+                      start: '2024-02-25T15:00:00'
+                      end: '2024-02-24T17:00:00'
+                      offset: '2024-02-24T14:55:00'
                     metaData:
-                      type: pressRelease
-                      pressRelease:
-                        posterImage:
-                          type: image
-                          title: Coach Steve R. during press release
-                          renditions:
-                            original:
-                              width: 550
-                              height: 550
-                              type: jpeg
-                              url: 'http://images.streamamg.com/345455b2-8f0f-4442-b317-da58396742a9'
+                      home_team_name: Manchester United
+                      home_team_opta_id: '123123213123123'
+                      away_team_name: Fulham
+                      away_team_opta_id: '123123213123122'
+                      competition: Premier League
+                      season: 2023-2024
+                      venue: Old Trafford
+                      opta_id: '123123213123121'
                     itemData:
                       - id: 37111304-c1f7-4c58-9944-9bfe64b53644
-                        type: video
-                        thumbnailUrl: 'https://example.com/thumbnail.png'
                         mediaData:
-                          legacyEntryId: '123'
+                          mediaType: Live
+                          entryId: 0_1o4os161
+                          entryStatus: Ready
+                          thumbnailUrl: 'https://example.com/thumbnail.png'
+                        metaData:
+                          title: Football Match
+                          body: Exciting match between Manchester United and Fulham
+                          tags:
+                            - football
+                            - premier league
+                          sysentryentitlements:
+                            - paid
+                          classification: audio
+                          category: Features
+                        publicationData:
+                          createdAt: '2022-11-25T16:34:19'
+                          updatedAt: '2024-04-10T07:30:53'
+                          released: true
+                          releaseFrom: '2022-11-25T16:34:19'
+                          releaseTo: '9999-12-31T23:59:59.9999999'
+                EFL press release:
+                  value:
+                    id: cac5a29a-42ed-4218-b695-df8c89bf7049
+                    type: press-release
+                    priorityOrder: 1
+                    title: Football Match
+                    subtitle: Premier League
+                    description: Manchester United vs Fulham
+                    scheduleData:
+                      start: '2024-02-25T15:00:00'
+                      end: '2024-02-24T17:00:00'
+                      offset: '2024-02-24T14:55:00'
+                    metaData: {}
+                    itemData:
+                      - id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                        mediaData:
+                          mediaType: Live
+                          entryId: 0_1o4os161
+                          entryStatus: Ready
+                          thumbnailUrl: 'https://example.com/thumbnail.png'
                         metaData:
                           title: This week's press release
                           body: First press release of our new coach
@@ -1971,6 +1987,14 @@ paths:
                             - news
                           sysentryentitlements:
                             - '*'
+                          classification: video
+                          category: PressRelease
+                        publicationData:
+                          createdAt: '2022-11-25T16:34:19'
+                          updatedAt: '2024-04-10T07:30:53'
+                          released: true
+                          releaseFrom: '2022-11-25T16:34:19'
+                          releaseTo: '9999-12-31T23:59:59.9999999'
         '404':
           description: Event not found or not available in user's location
           content:
@@ -1989,6 +2013,29 @@ paths:
                 properties:
                   error:
                     type: string
+      x-stoplight:
+        id: z4rk59ri6btib
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: apiUserId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: apiKey
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: languageCode
+        in: path
+        required: true
 components:
   schemas:
     Events:
@@ -2016,12 +2063,16 @@ components:
       type: object
       required:
         - id
+        - type
         - priorityOrder
         - title
         - scheduleData
       properties:
         id:
           description: event ID
+          type: string
+        type:
+          description: type of Event metadata
           type: string
         priorityOrder:
           description: priority order that allows sorting of events
@@ -2038,112 +2089,51 @@ components:
         scheduleData:
           $ref: '#/components/schemas/EventSchedule'
         metaData:
-          $ref: '#/components/schemas/EventMetadata'
+          $ref: '#/components/schemas/EmptyObject'
         itemData:
           type: array
           items:
-            $ref: '#/components/schemas/Media'
-        integrationData:
-          type: object
-          properties:
-            optaFixtureId:
-              description: Opta Fixture ID
-              type: string
-    MediaMetadata:
+            $ref: '#/components/schemas/ItemData'
+    ItemData:
       type: object
-      required:
-        - title
-        - body
-        - sysentryentitlements
-      properties:
-        title:
-          type: string
-          description: media entry title
-        body:
-          type: string
-          description: media entry description
-        tags:
-          type: array
-          description: media entry tags
-          items:
-            type: string
-        sysentryentitlements:
-          type: array
-          description: entitlements for media entry that permit suitable users to view it
-          items:
-            type: string
-    Media:
-      type: object
+      x-stoplight:
+        id: 0bd4a7a27f9e0
       required:
         - id
-        - type
       properties:
         id:
           type: string
-          description: media entry Cloudmatrix ID
-        type:
-          type: string
-          description: 'media type (audio, video)'
-        thumbnailUrl:
-          type: string
-          description: URL to media thumbnail
         mediaData:
-          $ref: '#/components/schemas/MediaData'
-        metaData:
-          $ref: '#/components/schemas/MediaMetadata'
-    MediaData:
-      type: object
-      properties:
-        legacyEntryId:
-          type: string
-          description: legacy media entry ID (e.g. Kaltura)
-    EventMetadata:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-        footballMatch:
-          $ref: '#/components/schemas/FootballMatchMetadata'
-        pressRelease:
-          $ref: '#/components/schemas/PressRelease'
-    PressRelease:
-      type: object
-      properties:
-        posterImage:
-          type:
-            $ref: '#/components/schemas/ImageDataType'
-      x-stoplight:
-        id: 3a11a10737734
-    FootballMatchMetadata:
-      type: object
-      properties:
-        teams:
           type: object
           properties:
-            home:
-              type: object
-              properties:
-                name:
-                  type: string
-                logo:
-                  $ref: '#/components/schemas/ImageDataType'
-            away:
-              type: object
-              properties:
-                name:
-                  type: string
-                logo:
-                  $ref: '#/components/schemas/ImageDataType'
-        competition:
-          type: string
-        season:
-          type: string
-        venue:
-          type: string
-        eventLogo:
-          $ref: '#/components/schemas/ImageDataType'
+            mediaType:
+              type: string
+            entryId:
+              type: string
+            entryStatus:
+              type: string
+            thumbnailUrl:
+              type: string
+        sortData:
+          type: array
+          items:
+            type: object
+        metaData:
+          type: object
+          additionalProperties: true
+        publicationData:
+          type: object
+          properties:
+            createdAt:
+              type: string
+            updatedAt:
+              type: string
+            released:
+              type: boolean
+            releaseFrom:
+              type: string
+            releaseTo:
+              type: string
     EventSchedule:
       type: object
       required:
@@ -2159,6 +2149,10 @@ components:
         offset:
           type: string
           description: ISO 8601 offset datetime when event can be advertised
+    EmptyObject:
+      type: object
+      x-stoplight:
+        id: e28df6d89f182
     ImageDataType:
       type: object
       properties:
