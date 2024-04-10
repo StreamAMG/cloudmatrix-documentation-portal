@@ -892,6 +892,76 @@ paths:
       security:
         - x-api-key: []
     parameters: []
+  /multipart/complete:
+    parameters: []
+    put:
+      summary: Complete a multipart upload
+      operationId: put-multipart-complete
+      responses:
+        '200':
+          description: OK
+      description: |-
+        <!--
+        focus: false
+        -->
+        ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
+
+        The final part of the multipart upload is the completion step. This request should be called when all chunks of the data have been sent. 
+      tags:
+        - Multipart
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+                  parts:
+                    - partNumber: 1
+                      etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
+                    - partNumber: 2
+                      etag: 44a64df551425fcc55e4d42a148795d9f25f89d5
+                    - partNumber: 2
+                      etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
+              properties:
+                filename:
+                  type: string
+                uploadId:
+                  type: string
+                  minLength: 1
+                parts:
+                  type: array
+                  uniqueItems: true
+                  minItems: 1
+                  items:
+                    type: object
+                    properties:
+                      partNumber:
+                        type: number
+                      etag:
+                        type: string
+                        minLength: 1
+                    required:
+                      - partNumber
+                      - etag
+              required:
+                - uploadId
+                - parts
+            examples:
+              Example:
+                value:
+                  filename: example-2.mp4
+                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+                  parts:
+                    - partNumber: 1
+                      etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
+                    - partNumber: 2
+                      etag: 44a64df551425fcc55e4d42a148795d9f25f89d5
+                    - partNumber: 2
+                      etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
+        description: The request body should contain a reference to each part along with the Etag of each upload.
   '/api/v1/{apiUserId}/{apiKey}/{targetId}/{languageCode}/search':
     parameters:
       - schema:
@@ -1130,76 +1200,6 @@ paths:
             examples:
               example-1:
                 value: {}
-  /multipart/complete:
-    put:
-      summary: Complete a multipart upload
-      operationId: put-multipart-complete
-      responses:
-        '200':
-          description: OK
-      description: |-
-        <!--
-        focus: false
-        -->
-        ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
-
-        The final part of the multipart upload is the completion step. This request should be called when all chunks of the data have been sent. 
-      tags:
-        - Multipart
-      requestBody:
-        content:
-          application/json:
-            schema:
-              description: ''
-              type: object
-              x-examples:
-                example-1:
-                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
-                  parts:
-                    - partNumber: 1
-                      etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
-                    - partNumber: 2
-                      etag: 44a64df551425fcc55e4d42a148795d9f25f89d5
-                    - partNumber: 2
-                      etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
-              properties:
-                filename:
-                  type: string
-                uploadId:
-                  type: string
-                  minLength: 1
-                parts:
-                  type: array
-                  uniqueItems: true
-                  minItems: 1
-                  items:
-                    type: object
-                    properties:
-                      partNumber:
-                        type: number
-                      etag:
-                        type: string
-                        minLength: 1
-                    required:
-                      - partNumber
-                      - etag
-              required:
-                - uploadId
-                - parts
-            examples:
-              Example:
-                value:
-                  filename: example-2.mp4
-                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
-                  parts:
-                    - partNumber: 1
-                      etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
-                    - partNumber: 2
-                      etag: 44a64df551425fcc55e4d42a148795d9f25f89d5
-                    - partNumber: 2
-                      etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
-        description: The request body should contain a reference to each part along with the Etag of each upload.
-    parameters: []
   '/api/v1/{apiUserId}/{apiKey}/{languageCode}/search':
     parameters:
       - schema:
@@ -1617,7 +1617,7 @@ paths:
       description: |-
         Returns the list of articles matching the rules defined in Feed and to be published without any restriction on location. 
         *Note all datetimes returned are in UTC format
-  /events:
+  '/api/v1/{apiUserId}/{apiKey}/{languageCode}/event':
     get:
       summary: List available events
       description: |-
@@ -1852,7 +1852,25 @@ paths:
                 properties:
                   error:
                     type: string
-  '/events/{id}':
+      x-stoplight:
+        id: pe03y4h6vqo9r
+    parameters:
+      - schema:
+          type: string
+        name: apiUserId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: apiKey
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: languageCode
+        in: path
+        required: true
+  '/api/v1/{apiUserId}/{apiKey}/{languageCode}/event/{id}':
     get:
       summary: Get a single event by ID
       operationId: get-event
@@ -1878,33 +1896,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Event'
               examples:
-                press release:
-                  value:
-                    id: cac5a29a-42ed-4218-b695-df8c89bf7049
-                    type: press-release
-                    priorityOrder: 1
-                    title: Football Match
-                    subtitle: Premier League
-                    description: Manchester United vs Fulham
-                    scheduleData:
-                      start: '2024-02-25T15:00:00'
-                      end: '2024-02-24T17:00:00'
-                      offset: '2024-02-24T14:55:00'
-                    metaData: {}
-                    itemData:
-                      - id: 37111304-c1f7-4c58-9944-9bfe64b53644
-                        type: video
-                        thumbnailUrl: 'https://example.com/thumbnail.png'
-                        mediaData:
-                          legacyEntryId: '123'
-                        metaData:
-                          title: This week's press release
-                          body: First press release of our new coach
-                          tags:
-                            - press-release
-                            - news
-                          sysentryentitlements:
-                            - '*'
                 football match:
                   value:
                     id: cac5a29a-42ed-4218-b695-df8c89bf7049
@@ -1940,6 +1931,33 @@ paths:
                             - premier league
                           sysentryentitlements:
                             - audio
+                press release:
+                  value:
+                    id: cac5a29a-42ed-4218-b695-df8c89bf7049
+                    type: press-release
+                    priorityOrder: 1
+                    title: Football Match
+                    subtitle: Premier League
+                    description: Manchester United vs Fulham
+                    scheduleData:
+                      start: '2024-02-25T15:00:00'
+                      end: '2024-02-24T17:00:00'
+                      offset: '2024-02-24T14:55:00'
+                    metaData: {}
+                    itemData:
+                      - id: 37111304-c1f7-4c58-9944-9bfe64b53644
+                        type: video
+                        thumbnailUrl: 'https://example.com/thumbnail.png'
+                        mediaData:
+                          legacyEntryId: '123'
+                        metaData:
+                          title: This week's press release
+                          body: First press release of our new coach
+                          tags:
+                            - press-release
+                            - news
+                          sysentryentitlements:
+                            - '*'
         '404':
           description: Event not found or not available in user's location
           content:
@@ -1958,6 +1976,29 @@ paths:
                 properties:
                   error:
                     type: string
+      x-stoplight:
+        id: z4rk59ri6btib
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: apiUserId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: apiKey
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: languageCode
+        in: path
+        required: true
 components:
   schemas:
     Events:
