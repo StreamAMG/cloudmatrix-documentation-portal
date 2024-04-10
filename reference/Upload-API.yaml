@@ -2056,41 +2056,39 @@ components:
       required:
         - id
       properties:
-        type: object
-        properties:
-            id:
-              type: string
-            mediaData:
+          id:
+            type: string
+          mediaData:
+            type: object
+            properties:
+              mediaType:
+                type: string
+              entryId:
+                type: string
+              entryStatus:
+                type: string
+              thumbnailUrl:
+                type: string
+          sortData:
+            type: array
+            items:
               type: object
-              properties:
-                mediaType:
-                  type: string
-                entryId:
-                  type: string
-                entryStatus:
-                  type: string
-                thumbnailUrl:
-                  type: string
-            sortData:
-              type: array
-              items:
-                type: object
-            metaData:
-              type: object
-              additionalProperties: true
-            publicationData:
-              type: object
-              properties:
-                createdAt:
-                  type: string
-                updatedAt:
-                  type: string
-                released:
-                  type: boolean
-                releaseFrom:
-                  type: string
-                releaseTo:
-                  type: string
+          metaData:
+            type: object
+            additionalProperties: true
+          publicationData:
+            type: object
+            properties:
+              createdAt:
+                type: string
+              updatedAt:
+                type: string
+              released:
+                type: boolean
+              releaseFrom:
+                type: string
+              releaseTo:
+                type: string
     MediaData:
       type: object
       properties:
