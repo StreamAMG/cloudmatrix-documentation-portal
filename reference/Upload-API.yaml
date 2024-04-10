@@ -2056,16 +2056,41 @@ components:
       required:
         - id
       properties:
-        id:
-          type: string
-          description: media entry Cloudmatrix ID
-        thumbnailUrl:
-          type: string
-          description: URL to media thumbnail
-        mediaData:
-          $ref: '#/components/schemas/MediaData'
-        metaData:
-          $ref: '#/components/schemas/MediaMetadata'
+        type: object
+        properties:
+            id:
+              type: string
+            mediaData:
+              type: object
+              properties:
+                mediaType:
+                  type: string
+                entryId:
+                  type: string
+                entryStatus:
+                  type: string
+                thumbnailUrl:
+                  type: string
+            sortData:
+              type: array
+              items:
+                type: object
+            metaData:
+              type: object
+              additionalProperties: true
+            publicationData:
+              type: object
+              properties:
+                createdAt:
+                  type: string
+                updatedAt:
+                  type: string
+                released:
+                  type: boolean
+                releaseFrom:
+                  type: string
+                releaseTo:
+                  type: string
     MediaData:
       type: object
       properties:
