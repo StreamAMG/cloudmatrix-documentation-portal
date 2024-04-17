@@ -415,36 +415,23 @@ paths:
               examples:
                 Example - Success:
                   value:
-                    [{
-                      "id": "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234",
-                      "typeId": "b5c3a174-1b00-4495-a4cb-f030d475b4b9",
-                      "priorityOrder": 1,
-                      "title": "Football Match: Barcelona vs Real Madrid",
-                      "subtitle": "El Clasico",
-                      "description": "This is a highly anticipated football match between two of the biggest clubs in the world.",
-                      "start": "2023-05-21T19:00:00Z",
-                      "end": "2023-05-21T21:00:00Z",
-                      "offset": 0,
-                      "entries": [
-                        {
-                          "id": "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236"
-                        },
-                        {
-                          "id": "e078d72a-aad4-4b68-9227-e0bde0b35c66"
-                        }
-                      ],
-                      "attributes": [
-                        {
-                          "id": "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234",
-                          "value": "custom string attribute"
-                        },
-                        {
-                          "id": "7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01",
-                          "value": "42"
-                        }
-                      ]
-                    }
-                    ]
+                    - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+                      typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
+                      priorityOrder: 1
+                      title: 'Football Match: Barcelona vs Real Madrid'
+                      subtitle: El Clasico
+                      description: This is a highly anticipated football match between two of the biggest clubs in the world.
+                      start: '2023-05-21T19:00:00Z'
+                      end: '2023-05-21T21:00:00Z'
+                      offset: 0
+                      entries:
+                        - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
+                        - id: e078d72a-aad4-4b68-9227-e0bde0b35c66
+                      attributes:
+                        - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+                          value: custom string attribute
+                        - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
+                          value: '42'
         '403':
           description: Forbidden
           content:
@@ -650,20 +637,28 @@ components:
       properties:
         id:
           type: string
+          format: uuid
         typeId:
           type: string
+          format: uuid
         title:
           type: string
+          minLength: 1
         description:
           type: string
+          minLength: 1
         priorityOrder:
           type: integer
+          minimum: 0
         subtitle:
           type: string
+          minLength: 1
         start:
           type: string
+          format: date-time
         end:
           type: string
+          format: date-time
         offset:
           type: number
           minimum: 0
@@ -685,18 +680,25 @@ components:
       properties:
         typeId:
           type: string
+          format: uuid
         title:
           type: string
+          minLength: 1
         description:
           type: string
+          minLength: 1
         priorityOrder:
           type: integer
+          minimum: 0
         subtitle:
           type: string
+          minLength: 1
         start:
           type: string
+          format: date-time
         end:
           type: string
+          format: date-time
         offset:
           type: number
           minimum: 0
@@ -713,11 +715,14 @@ components:
       description: The metadata attributes
       items:
         type: object
+        required:
+          - id
         properties:
           id:
             type: string
             minLength: 1
             description: CloudMatrix attribute configuration id
+            format: uuid
           value:
             type: string
             minLength: 1
@@ -730,15 +735,13 @@ components:
             items:
               type: object
               additionalProperties: false
+              required:
+                - value
               properties:
                 value:
                   type: string
                   minLength: 1
                   description: 'CloudMatrix attribute value (singular value like string, number etc.)'
-              required:
-                - value
-        required:
-          - id
     MediaEntries:
       type: array
       x-stoplight:
@@ -756,3 +759,4 @@ components:
             type: string
             minLength: 1
             description: CloudMatrix article id
+            format: uuid
