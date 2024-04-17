@@ -805,8 +805,7 @@ components:
             description: 'CloudMatrix attribute value (singular value like string, number etc.)'
           valueId:
             type: string
-            x-stoplight:
-              id: wu94loe356bg3
+            description: 'CloudMatrix attribute config option id (if for example attribute config represents a dropdown with predefined values)'
           items:
             type: array
             uniqueItems: true
@@ -824,8 +823,7 @@ components:
                   description: 'CloudMatrix attribute value (singular value like string, number etc.)'
                 valueId:
                   type: string
-                  x-stoplight:
-                    id: 6jwg43paxkkgg
+                  description: 'CloudMatrix attribute config option id (if for example attribute config represents a multichoice checkbox with predefined values)'
     MediaEntries:
       type: array
       x-stoplight:
