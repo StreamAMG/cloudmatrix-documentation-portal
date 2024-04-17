@@ -76,6 +76,8 @@ paths:
                         value: custom string attribute
                       - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
                         value: '42'
+                    createdAt: '2023-05-11T21:00:00Z'
+                    updatedAt: '2023-05-12T21:00:00Z'
         '403':
           description: Forbidden
           content:
@@ -403,6 +405,18 @@ paths:
           schema:
             type: string
             format: uuid
+        - schema:
+            type: string
+            default: '0'
+          in: query
+          name: pageIndex
+          description: Page index of results page to be returned
+        - schema:
+            type: string
+            default: '10'
+          in: query
+          name: pageSize
+          description: Size of the page of results
       responses:
         '200':
           description: Event data retrieved from CloudMatrix
@@ -410,26 +424,54 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EventDataList'
-              # examples:
-              #   Example - Success:
-              #     value:
-              #       - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
-              #         typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
-              #         priorityOrder: 1
-              #         title: 'Football Match: Barcelona vs Real Madrid'
-              #         subtitle: El Clasico
-              #         description: This is a highly anticipated football match between two of the biggest clubs in the world.
-              #         start: '2023-05-21T19:00:00Z'
-              #         end: '2023-05-21T21:00:00Z'
-              #         offset: 0
-              #         entries:
-              #           - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
-              #           - id: e078d72a-aad4-4b68-9227-e0bde0b35c66
-              #         attributes:
-              #           - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
-              #             value: custom string attribute
-              #           - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
-              #             value: '42'
+              examples:
+                Successful response:
+                  value:
+                    events:
+                      - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+                        typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
+                        priorityOrder: 1
+                        title: 'Football Match: Barcelona vs Real Madrid'
+                        subtitle: El Clasico
+                        description: This is a highly anticipated football match between two of the biggest clubs in the world.
+                        start: '2023-05-21T19:00:00Z'
+                        end: '2023-05-21T21:00:00Z'
+                        offset: 0
+                        entries:
+                          - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
+                          - id: e078d72a-aad4-4b68-9227-e0bde0b35c66
+                        attributes:
+                          - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+                            value: custom string attribute
+                          - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
+                            value: '42'
+                        createdAt: '2023-05-11T21:00:00Z'
+                        updatedAt: '2023-05-12T21:00:00Z'
+                    pagination:
+                      totalCount: 1
+                      itemCount: 1
+                      pageSize: 10
+                      pageIndex: 0
+        # examples:
+        #   Example - Success:
+        #     value:
+        #       - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+        #         typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
+        #         priorityOrder: 1
+        #         title: 'Football Match: Barcelona vs Real Madrid'
+        #         subtitle: El Clasico
+        #         description: This is a highly anticipated football match between two of the biggest clubs in the world.
+        #         start: '2023-05-21T19:00:00Z'
+        #         end: '2023-05-21T21:00:00Z'
+        #         offset: 0
+        #         entries:
+        #           - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
+        #           - id: e078d72a-aad4-4b68-9227-e0bde0b35c66
+        #         attributes:
+        #           - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+        #             value: custom string attribute
+        #           - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
+        #             value: '42'
         '403':
           description: Forbidden
           content:
@@ -673,6 +715,16 @@ components:
           $ref: '#/components/schemas/EventAttributes'
         entries:
           $ref: '#/components/schemas/MediaEntries'
+        createdAt:
+          type: string
+          x-stoplight:
+            id: sagujd3k325dy
+          format: date-time
+        updatedAt:
+          type: string
+          x-stoplight:
+            id: 7iybtu6zsekc6
+          format: date-time
     EventDataList:
       type: object
       properties:
@@ -680,8 +732,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EventData'
-        paging:
-          $ref: '#/components/schemas/Paging'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
     CreateEventBody:
       type: object
       x-stoplight:
@@ -751,6 +803,10 @@ components:
             type: string
             minLength: 1
             description: 'CloudMatrix attribute value (singular value like string, number etc.)'
+          valueId:
+            type: string
+            x-stoplight:
+              id: wu94loe356bg3
           items:
             type: array
             uniqueItems: true
@@ -766,6 +822,10 @@ components:
                   type: string
                   minLength: 1
                   description: 'CloudMatrix attribute value (singular value like string, number etc.)'
+                valueId:
+                  type: string
+                  x-stoplight:
+                    id: 6jwg43paxkkgg
     MediaEntries:
       type: array
       x-stoplight:
@@ -784,16 +844,16 @@ components:
             minLength: 1
             description: CloudMatrix article id
             format: uuid
-    Paging:
+    Pagination:
       type: object
       x-stoplight:
         id: 9576201547f2d
       properties:
         totalCount:
           type: integer
+          x-stoplight:
+            id: 9n82xqtwy974s
         itemCount:
-          type: integer
-        pageCount:
           type: integer
         pageSize:
           type: integer
