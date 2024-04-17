@@ -1,9 +1,7 @@
 x-stoplight:
   docs:
     showModels: true
-
 x-internal: true
-
 openapi: 3.1.0
 info:
   title: Events Service API Reference
@@ -20,13 +18,13 @@ tags:
 servers:
   - url: 'https://api.event-service.streamamg.com/v1'
 paths:
-  /event/{id}:
+  '/event/{id}':
     get:
       summary: Get a single event from CloudMatrix
       description: |-
         Get a single event from CloudMatrix based on a unique identifier passed through for a tenant identified by the 
         header parameter 'tenant-id'.
-        
+
         In order to fetch the event data, the user must first be authenticated (via an API-Key). This token
         should be passed during the API call through the 'x-api-key' header. 
 
@@ -52,7 +50,7 @@ paths:
             type: string
             format: uuid
       responses:
-        200:
+        '200':
           description: Event data retrieved from CloudMatrix
           content:
             application/json:
@@ -67,12 +65,10 @@ paths:
                     description: Manchester United vs Fulham
                     priorityOrder: 1
                     subtitle: Premier League
-                    start: 2024-02-24T15:00:00
-                    end: 2024-02-24T17:00:00
-                    offset: 2024-02-24T14:55:00
-                    createdAt: 2024-02-23T16:34:19
-                    updatedAt: 2024-02-23T17:30:53
-        400:
+                    start: '2024-02-24T15:00:00'
+                    end: '2024-02-24T17:00:00'
+                    offset: '2024-02-24T14:55:00'
+        '400':
           description: Bad Request
           content:
             application/json:
@@ -104,7 +100,7 @@ paths:
                     status: 400
                     message: No tenant-id supplied
                     reason: HEADER_ERROR
-        403:
+        '403':
           description: Forbidden
           content:
             application/json:
@@ -121,7 +117,7 @@ paths:
                 Invalid API Key:
                   value:
                     message: Forbidden
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
@@ -148,8 +144,8 @@ paths:
                   value:
                     status: 404
                     message: No event found for id
-                    reason: 'NO_ENTITY_EXIST'
-        500:
+                    reason: NO_ENTITY_EXIST
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -185,7 +181,7 @@ paths:
       tags:
         - Event
       security:
-        - ApiKey: [ ]
+        - ApiKey: []
       parameters:
         - name: id
           in: path
@@ -206,15 +202,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/EventData"
+              $ref: '#/components/schemas/EventData'
       responses:
-        201:
+        '201':
           description: Updated event in CloudMatrix
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/EventData"
-        400:
+                $ref: '#/components/schemas/EventData'
+        '400':
           description: Bad Request
           content:
             application/json:
@@ -243,7 +239,7 @@ paths:
                     status: 400
                     message: id must be a UUID
                     error: Bad Request
-        403:
+        '403':
           description: Forbidden
           content:
             application/json:
@@ -292,9 +288,9 @@ paths:
             type: string
             format: uuid
       responses:
-        204:
+        '204':
           description: Event data marked as deleted in CloudMatrix
-        403:
+        '403':
           description: Forbidden
           content:
             application/json:
@@ -311,7 +307,7 @@ paths:
                 Invalid API Key:
                   value:
                     message: Forbidden
-        404:
+        '404':
           description: Not Found
           content:
             application/json:
@@ -338,8 +334,8 @@ paths:
                   value:
                     status: 404
                     message: No event found for id
-                    reason: 'NO_ENTITY_EXIST'
-        500:
+                    reason: NO_ENTITY_EXIST
+        '500':
           description: Internal Server Error
           content:
             application/json:
@@ -362,17 +358,21 @@ paths:
                   value:
                     status: 500
                     message: 'Error deleting event data [Error stack]'
+    parameters:
+      - schema:
+          type: string
+        in: header
+        name: tenant-id
+        description: UUID identifying tenant
+        required: true
   /event:
     post:
       summary: Create a new event in CloudMatrix
-      description: |-
+      description: |
         Create a new event in CloudMatrix for a tenant identified by the header parameter 'tenant-id'.
-        
+
         In order to create the event data, the user must first be authenticated (via an API-Key). This token
         should be passed during the API call through the 'x-api-key' header. 
-
-        The API call should be made with the unique event 'id' passed through in the main payload (it is not 
-        automatically created by the service and database).
       tags:
         - Event
       security:
@@ -383,15 +383,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/EventData"
+              $ref: '#/components/schemas/CreateEventBody'
       responses:
-        201:
+        '201':
           description: Created new event in CloudMatrix
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/EventData"
-        400:
+                $ref: '#/components/schemas/EventData'
+        '400':
           description: Bad Request
           content:
             application/json:
@@ -425,7 +425,7 @@ paths:
                     status: 400
                     message: Title must be a non-empty object
                     error: Bad Request
-        403:
+        '403':
           description: Forbidden
           content:
             application/json:
@@ -442,6 +442,15 @@ paths:
                 Invalid API Key:
                   value:
                     message: Forbidden
+        '500':
+          description: Internal Server Error
+    parameters:
+      - schema:
+          type: string
+        in: header
+        name: tenant-id
+        description: UUID identifying tenant
+        required: true
 components:
   securitySchemes:
     ApiKey:
@@ -472,7 +481,69 @@ components:
           type: string
         deleted:
           type: boolean
-        createdAt:
+    CreateEventBody:
+      type: object
+      x-stoplight:
+        id: 1u6q4wjicmuut
+      title: CreateEventBody
+      required:
+        - typeId
+        - title
+        - priorityOrder
+        - start
+        - end
+      properties:
+        typeId:
           type: string
-        updatedAt:
+        title:
           type: string
+        description:
+          type: string
+        priorityOrder:
+          type: integer
+        subtitle:
+          type: string
+        start:
+          type: string
+        end:
+          type: string
+        offset:
+          type: number
+          minimum: 0
+        attributes:
+          $ref: '#/components/schemas/EventAttributes'
+    EventAttributes:
+      type: array
+      x-stoplight:
+        id: 17a44d0639528
+      uniqueItems: true
+      minItems: 1
+      description: The metadata attributes
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            minLength: 1
+            description: CloudMatrix attribute configuration id
+          value:
+            type: string
+            minLength: 1
+            description: 'CloudMatrix attribute value (singular value like string, number etc.)'
+          items:
+            type: array
+            uniqueItems: true
+            minItems: 1
+            description: CloudMatrix attribute value (collection)
+            items:
+              type: object
+              additionalProperties: false
+              properties:
+                value:
+                  type: string
+                  minLength: 1
+                  description: 'CloudMatrix attribute value (singular value like string, number etc.)'
+              required:
+                - value
+        required:
+          - id
