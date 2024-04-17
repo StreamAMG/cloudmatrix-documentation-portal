@@ -690,27 +690,35 @@ components:
         typeId:
           type: string
           format: uuid
+          description: Custom event type id
         title:
           type: string
           minLength: 1
+          description: Event's main title
         description:
           type: string
           minLength: 1
+          description: Event's description
         priorityOrder:
           type: integer
           minimum: 0
+          description: Event priority order used when displaying events
         subtitle:
           type: string
           minLength: 1
+          description: Event's secondary title
         start:
           type: string
           format: date-time
+          description: Start time of the event
         end:
           type: string
           format: date-time
+          description: End time of the event
         offset:
           type: number
           minimum: 0
+          description: Extra minutes before start time when event can be advertised
         attributes:
           $ref: '#/components/schemas/EventAttributes'
         entries:
