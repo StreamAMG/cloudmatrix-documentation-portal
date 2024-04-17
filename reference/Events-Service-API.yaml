@@ -382,6 +382,137 @@ paths:
         description: UUID identifying tenant
         required: true
   /event:
+    get:
+      summary: Get a single event from CloudMatrix
+      description: |
+        Get a all events from CloudMatrix based on a unique identifier passed through for a tenant identified by the 
+        header parameter 'tenant-id'.
+
+        In order to fetch the event data, the user must first be authenticated (via an API-Key). This token
+        should be passed during the API call through the 'x-api-key' header. 
+      tags:
+        - Event
+      operationId: list-events
+      security:
+        - ApiKey: []
+      parameters:
+        - in: header
+          name: tenant-id
+          description: The unique identifier of the tenant
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Event data retrieved from CloudMatrix
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventData'
+              examples:
+                Example - Success:
+                  value:
+                    [{
+                      "id": "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234",
+                      "typeId": "b5c3a174-1b00-4495-a4cb-f030d475b4b9",
+                      "priorityOrder": 1,
+                      "title": "Football Match: Barcelona vs Real Madrid",
+                      "subtitle": "El Clasico",
+                      "description": "This is a highly anticipated football match between two of the biggest clubs in the world.",
+                      "start": "2023-05-21T19:00:00Z",
+                      "end": "2023-05-21T21:00:00Z",
+                      "offset": 0,
+                      "entries": [
+                        {
+                          "id": "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236"
+                        },
+                        {
+                          "id": "e078d72a-aad4-4b68-9227-e0bde0b35c66"
+                        }
+                      ],
+                      "attributes": [
+                        {
+                          "id": "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234",
+                          "value": "custom string attribute"
+                        },
+                        {
+                          "id": "7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01",
+                          "value": "42"
+                        }
+                      ]
+                    }
+                    ]
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Invalid/Missing API Key
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                Invalid API Key:
+                  value:
+                    message: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: No event found for id
+                type: object
+                properties:
+                  status:
+                    type: number
+                    enum:
+                      - 404
+                  message:
+                    type: string
+                    minLength: 1
+                  reason:
+                    type: string
+                    enum:
+                      - NO_ENTITY_EXIST
+                required:
+                  - status
+                  - message
+              examples:
+                Invalid Event Id:
+                  value:
+                    status: 404
+                    message: No event found for id
+                    reason: NO_ENTITY_EXIST
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Error getting event data
+                type: object
+                properties:
+                  status:
+                    type: number
+                    enum:
+                      - 500
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+                  - message
+              examples:
+                Internal Server Error:
+                  value:
+                    status: 500
+                    message: 'Error getting event data [Error stack]'
     post:
       summary: Create a new event in CloudMatrix
       description: |
