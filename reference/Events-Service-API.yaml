@@ -383,7 +383,7 @@ paths:
         required: true
   /event:
     get:
-      summary: Get a single event from CloudMatrix
+      summary: Get a list of events from CloudMatrix
       description: |
         Get a all events from CloudMatrix based on a unique identifier passed through for a tenant identified by the 
         header parameter 'tenant-id'.
