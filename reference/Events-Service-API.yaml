@@ -409,29 +409,27 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/EventData'
-              examples:
-                Example - Success:
-                  value:
-                    - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
-                      typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
-                      priorityOrder: 1
-                      title: 'Football Match: Barcelona vs Real Madrid'
-                      subtitle: El Clasico
-                      description: This is a highly anticipated football match between two of the biggest clubs in the world.
-                      start: '2023-05-21T19:00:00Z'
-                      end: '2023-05-21T21:00:00Z'
-                      offset: 0
-                      entries:
-                        - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
-                        - id: e078d72a-aad4-4b68-9227-e0bde0b35c66
-                      attributes:
-                        - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
-                          value: custom string attribute
-                        - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
-                          value: '42'
+                $ref: '#/components/schemas/EventDataList'
+              # examples:
+              #   Example - Success:
+              #     value:
+              #       - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+              #         typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
+              #         priorityOrder: 1
+              #         title: 'Football Match: Barcelona vs Real Madrid'
+              #         subtitle: El Clasico
+              #         description: This is a highly anticipated football match between two of the biggest clubs in the world.
+              #         start: '2023-05-21T19:00:00Z'
+              #         end: '2023-05-21T21:00:00Z'
+              #         offset: 0
+              #         entries:
+              #           - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
+              #           - id: e078d72a-aad4-4b68-9227-e0bde0b35c66
+              #         attributes:
+              #           - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+              #             value: custom string attribute
+              #           - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
+              #             value: '42'
         '403':
           description: Forbidden
           content:
@@ -675,6 +673,15 @@ components:
           $ref: '#/components/schemas/EventAttributes'
         entries:
           $ref: '#/components/schemas/MediaEntries'
+    EventDataList:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventData'
+        paging:
+          $ref: '#/components/schemas/Paging'
     CreateEventBody:
       type: object
       x-stoplight:
@@ -777,3 +784,18 @@ components:
             minLength: 1
             description: CloudMatrix article id
             format: uuid
+    Paging:
+      type: object
+      x-stoplight:
+        id: 9576201547f2d
+      properties:
+        totalCount:
+          type: integer
+        itemCount:
+          type: integer
+        pageCount:
+          type: integer
+        pageSize:
+          type: integer
+        pageIndex:
+          type: integer
