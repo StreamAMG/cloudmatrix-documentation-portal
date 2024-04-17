@@ -32,7 +32,7 @@ paths:
         information about.
       tags:
         - Event
-      operationId: get-event-data
+      operationId: get-event-data-by-id
       security:
         - ApiKey: []
       parameters:
@@ -59,47 +59,23 @@ paths:
               examples:
                 Example - Success:
                   value:
-                    id: cac5a29a-42ed-4218-b695-df8c89bf7049
-                    typeId: cbbba29a-42ed-4218-b695-df8c89bf7123
-                    title: Football Match
-                    description: Manchester United vs Fulham
+                    id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+                    typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
                     priorityOrder: 1
-                    subtitle: Premier League
-                    start: '2024-02-24T15:00:00'
-                    end: '2024-02-24T17:00:00'
-                    offset: '2024-02-24T14:55:00'
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                description: Error getting event data
-                type: object
-                properties:
-                  status:
-                    type: number
-                    enum:
-                      - 400
-                  message:
-                    type: string
-                    minLength: 1
-                  reason:
-                    type: string
-                    enum:
-                      - HEADER_ERROR
-                      - BAD_REQUEST_ERROR
-                      - SITE_NOT_FOUND
-                      - CONFIGURATION_ERROR
-                      - API_KEY_ERROR
-                required:
-                  - status
-                  - message
-              examples:
-                Missing Required Header:
-                  value:
-                    status: 400
-                    message: No tenant-id supplied
-                    reason: HEADER_ERROR
+                    title: 'Football Match: Barcelona vs Real Madrid'
+                    subtitle: El Clasico
+                    description: This is a highly anticipated football match between two of the biggest clubs in the world.
+                    start: '2023-05-21T19:00:00Z'
+                    end: '2023-05-21T21:00:00Z'
+                    offset: 0
+                    entries:
+                      - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
+                      - id: e078d72a-aad4-4b68-9227-e0bde0b35c66
+                    attributes:
+                      - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+                        value: custom string attribute
+                      - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
+                        value: '42'
         '403':
           description: Forbidden
           content:
@@ -202,9 +178,49 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EventData'
+              $ref: '#/components/schemas/CreateEventBody'
+            examples:
+              Event with singular attributes:
+                value:
+                  typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
+                  priorityOrder: 1
+                  title: 'Football Match: Barcelona vs Real Madrid'
+                  subtitle: El Clasico
+                  description: This is a highly anticipated football match between two of the biggest clubs in the world.
+                  start: '2023-05-21T19:00:00Z'
+                  end: '2023-05-21T21:00:00Z'
+                  offset: 0
+                  entries:
+                    - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c66
+                  attributes:
+                    - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+                      value: custom string attribute
+                    - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
+                      value: '42'
+              Event with mixed attributes:
+                value:
+                  value:
+                    typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
+                    priorityOrder: 1
+                    title: 'Football Match: Barcelona vs Real Madrid'
+                    subtitle: El Clasico
+                    description: This is a highly anticipated football match between two of the biggest clubs in the world.
+                    start: '2023-05-21T19:00:00Z'
+                    end: '2023-05-21T21:00:00Z'
+                    offset: 0
+                    entries:
+                      - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
+                      - id: e078d72a-aad4-4b68-9227-e0bde0b35c66
+                    attributes:
+                      - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+                        value: custom string attribute
+                      - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
+                        items:
+                          - value: dropdownValue1
+                          - value: dropdownValue2
       responses:
-        '201':
+        '200':
           description: Updated event in CloudMatrix
           content:
             application/json:
@@ -518,9 +534,12 @@ components:
         end:
           type: string
         offset:
-          type: string
-        deleted:
-          type: boolean
+          type: number
+          minimum: 0
+        attributes:
+          $ref: '#/components/schemas/EventAttributes'
+        entries:
+          $ref: '#/components/schemas/MediaEntries'
     CreateEventBody:
       type: object
       x-stoplight:
