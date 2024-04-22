@@ -1,0 +1,859 @@
+x-stoplight:
+  docs:
+    showModels: true
+x-internal: true
+openapi: 3.1.0
+info:
+  title: Events Service API Reference
+  version: '1.0'
+  contact:
+    name: Stephen Higgins
+    email: Stephen.Higgins@pamediagroup.com
+  summary: Internal Events Service API for CRUD operations on CloudMatrix Events.
+  description: |-
+    The Events Service API exposes the functionality to create, read, update and delete CloudMatrix Events and is for
+    internal use only (typically the CloudMatrix UI will utilise these endpoints to allow users to manage their events).
+tags:
+  - name: Event
+servers:
+  - url: 'https://api.event-service.streamamg.com/v1'
+paths:
+  '/event/{id}':
+    get:
+      summary: Get a single event from CloudMatrix
+      description: |-
+        Get a single event from CloudMatrix based on a unique identifier passed through for a tenant identified by the 
+        header parameter 'tenant-id'.
+
+        In order to fetch the event data, the user must first be authenticated (via an API-Key). This token
+        should be passed during the API call through the 'x-api-key' header. 
+
+        The API call should be made with the event 'id' as a path parameter to identify the event resource to retrieve 
+        information about.
+      tags:
+        - Event
+      operationId: get-event-data-by-id
+      security:
+        - ApiKey: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: Event Identifier in CloudMatrix
+        - in: header
+          name: tenant-id
+          description: The unique identifier of the tenant
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Event data retrieved from CloudMatrix
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventData'
+              examples:
+                Example - Success:
+                  value:
+                    id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+                    typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
+                    priorityOrder: 1
+                    title: 'Football Match: Barcelona vs Real Madrid'
+                    subtitle: El Clasico
+                    description: This is a highly anticipated football match between two of the biggest clubs in the world.
+                    start: '2023-05-21T19:00:00Z'
+                    end: '2023-05-21T21:00:00Z'
+                    offset: 0
+                    entries:
+                      - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
+                      - id: e078d72a-aad4-4b68-9227-e0bde0b35c66
+                    attributes:
+                      - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+                        value: custom string attribute
+                      - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
+                        value: '42'
+                    createdAt: '2023-05-11T21:00:00Z'
+                    updatedAt: '2023-05-12T21:00:00Z'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Invalid/Missing API Key
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                Invalid API Key:
+                  value:
+                    message: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: No event found for id
+                type: object
+                properties:
+                  status:
+                    type: number
+                    enum:
+                      - 404
+                  message:
+                    type: string
+                    minLength: 1
+                  reason:
+                    type: string
+                    enum:
+                      - NO_ENTITY_EXIST
+                required:
+                  - status
+                  - message
+              examples:
+                Invalid Event Id:
+                  value:
+                    status: 404
+                    message: No event found for id
+                    reason: NO_ENTITY_EXIST
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Error getting event data
+                type: object
+                properties:
+                  status:
+                    type: number
+                    enum:
+                      - 500
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+                  - message
+              examples:
+                Internal Server Error:
+                  value:
+                    status: 500
+                    message: 'Error getting event data [Error stack]'
+    put:
+      summary: Update an event in CloudMatrix
+      description: |-
+        Update an event in CloudMatrix for a tenant identified by the header parameter 'tenant-id'.
+
+        In order to create the event data, the user must first be authenticated (via an API-Key). This token
+        should be passed during the API call through the 'x-api-key' header. 
+
+        The API call should be made with the unique event 'id' passed through in the main payload (it is not 
+        automatically created by the service and database).
+      tags:
+        - Event
+      security:
+        - ApiKey: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: Event identifier in CloudMatrix of event to update
+        - in: header
+          name: tenant-id
+          description: The unique identifier of the tenant (from CloudMatrix)
+          required: true
+          schema:
+            type: string
+            format: uuid
+      operationId: update-event
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEventBody'
+            examples:
+              Event with singular attributes:
+                value:
+                  typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
+                  priorityOrder: 1
+                  title: 'Football Match: Barcelona vs Real Madrid'
+                  subtitle: El Clasico
+                  description: This is a highly anticipated football match between two of the biggest clubs in the world.
+                  start: '2023-05-21T19:00:00Z'
+                  end: '2023-05-21T21:00:00Z'
+                  offset: 0
+                  entries:
+                    - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c66
+                  attributes:
+                    - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+                      value: custom string attribute
+                    - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
+                      value: '42'
+              Event with mixed attributes:
+                value:
+                  value:
+                    typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
+                    priorityOrder: 1
+                    title: 'Football Match: Barcelona vs Real Madrid'
+                    subtitle: El Clasico
+                    description: This is a highly anticipated football match between two of the biggest clubs in the world.
+                    start: '2023-05-21T19:00:00Z'
+                    end: '2023-05-21T21:00:00Z'
+                    offset: 0
+                    entries:
+                      - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
+                      - id: e078d72a-aad4-4b68-9227-e0bde0b35c66
+                    attributes:
+                      - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+                        value: custom string attribute
+                      - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
+                        items:
+                          - value: dropdownValue1
+                          - value: dropdownValue2
+      responses:
+        '200':
+          description: Updated event in CloudMatrix
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventData'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Invalid request data for the event to update
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                    enum:
+                      - 400
+                  message:
+                    type: string
+                    minLength: 1
+                  error:
+                    type: string
+                    enum:
+                      - Bad Request
+                required:
+                  - statusCode
+                  - message
+                  - error
+              examples:
+                Invalid Event Identifier:
+                  value:
+                    status: 400
+                    message: id must be a UUID
+                    error: Bad Request
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Invalid/Missing API Key
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                Invalid API Key:
+                  value:
+                    message: Forbidden
+    delete:
+      summary: Delete a single event from CloudMatrix
+      description: |-
+        Delete a single event from CloudMatrix based on a unique identifier passed through for a tenant identified by the 
+        header parameter 'tenant-id'. The delete is a 'soft' delete marking the event as 'deleted' but not physically 
+        removing it from the database.
+
+        In order to fetch the event data, the user must first be authenticated (via an API-Key). This token
+        should be passed during the API call through the 'x-api-key' header. 
+
+        The API call should be made with the event 'id' as a path parameter to identify the event resource to retrieve 
+        information about.
+      tags:
+        - Event
+      operationId: delete-event-data
+      security:
+        - ApiKey: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: Event Identifier in CloudMatrix to mark as deleted
+        - in: header
+          name: tenant-id
+          description: The unique identifier of the tenant
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Event data marked as deleted in CloudMatrix
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Invalid/Missing API Key
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                Invalid API Key:
+                  value:
+                    message: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: No event found for id to mark as deleted
+                type: object
+                properties:
+                  status:
+                    type: number
+                    enum:
+                      - 404
+                  message:
+                    type: string
+                    minLength: 1
+                  reason:
+                    type: string
+                    enum:
+                      - NO_ENTITY_EXIST
+                required:
+                  - status
+                  - message
+              examples:
+                Invalid Event Id:
+                  value:
+                    status: 404
+                    message: No event found for id
+                    reason: NO_ENTITY_EXIST
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Error deleting event data
+                type: object
+                properties:
+                  status:
+                    type: number
+                    enum:
+                      - 500
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+                  - message
+              examples:
+                Internal Server Error:
+                  value:
+                    status: 500
+                    message: 'Error deleting event data [Error stack]'
+    parameters:
+      - schema:
+          type: string
+        in: header
+        name: tenant-id
+        description: UUID identifying tenant
+        required: true
+  /event:
+    get:
+      summary: Get a list of events from CloudMatrix
+      description: |
+        Get a all events from CloudMatrix based on a unique identifier passed through for a tenant identified by the 
+        header parameter 'tenant-id'.
+
+        In order to fetch the event data, the user must first be authenticated (via an API-Key). This token
+        should be passed during the API call through the 'x-api-key' header. 
+      tags:
+        - Event
+      operationId: list-events
+      security:
+        - ApiKey: []
+      parameters:
+        - in: header
+          name: tenant-id
+          description: The unique identifier of the tenant
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - schema:
+            type: string
+            default: '0'
+          in: query
+          name: pageIndex
+          description: Page index of results page to be returned
+        - schema:
+            type: string
+            default: '10'
+          in: query
+          name: pageSize
+          description: Size of the page of results
+      responses:
+        '200':
+          description: Event data retrieved from CloudMatrix
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventDataList'
+              examples:
+                Successful response:
+                  value:
+                    events:
+                      - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+                        typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
+                        priorityOrder: 1
+                        title: 'Football Match: Barcelona vs Real Madrid'
+                        subtitle: El Clasico
+                        description: This is a highly anticipated football match between two of the biggest clubs in the world.
+                        start: '2023-05-21T19:00:00Z'
+                        end: '2023-05-21T21:00:00Z'
+                        offset: 0
+                        entries:
+                          - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
+                          - id: e078d72a-aad4-4b68-9227-e0bde0b35c66
+                        attributes:
+                          - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+                            value: custom string attribute
+                          - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
+                            value: '42'
+                        createdAt: '2023-05-11T21:00:00Z'
+                        updatedAt: '2023-05-12T21:00:00Z'
+                    pagination:
+                      totalCount: 1
+                      itemCount: 1
+                      pageSize: 10
+                      pageIndex: 0
+        # examples:
+        #   Example - Success:
+        #     value:
+        #       - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+        #         typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
+        #         priorityOrder: 1
+        #         title: 'Football Match: Barcelona vs Real Madrid'
+        #         subtitle: El Clasico
+        #         description: This is a highly anticipated football match between two of the biggest clubs in the world.
+        #         start: '2023-05-21T19:00:00Z'
+        #         end: '2023-05-21T21:00:00Z'
+        #         offset: 0
+        #         entries:
+        #           - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
+        #           - id: e078d72a-aad4-4b68-9227-e0bde0b35c66
+        #         attributes:
+        #           - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+        #             value: custom string attribute
+        #           - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
+        #             value: '42'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Invalid/Missing API Key
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                Invalid API Key:
+                  value:
+                    message: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: No event found for id
+                type: object
+                properties:
+                  status:
+                    type: number
+                    enum:
+                      - 404
+                  message:
+                    type: string
+                    minLength: 1
+                  reason:
+                    type: string
+                    enum:
+                      - NO_ENTITY_EXIST
+                required:
+                  - status
+                  - message
+              examples:
+                Invalid Event Id:
+                  value:
+                    status: 404
+                    message: No event found for id
+                    reason: NO_ENTITY_EXIST
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Error getting event data
+                type: object
+                properties:
+                  status:
+                    type: number
+                    enum:
+                      - 500
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+                  - message
+              examples:
+                Internal Server Error:
+                  value:
+                    status: 500
+                    message: 'Error getting event data [Error stack]'
+    post:
+      summary: Create a new event in CloudMatrix
+      description: |
+        Create a new event in CloudMatrix for a tenant identified by the header parameter 'tenant-id'.
+
+        In order to create the event data, the user must first be authenticated (via an API-Key). This token
+        should be passed during the API call through the 'x-api-key' header. 
+      tags:
+        - Event
+      security:
+        - ApiKey: []
+      operationId: create-event
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEventBody'
+            examples:
+              Event with singular attributes:
+                value:
+                  typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
+                  priorityOrder: 1
+                  title: 'Football Match: Barcelona vs Real Madrid'
+                  subtitle: El Clasico
+                  description: This is a highly anticipated football match between two of the biggest clubs in the world.
+                  start: '2023-05-21T19:00:00Z'
+                  end: '2023-05-21T21:00:00Z'
+                  offset: 0
+                  entries:
+                    - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c66
+                  attributes:
+                    - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+                      value: custom string attribute
+                    - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
+                      value: '42'
+              Event with mixed attributes:
+                value:
+                  value:
+                    typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
+                    priorityOrder: 1
+                    title: 'Football Match: Barcelona vs Real Madrid'
+                    subtitle: El Clasico
+                    description: This is a highly anticipated football match between two of the biggest clubs in the world.
+                    start: '2023-05-21T19:00:00Z'
+                    end: '2023-05-21T21:00:00Z'
+                    offset: 0
+                    entries:
+                      - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
+                      - id: e078d72a-aad4-4b68-9227-e0bde0b35c66
+                    attributes:
+                      - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
+                        value: custom string attribute
+                      - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
+                        items:
+                          - value: dropdownValue1
+                          - value: dropdownValue2
+      responses:
+        '201':
+          description: Created new event in CloudMatrix
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventData'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Invalid request data for the event to create
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                    enum:
+                      - 400
+                  message:
+                    type: string
+                    minLength: 1
+                  error:
+                    type: string
+                    enum:
+                      - Bad Request
+                required:
+                  - statusCode
+                  - message
+                  - error
+              examples:
+                Invalid Event Identifier:
+                  value:
+                    status: 400
+                    message: id must be a UUID
+                    error: Bad Request
+                Title Is Required:
+                  value:
+                    status: 400
+                    message: Title must be a non-empty object
+                    error: Bad Request
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Invalid/Missing API Key
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                Invalid API Key:
+                  value:
+                    message: Forbidden
+        '500':
+          description: Internal Server Error
+    parameters:
+      - schema:
+          type: string
+        in: header
+        name: tenant-id
+        description: UUID identifying tenant
+        required: true
+components:
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+  schemas:
+    EventData:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Event id
+        typeId:
+          type: string
+          format: uuid
+          description: Custom event type id
+        priorityOrder:
+          type: integer
+          minimum: 0
+          description: Event priority order used when displaying events
+        title:
+          type: string
+          minLength: 1
+          description: Event's main title
+        subtitle:
+          type: string
+          minLength: 1
+          description: Event's secondary title
+        description:
+          type: string
+          minLength: 1
+          description: Event's description
+        start:
+          type: string
+          format: date-time
+          description: Start time of the event
+        end:
+          type: string
+          format: date-time
+          description: End time of the event
+        offset:
+          type: number
+          minimum: 0
+          description: Extra minutes before start time when event can be advertised
+        attributes:
+          $ref: '#/components/schemas/EventAttributes'
+        entries:
+          $ref: '#/components/schemas/MediaEntries'
+        createdAt:
+          type: string
+          x-stoplight:
+            id: sagujd3k325dy
+          format: date-time
+        updatedAt:
+          type: string
+          x-stoplight:
+            id: 7iybtu6zsekc6
+          format: date-time
+    EventDataList:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventData'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    CreateEventBody:
+      type: object
+      x-stoplight:
+        id: 1u6q4wjicmuut
+      title: CreateEventBody
+      required:
+        - typeId
+        - title
+        - priorityOrder
+        - start
+        - end
+      properties:
+        typeId:
+          type: string
+          format: uuid
+          description: Custom event type id
+        title:
+          type: string
+          minLength: 1
+          description: Event's main title
+        description:
+          type: string
+          minLength: 1
+          description: Event's description
+        priorityOrder:
+          type: integer
+          minimum: 0
+          description: Event priority order used when displaying events
+        subtitle:
+          type: string
+          minLength: 1
+          description: Event's secondary title
+        start:
+          type: string
+          format: date-time
+          description: Start time of the event
+        end:
+          type: string
+          format: date-time
+          description: End time of the event
+        offset:
+          type: number
+          minimum: 0
+          description: Extra minutes before start time when event can be advertised
+        attributes:
+          $ref: '#/components/schemas/EventAttributes'
+        entries:
+          $ref: '#/components/schemas/MediaEntries'
+    EventAttributes:
+      type: array
+      x-stoplight:
+        id: 17a44d0639528
+      uniqueItems: true
+      minItems: 1
+      description: The metadata attributes
+      items:
+        type: object
+        required:
+          - id
+        properties:
+          id:
+            type: string
+            minLength: 1
+            description: CloudMatrix attribute configuration id
+            format: uuid
+          value:
+            type: string
+            minLength: 1
+            description: 'CloudMatrix attribute value (singular value like string, number etc.)'
+          valueId:
+            type: string
+            description: CloudMatrix attribute config option id (if for example attribute config represents a dropdown with predefined values)
+          items:
+            type: array
+            uniqueItems: true
+            minItems: 1
+            description: CloudMatrix attribute value (collection)
+            items:
+              type: object
+              additionalProperties: false
+              required:
+                - value
+              properties:
+                value:
+                  type: string
+                  minLength: 1
+                  description: 'CloudMatrix attribute value (singular value like string, number etc.)'
+                valueId:
+                  type: string
+                  description: CloudMatrix attribute config option id (if for example attribute config represents a multichoice checkbox with predefined values)
+    MediaEntries:
+      type: array
+      x-stoplight:
+        id: pa0pwp9i6rc0k
+      uniqueItems: true
+      minItems: 1
+      description: The wideo and audio entries details (itemData)
+      title: ItemData
+      items:
+        type: object
+        required:
+          - id
+        properties:
+          id:
+            type: string
+            minLength: 1
+            description: CloudMatrix article id
+            format: uuid
+    Pagination:
+      type: object
+      x-stoplight:
+        id: 9576201547f2d
+      properties:
+        totalCount:
+          type: integer
+          x-stoplight:
+            id: 9n82xqtwy974s
+        itemCount:
+          type: integer
+        pageSize:
+          type: integer
+        pageIndex:
+          type: integer
