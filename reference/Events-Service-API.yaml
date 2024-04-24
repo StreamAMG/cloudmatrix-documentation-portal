@@ -5,7 +5,7 @@ x-internal: true
 openapi: 3.1.0
 info:
   title: Events Service API Reference
-  version: '1.0'
+  version: "1.0"
   contact:
     name: Stephen Higgins
     email: Stephen.Higgins@pamediagroup.com
@@ -16,9 +16,9 @@ info:
 tags:
   - name: Event
 servers:
-  - url: 'https://api.event-service.streamamg.com/v1'
+  - url: "https://api.event-service.streamamg.com/v1"
 paths:
-  '/event/{id}':
+  "/event/{id}":
     get:
       summary: Get a single event from CloudMatrix
       description: |-
@@ -50,23 +50,23 @@ paths:
             type: string
             format: uuid
       responses:
-        '200':
+        "200":
           description: Event data retrieved from CloudMatrix
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EventData'
+                $ref: "#/components/schemas/EventData"
               examples:
                 Example - Success:
                   value:
                     id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
                     typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
                     priorityOrder: 1
-                    title: 'Football Match: Barcelona vs Real Madrid'
+                    title: "Football Match: Barcelona vs Real Madrid"
                     subtitle: El Clasico
                     description: This is a highly anticipated football match between two of the biggest clubs in the world.
-                    start: '2023-05-21T19:00:00Z'
-                    end: '2023-05-21T21:00:00Z'
+                    start: "2023-05-21T19:00:00Z"
+                    end: "2023-05-21T21:00:00Z"
                     offset: 0
                     entries:
                       - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
@@ -75,10 +75,10 @@ paths:
                       - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
                         value: custom string attribute
                       - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
-                        value: '42'
-                    createdAt: '2023-05-11T21:00:00Z'
-                    updatedAt: '2023-05-12T21:00:00Z'
-        '403':
+                        value: "42"
+                    createdAt: "2023-05-11T21:00:00Z"
+                    updatedAt: "2023-05-12T21:00:00Z"
+        "403":
           description: Forbidden
           content:
             application/json:
@@ -95,7 +95,7 @@ paths:
                 Invalid API Key:
                   value:
                     message: Forbidden
-        '404':
+        "404":
           description: Not Found
           content:
             application/json:
@@ -123,7 +123,7 @@ paths:
                     status: 404
                     message: No event found for id
                     reason: NO_ENTITY_EXIST
-        '500':
+        "500":
           description: Internal Server Error
           content:
             application/json:
@@ -145,7 +145,7 @@ paths:
                 Internal Server Error:
                   value:
                     status: 500
-                    message: 'Error getting event data [Error stack]'
+                    message: "Error getting event data [Error stack]"
     put:
       summary: Update an event in CloudMatrix
       description: |-
@@ -180,17 +180,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateEventBody'
+              $ref: "#/components/schemas/CreateEventBody"
             examples:
               Event with singular attributes:
                 value:
                   typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
                   priorityOrder: 1
-                  title: 'Football Match: Barcelona vs Real Madrid'
+                  title: "Football Match: Barcelona vs Real Madrid"
                   subtitle: El Clasico
                   description: This is a highly anticipated football match between two of the biggest clubs in the world.
-                  start: '2023-05-21T19:00:00Z'
-                  end: '2023-05-21T21:00:00Z'
+                  start: "2023-05-21T19:00:00Z"
+                  end: "2023-05-21T21:00:00Z"
                   offset: 0
                   entries:
                     - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
@@ -199,17 +199,17 @@ paths:
                     - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
                       value: custom string attribute
                     - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
-                      value: '42'
+                      value: "42"
               Event with mixed attributes:
                 value:
                   value:
                     typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
                     priorityOrder: 1
-                    title: 'Football Match: Barcelona vs Real Madrid'
+                    title: "Football Match: Barcelona vs Real Madrid"
                     subtitle: El Clasico
                     description: This is a highly anticipated football match between two of the biggest clubs in the world.
-                    start: '2023-05-21T19:00:00Z'
-                    end: '2023-05-21T21:00:00Z'
+                    start: "2023-05-21T19:00:00Z"
+                    end: "2023-05-21T21:00:00Z"
                     offset: 0
                     entries:
                       - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
@@ -222,13 +222,13 @@ paths:
                           - value: dropdownValue1
                           - value: dropdownValue2
       responses:
-        '200':
+        "200":
           description: Updated event in CloudMatrix
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EventData'
-        '400':
+                $ref: "#/components/schemas/EventData"
+        "400":
           description: Bad Request
           content:
             application/json:
@@ -257,7 +257,7 @@ paths:
                     status: 400
                     message: id must be a UUID
                     error: Bad Request
-        '403':
+        "403":
           description: Forbidden
           content:
             application/json:
@@ -306,9 +306,9 @@ paths:
             type: string
             format: uuid
       responses:
-        '204':
+        "204":
           description: Event data marked as deleted in CloudMatrix
-        '403':
+        "403":
           description: Forbidden
           content:
             application/json:
@@ -325,7 +325,7 @@ paths:
                 Invalid API Key:
                   value:
                     message: Forbidden
-        '404':
+        "404":
           description: Not Found
           content:
             application/json:
@@ -353,7 +353,7 @@ paths:
                     status: 404
                     message: No event found for id
                     reason: NO_ENTITY_EXIST
-        '500':
+        "500":
           description: Internal Server Error
           content:
             application/json:
@@ -375,7 +375,7 @@ paths:
                 Internal Server Error:
                   value:
                     status: 500
-                    message: 'Error deleting event data [Error stack]'
+                    message: "Error deleting event data [Error stack]"
     parameters:
       - schema:
           type: string
@@ -391,7 +391,7 @@ paths:
         header parameter 'tenant-id'.
 
         In order to fetch the event data, the user must first be authenticated (via an API-Key). This token
-        should be passed during the API call through the 'x-api-key' header. 
+        should be passed during the API call through the 'x-api-key' header.
       tags:
         - Event
       operationId: list-events
@@ -407,23 +407,23 @@ paths:
             format: uuid
         - schema:
             type: string
-            default: '0'
+            default: "0"
           in: query
           name: pageIndex
           description: Page index of results page to be returned
         - schema:
             type: string
-            default: '10'
+            default: "10"
           in: query
           name: pageSize
           description: Size of the page of results
       responses:
-        '200':
+        "200":
           description: Event data retrieved from CloudMatrix
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EventDataList'
+                $ref: "#/components/schemas/EventDataList"
               examples:
                 Successful response:
                   value:
@@ -431,11 +431,11 @@ paths:
                       - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
                         typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
                         priorityOrder: 1
-                        title: 'Football Match: Barcelona vs Real Madrid'
+                        title: "Football Match: Barcelona vs Real Madrid"
                         subtitle: El Clasico
                         description: This is a highly anticipated football match between two of the biggest clubs in the world.
-                        start: '2023-05-21T19:00:00Z'
-                        end: '2023-05-21T21:00:00Z'
+                        start: "2023-05-21T19:00:00Z"
+                        end: "2023-05-21T21:00:00Z"
                         offset: 0
                         entries:
                           - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
@@ -444,9 +444,9 @@ paths:
                           - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
                             value: custom string attribute
                           - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
-                            value: '42'
-                        createdAt: '2023-05-11T21:00:00Z'
-                        updatedAt: '2023-05-12T21:00:00Z'
+                            value: "42"
+                        createdAt: "2023-05-11T21:00:00Z"
+                        updatedAt: "2023-05-12T21:00:00Z"
                     pagination:
                       totalCount: 1
                       itemCount: 1
@@ -472,7 +472,7 @@ paths:
         #             value: custom string attribute
         #           - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
         #             value: '42'
-        '403':
+        "403":
           description: Forbidden
           content:
             application/json:
@@ -489,7 +489,7 @@ paths:
                 Invalid API Key:
                   value:
                     message: Forbidden
-        '404':
+        "404":
           description: Not Found
           content:
             application/json:
@@ -517,7 +517,7 @@ paths:
                     status: 404
                     message: No event found for id
                     reason: NO_ENTITY_EXIST
-        '500':
+        "500":
           description: Internal Server Error
           content:
             application/json:
@@ -539,14 +539,14 @@ paths:
                 Internal Server Error:
                   value:
                     status: 500
-                    message: 'Error getting event data [Error stack]'
+                    message: "Error getting event data [Error stack]"
     post:
       summary: Create a new event in CloudMatrix
       description: |
         Create a new event in CloudMatrix for a tenant identified by the header parameter 'tenant-id'.
 
         In order to create the event data, the user must first be authenticated (via an API-Key). This token
-        should be passed during the API call through the 'x-api-key' header. 
+        should be passed during the API call through the 'x-api-key' header.
       tags:
         - Event
       security:
@@ -557,17 +557,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateEventBody'
+              $ref: "#/components/schemas/CreateEventBody"
             examples:
               Event with singular attributes:
                 value:
                   typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
                   priorityOrder: 1
-                  title: 'Football Match: Barcelona vs Real Madrid'
+                  title: "Football Match: Barcelona vs Real Madrid"
                   subtitle: El Clasico
                   description: This is a highly anticipated football match between two of the biggest clubs in the world.
-                  start: '2023-05-21T19:00:00Z'
-                  end: '2023-05-21T21:00:00Z'
+                  start: "2023-05-21T19:00:00Z"
+                  end: "2023-05-21T21:00:00Z"
                   offset: 0
                   entries:
                     - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
@@ -576,17 +576,17 @@ paths:
                     - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
                       value: custom string attribute
                     - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
-                      value: '42'
+                      value: "42"
               Event with mixed attributes:
                 value:
                   value:
                     typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
                     priorityOrder: 1
-                    title: 'Football Match: Barcelona vs Real Madrid'
+                    title: "Football Match: Barcelona vs Real Madrid"
                     subtitle: El Clasico
                     description: This is a highly anticipated football match between two of the biggest clubs in the world.
-                    start: '2023-05-21T19:00:00Z'
-                    end: '2023-05-21T21:00:00Z'
+                    start: "2023-05-21T19:00:00Z"
+                    end: "2023-05-21T21:00:00Z"
                     offset: 0
                     entries:
                       - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
@@ -599,13 +599,13 @@ paths:
                           - value: dropdownValue1
                           - value: dropdownValue2
       responses:
-        '201':
+        "201":
           description: Created new event in CloudMatrix
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EventData'
-        '400':
+                $ref: "#/components/schemas/EventData"
+        "400":
           description: Bad Request
           content:
             application/json:
@@ -639,7 +639,7 @@ paths:
                     status: 400
                     message: Title must be a non-empty object
                     error: Bad Request
-        '403':
+        "403":
           description: Forbidden
           content:
             application/json:
@@ -656,7 +656,7 @@ paths:
                 Invalid API Key:
                   value:
                     message: Forbidden
-        '500':
+        "500":
           description: Internal Server Error
     parameters:
       - schema:
@@ -693,11 +693,11 @@ components:
           description: Event's main title
         subtitle:
           type: string
-          minLength: 1
+          minLength: 0
           description: Event's secondary title
         description:
           type: string
-          minLength: 1
+          minLength: 0
           description: Event's description
         start:
           type: string
@@ -712,9 +712,9 @@ components:
           minimum: 0
           description: Extra minutes before start time when event can be advertised
         attributes:
-          $ref: '#/components/schemas/EventAttributes'
+          $ref: "#/components/schemas/EventAttributes"
         entries:
-          $ref: '#/components/schemas/MediaEntries'
+          $ref: "#/components/schemas/MediaEntries"
         createdAt:
           type: string
           x-stoplight:
@@ -731,9 +731,9 @@ components:
         events:
           type: array
           items:
-            $ref: '#/components/schemas/EventData'
+            $ref: "#/components/schemas/EventData"
         pagination:
-          $ref: '#/components/schemas/Pagination'
+          $ref: "#/components/schemas/Pagination"
     CreateEventBody:
       type: object
       x-stoplight:
@@ -756,7 +756,7 @@ components:
           description: Event's main title
         description:
           type: string
-          minLength: 1
+          minLength: 0
           description: Event's description
         priorityOrder:
           type: integer
@@ -764,7 +764,7 @@ components:
           description: Event priority order used when displaying events
         subtitle:
           type: string
-          minLength: 1
+          minLength: 0
           description: Event's secondary title
         start:
           type: string
@@ -779,9 +779,9 @@ components:
           minimum: 0
           description: Extra minutes before start time when event can be advertised
         attributes:
-          $ref: '#/components/schemas/EventAttributes'
+          $ref: "#/components/schemas/EventAttributes"
         entries:
-          $ref: '#/components/schemas/MediaEntries'
+          $ref: "#/components/schemas/MediaEntries"
     EventAttributes:
       type: array
       x-stoplight:
@@ -802,7 +802,7 @@ components:
           value:
             type: string
             minLength: 1
-            description: 'CloudMatrix attribute value (singular value like string, number etc.)'
+            description: "CloudMatrix attribute value (singular value like string, number etc.)"
           valueId:
             type: string
             description: CloudMatrix attribute config option id (if for example attribute config represents a dropdown with predefined values)
@@ -820,7 +820,7 @@ components:
                 value:
                   type: string
                   minLength: 1
-                  description: 'CloudMatrix attribute value (singular value like string, number etc.)'
+                  description: "CloudMatrix attribute value (singular value like string, number etc.)"
                 valueId:
                   type: string
                   description: CloudMatrix attribute config option id (if for example attribute config represents a multichoice checkbox with predefined values)
