@@ -1,0 +1,1024 @@
+openapi: 3.1.0
+x-stoplight:
+  id: si5zxjwv014ws
+info:
+  title: Service API Reference
+  version: '1.0'
+  contact:
+    name: Jonathon Robins
+    email: Jonathon.Robins@pamediagroup.com
+  summary: An API to facilitate the uploading of media Content into StreamAMGs CloudMatrix
+  description: |-
+    The CloudMatrix Service API provides clients with the functionality to manage Media Content via a HTTP API with no dependencies on a technology or framework.
+
+    The upload functionality allows clients to upload Rich Metadata alongside their media so that it is automatically available within CloudMatrix once the media entry is processed via MediaPlatform. 
+tags:
+  - name: Entry
+  - name: Multipart
+servers:
+  - url: 'https://cloudmatrix.api.streamamg.com'
+paths:
+  /entry:
+    parameters:
+      - in: query
+        schema:
+          type: string
+          default: en
+        name: language
+        required: false
+        description: The Cloudmatrix language for custom attributes (representing a valid configured language).
+    post:
+      summary: Create a new CloudMatrix entry
+      operationId: post-upload
+      responses:
+        '200':
+          description: Success - reporting back any values that are invalid and not updated
+          content:
+            application/json:
+              schema:
+                description: status and message with optional list of invalid values for attributes ignored
+                type: object
+                x-examples:
+                  example-1:
+                    status: 200
+                    message: Successfully uploaded
+                    entryId: 0_xshqrl2n
+                    uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJWZ7B6WCRGMKFGQ%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
+                properties:
+                  status:
+                    type: number
+                    enum:
+                      - 200
+                  message:
+                    type: string
+                    minLength: 1
+                  entryId:
+                    type: string
+                    minLength: 1
+                  uploadUrl:
+                    type: string
+                    minLength: 1
+                  failed:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        reason:
+                          type: string
+                required:
+                  - status
+                  - message
+                  - entryId
+                  - uploadUrl
+              examples:
+                Example - Success:
+                  value:
+                    status: 200
+                    message: Successfully uploaded
+                    entryId: 0_xshqrl2n
+                    uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJWZ7B6WCRGMKFGQ%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
+                Example - Success With Invalid Values Reported:
+                  value:
+                    status: 200
+                    message: Successfully uploaded
+                    entryId: 0_xshqrl2n
+                    uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJWZ7B6WCRGMKFGQ%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
+                    failed:
+                      - id: c490887c-c21b-4bda-b59a-8ca1ee88d8a8
+                        reason: Invalid value for attribute type specified
+                      - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
+                        reason: Invalid value for attribute type specified
+        '400':
+          description: Bad Request - payload shape or attribute identifiers are invalid (nothing created)
+          content:
+            application/json:
+              schema:
+                description: Status and message and optional list of invalid attribute identifiers (nothing created)
+                type: object
+                properties:
+                  status:
+                    type: number
+                    enum:
+                      - 400
+                  message:
+                    type: string
+                    minLength: 1
+                  failed:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        reason:
+                          type: string
+                required:
+                  - status
+                  - message
+              examples:
+                Invalid Request:
+                  value:
+                    status: 400
+                    message: Bad Request Exception
+                Invalid Attributes:
+                  value:
+                    status: 400
+                    message: Failed to create attributes
+                    failed:
+                      - id: c490887c-c21b-4bda-b59a-8ca1ee88d8a8
+                        reason: Attribute identifier is invalid
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                Example:
+                  value:
+                    message: Forbidden
+        '500':
+          description: Application Error
+          content:
+            application/json:
+              schema:
+                description: On an unexpected error a generic error message is returned
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+                  - message
+              examples:
+                Example:
+                  value:
+                    status: 500
+                    message: Unexpected Error
+      description: |-
+        <!--
+        focus: false
+        -->
+        ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
+
+        In order to upload a media entry, first an initial API call to retrive a signed URL must be generated. This signed URL will allow you to directly upload the media asset to the storage location via HTTP.
+
+        The initial API call should consist of attributes (metadata) you would like to store against your asset within the CloudMatrix Platform and any associated publication details for the entry you are uploading.
+
+        **Note**: 
+        - This method of upload only supports up to 5GB per asset, for larger assets please refer to the multipart upload.
+        - This endpoint uploads only the VOD entries
+      tags:
+        - Entry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                filename:
+                  type: string
+                  minLength: 1
+                  description: The name of the file passed
+                attributes:
+                  type: array
+                  uniqueItems: true
+                  minItems: 1
+                  description: The metadata attributes
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        minLength: 1
+                        description: CloudMatrix attribute id (customer attribute configuration identifier)
+                      value:
+                        type: string
+                        minLength: 1
+                        description: CloudMatrix attribute value (valid report option for a dropdown type)
+                      items:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        description: CloudMatrix attribute where value is a collection
+                        items:
+                          type: object
+                          additionalProperties: false
+                          properties:
+                            value:
+                              type: string
+                              minLength: 1
+                              description: CloudMatrix attribute value (valid report option for a dropdown type)
+                          required:
+                            - value
+                    required:
+                      - id
+                publication:
+                  type: object
+                  required:
+                    - publish
+                    - from
+                  properties:
+                    publish:
+                      type: boolean
+                      description: CloudMatrix attribute flag to indicate whether to publish the attribute or not
+                      default: false
+                    from:
+                      type: string
+                      minLength: 1
+                      description: |-
+                        From date is required only when publish is set to true.
+                        Expected format is ISO 8601.
+                    to:
+                      type: string
+                      minLength: 1
+                      description: Expected format is ISO 8601.
+                    config:
+                      type: array
+                      uniqueItems: true
+                      minItems: 1
+                      items:
+                        type: object
+                        properties:
+                          target:
+                            type: string
+                            minLength: 1
+                            description: CloudMatrix target uuid
+                          from:
+                            type: string
+                            minLength: 1
+                            description: Expected format is ISO 8601.
+                          to:
+                            type: string
+                            minLength: 1
+                            description: Expected format is ISO 8601.
+                          region:
+                            type: array
+                            uniqueItems: true
+                            minItems: 1
+                            description: CloudMatrix attribute
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                  minLength: 1
+                                  description: CloudMatrix region uuid
+                                from:
+                                  type: string
+                                  minLength: 1
+                                  description: Expected format is ISO 8601.
+                                to:
+                                  type: string
+                                  minLength: 1
+                                  description: Expected format is ISO 8601.
+                              required:
+                                - id
+                        required:
+                          - target
+                          - region
+              required:
+                - attributes
+                - publication
+            examples:
+              Example:
+                value:
+                  filename: video.mp4
+                  attributes:
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
+                      value: Some Title
+                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18ada
+                      value: Some Description
+                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18adb
+                      value: Some custom field
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
+                      items:
+                        - value: entitlement1
+                        - value: entitlement2
+                    - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
+                      items:
+                        - value: Team A Report Value
+                        - value: Team B Report Value
+                  publication:
+                    publish: true
+                    from: '2022-03-06T22:51:25Z'
+                    to: '2022-06-06T22:51:25Z'
+                    config:
+                      - target: 54fc1851-cf8a-4d7c-86fb-9cc7d8d1ff5c
+                        region:
+                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
+                            from: '2022-03-06T22:51:25Z'
+                            to: '2022-06-06T22:51:25Z'
+                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d3
+                            from: '2022-03-06T22:51:25Z'
+                            to: '2022-06-06T22:51:25Z'
+                      - target: 8b6a094d-59e3-4a31-8324-19e1366fca55
+                        from: '2022-03-06T22:51:25Z'
+                        to: '2022-06-06T22:51:25Z'
+                        region:
+                          - from: '2022-03-06T22:51:25Z'
+                            to: '2022-06-06T22:51:25Z'
+                            id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
+        description: The body should contain the additional CloudMatrix Metadata you would like to store along side the entry.
+      security:
+        - x-api-key: []
+      x-stoplight:
+        id: cazoq99lt1dry
+  '/entry/{entryId}':
+    parameters:
+      - in: path
+        schema:
+          type: string
+        name: entryId
+        required: true
+        description: The Cloudmatrix entry id to update (representing the article which must already exist).
+      - in: query
+        schema:
+          type: string
+          default: en
+        name: language
+        required: false
+        description: The Cloudmatrix language for custom attributes (representing a valid configured language).
+    patch:
+      summary: Update Entry Attributes
+      operationId: patch-attributes
+      responses:
+        '200':
+          description: Success - reporting back any values that are invalid and not updated
+          content:
+            application/json:
+              schema:
+                description: status and message with optional list of invalid values for attributes ignored
+                type: object
+                properties:
+                  status:
+                    type: number
+                    enum:
+                      - 200
+                  message:
+                    type: string
+                    minLength: 1
+                  failed:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        reason:
+                          type: string
+                required:
+                  - status
+                  - message
+              examples:
+                Example - Success:
+                  value:
+                    status: 200
+                    message: Attributes updated successfully
+                Example - Success With Invalid Values Reported:
+                  value:
+                    status: 200
+                    message: Attributes updated successfully
+                    failed:
+                      - id: c490887c-c21b-4bda-b59a-8ca1ee88d8a8
+                        reason: Invalid value for attribute type specified
+                      - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
+                        reason: Invalid value for attribute type specified
+        '400':
+          description: Bad Request - payload shape or attribute identifiers are invalid (nothing updated)
+          content:
+            application/json:
+              schema:
+                description: Status and message and optional list of invalid attribute identifiers (nothing updated)
+                type: object
+                properties:
+                  status:
+                    type: number
+                    enum:
+                      - 400
+                  message:
+                    type: string
+                    minLength: 1
+                  failed:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        reason:
+                          type: string
+                required:
+                  - status
+                  - message
+              examples:
+                Invalid Request:
+                  value:
+                    status: 400
+                    message: Bad Request Exception
+                Invalid Attributes:
+                  value:
+                    status: 400
+                    message: 'Not all attributes found: none updated'
+                    failed:
+                      - id: c490887c-c21b-4bda-b59a-8ca1ee88d8a8
+                        reason: Attribute identifier is invalid
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                Example:
+                  value:
+                    message: Forbidden
+        '500':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                description: On an unexpected error a generic error message is returned
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+                  - message
+              examples:
+                Example:
+                  value:
+                    status: 500
+                    message: Unexpected Error
+      description: |-
+        <!--
+        focus: false
+        -->
+        ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
+
+        The endpoint updates existing CloudMatrix media entry attributes.
+      tags:
+        - Entry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                attributes:
+                  type: array
+                  uniqueItems: true
+                  minItems: 1
+                  description: The metadata attributes (either as a single value or a collection of values).
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        minLength: 1
+                        description: CloudMatrix attribute id (media asset configured custom field identifier)
+                      value:
+                        type: string
+                        minLength: 1
+                        description: CloudMatrix attribute value (media asset configured custom field value)
+                      items:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        description: CloudMatrix attribute where value is a collection.
+                        items:
+                          type: object
+                          additionalProperties: false
+                          properties:
+                            value:
+                              type: string
+                              minLength: 1
+                              description: CloudMatrix attribute value (media asset configured custom field value)
+                          required:
+                            - value
+                    required:
+                      - id
+              required:
+                - attributes
+            examples:
+              String Value Example:
+                value:
+                  attributes:
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
+                      value: Updated Title
+              Integer Value Example:
+                value:
+                  attributes:
+                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18ada
+                      value: '123'
+              Boolean Value Example:
+                value:
+                  attributes:
+                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18adb
+                      value: 'true'
+              Multi-Value Example:
+                value:
+                  attributes:
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
+                      items:
+                        - value: team1
+                        - value: team2
+              Date Value Example:
+                value:
+                  attributes:
+                    - id: 7ac5484e-ec8c-45f6-9437-95c909f5d41d
+                      value: '2022-02-24'
+              Time Value Example:
+                value:
+                  attributes:
+                    - id: 17cfb9e1-1775-41a8-8628-1cf053551c73
+                      value: '15:30'
+              Datetime Value Example:
+                value:
+                  attributes:
+                    - id: cdb8eb34-917f-4e45-b617-a6d994d00d2c
+                      value: '2022-02-24 11:30:20'
+                    - id: cdb8eb34-917f-4e45-b617-a6d994d00d2c
+                      value: '2022/02/24 11:30:20'
+        description: |-
+          The body should contain the additional CloudMatrix Metadata attributes you would like to update. 
+
+          The value(s) supplied must be of the correct type for the media asset configured custom field (see examples)
+
+          Invalid value(s) will result in a status code of 500 being returned (see responses) detailing the error-prone 
+          attribute identifier.
+
+          Any error (validation or non-existent custom attribute etc) will result in no changes being updated in the 
+          entire payload. If all the changes are valid and updates are possible then they will all be committed to the 
+          database in one transaction.
+      parameters: []
+      security:
+        - x-api-key: []
+      x-stoplight:
+        id: odc93n8aiit2q
+  /multipart/start:
+    put:
+      summary: Start multipart upload
+      operationId: put-multipart-start
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  entryId:
+                    type: string
+                    minLength: 1
+                  uploadId:
+                    type: string
+                    minLength: 1
+                required:
+                  - entryId
+                  - uploadId
+                x-examples:
+                  example-1:
+                    entryId: 0_tsdqrl2p
+                    uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+              examples:
+                Example:
+                  value:
+                    entryId: 0_tsdqwl2p
+                    uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+      description: |-
+        <!--
+        focus: false
+        -->
+        ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
+
+        For larger uploads (Larger than 5GB) you should utilise the multipart API, this allows the upload to handle partial uploads.
+
+        Like the upload process this has multiple steps, the first step you must initialise the multipart upload process by calling the start endpoint.
+      tags:
+        - Multipart
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  attributes:
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
+                      value: Some Title
+                      items:
+                        - value: Team A Report Value
+                        - value: Team B Report Value
+                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18ada
+                      value: Some Description
+                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18adb
+                      value: Some custom field
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
+                      items:
+                        - value: entitlement1
+                        - value: entitlement2
+                    - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
+                      items:
+                        - value: Team A Report Value
+                        - value: Team B Report Value
+                  publication:
+                    publish: true
+                    from: '2022-03-06T22:51:25Z'
+                    to: '2022-06-06T22:51:25Z'
+                    config:
+                      - target: 8b6a094d-59e3-4a31-8324-19e1366fca55
+                        region:
+                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
+                            from: '2022-03-06T22:51:25Z'
+                            to: '2022-06-06T22:51:25Z'
+                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d3
+                            from: '2022-03-06T22:51:25Z'
+                            to: '2022-06-06T22:51:25Z'
+                      - target: 54fc1851-cf8a-4d7c-86fb-9cc7d8d1ff5c
+                        from: '2022-03-06T22:51:25Z'
+                        to: '2022-06-06T22:51:25Z'
+                        region:
+                          - from: '2022-03-06T22:51:25Z'
+                            to: '2022-06-06T22:51:25Z'
+                            id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
+              properties:
+                attributes:
+                  type: array
+                  uniqueItems: true
+                  minItems: 1
+                  description: The metadata attributes
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        minLength: 1
+                        description: CloudMatrix attribute id
+                      value:
+                        type: string
+                        minLength: 1
+                        description: CloudMatrix attribute value (valid report option for a dropdown type)
+                      items:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        description: CloudMatrix attribute where value is a collection
+                        items:
+                          type: object
+                          additionalProperties: false
+                          properties:
+                            value:
+                              type: string
+                              minLength: 1
+                              description: CloudMatrix attribute value (valid report option for a dropdown type)
+                          required:
+                            - value
+                    required:
+                      - id
+                publication:
+                  type: object
+                  required:
+                    - publish
+                    - from
+                  properties:
+                    publish:
+                      type: boolean
+                      description: CloudMatrix attribute flag to indicate whether to publish the attribute or not
+                      default: false
+                    from:
+                      type: string
+                      minLength: 1
+                      description: |-
+                        From date is required only when publish is set to true.
+                        Expected format is ISO 8601.
+                    to:
+                      type: string
+                      minLength: 1
+                      description: Expected format is ISO 8601.
+                    config:
+                      type: array
+                      uniqueItems: true
+                      minItems: 1
+                      items:
+                        type: object
+                        properties:
+                          target:
+                            type: string
+                            minLength: 1
+                            description: CloudMatrix target uuid
+                          from:
+                            type: string
+                            minLength: 1
+                            description: Expected format is ISO 8601.
+                          to:
+                            type: string
+                            minLength: 1
+                            description: Expected format is ISO 8601.
+                          region:
+                            type: array
+                            uniqueItems: true
+                            minItems: 1
+                            description: 'CloudMatrix attribute '
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                  minLength: 1
+                                  description: CloudMatrix region uuid
+                                from:
+                                  type: string
+                                  minLength: 1
+                                  description: Expected format is ISO 8601.
+                                to:
+                                  type: string
+                                  minLength: 1
+                                  description: Expected format is ISO 8601.
+                              required:
+                                - id
+                        required:
+                          - target
+                          - region
+              required:
+                - attributes
+                - publication
+            examples:
+              Example:
+                value:
+                  attributes:
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6d
+                      value: Some Title
+                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18ada
+                      value: Some Description
+                    - id: 57e816fb-03b7-4706-a99f-5c6ef8d18adb
+                      value: Some custom field
+                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
+                      items:
+                        - value: entitlement1
+                        - value: entitlement2
+                    - id: a61de76c-e367-4c63-93e0-2d6fd6e256cf
+                      items:
+                        - value: Team A Report Value
+                        - value: Team B Report Value
+                  publication:
+                    publish: true
+                    from: '2022-03-06T22:51:25Z'
+                    to: '2022-06-06T22:51:25Z'
+                    config:
+                      - target: 54fc1851-cf8a-4d7c-86fb-9cc7d8d1ff5c
+                        region:
+                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
+                            from: '2022-03-06T22:51:25Z'
+                            to: '2022-06-06T22:51:25Z'
+                          - id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d3
+                            from: '2022-03-06T22:51:25Z'
+                            to: '2022-06-06T22:51:25Z'
+                      - target: 8b6a094d-59e3-4a31-8324-19e1366fca55
+                        from: '2022-03-06T22:51:25Z'
+                        to: '2022-06-06T22:51:25Z'
+                        region:
+                          - from: '2022-03-06T22:51:25Z'
+                            to: '2022-06-06T22:51:25Z'
+                            id: 067f103a-e1ca-461b-8ef8-a4f681a9f6d2
+        description: The body should contain the additional CloudMatrix Metadata you would like to store along side the entry.
+      security:
+        - x-api-key: []
+      x-stoplight:
+        id: nrbck2x607yi4
+  /multipart/upload:
+    put:
+      summary: Request a upload URL
+      operationId: put-multipart-upload
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    partNumber: 1
+                    uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+                    etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
+                properties:
+                  partNumber:
+                    type: number
+                  uploadId:
+                    type: string
+                    minLength: 1
+                  uploadUrl:
+                    type: string
+                    minLength: 1
+                required:
+                  - partNumber
+                  - uploadId
+                  - uploadUrl
+              examples:
+                Example:
+                  value:
+                    partNumber: 1
+                    uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+                    uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJWZ7B6WCRGMKFGQ%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
+          headers: {}
+      description: |-
+        <!--
+        focus: false
+        -->
+        ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
+
+        The multipart upload endpoint allows you to generate a signed URL for the binary chunk you want to upload.
+
+        It is important that you store a the etag response for each upload as this is required for the final step of completing the multiple upload.
+      tags:
+        - Multipart
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  partNumber: 1
+                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+              properties:
+                filename:
+                  type: string
+                partNumber:
+                  type: number
+                uploadId:
+                  type: string
+                  minLength: 1
+              required:
+                - partNumber
+                - uploadId
+            examples:
+              Example:
+                value:
+                  filename: example-2.mp4
+                  partNumber: 1
+                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
+        description: The request body must contain the part number and the upload id of the partial upload chunk.
+      security:
+        - x-api-key: []
+      x-stoplight:
+        id: xupyuly74tbuz
+    parameters: []
+  /multipart/complete:
+    parameters: []
+    put:
+      summary: Complete a multipart upload
+      operationId: put-multipart-complete
+      responses:
+        '200':
+          description: OK
+      description: |-
+        <!--
+        focus: false
+        -->
+        ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
+
+        The final part of the multipart upload is the completion step. This request should be called when all chunks of the data have been sent. 
+      tags:
+        - Multipart
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+                  parts:
+                    - partNumber: 1
+                      etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
+                    - partNumber: 2
+                      etag: 44a64df551425fcc55e4d42a148795d9f25f89d5
+                    - partNumber: 2
+                      etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
+              properties:
+                filename:
+                  type: string
+                uploadId:
+                  type: string
+                  minLength: 1
+                parts:
+                  type: array
+                  uniqueItems: true
+                  minItems: 1
+                  items:
+                    type: object
+                    properties:
+                      partNumber:
+                        type: number
+                      etag:
+                        type: string
+                        minLength: 1
+                    required:
+                      - partNumber
+                      - etag
+              required:
+                - uploadId
+                - parts
+            examples:
+              Example:
+                value:
+                  filename: example-2.mp4
+                  uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
+                  parts:
+                    - partNumber: 1
+                      etag: 33a64df551425fcc55e4d42a148795d9f25f89d4
+                    - partNumber: 2
+                      etag: 44a64df551425fcc55e4d42a148795d9f25f89d5
+                    - partNumber: 2
+                      etag: 55a64df551425fcc55e4d42a148795d9f25f89d6
+        description: The request body should contain a reference to each part along with the Etag of each upload.
+      x-stoplight:
+        id: zl5ddu4djku8b
+components:
+  schemas:
+    ItemData:
+      type: object
+      x-stoplight:
+        id: 0bd4a7a27f9e0
+      required:
+        - id
+      properties:
+        id:
+          type: string
+        mediaData:
+          type: object
+          properties:
+            mediaType:
+              type: string
+            entryId:
+              type: string
+            entryStatus:
+              type: string
+            thumbnailUrl:
+              type: string
+        sortData:
+          type: array
+          items:
+            type: object
+        metaData:
+          type: object
+          additionalProperties: true
+        publicationData:
+          type: object
+          properties:
+            createdAt:
+              type: string
+            updatedAt:
+              type: string
+            released:
+              type: boolean
+            releaseFrom:
+              type: string
+            releaseTo:
+              type: string
+    EmptyObject:
+      type: object
+      x-stoplight:
+        id: e28df6d89f182
+  securitySchemes:
+    x-api-key:
+      name: x-api-key
+      type: apiKey
+      in: header
+      description: ''
