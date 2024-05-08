@@ -1640,7 +1640,7 @@ paths:
               - now.plus.1
               - now.minus.1
           required: false
-          description: Limit the events to ones within the specified range. The 'end' parameter is typically used in combination with the 'start' param to form a date range. Example 'now.plus.n' should be provided in form now.plus.1 which resolved to now plus 1 day.
+          description: Limit the events to ones within the specified range. The 'start' parameter works off the 'scheduleData.offset' value of the event body and is typically used in combination with the 'end' param to form a date range. Example 'now.plus.n' should be provided in the form now.plus.1 which is resolved to now plus 1 day. Values 'today' and 'tomorrow' are resolved to the end (23:59) of today and tomorrow respectively.
         - in: query
           name: end
           schema:
@@ -1654,7 +1654,7 @@ paths:
               - now.plus.1
               - now.minus.1
           required: false
-          description: Limit the events to ones within the specified range. The 'end' parameter is typically used in combination with the 'start' param to form a date range.  Example 'now.plus.n' should be provided in form now.plus.1 which resolved to now plus 1 day.
+          description: Limit the events to ones within the specified range. The 'end' parameter works off the 'scheduleData.end' value of the event body and is typically used in combination with the 'start' param to form a date range. Example 'now.plus.n' should be provided in form now.plus.1 which is resolved to now plus 1 day. Values 'today' and 'tomorrow' are resolved to the start (00:00) of today and tomorrow respectively.
         - in: query
           name: pageSize
           schema:
