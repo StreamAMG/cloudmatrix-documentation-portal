@@ -1617,7 +1617,7 @@ paths:
       description: |-
         Returns the list of articles matching the rules defined in Feed and to be published without any restriction on location. 
         *Note all datetimes returned are in UTC format
-  '/api/v1/{apiUserId}/{apiKey}/{languageCode}/event':
+  '/api/v1/{apiUserId}/{apiKey}/{targetId}/{languageCode}/event':
     get:
       summary: List available events
       description: |-
@@ -1889,7 +1889,7 @@ paths:
         name: languageCode
         in: path
         required: true
-  '/api/v1/{apiUserId}/{apiKey}/{languageCode}/event/{id}':
+  '/api/v1/{apiUserId}/{apiKey}/{targetId}/{languageCode}/event/{id}':
     get:
       summary: Get a single event by ID
       operationId: get-event
