@@ -1889,6 +1889,11 @@ paths:
         name: languageCode
         in: path
         required: true
+      - schema:
+          type: string
+        name: targetId
+        in: path
+        required: false    
   '/api/v1/{apiUserId}/{apiKey}/{targetId}/{languageCode}/event/{id}':
     get:
       summary: Get a single event by ID
@@ -2036,6 +2041,11 @@ paths:
         name: languageCode
         in: path
         required: true
+      - schema:
+          type: string
+        name: targetId
+        in: path
+        required: false   
 components:
   schemas:
     Events:
