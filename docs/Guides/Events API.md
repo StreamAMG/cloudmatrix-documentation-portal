@@ -67,3 +67,5 @@ Navigate to the **Configuration** -> **API User / Key** page, click the **Create
 ## Georestrictions
 
 It is possible to restrict certain content in the event (which is returned in the **itemData** property from the API) from being accessed by users from specific locations. For that, an API User must have a **Target ID** with a specific location assigned to it. **Target ID** can be created by navigating to **Configuration** -> **Targets** page and then assigned to an API User in **Configuration** -> **API User / Key** page.
+
+In Events API endpoints, **targetID** path parameter can be supplied and it must be assigned to the API User accessing the API. However, this path parameter is not required and can be omitted. In this case, default unrestricted **targetId** must be assigned to the API User.
