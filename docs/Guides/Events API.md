@@ -14,15 +14,15 @@ For example, there is a tennis championship next week with 5 courts and overlapp
 
 - Navigate to CloudMatrix Configuration settings
 
-<img src="../../assets/images/cm-configuration.png" alt="CloudMatrix Configuration Navigation" width="900" style="align:center"/>
+<img src="../../assets/images/events/cm-configuration.png" alt="CloudMatrix Configuration Navigation" width="900" style="align:center"/>
 
 - Click **Edit Settings** button at the bottom of the page
 
-<img src="../../assets/images/configuration-edit.png" alt="CloudMatrix Configuration Edit" width="900" style="align:center"/>
+<img src="../../assets/images/events/configuration-edit.png" alt="CloudMatrix Configuration Edit" width="900" style="align:center"/>
 
 - Enable Events and Article creation functionality
 
-<img src="../../assets/images/configuration-events.png" alt="CloudMatrix Configuration Events" width="900" style="align:center"/>
+<img src="../../assets/images/events/configuration-events.png" alt="CloudMatrix Configuration Events" width="900" style="align:center"/>
 
 - Click **Save Changes** button at the bottom of the page
 
@@ -37,7 +37,7 @@ This step is outlined in the following guides:
 
 - Navigate to event type creation page
 
-<img src="../../assets/images/event-type-page.png" alt="Event Type Navigation" width="900" style="align:center"/>
+<img src="../../assets/images/events/event-type-page.png" alt="Event Type Navigation" width="900" style="align:center"/>
 
 - Click **Create New** button at the bottom of the page, fill in the form and save changes
 
@@ -45,7 +45,7 @@ This step is outlined in the following guides:
 
 - Navigate to the events page
 
-<img src="../../assets/images/events-page.png" alt="Events Page" width="900" style="align:center"/>
+<img src="../../assets/images/events/events-page.png" alt="Events Page" width="900" style="align:center"/>
 
 - Click **Create New Event** button at the top of the page and choose newly created type from the dropdown
 
@@ -53,7 +53,7 @@ This step is outlined in the following guides:
 
 **Note:** content can be added to the event via the **Media Entries** tab.
 
-<img src="../../assets/images/event-media.png" alt="Event Media" width="900" style="align:center"/>
+<img src="../../assets/images/events/event-media.png" alt="Event Media" width="900" style="align:center"/>
 
 ## Accessing the Events API
 
