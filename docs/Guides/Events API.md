@@ -2,7 +2,7 @@
 
 CloudMatrix Events functionality allows you to create an event entity and assign it multiple videos, live streams, or audio streams.
 
-For example, there is a tennis championship next week with five courts and overlapping games. With this functionality, it is possible to create an event within CloudMatrix, then create live stream entities for each court and return all of them via Events API. This way, it is possible to allow the user watching the championship to switch courts and watch the game he is interested in or switch between them.
+For example, there is a tennis championship next week with five courts and overlapping games. With this functionality, it is possible to create an event within CloudMatrix, then create live stream entities for each court and return all of them via Events API. This way, it is possible to allow the user watching the championship to switch courts and watch the game he is interested in and switch between them.
 
 ## Prerequisites
 
