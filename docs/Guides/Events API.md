@@ -10,46 +10,44 @@ For example, there is a tennis championship next week with 5 courts and overlapp
 
 ## The Event Creation Process
 
-1. Enable Events functionality fo your CloudMatrix Instance
+### 1. Enable Events functionality fo your CloudMatrix Instance
 
-- Navigate to CloudMatrix Configuration settings
+Navigate to CloudMatrix Configuration settings
 
 <img src="../../assets/images/events/cm-configuration.png" alt="CloudMatrix Configuration Navigation" width="900" style="align:center"/>
 
-- Click **Edit Settings** button at the bottom of the page
+Click **Edit Settings** button at the bottom of the page
 
 <img src="../../assets/images/events/configuration-edit.png" alt="CloudMatrix Configuration Edit" width="900" style="align:center"/>
 
-- Enable Events and Article creation functionality
+Enable Events and Article creation functionality
 
 <img src="../../assets/images/events/configuration-events.png" alt="CloudMatrix Configuration Events" width="900" style="align:center"/>
 
-- Click **Save Changes** button at the bottom of the page
+Click **Save Changes** button at the bottom of the page
 
-2. Upload your content to CloudMatrix
+### 2. Upload your content to CloudMatrix
 
 This step is outlined in the following guides:
 
 - [Upload a Media Entry](./Upload%20a%20media%20entry.md)
 - [XML Enrichment Upload](./XML-enrichment-upload.md)
 
-3. Create an event type
+### 3. Create an event type
 
-- Navigate to event type creation page
+Navigate to event type creation page
 
 <img src="../../assets/images/events/event-type-page.png" alt="Event Type Navigation" width="900" style="align:center"/>
 
-- Click **Create New** button at the bottom of the page, fill in the form and save changes
+Click **Create New** button at the bottom of the page, fill in the form and save changes
 
-4. Create an event
+### 4. Create an event
 
-- Navigate to the events page
+Navigate to the events page
 
 <img src="../../assets/images/events/events-page.png" alt="Events Page" width="900" style="align:center"/>
 
-- Click **Create New Event** button at the top of the page and choose newly created type from the dropdown
-
-- Fill in the form and save the changes
+Click **Create New Event** button at the top of the page and choose newly created type from the dropdown, then fill in the form and save the changes
 
 **Note:** content can be added to the event via the **Media Entries** tab.
 
@@ -57,11 +55,11 @@ This step is outlined in the following guides:
 
 ## Accessing the Events API
 
-1. Create an API user
+### 1. Create an API user
 
 Navigate to **Configuration** -> **API User / Key** page, click **Create New API User** button, fill in the form and save changes.
 
-2. Make API calls according to the Events API reference
+### 2. Make API calls according to the Events API reference
 
 - [List available events](https://streamamg.stoplight.io/docs/cloudmatrix-documentation-portal/pe03y4h6vqo9r-list-available-events)
 - [Get a single event by ID](https://streamamg.stoplight.io/docs/cloudmatrix-documentation-portal/z4rk59ri6btib-get-a-single-event-by-id)
