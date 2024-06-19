@@ -1,8 +1,8 @@
 # Events
 
-CloudMatrix Events functionality allows you to create an event entity and assign it multiple videos, live streams, or audio streams.
+CloudMatrix Events functionality allows you to create an event entity and assign it multiple videos, live streams, or audio streams. The returned events are determined based on the parameters provided at the time of the request. By default, the endpoint only returns events that are currently active or upcoming. Our endpoint will expose high-throughput read endpoints to allow easy consumption of the events by the integrations/websites.
 
-For example, there is a tennis championship next week with five courts and overlapping games. With this functionality, it is possible to create an event within CloudMatrix, then create live stream entities for each court and return all of them via Events API. This way, it is possible to allow the user watching the championship to switch courts and watch the game he is interested in.
+For example, there is a tennis championship next week with five courts and overlapping games. With this functionality, it is possible to create an event within CloudMatrix, then create live stream entities for each court and return all of them via Events API. This way, it is possible to allow the user watching the championship to switch courts and watch the game they are interested in.
 
 ## Prerequisites
 
