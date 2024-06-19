@@ -7,33 +7,18 @@ For example, there is a tennis championship next week with five courts and overl
 ## Prerequisites
 
 - CloudMatrix instance is set up
+- Events functionality is enabled for the instance
 
 ## The Event Creation Process
 
-### 1. Enable Events functionality for your CloudMatrix Instance
-
-Navigate to CloudMatrix Configuration settings.
-
-<img src="../../assets/images/events/cm-configuration.png" alt="CloudMatrix Configuration Navigation" width="900" style="align:center"/>
-
-Click **Edit Settings** button at the bottom of the page.
-
-<img src="../../assets/images/events/configuration-edit.png" alt="CloudMatrix Configuration Edit" width="900" style="align:center"/>
-
-Enable Events and Article creation functionality.
-
-<img src="../../assets/images/events/configuration-events.png" alt="CloudMatrix Configuration Events" width="900" style="align:center"/>
-
-Click **Save Changes** button at the bottom of the page.
-
-### 2. Upload your content to CloudMatrix
+### 1. Upload your content to CloudMatrix
 
 This step is outlined in the following guides:
 
 - [Upload a Media Entry](./Upload%20a%20media%20entry.md)
 - [XML Enrichment Upload](./XML-enrichment-upload.md)
 
-### 3. Create an event type
+### 2. Create an event type
 
 Navigate to the event type creation page.
 
@@ -41,7 +26,7 @@ Navigate to the event type creation page.
 
 Click the **Create New** button at the bottom of the page, fill in the form and save the changes.
 
-### 4. Add Custom Attributes to the event type
+### 3. Add Custom Attributes to the event type
 
 Navigate to the event type custom attributes page.
 
@@ -53,7 +38,7 @@ Click the **Create New Field** or **Link Existing Field** button, fill in the fo
 
 <img src="../../assets/images/events/custom-attributes-event-page.png" alt="Event Custom Attibutes Page" width="900" style="align:center"/>
 
-### 5. Create an event
+### 4. Create an event
 
 Navigate to the events page.
 
