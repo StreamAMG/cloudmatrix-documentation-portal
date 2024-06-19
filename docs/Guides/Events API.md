@@ -41,7 +41,19 @@ Navigate to the event type creation page.
 
 Click the **Create New** button at the bottom of the page, fill in the form and save the changes.
 
-### 4. Create an event
+### 4. Add Custom Attributes to the event type
+
+Navigate to the event type custom attributes page.
+
+<img src="../../assets/images/events/custom-attributes-menu.png" alt="Event Custom Attibutes Menu" width="900" style="align:center"/>
+
+<img src="../../assets/images/events/custom-attributes-event.png" alt="Event Custom Attibutes Dropdown" width="900" style="align:center"/>
+
+Click the **Create New Field** or **Link Existing Field** button, fill in the form and save the changes.
+
+<img src="../../assets/images/events/custom-attributes-event-page.png" alt="Event Custom Attibutes Page" width="900" style="align:center"/>
+
+### 5. Create an event
 
 Navigate to the events page.
 
