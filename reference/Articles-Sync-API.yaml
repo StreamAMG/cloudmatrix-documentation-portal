@@ -1,0 +1,98 @@
+x-stoplight:
+  docs:
+    showModels: true
+x-internal: true
+openapi: 3.1.0
+info:
+  title: Articles Sync API Reference
+  version: "1.0"
+  contact:
+    name: ''
+    email: ''
+  summary: Internal service for syncing articles between CloudMatrix and Playback Store
+  tags:
+  - name: Articles Sync
+servers:
+  - url: "https://cloudmatrix-articles-service.streamamg.com"
+paths:
+ '/articles/sync':
+   post:
+      summary: Articles sync
+      tags:
+        - Sync
+      description: 'Synchronizes articles from CM to Playback store'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                site:
+                  type: string
+                  description: 'Specifies the site whose articles are to be synchronized'
+      security:
+        - x-api-key: []   
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: Sync process for {site} initiated successfully"               
+                type: string
+                default: "Sync process for {site} initiated successfully"
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                description: No api key provided
+                type: object
+                properties:
+                  status:
+                    type: number
+                    enum:
+                      - 401
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+                  - message
+              examples:
+                Unauthorized:
+                  value:
+                    status: 401
+                    error: Unauthorized
+                    message: No api key provided       
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Invalid request
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                  error:
+                    type: string
+                    minLength: 1
+                  statusCode:
+                    type: number
+                    enum:
+                      - 400
+                required:
+                  - message
+                  - statusCode
+                  - error
+              examples:
+                BadRequest:
+                  value:
+                    statusCode: 400
+                    error: Bad Request
+                    message: Missing 'site' attribute in the request body                    
+          
+    
