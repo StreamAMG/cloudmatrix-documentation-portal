@@ -22,6 +22,7 @@ paths:
         - Sync
       description: 'Synchronizes articles from CM to Playback store'
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -31,6 +32,8 @@ paths:
                 site:
                   type: string
                   description: 'Specifies the site whose articles are to be synchronized'
+              required:
+                - site
       security:
         - x-api-key: []   
       responses:
