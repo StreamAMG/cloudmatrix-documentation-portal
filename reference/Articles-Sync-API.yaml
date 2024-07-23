@@ -17,10 +17,12 @@ servers:
 paths:
  '/articles/sync':
    post:
-      summary: Articles sync
+      summary: Articles Sync
       tags:
-        - Sync
-      description: 'Synchronizes articles from CM to Playback store'
+        - Articles Sync
+      description: "Synchronizes articles from CM to Playback store
+        In order to start sync process, the user must first be authenticated (via an API-Key). This token
+        should be passed during the API call through the 'x-api-key' header"
       requestBody:
         required: true
         content:
@@ -107,4 +109,5 @@ securitySchemes:
       name: x-api-key
       type: apiKey
       in: header
-      description: ''    
+      description: 'An API key is a token that you provide when making API calls.
+        Include the token in a header parameter called x-api-key.'   
