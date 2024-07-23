@@ -3,7 +3,7 @@ stoplight-id: 92mz02po829y4
 internal: true
 ---
 
-# Get Entry Entitlement
+# Get Entry Entitlement (Internal)
 
 Entry entitlement API is used to get the list of entry entitlement for a given entry. The entitlement to entry is assigned to by the admin and is used to validate if user has valid entitlement to watch the media.
 
