@@ -31,9 +31,11 @@ paths:
               properties:
                 site:
                   type: string
-                  description: 'Specifies the site whose articles are to be synchronized'
-              required:
-                - site
+                  description: 'Specifies the site whose articles are to be synchronized'             
+                  default: 'cloudmatrix.dev.streamamg.com'
+                  required:
+                    - site
+                 
       security:
         - x-api-key: []   
       responses:
@@ -43,8 +45,11 @@ paths:
             application/json:
               schema:
                 description: Sync process for {site} initiated successfully"               
-                type: string
-                default: "Sync process for {site} initiated successfully"
+              examples:
+                Success:
+                  value:
+                    statusCode: 200
+                    message: Sync process for {site} initiated successfully  
         401:
           description: Unauthorized
           content:
@@ -68,7 +73,7 @@ paths:
                   value:
                     status: 401
                     error: Unauthorized
-                    message: No api key provided       
+                    message: API Key not provided or not valid  
         400:
           description: Bad Request
           content:
@@ -96,6 +101,10 @@ paths:
                   value:
                     statusCode: 400
                     error: Bad Request
-                    message: Missing 'site' attribute in the request body                    
-          
-    
+                    message: Site should be provided                    
+securitySchemes:
+    x-api-key:
+      name: x-api-key
+      type: apiKey
+      in: header
+      description: ''    
