@@ -46,12 +46,28 @@ paths:
           content:
             application/json:
               schema:
-                description: "Sync process for {site} initiated successfully"               
+                description: Sync process for {site} initiated successfully
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                  error:
+                    type: string
+                    minLength: 1
+                  statusCode:
+                    type: number
+                    enum:
+                      - 200
+                required:
+                  - message
+                  - statusCode
+       
               examples:
-                Success:
+                OK:
                   value:
                     statusCode: 200
-                    message: "Sync process for {site} initiated successfully"   
+                    message: Sync process for {site} initiated successfully   
                    
         401:
           description: Unauthorized
