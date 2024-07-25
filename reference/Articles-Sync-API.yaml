@@ -69,16 +69,15 @@ paths:
                 description: No api key provided
                 type: object
                 properties:
-                  status:
-                    type: number
-                    enum:
-                      - 401
                   message:
                     type: string
                     minLength: 1
+                  error:
+                    type: string
+                    minLength: 1
                 required:
-                  - error
                   - message
+                  - error
               examples:
                 Unauthorized:
                   value:
