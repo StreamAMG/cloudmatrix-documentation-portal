@@ -52,16 +52,8 @@ paths:
                   message:
                     type: string
                     minLength: 1
-                  error:
-                    type: string
-                    minLength: 1
-                  statusCode:
-                    type: number
-                    enum:
-                      - 200
                 required:
                   - message
-                  - statusCode
        
               examples:
                 OK:
@@ -85,12 +77,11 @@ paths:
                     type: string
                     minLength: 1
                 required:
-                  - statusCode
+                  - error
                   - message
               examples:
                 Unauthorized:
                   value:
-                    statusCode: 401
                     error: Unauthorized
                     message: API Key not provided or not valid  
         400:
@@ -107,20 +98,58 @@ paths:
                   error:
                     type: string
                     minLength: 1
-                  statusCode:
-                    type: number
-                    enum:
-                      - 400
                 required:
                   - message
-                  - statusCode
                   - error
               examples:
                 BadRequest:
                   value:
-                    statusCode: 400
                     error: Bad Request
-                    message: Site should be provided                    
+                    message: Site should be provided  
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Forbidden
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                  error:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+                  - error
+              examples:
+                BadRequest:
+                  value:
+                    error: Forbidden
+                    message: Sync not enabled for {site}    
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: Not Found
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                  error:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+                  - error
+              examples:
+                BadRequest:
+                  value:
+                    error: Not Found
+                    message: Site {site} does not exist                                          
 components:
   securitySchemes:
     x-api-key:
