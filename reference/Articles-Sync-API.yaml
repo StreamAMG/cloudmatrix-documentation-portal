@@ -58,7 +58,6 @@ paths:
               examples:
                 OK:
                   value:
-                    statusCode: 200
                     message: Sync process for {site} initiated successfully   
                    
         401:
@@ -72,16 +71,11 @@ paths:
                   message:
                     type: string
                     minLength: 1
-                  error:
-                    type: string
-                    minLength: 1
                 required:
-                  - message
-                  - error
+                  - message 
               examples:
                 Unauthorized:
                   value:
-                    error: Unauthorized
                     message: API Key not provided or not valid  
         400:
           description: Bad Request
@@ -94,16 +88,11 @@ paths:
                   message:
                     type: string
                     minLength: 1
-                  error:
-                    type: string
-                    minLength: 1
                 required:
                   - message
-                  - error
               examples:
                 BadRequest:
-                  value:
-                    error: Bad Request
+                  value:                    
                     message: Site should be provided  
         403:
           description: Forbidden
@@ -116,16 +105,11 @@ paths:
                   message:
                     type: string
                     minLength: 1
-                  error:
-                    type: string
-                    minLength: 1
                 required:
                   - message
-                  - error
               examples:
                 BadRequest:
                   value:
-                    error: Forbidden
                     message: Sync not enabled for {site}    
         404:
           description: Not Found
@@ -138,16 +122,11 @@ paths:
                   message:
                     type: string
                     minLength: 1
-                  error:
-                    type: string
-                    minLength: 1
                 required:
                   - message
-                  - error
               examples:
                 BadRequest:
                   value:
-                    error: Not Found
                     message: Site {site} does not exist                                          
 components:
   securitySchemes:
