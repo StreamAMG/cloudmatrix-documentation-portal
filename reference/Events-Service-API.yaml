@@ -417,6 +417,20 @@ paths:
           in: query
           name: pageSize
           description: Size of the page of results
+        - schema:
+            type: string
+            default: "start"
+            enum: ["start", "end", "createdAt", "updatedAt", "priorityOrder"]
+          in: query
+          name: sort
+          description: Parameter to sort the response by
+        - schema:
+            type: string
+            default: "desc"
+            enum: ["asc", "desc"]
+          in: query
+          name: order
+          description: Sorting order
       responses:
         "200":
           description: Event data retrieved from CloudMatrix
