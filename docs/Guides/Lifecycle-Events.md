@@ -44,7 +44,9 @@ To receive SNS notifications, you need to set up an HTTPS endpoint:
    2. SNS Notification will contain our Cloudmatrix Event payload (described below) that you subscribed to when created the subscription. 
 
 Follow official AWS guide on the how to implement your webhook endpoint to be able to consume SNS Notifications.
+
 Guidlines for the endpoint: https://docs.aws.amazon.com/sns/latest/dg/SendMessageToHttp.prepare.html
+
 Verifying SNS messages: https://docs.aws.amazon.com/sns/latest/dg/sns-verify-signature-of-message.html
 
 
