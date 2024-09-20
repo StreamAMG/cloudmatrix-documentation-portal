@@ -31,6 +31,23 @@ Log of all outgoing notifications with basic details of the message including re
 
 Send automated emails to a designated technical contact email including details about the failure, such as the webhook URL, error message, and timestamp.
 
+
+## Setting Up Your HTTPS Endpoint
+
+To receive SNS notifications, you need to set up an HTTPS endpoint:
+
+1. Implement an HTTPS server that can handle POST requests.
+2. Ensure your server has a valid SSL certificate from a trusted Certificate Authority (CA).
+3. Configure your server to consume:
+   1. Subscription confirmation message automatically
+      - or do it manually by opening the initial message `SubscribeURL` in your browser of choice
+   2. SNS Notification will contain our Cloudmatrix Event payload (described below) that you subscribed to when created the subscription. 
+
+Follow official AWS guide on the how to implement your webhook endpoint to be able to consume SNS Notifications.
+Guidlines for the endpoint: https://docs.aws.amazon.com/sns/latest/dg/SendMessageToHttp.prepare.html
+Verifying SNS messages: https://docs.aws.amazon.com/sns/latest/dg/sns-verify-signature-of-message.html
+
+
 ## Cloudmatrix Event Types
 
 This list shows our current event types. We will be adding new types as we expand our system. 
@@ -53,7 +70,7 @@ Event occurs when default entitlement is being changed.
 }
 ```
 
-### ArticleUpdate
+### Article Update
 
 Event occurs when changes has been made to an Article. Represents a snapshot of the current state of the Article at the time of publishing the message.
 
@@ -107,25 +124,6 @@ Total retry time: ~ 40 minutes
 
 Note: Ensure your endpoint can handle potential duplicate messages due to retries. You can use `x-amz-sns-message-id` header field to uniquely identify each message.
 
-
-## Setting Up Your HTTPS Endpoint
-
-To receive SNS notifications, you need to set up an HTTPS endpoint:
-
-1. Implement an HTTPS server that can handle POST requests.
-2. Ensure your server has a valid SSL certificate from a trusted Certificate Authority (CA).
-3. Configure your server to consume:
-   1. Subscription confirmation message automatically
-      - or do it manually by opening the initial message `SubscribeURL` in your browser of choice
-   2. Notification messages containing our CM Event payload that you subscribed to when created the subscription
-
-### Handling SNS Messages
-
-Your HTTPS endpoint should be able to handle three types of SNS envelope messages:
-
-1. SubscriptionConfirmation
-2. Notification
-3. UnsubscribeConfirmation
 
 ## Security Considerations
 
