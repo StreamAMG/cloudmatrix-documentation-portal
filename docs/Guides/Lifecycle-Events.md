@@ -27,6 +27,11 @@ Our platform provides an Admin UI that allows you to:
 
 Log of all outgoing notifications with basic details of the message including record of success/failure status.
 
+### Failure notification
+
+#### Email Notifications:
+
+Send automated emails to designated technical contact email including details about the failure, such as the webhook URL, error message, and timestamp.
 
 ## Cloudmatrix Event Types
 
