@@ -29,9 +29,7 @@ Log of all outgoing notifications with basic details of the message including re
 
 ### Failure notification
 
-#### Email Notifications:
-
-Send automated emails to designated technical contact email including details about the failure, such as the webhook URL, error message, and timestamp.
+Send automated emails to a designated technical contact email including details about the failure, such as the webhook URL, error message, and timestamp.
 
 ## Cloudmatrix Event Types
 
