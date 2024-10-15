@@ -31,7 +31,7 @@ paths:
               description: ''
               type: object
               properties:
-                site:
+                cmSite:
                   type: string
                   description: 'Specifies the CloudMatrix Site whose articles are to be synchronized'             
                   default: 'cloudmatrix.dev.streamamg.com'
