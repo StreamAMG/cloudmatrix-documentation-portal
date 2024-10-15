@@ -19,7 +19,7 @@ paths:
     post:
       summary: Articles Sync V2
       tags:
-        - Articles Sync
+        - Articles Sync V2
       description: "Synchronizes articles from CM RDS to Playback DataStore
         In order to start sync process, the user must first be authenticated (via an API-Key). This token
         should be passed during the API call through the 'x-api-key' header"
