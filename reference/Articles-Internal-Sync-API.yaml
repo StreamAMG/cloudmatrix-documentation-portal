@@ -5,24 +5,22 @@ x-internal: true
 openapi: 3.1.0
 info:
   title: Articles Internal Sync API Reference
-  version: "1.0"
+  version: '1.0'
   contact:
     name: ''
     email: ''
   summary: Internal service for syncing articles between CloudMatrix and Playback Store
   tags:
-  - name: Articles Internal Sync
+    - name: Articles Internal Sync
 servers:
-  - url: "https://cloudmatrix-articles-service.streamamg.com"
+  - url: 'https://cloudmatrix-articles-service.streamamg.com'
 paths:
- '/articles/sync2':
+  /articles/sync:
     post:
       summary: Articles Internal Sync
       tags:
         - Articles Internal Sync
-      description: "Synchronizes articles from CloudMatrix to Playback DataStore
-        In order to start sync process, the user must first be authenticated (via an API-Key). This token
-        should be passed during the API call through the 'x-api-key' header"
+      description: 'Synchronizes articles from CloudMatrix to Playback DataStore In order to start sync process, the user must first be authenticated (via an API-Key). This token should be passed during the API call through the ''x-api-key'' header'
       requestBody:
         required: true
         content:
@@ -33,20 +31,19 @@ paths:
               properties:
                 cmSite:
                   type: string
-                  description: 'Specifies the CloudMatrix Site whose articles are to be synchronized'             
-                  default: 'cloudmatrix.dev.streamamg.com'
+                  description: Specifies the CloudMatrix Site whose articles are to be synchronized
+                  default: cloudmatrix.dev.streamamg.com
                   required:
-                    - cmSite          
+                    - cmSite
       security:
         - x-api-key: []
-
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                description: Sync process for {site} initiated successfully
+                description: 'Sync process for {site} initiated successfully'
                 type: object
                 properties:
                   status:
@@ -56,25 +53,22 @@ paths:
                   message:
                     type: string
                     minLength: 1
-                  data: {
+                  data:
                     count: number
-                  }
                 required:
                   - status
                   - success
                   - message
                   - data
-       
               examples:
                 OK:
                   value:
                     status: 200
                     success: true
                     message: articles retrieved and sent to SQS successfully
-                    data: {
+                    data:
                       count: 500
-                    }  
-        403:
+        '403':
           description: Forbidden
           content:
             application/json:
@@ -90,8 +84,8 @@ paths:
               examples:
                 BadRequest:
                   value:
-                    message: API Key not provided or not valid   
-        404:
+                    message: API Key not provided or not valid
+        '404':
           description: Not Found
           content:
             application/json:
@@ -108,14 +102,16 @@ paths:
                     minLength: 1
                 required:
                   - message
-                  - status   
-                  - success 
+                  - status
+                  - success
               examples:
                 BadRequest:
                   value:
                     status: 404
                     success: false
-                    message: "No connection details found for {CloudMatrix Instance}}"                                         
+                    message: 'No connection details found for {CloudMatrix Instance}}'
+      x-stoplight:
+        id: b1u5ddofpodve
 components:
   securitySchemes:
     x-api-key:
