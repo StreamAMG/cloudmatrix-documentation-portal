@@ -20,7 +20,7 @@ paths:
       summary: Articles Internal Sync
       tags:
         - Articles Internal Sync
-      description: "Synchronizes articles from CM RDS to Playback DataStore
+      description: "Synchronizes articles from CloudMatrix RDS to Playback DataStore
         In order to start sync process, the user must first be authenticated (via an API-Key). This token
         should be passed during the API call through the 'x-api-key' header"
       requestBody:
