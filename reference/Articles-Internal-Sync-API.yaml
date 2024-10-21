@@ -60,8 +60,8 @@ paths:
                     count: number
                   }
                 required:
-                  - message
                   - status
+                  - success
                   - message
                   - data
        
@@ -108,11 +108,13 @@ paths:
                     minLength: 1
                 required:
                   - message
-                  - status
-                  - message       
+                  - status   
+                  - success 
               examples:
                 BadRequest:
                   value:
+                    status: 404
+                    success: false
                     message: "No connection details found for {CloudMatrix Instance}}"                                         
 components:
   securitySchemes:
