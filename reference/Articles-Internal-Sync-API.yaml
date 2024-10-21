@@ -4,25 +4,23 @@ x-stoplight:
 x-internal: true
 openapi: 3.1.0
 info:
-  title: Articles Sync V2 API Reference
+  title: Articles Internal Sync API Reference
   version: "1.0"
   contact:
     name: ''
     email: ''
   summary: Internal service for syncing articles between CloudMatrix and Playback Store
   tags:
-  - name: Articles Sync V2
+  - name: Articles Internal Sync
 servers:
   - url: "https://cloudmatrix-articles-service.streamamg.com"
 paths:
  '/articles/sync2':
     post:
-      summary: Articles Sync V2
+      summary: Articles Internal Sync
       tags:
-        - Articles Sync V2
-      description: "Synchronizes articles from CM RDS to Playback DataStore
-       ![In Review](https://img.shields.io/badge/Status-In%20Review-green?style=flat-square)
-
+        - Articles Internal Sync
+      description: "Synchronizes articles from CloudMatrix to Playback DataStore
         In order to start sync process, the user must first be authenticated (via an API-Key). This token
         should be passed during the API call through the 'x-api-key' header"
       requestBody:
