@@ -167,6 +167,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SNSSubscriptionResponse'
+              examples:
+                Example - Success:
+                  value:
+                      id: "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234"
+                      tenantId: "3c565fca-c792-469d-a745-8d202261b35f"
+                      endpoint: 'https://www.example-sns-endpoint.com'
+                      eventTypes: ['article.update']
+                      createdAt: "2024-11-21T19:00:00Z"
+                      status: "PENDING" 
         '403':
           description: Forbidden
           content:
@@ -266,12 +275,6 @@ paths:
       security:
         - ApiKey: []
       parameters:
-        - name: id
-          in: path
-          schema:
-            type: string
-          required: true
-          description: Retrieve All SNS Subscription in CloudMatrix for a Given Tenant
         - in: header
           name: tenant-id
           description: The unique identifier of the tenant
@@ -323,10 +326,6 @@ paths:
                 description: Invalid request
                 type: object
                 properties:
-                  statusCode:
-                    type: number
-                    enum:
-                      - 400
                   message:
                     type: string
                     minLength: 1
@@ -334,6 +333,10 @@ paths:
                     type: string
                     enum:
                       - Bad Request
+                  statusCode:
+                    type: number
+                    enum:
+                      - 400
                 required:
                   - message
                   - error
@@ -386,7 +389,7 @@ paths:
               examples:
                 Internal Server Error:
                   value:
-                    message: 'Retrieving Subscriptios failed'
+                    message: 'Retrieving Subscriptions failed'
                     error: Internal Server Error
                     statusCode: 500
     post:
@@ -447,14 +450,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/SNSSubscriptionResponse'
               examples:
-                Successful response:
+                Example - Success:
                   value:
                       id: "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234"
                       tenantId: "3c565fca-c792-469d-a745-8d202261b35f"
                       endpoint: 'https://www.example-sns-endpoint.com'
                       eventTypes: ['article.update']
                       createdAt: "2024-11-21T19:00:00Z"
-                      status: "PENDING"
+                      status: "PENDING" 
         '400':
           description: Bad Request
           content:
@@ -463,10 +466,6 @@ paths:
                 description: Invalid request data for the event to create
                 type: object
                 properties:
-                  statusCode:
-                    type: number
-                    enum:
-                      - 400
                   message:
                     type: string
                     minLength: 1
@@ -474,10 +473,14 @@ paths:
                     type: string
                     enum:
                       - Bad Request
+                  statusCode:
+                    type: number
+                    enum:
+                      - 400
                 required:
-                  - statusCode
                   - message
                   - error
+                  - statusCode
               examples:
                 Invalid Event Identifier:
                   value:
@@ -509,17 +512,20 @@ paths:
                 description: Error creation SNS Subscription data
                 type: object
                 properties:
+                  message:
+                    type: string
+                    minLength: 1
+                  error:
+                    type: string
+                    minLength: 1
                   statusCode:
                     type: number
                     enum:
                       - 500
-                  message:
-                    type: string
-                    minLength: 1
                 required:
-                  - status
                   - message
                   - error
+                  - statusCode
               examples:
                 Internal Server Error:
                   value:
