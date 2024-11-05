@@ -13,7 +13,7 @@ info:
     The SNS Subscription Service API exposes the functionality to create, read and delete CloudMatrix SNS Subscription 
     Webhooks and is for internal use only (typically the CloudMatrix UI will utilise these endpoints to allow users to manage their subscriptions).
 servers:
-  - url: 'https://cloudmatrix-events-api.dev.streamamg.com/api/v1/'
+  - url: 'https://service.cloudmatrix.streamamg.com/v1/subscription'
 paths:
   '/subscription/{id}':
     delete:
@@ -124,6 +124,116 @@ paths:
                     message: 'Subscription deletion failed'
                     error: Internal Server Error
                     statusCode: 500
+    get:
+      summary: Retrieve a SNS Subscription from CloudMatrix
+      description: |-
+        This endpoint retrieves an existing subscription based on its unique id. The client must provide a valid tenant-id in the request headers to identify the tenant context under which the subscription operates.
+        If successful, the server responds with a 200 OK status, indicating that the subscription was retrieved, returning any content in the response body.
+
+        The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header. 
+      tags:
+        - SNS-Subscription
+      operationId: retrieve-sns-subscription
+      security:
+        - ApiKey: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: SNS Subscription in CloudMatrix retrieved
+        - in: header
+          name: tenant-id
+          description: The unique identifier of the tenant
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: header
+          name: x-api-key
+          description: The x-api-key
+          required: true
+          schema:
+            type: string
+            format: string
+      responses:
+        '200':
+          description: SNS Subscription retrieved in CloudMatrix
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SNSSubscriptionResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Invalid/Missing API Key
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                Invalid API Key:
+                  value:
+                    message: API Key not provided or not valid
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: "Subscription: {id} not found"
+                type: object
+                properties:
+                  status:
+                    type: number
+                    enum:
+                      - 404
+                  message:
+                    type: string
+                    minLength: 1
+                  reason:
+                    type: string
+                    minLength: 1
+                required:
+                  - statusCode
+                  - message
+                  - error
+              examples:
+                Invalid Event Id:
+                  value:
+                    message: "Subscription: 354a82b8-fb50-45fe-8b78-c952b06e2a82 not found"
+                    error: Not Found
+                    statusCode: 404
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Error retrieving SNS Subscription data
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                    enum:
+                      - 500
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+                  - message
+                  - error
+              examples:
+                Internal Server Error:
+                  value:
+                    message: 'Subscription retrieval failed'
+                    error: Internal Server Error
+                    statusCode: 500
       x-stoplight:
         id: zfms911lbsgx2
     parameters:
@@ -196,7 +306,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateSNSSubscriptionResponse'
+                $ref: '#/components/schemas/SNSSubscriptionResponse'
         '400':
           description: Bad Request
           content:
@@ -253,7 +363,7 @@ paths:
           content:
             application/json:
               schema:
-                description: Error deleting SNS Subscription data
+                description: Error creation SNS Subscription data
                 type: object
                 properties:
                   statusCode:
@@ -270,7 +380,7 @@ paths:
               examples:
                 Internal Server Error:
                   value:
-                    message: 'Subscription deletion failed'
+                    message: 'Subscription creation failed'
                     error: Internal Server Error
                     statusCode: 500
       x-stoplight:
@@ -306,11 +416,11 @@ components:
           type: array
           minimum: 0
           description: array of event types to subscribe to ['article.update', 'article.delete', 'article.restore', 'config.update']
-    CreateSNSSubscriptionResponse:
+    SNSSubscriptionResponse:
       type: object
       x-stoplight:
         id: gey81qt7eka7o
-      title: CreateSNSSubscriptionResponse
+      title: SNSSubscriptionResponse
       required:
         - endpoint
         - eventTypes
