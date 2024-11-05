@@ -289,6 +289,18 @@ paths:
           schema:
             type: string
             format: string
+        - schema:
+            type: string
+            default: "0"
+          in: query
+          name: pageIndex
+          description: Page index of results page to be returned
+        - schema:
+            type: string
+            default: "10"
+          in: query
+          name: pageSize
+          description: Size of the page of results
       operationId: get-all-sns-subscription
       responses:
         '200':
