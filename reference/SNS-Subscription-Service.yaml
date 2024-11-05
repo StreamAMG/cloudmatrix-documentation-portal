@@ -27,7 +27,7 @@ paths:
         The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header. 
       tags:
         - SNS-Subscription
-      operationId: delete-sns-subscription-data
+      operationId: delete-sns-subscription
       security:
         - ApiKey: []
       parameters:
@@ -135,70 +135,47 @@ paths:
         required: true
   /event:
     post:
-      summary: Create a new event in CloudMatrix
+      summary: Create a SNS Subscription in CloudMatrix
       description: |
-        Create a new event in CloudMatrix for a tenant identified by the header parameter 'tenant-id'.
+        This endpoint creates a new subscription for a specified tenant. The client must provide a valid tenant-id in the request headers and the subscription data in the request body.
+        If successful, the server responds with a 201 Created status, confirming that the subscription was successfully created.
 
-        In order to create the event data, the user must first be authenticated (via an API-Key). This token
-        should be passed during the API call through the 'x-api-key' header.
+        The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header. 
       tags:
         - SNS-Subscription
       security:
         - ApiKey: []
-      operationId: create-event
+      operationId: create-sns-subscription
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateEventBody'
+              $ref: '#/components/schemas/CreateSNSSubscription'
             examples:
-              Event with singular attributes:
+              SNS Subscription (article.update):
                 value:
-                  typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
-                  priorityOrder: 1
-                  title: 'Football Match: Barcelona vs Real Madrid'
-                  subtitle: El Clasico
-                  description: This is a highly anticipated football match between two of the biggest clubs in the world.
-                  start: '2023-05-21T19:00:00Z'
-                  end: '2023-05-21T21:00:00Z'
-                  offset: 0
-                  entries:
-                    - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
-                    - id: e078d72a-aad4-4b68-9227-e0bde0b35c66
-                  attributes:
-                    - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
-                      value: custom string attribute
-                    - id: 7b8c2e5a-1a2b-4c3d-e4f5-6789abcdef01
-                      value: '42'
-              Event with mixed attributes:
+                  endpoint: 'https:www.example-sns-endpoint.com'
+                  eventTypes: ['article.update']
+              SNS Subscription (article.delete):
                 value:
-                  value:
-                    typeId: b5c3a174-1b00-4495-a4cb-f030d475b4b9
-                    priorityOrder: 1
-                    title: 'Football Match: Barcelona vs Real Madrid'
-                    subtitle: El Clasico
-                    description: This is a highly anticipated football match between two of the biggest clubs in the world.
-                    start: '2023-05-21T19:00:00Z'
-                    end: '2023-05-21T21:00:00Z'
-                    offset: 0
-                    entries:
-                      - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1236
-                      - id: e078d72a-aad4-4b68-9227-e0bde0b35c66
-                    attributes:
-                      - id: 4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234
-                        value: custom string attribute
-                      - id: e078d72a-aad4-4b68-9227-e0bde0b35c6z
-                        items:
-                          - value: dropdownValue1
-                          - value: dropdownValue2
+                  endpoint: 'https:www.example-sns-endpoint.com'
+                  eventTypes: ['article.delete']
+              SNS Subscription (article.restore):
+                value:
+                  endpoint: 'https:www.example-sns-endpoint.com'
+                  eventTypes: ['article.restore']
+              SNS Subscription (config.update):
+                value:
+                  endpoint: 'https:www.example-sns-endpoint.com'
+                  eventTypes: ['config.update']
       responses:
         '201':
-          description: Created new event in CloudMatrix
+          description: Created SNS Subscription in CloudMatrix
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EventData'
+                $ref: '#/components/schemas/CreateSNSSubscriptionResponse'
         '400':
           description: Bad Request
           content:
@@ -252,6 +229,29 @@ paths:
                     message: Forbidden
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Error deleting SNS Subscription data
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                    enum:
+                      - 500
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+                  - message
+                  - error
+              examples:
+                Internal Server Error:
+                  value:
+                    message: 'Subscription deletion failed'
+                    error: Internal Server Error
+                    statusCode: 500
       x-stoplight:
         id: p7xw6sda7vuh1
     parameters:
@@ -268,194 +268,55 @@ components:
       in: header
       name: x-api-key
   schemas:
-    EventData:
+    CreateSNSSubscription:
       type: object
+      x-stoplight:
+        id: gey87qt7ekx7o
+      title: CreateSNSSubscription
+      required:
+        - endpoint
+        - eventTypes
+      properties:
+        endpoint:
+          type: string
+          minLength: 1
+          description: endpoint to send the SNS message to
+        eventTypes:
+          type: array
+          minimum: 0
+          description: array of event types to subscribe to ['article.update', 'article.delete', 'article.restore', 'config.update']
+    CreateSNSSubscriptionResponse:
+      type: object
+      x-stoplight:
+        id: gey87qt7ekx7o
+      title: CreateSNSSubscription
+      required:
+        - endpoint
+        - eventTypes
       properties:
         id:
           type: string
           format: uuid
-          description: Event id
-        typeId:
-          type: string
-          format: uuid
-          description: Custom event type id
-        priorityOrder:
-          type: integer
-          minimum: 0
-          description: Event priority order used when displaying events
-        title:
+          description: unique identifier for the subscription
+        tenantId:
           type: string
           minLength: 1
-          description: Event's main title
-        subtitle:
+          description: tenant identifier
+        endpoint:
           type: string
-          minLength: 0
-          description: Event's secondary title
-        description:
-          type: string
-          minLength: 0
-          description: Event's description
-        start:
-          type: string
-          format: date-time
-          description: Start time of the event
-        end:
-          type: string
-          format: date-time
-          description: End time of the event
-        offset:
-          type: number
+          minLength: 1
+          description: endpoint to send the SNS message to
+        eventTypes:
+          type: array
           minimum: 0
-          description: Extra minutes before start time when event can be advertised
-        attributes:
-          $ref: '#/components/schemas/EventAttributes'
-        entries:
-          $ref: '#/components/schemas/MediaEntries'
+          description: array of event types to subscribe to ['article.update', 'article.delete', 'article.restore', 'config.update']
+        status:
+          type: string
+          minLength: 0
+          description: status of the subscription
         createdAt:
           type: string
-          x-stoplight:
-            id: sagujd3k325dy
-          format: date-time
-        updatedAt:
-          type: string
-          x-stoplight:
-            id: 7iybtu6zsekc6
-          format: date-time
-      x-stoplight:
-        id: ewk4f9lm2hqcb
-    EventDataList:
-      type: object
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/EventData'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-      x-stoplight:
-        id: tf1o74n02fdrh
-    CreateEventBody:
-      type: object
-      x-stoplight:
-        id: gey87qt7ekx7o
-      title: CreateEventBody
-      required:
-        - typeId
-        - title
-        - priorityOrder
-        - start
-        - end
-      properties:
-        typeId:
-          type: string
-          format: uuid
-          description: Custom event type id
-        title:
-          type: string
-          minLength: 1
-          description: Event's main title
-        description:
-          type: string
-          minLength: 0
-          description: Event's description
-        priorityOrder:
-          type: integer
-          minimum: 0
-          description: Event priority order used when displaying events
-        subtitle:
-          type: string
-          minLength: 0
-          description: Event's secondary title
-        start:
-          type: string
-          format: date-time
-          description: Start time of the event
-        end:
-          type: string
-          format: date-time
-          description: End time of the event
-        offset:
-          type: number
-          minimum: 0
-          description: Extra minutes before start time when event can be advertised
-        attributes:
-          $ref: '#/components/schemas/EventAttributes'
-        entries:
-          $ref: '#/components/schemas/MediaEntries'
-    EventAttributes:
-      type: array
-      x-stoplight:
-        id: dfqlt93r36p2k
-      uniqueItems: true
-      minItems: 1
-      description: The metadata attributes
-      items:
-        type: object
-        required:
-          - id
-        properties:
-          id:
-            type: string
-            minLength: 1
-            description: CloudMatrix attribute configuration id
-            format: uuid
-          value:
-            type: string
-            minLength: 1
-            description: 'CloudMatrix attribute value (singular value like string, number etc.)'
-          valueId:
-            type: string
-            description: CloudMatrix attribute config option id (if for example attribute config represents a dropdown with predefined values)
-          items:
-            type: array
-            uniqueItems: true
-            minItems: 1
-            description: CloudMatrix attribute value (collection)
-            items:
-              type: object
-              additionalProperties: false
-              required:
-                - value
-              properties:
-                value:
-                  type: string
-                  minLength: 1
-                  description: 'CloudMatrix attribute value (singular value like string, number etc.)'
-                valueId:
-                  type: string
-                  description: CloudMatrix attribute config option id (if for example attribute config represents a multichoice checkbox with predefined values)
-    MediaEntries:
-      type: array
-      x-stoplight:
-        id: desads8z02311
-      uniqueItems: true
-      minItems: 1
-      description: The wideo and audio entries details (itemData)
-      title: ItemData
-      items:
-        type: object
-        required:
-          - id
-        properties:
-          id:
-            type: string
-            minLength: 1
-            description: CloudMatrix article id
-            format: uuid
-    Pagination:
-      type: object
-      x-stoplight:
-        id: 74bgl7ah1xkhz
-      properties:
-        totalCount:
-          type: integer
-          x-stoplight:
-            id: 9n82xqtwy974s
-        itemCount:
-          type: integer
-        pageSize:
-          type: integer
-        pageIndex:
-          type: integer
-tags:
+          format: string
+          description: date and time the subscription was created 
+  tags:
   - name: SNS-Subscription
