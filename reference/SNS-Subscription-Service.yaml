@@ -260,7 +260,7 @@ paths:
         required: true
   /event:
     get:
-      summary: Retrieve all SNS Subscription in CloudMatrix for a Given Tenant
+      summary: Retrieve all SNS Subscription(s) in CloudMatrix for a Given Tenant
       description: |
         This endpoint retrieves all subscription(s) for a specified tenant. The client must provide a valid tenant-id in the request headers and the subscription data in the request body.
         If successful, the server responds with a 200 OK status returning all SNS Subscriptions associated.
