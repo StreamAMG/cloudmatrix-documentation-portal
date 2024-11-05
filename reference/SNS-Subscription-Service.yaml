@@ -145,6 +145,27 @@ paths:
         - SNS-Subscription
       security:
         - ApiKey: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: SNS Subscription in CloudMatrix to be deleted
+        - in: header
+          name: tenant-id
+          description: The unique identifier of the tenant
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: header
+          name: x-api-key
+          description: The x-api-key
+          required: true
+          schema:
+            type: string
+            format: string
       operationId: create-sns-subscription
       requestBody:
         required: true
@@ -289,7 +310,7 @@ components:
       type: object
       x-stoplight:
         id: gey87qt7ekx7o
-      title: CreateSNSSubscription
+      title: CreateSNSSubscriptionResponse
       required:
         - endpoint
         - eventTypes
