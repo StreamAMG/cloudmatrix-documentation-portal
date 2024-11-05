@@ -7,8 +7,8 @@ info:
   title: Articles Internal Sync API Reference
   version: '1.0'
   contact:
-    name: ''
-    email: ''
+    name: Stephen Higgins
+    email: Stephen.Higgins@pamediagroup.com
   summary: Internal service for syncing articles between CloudMatrix and Playback Store
   tags:
     - name: Articles Internal Sync
