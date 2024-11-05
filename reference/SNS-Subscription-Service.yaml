@@ -251,7 +251,7 @@ paths:
         required: true
   /event:
     get:
-      summary: Retrieve All SNS Subscription in CloudMatrix for a Given Tenant
+      summary: Retrieve all SNS Subscription in CloudMatrix for a Given Tenant
       description: |
         This endpoint retrieves all subscription(s) for a specified tenant. The client must provide a valid tenant-id in the request headers and the subscription data in the request body.
         If successful, the server responds with a 200 OK status returning all SNS Subscriptions associated.
@@ -297,7 +297,7 @@ paths:
               examples:
                 Successful response:
                   value:
-                    events:
+                    subscriptions:
                       - id: "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234"
                         tenantId: "3c565fca-c792-469d-a745-8d202261b35f"
                         endpoint: 'https://www.example-sns-endpoint.com'
@@ -335,15 +335,15 @@ paths:
                     enum:
                       - Bad Request
                 required:
-                  - statusCode
                   - message
                   - error
+                  - statusCode
               examples:
                 Invalid Parameter:
                   value:
-                    status: 400
                     message: 'To be defined'
                     error: Bad Request
+                    statusCode: 400
         '403':
           description: Forbidden
           content:
@@ -366,24 +366,27 @@ paths:
           content:
             application/json:
               schema:
-                description: Error creation SNS Subscription data
+                description: Error retrieving all of tenant-id SNS Subscription data
                 type: object
                 properties:
+                  message:
+                    type: string
+                    minLength: 1
+                  error:
+                    type: string
+                    minLength: 1
                   statusCode:
                     type: number
                     enum:
                       - 500
-                  message:
-                    type: string
-                    minLength: 1
                 required:
-                  - status
                   - message
                   - error
+                  - statusCode
               examples:
                 Internal Server Error:
                   value:
-                    message: 'Subscription creation failed'
+                    message: 'Retrieving Subscriptios failed'
                     error: Internal Server Error
                     statusCode: 500
     post:
@@ -443,6 +446,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SNSSubscriptionResponse'
+              examples:
+                Successful response:
+                  value:
+                      id: "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234"
+                      tenantId: "3c565fca-c792-469d-a745-8d202261b35f"
+                      endpoint: 'https://www.example-sns-endpoint.com'
+                      eventTypes: ['article.update']
+                      createdAt: "2024-11-21T19:00:00Z"
+                      status: "PENDING"
         '400':
           description: Bad Request
           content:
@@ -469,14 +481,9 @@ paths:
               examples:
                 Invalid Event Identifier:
                   value:
-                    status: 400
                     message: "each value in eventTypes must be one of the following values: article.update, article.delete, article.restore, config.update"
                     error: Bad Request
-                Title Is Required:
-                  value:
-                    status: 400
-                    message: Title must be a non-empty object
-                    error: Bad Request
+                    statusCode: 400
         '403':
           description: Forbidden
           content:
@@ -588,7 +595,7 @@ components:
     SNSSubscriptionListResponse:
       type: object
       properties:
-        events:
+        subscriptions:
           type: array
           items:
             $ref: "#/components/schemas/SNSSubscriptionResponse"
