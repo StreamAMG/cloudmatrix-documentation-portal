@@ -13,7 +13,7 @@ info:
     The SNS Subscription Service API exposes the functionality to create, read and delete CloudMatrix SNS Subscription 
     Webhooks and is for internal use only (typically the CloudMatrix UI will utilise these endpoints to allow users to manage their subscriptions).
 servers:
-  - url: 'https://service.cloudmatrix.streamamg.com/v1/subscription'
+  - url: 'https://service.cloudmatrix.streamamg.com/v1/'
 paths:
   '/subscription/{id}':
     delete:
@@ -244,6 +244,147 @@ paths:
         description: UUID identifying tenant
         required: true
   /event:
+    get:
+      summary: Retrieve All SNS Subscription in CloudMatrix for a Given Tenant
+      description: |
+        This endpoint retrieves all subscription(s) for a specified tenant. The client must provide a valid tenant-id in the request headers and the subscription data in the request body.
+        If successful, the server responds with a 200 OK status returning all SNS Subscriptions associated.
+
+        This endpoint uses parameters:
+          - pageIndex: The page index to retrieve
+          - pageSize: The number of items to retrieve per page
+
+        The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header. 
+      tags:
+        - SNS-Subscription
+      security:
+        - ApiKey: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: Retrieve All SNS Subscription in CloudMatrix for a Given Tenant
+        - in: header
+          name: tenant-id
+          description: The unique identifier of the tenant
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: header
+          name: x-api-key
+          description: The x-api-key
+          required: true
+          schema:
+            type: string
+            format: string
+      operationId: get-all-sns-subscription
+      responses:
+        '200':
+          description: All SNS Subscription in CloudMatrix for a Given Tenant
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SNSSubscriptionListResponse"
+              examples:
+                Successful response:
+                  value:
+                    events:
+                      - id: "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234"
+                        tenantId: "3c565fca-c792-469d-a745-8d202261b35f"
+                        endpoint: 'https:www.example-sns-endpoint.com'
+                        eventTypes: ['article.update']
+                        createdAt: "2024-11-21T19:00:00Z"
+                        status: "PENDING"
+                      - id: "731f576b-ee29-4369-bbaa-a6b43ef276f0"
+                        tenantId: "3c565fca-c792-469d-a745-8d202261b35f"
+                        endpoint: 'https:www.example-sns-endpoint.com'
+                        eventTypes: ['article.restore']
+                        createdAt: "2024-10-09T19:00:00Z"
+                        status: "COMPLETED"
+                    pagination:
+                      totalCount: 2
+                      itemCount: 2
+                      pageSize: 10
+                      pageIndex: 0
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Invalid request data for the event to create
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                    enum:
+                      - 400
+                  message:
+                    type: string
+                    minLength: 1
+                  error:
+                    type: string
+                    enum:
+                      - Bad Request
+                required:
+                  - statusCode
+                  - message
+                  - error
+              examples:
+                Invalid Event Identifier:
+                  value:
+                    status: 400
+                    message: id must be a UUID
+                    error: Bad Request
+                Title Is Required:
+                  value:
+                    status: 400
+                    message: Title must be a non-empty object
+                    error: Bad Request
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Invalid/Missing API Key
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                Invalid API Key:
+                  value:
+                    message: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Error creation SNS Subscription data
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                    enum:
+                      - 500
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+                  - message
+                  - error
+              examples:
+                Internal Server Error:
+                  value:
+                    message: 'Subscription creation failed'
+                    error: Internal Server Error
+                    statusCode: 500
     post:
       summary: Create a SNS Subscription in CloudMatrix
       description: |
@@ -448,6 +589,30 @@ components:
         createdAt:
           type: string
           format: string
-          description: date and time the subscription was created 
+          description: date and time the subscription was created
+    SNSSubscriptionListResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: "#/components/schemas/SNSSubscriptionResponse"
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+    Pagination:
+      type: object
+      x-stoplight:
+        id: 9576201547f2d
+      properties:
+        totalCount:
+          type: integer
+          x-stoplight:
+            id: 9n82xqtwy974s
+        itemCount:
+          type: integer
+        pageSize:
+          type: integer
+        pageIndex:
+          type: integer
   tags:
   - name: SNS-Subscription
