@@ -107,15 +107,18 @@ paths:
                 description: Error deleting SNS Subscription data
                 type: object
                 properties:
+                  message:
+                    type: string
+                    minLength: 1
+                  error:
+                    type: string
+                    minLength: 1
                   statusCode:
                     type: number
                     enum:
                       - 500
-                  message:
-                    type: string
-                    minLength: 1
                 required:
-                  - status
+                  - statusCode
                   - message
                   - error
               examples:
@@ -189,20 +192,20 @@ paths:
                 description: "Subscription: {id} not found"
                 type: object
                 properties:
-                  status:
-                    type: number
-                    enum:
-                      - 404
                   message:
                     type: string
                     minLength: 1
-                  reason:
+                  error:
                     type: string
                     minLength: 1
+                  statusCode:
+                    type: number
+                    enum:
+                      - 404
                 required:
-                  - statusCode
                   - message
                   - error
+                  - statusCode
               examples:
                 Invalid Event Id:
                   value:
@@ -217,17 +220,20 @@ paths:
                 description: Error retrieving SNS Subscription data
                 type: object
                 properties:
+                  message:
+                    type: string
+                    minLength: 1
+                  error:
+                    type: string
+                    minLength: 1
                   statusCode:
                     type: number
                     enum:
                       - 500
-                  message:
-                    type: string
-                    minLength: 1
                 required:
-                  - status
                   - message
                   - error
+                  - statusCode
               examples:
                 Internal Server Error:
                   value:
@@ -294,13 +300,13 @@ paths:
                     events:
                       - id: "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234"
                         tenantId: "3c565fca-c792-469d-a745-8d202261b35f"
-                        endpoint: 'https:www.example-sns-endpoint.com'
+                        endpoint: 'https://www.example-sns-endpoint.com'
                         eventTypes: ['article.update']
                         createdAt: "2024-11-21T19:00:00Z"
                         status: "PENDING"
                       - id: "731f576b-ee29-4369-bbaa-a6b43ef276f0"
                         tenantId: "3c565fca-c792-469d-a745-8d202261b35f"
-                        endpoint: 'https:www.example-sns-endpoint.com'
+                        endpoint: 'https://www.example-sns-endpoint.com'
                         eventTypes: ['article.restore']
                         createdAt: "2024-10-09T19:00:00Z"
                         status: "COMPLETED"
@@ -383,7 +389,7 @@ paths:
     post:
       summary: Create a SNS Subscription in CloudMatrix
       description: |
-        This endpoint creates a new subscription for a specified tenant. The client must provide a valid tenant-id in the request headers and the subscription data in the request body.
+        This endpoint creates a new SNS subscription for a specified CloudMatrix tenant. The client must provide a valid tenant-id in the request headers and the subscription data in the request body.
         If successful, the server responds with a 201 Created status, confirming that the subscription was successfully created.
 
         The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header. 
@@ -392,12 +398,6 @@ paths:
       security:
         - ApiKey: []
       parameters:
-        - name: id
-          in: path
-          schema:
-            type: string
-          required: true
-          description: SNS Subscription in CloudMatrix to be deleted
         - in: header
           name: tenant-id
           description: The unique identifier of the tenant
@@ -422,19 +422,19 @@ paths:
             examples:
               SNS Subscription (article.update):
                 value:
-                  endpoint: 'https:www.example-sns-endpoint.com'
+                  endpoint: 'https://www.example-sns-endpoint.com'
                   eventTypes: ['article.update']
               SNS Subscription (article.delete):
                 value:
-                  endpoint: 'https:www.example-sns-endpoint.com'
+                  endpoint: 'https://www.example-sns-endpoint.com'
                   eventTypes: ['article.delete']
               SNS Subscription (article.restore):
                 value:
-                  endpoint: 'https:www.example-sns-endpoint.com'
+                  endpoint: 'https://www.example-sns-endpoint.com'
                   eventTypes: ['article.restore']
               SNS Subscription (config.update):
                 value:
-                  endpoint: 'https:www.example-sns-endpoint.com'
+                  endpoint: 'https://www.example-sns-endpoint.com'
                   eventTypes: ['config.update']
       responses:
         '201':
@@ -577,14 +577,14 @@ components:
           type: array
           minimum: 0
           description: array of event types to subscribe to ['article.update', 'article.delete', 'article.restore', 'config.update']
-        status:
-          type: string
-          minLength: 0
-          description: status of the subscription
         createdAt:
           type: string
           format: string
           description: date and time the subscription was created
+        status:
+          type: string
+          minLength: 0
+          description: status of the subscription
     SNSSubscriptionListResponse:
       type: object
       properties:
