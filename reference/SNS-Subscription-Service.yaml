@@ -17,7 +17,7 @@ servers:
 paths:
   '/subscription/{id}':
     delete:
-      summary: Delete a single SNS Subscription from CloudMatrix
+      summary: Delete a SNS Subscription from CloudMatrix
       description: |-
         This endpoint deletes an existing subscription based on its unique id. The client must provide a valid tenant-id in the request headers to identify the tenant context under which the subscription operates.
         If successful, the server responds with a 204 No Content status, indicating that the subscription was deleted without returning any content in the response body.
