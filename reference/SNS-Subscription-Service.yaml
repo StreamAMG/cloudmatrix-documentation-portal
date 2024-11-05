@@ -22,7 +22,7 @@ paths:
         This endpoint deletes an existing subscription based on its unique id. The client must provide a valid tenant-id in the request headers to identify the tenant context under which the subscription operates.
         If successful, the server responds with a 204 No Content status, indicating that the subscription was deleted without returning any content in the response body.
 
-        Note that this is a full removal of the entry, not a soft removal.
+        Note: that this is a full removal of the entry, not a soft removal.
 
         The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header. 
       tags:
@@ -79,20 +79,20 @@ paths:
                 description: "Subscription: {id} not found"
                 type: object
                 properties:
-                  status:
-                    type: number
-                    enum:
-                      - 404
                   message:
                     type: string
                     minLength: 1
-                  reason:
+                  error:
                     type: string
                     minLength: 1
+                  statusCode:
+                    type: number
+                    enum:
+                      - 404
                 required:
-                  - statusCode
                   - message
                   - error
+                  - statusCode
               examples:
                 Invalid Event Id:
                   value:
@@ -314,7 +314,7 @@ paths:
           content:
             application/json:
               schema:
-                description: Invalid request data for the event to create
+                description: Invalid request
                 type: object
                 properties:
                   statusCode:
@@ -333,15 +333,10 @@ paths:
                   - message
                   - error
               examples:
-                Invalid Event Identifier:
+                Invalid Parameter:
                   value:
                     status: 400
-                    message: id must be a UUID
-                    error: Bad Request
-                Title Is Required:
-                  value:
-                    status: 400
-                    message: Title must be a non-empty object
+                    message: 'To be defined'
                     error: Bad Request
         '403':
           description: Forbidden
@@ -475,7 +470,7 @@ paths:
                 Invalid Event Identifier:
                   value:
                     status: 400
-                    message: id must be a UUID
+                    message: "each value in eventTypes must be one of the following values: article.update, article.delete, article.restore, config.update"
                     error: Bad Request
                 Title Is Required:
                   value:
