@@ -7,8 +7,8 @@ info:
   title: Events Service API Reference
   version: "1.0"
   contact:
-    name: Stephen Higgins
-    email: Stephen.Higgins@pamediagroup.com
+    name: ''
+    email: ''
   summary: Internal Events Service API for CRUD operations on CloudMatrix Events.
   description: |-
     The Events Service API exposes the functionality to create, read, update and delete CloudMatrix Events and is for
