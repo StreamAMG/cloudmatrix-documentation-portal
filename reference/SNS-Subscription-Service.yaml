@@ -17,7 +17,7 @@ servers:
 paths:
   '/subscription/{id}':
     delete:
-      summary: Delete a SNS Subscription from CloudMatrix
+      summary: Delete an SNS Subscription from CloudMatrix
       description: |-
         This endpoint deletes an existing subscription based on its unique id. The client must provide a valid tenant-id in the request headers to identify the tenant context under which the subscription operates.
         If successful, the server responds with a 204 No Content status, indicating that the subscription was deleted without returning any content in the response body.
@@ -128,7 +128,7 @@ paths:
                     error: Internal Server Error
                     statusCode: 500
     get:
-      summary: Retrieve a SNS Subscription from CloudMatrix
+      summary: Retrieve an SNS Subscription from CloudMatrix
       description: |-
         This endpoint retrieves an existing subscription based on its unique id. The client must provide a valid tenant-id in the request headers to identify the tenant context under which the subscription operates.
         If successful, the server responds with a 200 OK status, indicating that the subscription was retrieved, returning any content in the response body.
@@ -405,7 +405,7 @@ paths:
                     error: Internal Server Error
                     statusCode: 500
     post:
-      summary: Create a SNS Subscription in CloudMatrix
+      summary: Create an SNS Subscription in CloudMatrix
       description: |
         This endpoint creates a new SNS subscription for a specified CloudMatrix tenant. The client must provide a valid tenant-id in the request headers and the subscription data in the request body.
         If successful, the server responds with a 201 Created status, confirming that the subscription was successfully created.
