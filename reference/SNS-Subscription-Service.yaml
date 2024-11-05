@@ -309,7 +309,7 @@ components:
     CreateSNSSubscriptionResponse:
       type: object
       x-stoplight:
-        id: gey87qt7ekx7o
+        id: gey81qt7eka7o
       title: CreateSNSSubscriptionResponse
       required:
         - endpoint
