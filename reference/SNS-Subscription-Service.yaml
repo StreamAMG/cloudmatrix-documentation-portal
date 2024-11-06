@@ -258,7 +258,7 @@ paths:
         name: tenant-id
         description: UUID identifying tenant
         required: true
-  /event:
+  /subscription:
     get:
       summary: Retrieve all SNS Subscription(s) in CloudMatrix for a Given Tenant
       description: |
