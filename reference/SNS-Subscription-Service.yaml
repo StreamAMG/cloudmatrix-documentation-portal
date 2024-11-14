@@ -267,7 +267,8 @@ paths:
 
         This endpoint uses parameters:
           - pageSize: The number of items to retrieve per page
-          - exclusiveStartKey: id of the last item returned in the previous request. NOTE:  Will only show if count returned is greater than pageSize
+          - exclusiveStartKey: id of the last item returned in the previous request.
+               <b>NOTE</b>:  Will only show if count returned is greater than pageSize
 
         The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header. 
       tags:
