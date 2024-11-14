@@ -266,8 +266,9 @@ paths:
         If successful, the server responds with a 200 OK status returning all SNS Subscriptions associated.
 
         This endpoint uses parameters:
-          - pageIndex: The page index to retrieve
           - pageSize: The number of items to retrieve per page
+          - exclusiveStartKey: id of the last item returned in the previous request.
+               <b>NOTE</b>:  Will only show if count returned is greater than pageSize
 
         The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header. 
       tags:
@@ -291,16 +292,17 @@ paths:
             format: string
         - schema:
             type: string
-            default: "0"
-          in: query
-          name: pageIndex
-          description: Page index of results page to be returned
-        - schema:
-            type: string
             default: "10"
           in: query
           name: pageSize
           description: Size of the page of results
+        - schema:
+            type: string
+            # default: "null"
+          in: query
+          name: exclusiveStartKey
+          description: id of the last item returned in the previous request
+          optional: true
       operationId: get-all-sns-subscription
       responses:
         '200':
@@ -327,9 +329,7 @@ paths:
                         status: "COMPLETED"
                     pagination:
                       totalCount: 2
-                      itemCount: 2
                       pageSize: 10
-                      pageIndex: 0
         '400':
           description: Bad Request
           content:
@@ -628,11 +628,9 @@ components:
           type: integer
           x-stoplight:
             id: 9n82xqtwy974s
-        itemCount:
-          type: integer
         pageSize:
           type: integer
-        pageIndex:
-          type: integer
+        exclusiveStartKey:
+          type: uuid
   tags:
   - name: SNS-Subscription
