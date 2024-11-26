@@ -532,7 +532,7 @@ paths:
               examples:
                 Subscription already exists:
                   value:
-                    message: Subscription for https://www.example-sns-endpoint.com and event: article.update already exists            
+                    message: "Subscription for https://www.example-sns-endpoint.com and event: article.update already exists"
         '500':
           description: Internal Server Error
           content:
