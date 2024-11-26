@@ -527,8 +527,18 @@ paths:
                   message:
                     type: string
                     minLength: 1
+                  error:
+                    type: string
+                    enum:
+                      - Conflict
+                  statusCode:
+                    type: number
+                    enum:
+                      - 409  
                 required:
                   - message
+                  - error
+                  - statusCode
               examples:
                 Subscription already exists:
                   value:
