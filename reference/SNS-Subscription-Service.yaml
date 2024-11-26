@@ -533,6 +533,8 @@ paths:
                 Subscription already exists:
                   value:
                     message: "Subscription for https://www.example-sns-endpoint.com and event: article.update already exists"
+                    error: Conflict
+                    statusCode: 409
         '500':
           description: Internal Server Error
           content:
