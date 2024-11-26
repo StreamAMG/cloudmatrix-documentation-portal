@@ -516,6 +516,35 @@ paths:
                 Invalid API Key:
                   value:
                     message: Forbidden
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                description: Subscription already exists
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                  error:
+                    type: string
+                    enum:
+                      - Conflict
+                  statusCode:
+                    type: number
+                    enum:
+                      - 409  
+                required:
+                  - message
+                  - error
+                  - statusCode
+              examples:
+                Subscription already exists:
+                  value:
+                    message: "Subscription for https://www.example-sns-endpoint.com and event: article.update already exists"
+                    error: Conflict
+                    statusCode: 409
         '500':
           description: Internal Server Error
           content:
