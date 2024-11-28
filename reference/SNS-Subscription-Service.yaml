@@ -545,12 +545,12 @@ paths:
                   - error
                   - statusCode
               examples:
-                SubscriptionAlreadyExists:
+                Subscription already exists:
                   value:
                     message: "Subscription for already exists"
                     error: Conflict
                     statusCode: 409
-                AnotherSubscriptionConflict:
+                Subscription already exists with different eventTypes:
                   value:
                     message: "Subscription already exists with different attributes"
                     error: Conflict
