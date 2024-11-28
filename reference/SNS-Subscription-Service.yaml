@@ -547,7 +547,7 @@ paths:
               examples:
                 Subscription already exists:
                   value:
-                    message: "Subscription for already exists"
+                    message: "Subscription already exists"
                     error: Conflict
                     statusCode: 409
                 Subscription already exists with different eventTypes:
