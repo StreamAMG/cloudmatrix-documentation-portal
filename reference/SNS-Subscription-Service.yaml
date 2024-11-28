@@ -499,6 +499,11 @@ paths:
                     message: "each value in eventTypes must be one of the following values: article.update, article.delete, article.restore, config.update"
                     error: Bad Request
                     statusCode: 400
+                Unreachable Endpoint:
+                  value:
+                    message: "Unreachable Endpoint"
+                    error: Bad Request
+                    statusCode: 400    
         '403':
           description: Forbidden
           content:
@@ -542,9 +547,14 @@ paths:
               examples:
                 Subscription already exists:
                   value:
-                    message: "Subscription for https://www.example-sns-endpoint.com and event: article.update already exists"
+                    message: "Subscription already exists"
                     error: Conflict
                     statusCode: 409
+                Subscription already exists with different eventTypes:
+                  value:
+                    message: "Subscription already exists with different attributes"
+                    error: Conflict
+                    statusCode: 409    
         '500':
           description: Internal Server Error
           content:
