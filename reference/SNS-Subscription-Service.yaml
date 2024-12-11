@@ -594,7 +594,7 @@ paths:
         required: true
   '/subscription/audit': 
     get: 
-      summary: Retrieve all SNS delivery in CloudMatrix for a destination
+      summary: Retrieve all SNS delivery logs in CloudMatrix for a destination
       description: |
         This endpoint retrieves all log(s) for a specified destination. The client must provide a valid tenant-id in the request headers.
         If successful, the server responds with a 200 OK status returning all SNS logs associated.
