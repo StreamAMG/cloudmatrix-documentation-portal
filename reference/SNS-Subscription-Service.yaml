@@ -314,7 +314,7 @@ paths:
               examples:
                 Successful response:
                   value:
-                    subscriptions:
+                   items:
                       - id: "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234"
                         tenantId: "3c565fca-c792-469d-a745-8d202261b35f"
                         endpoint: 'https://www.example-sns-endpoint.com'
@@ -809,7 +809,7 @@ components:
     SNSSubscriptionListResponse:
       type: object
       properties:
-        subscriptions:
+        items:
           type: array
           items:
             $ref: "#/components/schemas/SNSSubscriptionResponse"
