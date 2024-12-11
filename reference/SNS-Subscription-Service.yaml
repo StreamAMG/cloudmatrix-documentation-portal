@@ -813,8 +813,12 @@ components:
         id: gey81qt7eka7o
       title: AuditLogsResponse
       required:
-        - endpoint
-        - eventTypes
+        - messageId
+        - status
+        - statusCode
+        - lastUpdated
+        - deliveryTimestamp
+        - destination        
       properties:
         messageId:
           type: string
