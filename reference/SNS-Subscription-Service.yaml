@@ -603,8 +603,7 @@ paths:
           - pageSize: The number of items to retrieve per page
           - exclusiveStartKey: id of the last item returned in the previous request.
             <b>NOTE</b>:  Will only show if count returned is greater than pageSize
-          - destination: The destination URL to filter the logs by
-               
+          - destination: The destination URL to filter the logs by              
 
         The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header. 
       tags:
@@ -648,10 +647,12 @@ paths:
           required: true  
       operationId: get-all-sns-subscription
       responses:
-        '200':
+        '200':        
           description: All SNS Logs in CloudMatrix for a Given Destination
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/LogsListResponse'
               examples:
                 Successful response:
                   value:
@@ -806,6 +807,50 @@ components:
           type: string
           minLength: 0
           description: status of the subscription
+    AuditLogsResponse:
+      type: object
+      x-stoplight:
+        id: gey81qt7eka7o
+      title: AuditLogsResponse
+      required:
+        - endpoint
+        - eventTypes
+      properties:
+        messageId::
+          type: string
+          format: uuid
+          description: SNS notification identifier
+        destination:
+          type: string
+          minLength: 1
+          description: webhook endpoint
+        status:
+          type: string
+          minLength: 1
+          description: delivery status
+        statusCode:
+          type: number
+          minimum: 0
+          description: HTTP status code
+        lastUpdated:
+          type: string
+          format: string
+          description: date and time the log was created
+        deliveryTimestamp:
+          type: string
+          minLength: 0
+          description: date and time the log was delivered
+        failureReason":
+          type: string
+          minLength: 0
+          description: reason for failure
+          optional: true
+        attempts:
+          type: number
+          minimum: 1
+          description: number of delivery attempts   
+          optional: true       
+
     SNSSubscriptionListResponse:
       type: object
       properties:
@@ -828,5 +873,15 @@ components:
           type: integer
         exclusiveStartKey:
           type: uuid
+    LogsListResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuditLogsResponse"
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+  
   tags:
   - name: SNS-Subscription
