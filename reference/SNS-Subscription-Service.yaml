@@ -816,30 +816,36 @@ components:
         - endpoint
         - eventTypes
       properties:
-        messageId::
+        messageId:
           type: string
           format: uuid
           description: SNS notification identifier
+          required: true
         destination:
           type: string
           minLength: 1
           description: webhook endpoint
+          required: true
         status:
           type: string
           minLength: 1
           description: delivery status
+          required: true
         statusCode:
           type: number
           minimum: 0
           description: HTTP status code
+          required: true
         lastUpdated:
           type: string
           format: string
           description: date and time the log was created
+          required: true
         deliveryTimestamp:
           type: string
           minLength: 0
           description: date and time the log was delivered
+          required: true
         failureReason":
           type: string
           minLength: 0
