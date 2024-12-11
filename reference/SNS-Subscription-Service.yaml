@@ -314,7 +314,7 @@ paths:
               examples:
                 Successful response:
                   value:
-                    subscriptions:
+                    items:
                       - id: "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234"
                         tenantId: "3c565fca-c792-469d-a745-8d202261b35f"
                         endpoint: 'https://www.example-sns-endpoint.com'
@@ -592,6 +592,164 @@ paths:
         name: tenant-id
         description: UUID identifying tenant
         required: true
+  /subscription/audit: 
+    get: 
+      summary: Retrieve all SNS delivery logs in CloudMatrix for a destination
+      description: |
+        This endpoint retrieves all log(s) for a specified destination. The client must provide a valid tenant-id in the request headers.
+        If successful, the server responds with a 200 OK status returning all SNS logs associated.
+
+        This endpoint uses parameters:
+          - pageSize: The number of items to retrieve per page
+          - exclusiveStartKey: id of the last item returned in the previous request.
+            <b>NOTE</b>:  Will only show if count returned is greater than pageSize
+          - destination: The destination URL to filter the logs by              
+
+        The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header. 
+      tags:
+        - SNS-Logs 
+
+      security:
+        - ApiKey: []
+      parameters:
+        - in: header
+          name: tenant-id
+          description: The unique identifier of the tenant
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: header
+          name: x-api-key
+          description: The x-api-key
+          required: true
+          schema:
+            type: string
+            format: string
+        - schema:
+            type: string
+            default: "10"
+          in: query
+          name: pageSize
+          description: Size of the page of results
+        - schema:
+            type: string
+            # default: "null"
+          in: query
+          name: exclusiveStartKey
+          description: id of the last item returned in the previous request
+          optional: true
+        - schema:
+            type: string
+          in: query
+          name: destination
+          description: destination URL to filter the logs by
+          required: true  
+      operationId: get-all-sns-subscription
+      responses:
+        '200':        
+          description: All SNS Logs in CloudMatrix for a Given Destination
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsListResponse'
+              examples:
+                Successful response:
+                  value:
+                    items:
+                    - messageId: "adb526de-830e-51b9-94f3-790df365672e"
+                      lastUpdated: "2024-12-11T10:49:39.664Z"
+                      statusCode: 404,
+                      deliveryTimestamp: "2024-12-11T10:49:39.664Z"
+                      status: "FAILURE"
+                      destination: "https://0909-2001-818-e781-cc00-a053-7bf4-aeb3-23bf.ngrok-free.app"
+                      failureReason": "Not Found"
+                      attempts: 1
+                     
+                    - messageId: "6f70192d-8e02-40bb-8caa-5be21aa5c901"
+                      destination: "https://0909-2001-818-e781-cc00-a053-7bf4-aeb3-23bf.ngrok-free.app"
+                      lastUpdated: "2024-12-09T16:57:02.963Z"
+                      statusCode: 200
+                      deliveryTimestamp: "2024-12-09T16:57:02.963Z"
+                      status: "SUCCESS"
+            
+                    pagination:
+                      totalCount: 2
+                      pageSize: 10
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Invalid request
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                  error:
+                    type: string
+                    enum:
+                      - Bad Request
+                  statusCode:
+                    type: number
+                    enum:
+                      - 400
+                required:
+                  - message
+                  - error
+                  - statusCode
+              examples:
+                Invalid Parameter:
+                  value:
+                    message: 'Destination is required'
+                    error: Bad Request
+                    statusCode: 400
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Invalid/Missing API Key
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                Invalid API Key:
+                  value:
+                    message: Forbidden
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Error retrieving logs for destination
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                  error:
+                    type: string
+                    minLength: 1
+                  statusCode:
+                    type: number
+                    enum:
+                      - 500
+                required:
+                  - message
+                  - error
+                  - statusCode
+              examples:
+                Internal Server Error:
+                  value:
+                    message: 'Retrieving logs failed'
+                    error: Internal Server Error
+                    statusCode: 500                     
 components:
   securitySchemes:
     ApiKey:
@@ -649,10 +807,64 @@ components:
           type: string
           minLength: 0
           description: status of the subscription
+    AuditLogsResponse:
+      type: object
+      x-stoplight:
+        id: gey81qt7eka7o
+      title: AuditLogsResponse
+      required:
+        - messageId
+        - status
+        - statusCode
+        - lastUpdated
+        - deliveryTimestamp
+        - destination        
+      properties:
+        messageId:
+          type: string
+          format: uuid
+          description: SNS notification identifier
+          required: true
+        destination:
+          type: string
+          minLength: 1
+          description: webhook endpoint
+          required: true
+        status:
+          type: string
+          minLength: 1
+          description: delivery status
+          required: true
+        statusCode:
+          type: number
+          minimum: 0
+          description: HTTP status code
+          required: true
+        lastUpdated:
+          type: string
+          format: string
+          description: date and time the log was created
+          required: true
+        deliveryTimestamp:
+          type: string
+          minLength: 0
+          description: date and time the log was delivered
+          required: true
+        failureReason":
+          type: string
+          minLength: 0
+          description: reason for failure
+          optional: true
+        attempts:
+          type: number
+          minimum: 1
+          description: number of delivery attempts   
+          optional: true       
+
     SNSSubscriptionListResponse:
       type: object
       properties:
-        subscriptions:
+        items:
           type: array
           items:
             $ref: "#/components/schemas/SNSSubscriptionResponse"
@@ -671,5 +883,15 @@ components:
           type: integer
         exclusiveStartKey:
           type: uuid
+    LogsListResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuditLogsResponse"
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+  
   tags:
   - name: SNS-Subscription
