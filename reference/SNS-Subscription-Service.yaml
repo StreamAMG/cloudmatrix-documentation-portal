@@ -592,7 +592,7 @@ paths:
         name: tenant-id
         description: UUID identifying tenant
         required: true
-  '/subscription/audit': 
+  /subscription/audit: 
     get: 
       summary: Retrieve all SNS delivery logs in CloudMatrix for a destination
       description: |
