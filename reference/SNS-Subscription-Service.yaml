@@ -715,7 +715,8 @@ paths:
                 Invalid Pagination Parameters:
                   value:
                     message: 'Both exclusiveStartKey and timestamp must be provided together.'
-                    error: Bad Request    
+                    error: Bad Request  
+                    statusCode: 400  
         '403':
           description: Forbidden
           content:
