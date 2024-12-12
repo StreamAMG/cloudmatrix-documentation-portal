@@ -603,7 +603,9 @@ paths:
           - pageSize: The number of items to retrieve per page
           - exclusiveStartKey: id of the last item returned in the previous request.
             <b>NOTE</b>:  Will only show if count returned is greater than pageSize
-          - destination: The destination URL to filter the logs by              
+          - destination: The destination URL to filter the logs by     
+          - temastamp: is used for pagination. The timestamp of the last log returned in the previous request. 
+            <b>NOTE</b>:  Should be passed together with exclusiveStartKey           
 
         The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header. 
       tags:
@@ -645,6 +647,11 @@ paths:
           name: destination
           description: destination URL to filter the logs by
           required: true  
+        - schema:
+            type: string
+            in: query  
+            name: timestamp
+            description: timestamp of the last log returned in the previous request
       operationId: get-all-sns-subscription
       responses:
         '200':        
@@ -705,6 +712,11 @@ paths:
                     message: 'Destination is required'
                     error: Bad Request
                     statusCode: 400
+                Invalid Pagination Parameters:
+                  value:
+                    message: 'Both exclusiveStartKey and timestamp must be provided together.'
+                    error: Bad Request  
+                    statusCode: 400  
         '403':
           description: Forbidden
           content:
