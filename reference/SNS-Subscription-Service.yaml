@@ -687,7 +687,7 @@ paths:
                       deliveryTimestamp: "2024-12-09T16:57:02.963Z"
                       status: "SUCCESS"
                       eventType: 'config.update'
-                      entitlement: 'paidEntitlement'
+                      entitlement: '[paidEntitlement]'
             
                     pagination:
                       totalCount: 2
@@ -892,7 +892,7 @@ components:
           description: unique identifier for the subscription (uuid or MP id)
           optional: true        
         entitlement:
-          type: string
+          type: array
           minLength: 1
           description: entitlement value on config.update event
           optional: true    
