@@ -642,6 +642,11 @@ paths:
           description: id of the last item returned in the previous request
           optional: true
         - schema:
+            type: string  
+          in: query
+          name: timestamp
+          description: timestamp of the last log returned in the previous request
+        - schema:
             type: string
           in: query
           name: destination
