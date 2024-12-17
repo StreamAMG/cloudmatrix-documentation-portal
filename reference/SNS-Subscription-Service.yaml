@@ -672,13 +672,17 @@ paths:
                       destination: "https://0909-2001-818-e781-cc00-a053-7bf4-aeb3-23bf.ngrok-free.app"
                       failureReason": "Not Found"
                       attempts: 1
-                     
+                      eventTypes: 'article.update'
+                      entryId: "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234"
+
                     - messageId: "6f70192d-8e02-40bb-8caa-5be21aa5c901"
                       destination: "https://0909-2001-818-e781-cc00-a053-7bf4-aeb3-23bf.ngrok-free.app"
                       lastUpdated: "2024-12-09T16:57:02.963Z"
                       statusCode: 200
                       deliveryTimestamp: "2024-12-09T16:57:02.963Z"
                       status: "SUCCESS"
+                      eventType: 'config.update'
+                      entitlement: 'paidEntitlement'
             
                     pagination:
                       totalCount: 2
@@ -830,7 +834,8 @@ components:
         - statusCode
         - lastUpdated
         - deliveryTimestamp
-        - destination        
+        - destination   
+        - eventType    
       properties:
         messageId:
           type: string
@@ -871,7 +876,21 @@ components:
           type: number
           minimum: 1
           description: number of delivery attempts   
-          optional: true       
+          optional: true 
+        eventType:
+          type: string
+          minLength: 1
+          description: event type
+          required: true
+        entryId:  
+          type: string
+          description: unique identifier for the subscription (uuid or MP id)
+          optional: true        
+        entitlement:
+          type: string
+          minLength: 1
+          description: entitlement value on config.update event
+          optional: true    
 
     SNSSubscriptionListResponse:
       type: object
