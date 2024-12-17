@@ -604,7 +604,7 @@ paths:
           - exclusiveStartKey: id of the last item returned in the previous request.
             <b>NOTE</b>:  Will only show if count returned is greater than pageSize
           - destination: The destination URL to filter the logs by     
-          - timastamp: is used for pagination. The timestamp of the last log returned in the previous request. 
+          - timestamp: is used for pagination. The timestamp of the last log returned in the previous request. 
             <b>NOTE</b>:  Should be passed together with exclusiveStartKey           
 
         The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header. 
@@ -687,7 +687,7 @@ paths:
                       deliveryTimestamp: "2024-12-09T16:57:02.963Z"
                       status: "SUCCESS"
                       eventType: 'config.update'
-                      entitlement: 'paidEntitlement'
+                      entitlement: ['paidEntitlement']
             
                     pagination:
                       totalCount: 2
@@ -892,7 +892,7 @@ components:
           description: unique identifier for the subscription (uuid or MP id)
           optional: true        
         entitlement:
-          type: string
+          type: array
           minLength: 1
           description: entitlement value on config.update event
           optional: true    
