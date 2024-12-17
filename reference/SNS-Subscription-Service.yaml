@@ -687,7 +687,7 @@ paths:
                       deliveryTimestamp: "2024-12-09T16:57:02.963Z"
                       status: "SUCCESS"
                       eventType: 'config.update'
-                      entitlement: '[paidEntitlement]'
+                      entitlement: ['paidEntitlement']
             
                     pagination:
                       totalCount: 2
