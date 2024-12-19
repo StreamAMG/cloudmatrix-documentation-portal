@@ -19,7 +19,7 @@ Below is a brief outline of the event types. You do not have to configure all ty
 
 ### article.update
 
-Whenever an article is edited, an event will be sent to the webhook. This includes changes made through an input box or anything specific to the publication schedule. It does not include deletion or restoration.
+Whenever an article is edited or content is uploaded to CloudMatrix via MediaPlatform or Enrichment Service, an event will be sent to the webhook. This includes changes made through an input box or anything specific to the publication schedule. It does not include deletion or restoration.
 
 ### article.delete
 
