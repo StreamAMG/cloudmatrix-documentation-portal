@@ -679,6 +679,7 @@ paths:
                       attempts: 1
                       eventTypes: 'article.update'
                       entryId: "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234"
+                      mediaReady: true
 
                     - messageId: "6f70192d-8e02-40bb-8caa-5be21aa5c901"
                       destination: "https://0909-2001-818-e781-cc00-a053-7bf4-aeb3-23bf.ngrok-free.app"
@@ -895,6 +896,10 @@ components:
           type: array
           minLength: 1
           description: entitlement value on config.update event
+          optional: true    
+        mediaReady:
+          type: boolean
+          description: true or false boolean value to advise if media is ready to be used
           optional: true    
 
     SNSSubscriptionListResponse:

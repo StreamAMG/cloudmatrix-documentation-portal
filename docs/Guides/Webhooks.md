@@ -91,19 +91,15 @@ Here you can then view the event types
 
 The following are examples of the data expected to be sent in the message portion of the webhook:
 
-### Media Platform / SNS On Demand
+### Article Example - On Demand
 ```json
 {
   "id": "e33cf999-395f-45c1-b682-76b834a604f0",
   "timestamp": "2024-12-19T09:36:54.5601363Z",
   "payload": {
     "mediaData": {
-      "type": "kaltura",
       "mediaType": "OnDemand",
-      "kaltura": {
-        "entryId": "0_bsjm69nx",
-        "entryStatus": "Ready"
-      }
+      "mediaReady": true
     },
     "metadata": {
       "title": "Media Platform OnDemand Title",
@@ -118,44 +114,15 @@ The following are examples of the data expected to be sent in the message portio
   }
 ```
 
-### Media Platform / SNS On Live
-```json
-{
-  "id": "02b50844-7413-4354-95bd-139836b50435",
-  "timestamp": "2024-12-19T09:36:46.5104087Z",
-  "payload": {
-    "mediaData": {
-      "type": "kaltura",
-      "mediaType": "Live",
-      "kaltura": {
-        "entryId": "0_x49oclf8",
-        "entryStatus": "Ready",
-        "thumbnailUrl": "https://open.http.mp.streamamg.com/p/3000759/sp/300075900/thumbnail/entry_id/0_x49oclf8/"
-      }
-    },
-    "metadata": {
-      "title": "Media Platform Live Title",
-      "body": "Media Platform Live Description",
-      "tags": "",
-      "duration": 0,
-      "sysEntryEntitlements": [
-        "*"
-      ],
-      "defaultEntitlementApplied": true
-    }
-  }
-}
-```
-
-### CloudMatrix / SNS On Live
+### Article Example - Live
 ```json
 {
   "id": "6a594eec-7ebe-4c5a-9376-33d5fc46c9fa",
   "timestamp": "2024-12-19T09:36:38.7614609Z",
   "payload": {
     "mediaData": {
-      "type": "playback",
-      "mediaType": "Live"
+      "mediaType": "Live",
+      "mediaReady": true
     },
     "metadata": {
       "title": "CM Live Article",
