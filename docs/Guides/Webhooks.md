@@ -109,7 +109,12 @@ The following are examples of the data expected to be sent in the message portio
       "sysEntryEntitlements": [
         "*"
       ],
-      "defaultEntitlementApplied": true
+      "customFieldA": "Example of custom field value A",
+      "customFieldB": "Example of custom field value B",
+      "customFieldC": "Example of custom field value C",
+      "customFieldD": "Example of custom field value D",
+      "customFieldE": "Example of custom field value E",
+      "customFieldF": "Example of custom field value F",
     }
   }
 ```
@@ -132,7 +137,12 @@ The following are examples of the data expected to be sent in the message portio
       "sysEntryEntitlements": [
         "*"
       ],
-      "defaultEntitlementApplied": true
+      "customFieldA": "Example of custom field value A",
+      "customFieldB": "Example of custom field value B",
+      "customFieldC": "Example of custom field value C",
+      "customFieldD": "Example of custom field value D",
+      "customFieldE": "Example of custom field value E",
+      "customFieldF": "Example of custom field value F",
     }
   }
 }
