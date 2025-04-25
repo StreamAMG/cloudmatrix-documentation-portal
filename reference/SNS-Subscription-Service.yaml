@@ -1076,8 +1076,15 @@ components:
         - message
         - statusCode
       properties:
-        message: string
-        statusCode: number
+        message:
+          type: string
+          minLength: 1
+          description: message indicating the result of the resync operation
+        statusCode:
+          type: number
+          description: HTTP status code
+          enum:
+            - 201
 
     SNSSubscriptionListResponse:
       type: object
