@@ -814,7 +814,7 @@ paths:
       responses:
         responses:
         "201":
-          description: Created SNS Subscription in CloudMatrix
+          description: Resync Subscription in CloudMatrix
           content:
             application/json:
               schema:
@@ -823,7 +823,7 @@ paths:
                 Example - Success:
                   value:
                     message: "Subscription resync triggered successfully"
-                    statusCode: 200
+                    statusCode: 201
         "400":
           description: Bad Request
           content:
@@ -850,19 +850,26 @@ paths:
               examples:
                 Missing Subscription Id:
                   value:
-                    message: ["subscriptionId must be a UUID", "subscriptionId must be a string"]
+                    message:
+                      - "subscriptionId must be a UUID"
+                      - "subscriptionId must be a string"
                     error: Bad Request
                     statusCode: 400
                 Missing Start Time:
                   value:
-                    message: ["startTime must be a valid ISO 8601 date string", "startTime must be a string"]
+                    message:
+                      - "startTime must be a valid ISO 8601 date string"
+                      - "startTime must be a string"
                     error: Bad Request
                     statusCode: 400
                 Missing End Time:
                   value:
-                    message: ["endTime must be a must be a valid ISO 8601 date string", "endTime must be a string"]
+                    message:
+                      - "endTime must be a must be a valid ISO 8601 date string"
+                      - "endTime must be a string"
+
                     error: Bad Request
-                    statusCode: 400  
+                    statusCode: 400
         "403":
           description: Forbidden
           content:
@@ -1071,7 +1078,7 @@ components:
       properties:
         id:
           message: string
-          statusCode: number    
+          statusCode: number
 
     SNSSubscriptionListResponse:
       type: object
