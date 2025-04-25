@@ -775,7 +775,7 @@ paths:
 
   /subscription/sync:
     post:
-      summary: Starts a sync of all articles for the given timestamp and destination
+      summary: Start a sync of all articles for the given timestamp and destination
       description: |
         This endpoint checks for articles that were updated within a specified time range and resends the latest state of those articles to the specified destination
         The client must provide a valid tenant-id in the request headers.        
