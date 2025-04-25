@@ -886,7 +886,7 @@ paths:
               examples:
                 Invalid API Key:
                   value:
-                    message: Forbidden
+                    message: API Key not provided or not valid
 
         "500":
           description: Internal Server Error
@@ -1073,12 +1073,11 @@ components:
         id: gey81qt7eka7o
       title: ResyncSubscriptionResponse
       required:
-        - endpoint
-        - eventTypes
+        - message
+        - statusCode
       properties:
-        id:
-          message: string
-          statusCode: number
+        message: string
+        statusCode: number
 
     SNSSubscriptionListResponse:
       type: object
