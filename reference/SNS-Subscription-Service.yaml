@@ -4,18 +4,18 @@ x-stoplight:
 openapi: 3.1.0
 info:
   title: SNS Subscription API Reference
-  version: '1.0'
+  version: "1.0"
   contact:
-    name: ''
-    email: ''
+    name: ""
+    email: ""
   summary: Internal SNS Subscription Service API for CloudMatrix.
   description: |-
     The SNS Subscription Service API exposes the functionality to create, read and delete CloudMatrix SNS Subscription 
     Webhooks and is for internal use only (typically the CloudMatrix UI will utilise these endpoints to allow users to manage their subscriptions).
 servers:
-  - url: 'https://service.cloudmatrix.streamamg.com/v1/'
+  - url: "https://service.cloudmatrix.streamamg.com/v1/"
 paths:
-  '/subscription/{id}':
+  "/subscription/{id}":
     delete:
       summary: Delete an SNS Subscription from CloudMatrix
       description: |-
@@ -24,7 +24,7 @@ paths:
 
         Note: that this is a full removal of the entry, not a soft removal.
 
-        The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header. 
+        The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header.
       tags:
         - SNS-Subscription
       operationId: delete-sns-subscription
@@ -52,9 +52,9 @@ paths:
             type: string
             format: string
       responses:
-        '204':
+        "204":
           description: SNS Subscription is deleted in CloudMatrix
-        '403':
+        "403":
           description: Forbidden
           content:
             application/json:
@@ -71,7 +71,7 @@ paths:
                 Invalid API Key:
                   value:
                     message: API Key not provided or not valid
-        '404':
+        "404":
           description: Not Found
           content:
             application/json:
@@ -99,7 +99,7 @@ paths:
                     message: "Subscription: 354a82b8-fb50-45fe-8b78-c952b06e2a82 not found"
                     error: Not Found
                     statusCode: 404
-        '500':
+        "500":
           description: Internal Server Error
           content:
             application/json:
@@ -124,7 +124,7 @@ paths:
               examples:
                 Internal Server Error:
                   value:
-                    message: 'Subscription deletion failed'
+                    message: "Subscription deletion failed"
                     error: Internal Server Error
                     statusCode: 500
     get:
@@ -133,7 +133,7 @@ paths:
         This endpoint retrieves an existing subscription based on its unique id. The client must provide a valid tenant-id in the request headers to identify the tenant context under which the subscription operates.
         If successful, the server responds with a 200 OK status, indicating that the subscription was retrieved, returning any content in the response body.
 
-        The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header. 
+        The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header.
       tags:
         - SNS-Subscription
       operationId: retrieve-sns-subscription
@@ -161,22 +161,22 @@ paths:
             type: string
             format: string
       responses:
-        '200':
+        "200":
           description: SNS Subscription retrieved in CloudMatrix
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SNSSubscriptionResponse'
+                $ref: "#/components/schemas/SNSSubscriptionResponse"
               examples:
                 Example - Success:
                   value:
-                      id: "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234"
-                      tenantId: "3c565fca-c792-469d-a745-8d202261b35f"
-                      endpoint: 'https://www.example-sns-endpoint.com'
-                      eventTypes: ['article.update']
-                      createdAt: "2024-11-21T19:00:00Z"
-                      status: "PENDING" 
-        '403':
+                    id: "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234"
+                    tenantId: "3c565fca-c792-469d-a745-8d202261b35f"
+                    endpoint: "https://www.example-sns-endpoint.com"
+                    eventTypes: ["article.update"]
+                    createdAt: "2024-11-21T19:00:00Z"
+                    status: "PENDING"
+        "403":
           description: Forbidden
           content:
             application/json:
@@ -193,7 +193,7 @@ paths:
                 Invalid API Key:
                   value:
                     message: API Key not provided or not valid
-        '404':
+        "404":
           description: Not Found
           content:
             application/json:
@@ -221,7 +221,7 @@ paths:
                     message: "Subscription: 354a82b8-fb50-45fe-8b78-c952b06e2a82 not found"
                     error: Not Found
                     statusCode: 404
-        '500':
+        "500":
           description: Internal Server Error
           content:
             application/json:
@@ -246,7 +246,7 @@ paths:
               examples:
                 Internal Server Error:
                   value:
-                    message: 'Subscription retrieval failed'
+                    message: "Subscription retrieval failed"
                     error: Internal Server Error
                     statusCode: 500
       x-stoplight:
@@ -270,7 +270,7 @@ paths:
           - exclusiveStartKey: id of the last item returned in the previous request.
                <b>NOTE</b>:  Will only show if count returned is greater than pageSize
 
-        The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header. 
+        The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header.
       tags:
         - SNS-Subscription
       security:
@@ -305,7 +305,7 @@ paths:
           optional: true
       operationId: get-all-sns-subscription
       responses:
-        '200':
+        "200":
           description: All SNS Subscription in CloudMatrix for a Given Tenant
           content:
             application/json:
@@ -317,20 +317,20 @@ paths:
                     items:
                       - id: "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234"
                         tenantId: "3c565fca-c792-469d-a745-8d202261b35f"
-                        endpoint: 'https://www.example-sns-endpoint.com'
-                        eventTypes: ['article.update']
+                        endpoint: "https://www.example-sns-endpoint.com"
+                        eventTypes: ["article.update"]
                         createdAt: "2024-11-21T19:00:00Z"
                         status: "PENDING"
                       - id: "731f576b-ee29-4369-bbaa-a6b43ef276f0"
                         tenantId: "3c565fca-c792-469d-a745-8d202261b35f"
-                        endpoint: 'https://www.example-sns-endpoint.com'
-                        eventTypes: ['article.restore']
+                        endpoint: "https://www.example-sns-endpoint.com"
+                        eventTypes: ["article.restore"]
                         createdAt: "2024-10-09T19:00:00Z"
                         status: "COMPLETED"
                     pagination:
                       totalCount: 2
                       pageSize: 10
-        '400':
+        "400":
           description: Bad Request
           content:
             application/json:
@@ -356,10 +356,10 @@ paths:
               examples:
                 Invalid Parameter:
                   value:
-                    message: 'To be defined'
+                    message: "To be defined"
                     error: Bad Request
                     statusCode: 400
-        '403':
+        "403":
           description: Forbidden
           content:
             application/json:
@@ -376,7 +376,7 @@ paths:
                 Invalid API Key:
                   value:
                     message: Forbidden
-        '500':
+        "500":
           description: Internal Server Error
           content:
             application/json:
@@ -401,7 +401,7 @@ paths:
               examples:
                 Internal Server Error:
                   value:
-                    message: 'Retrieving Subscriptions failed'
+                    message: "Retrieving Subscriptions failed"
                     error: Internal Server Error
                     statusCode: 500
     post:
@@ -410,7 +410,7 @@ paths:
         This endpoint creates a new SNS subscription for a specified CloudMatrix tenant. The client must provide a valid tenant-id in the request headers and the subscription data in the request body.
         If successful, the server responds with a 201 Created status, confirming that the subscription was successfully created.
 
-        The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header. 
+        The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header.
       tags:
         - SNS-Subscription
       security:
@@ -436,41 +436,41 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateSNSSubscription'
+              $ref: "#/components/schemas/CreateSNSSubscription"
             examples:
               SNS Subscription (article.update):
                 value:
-                  endpoint: 'https://www.example-sns-endpoint.com'
-                  eventTypes: ['article.update']
+                  endpoint: "https://www.example-sns-endpoint.com"
+                  eventTypes: ["article.update"]
               SNS Subscription (article.delete):
                 value:
-                  endpoint: 'https://www.example-sns-endpoint.com'
-                  eventTypes: ['article.delete']
+                  endpoint: "https://www.example-sns-endpoint.com"
+                  eventTypes: ["article.delete"]
               SNS Subscription (article.restore):
                 value:
-                  endpoint: 'https://www.example-sns-endpoint.com'
-                  eventTypes: ['article.restore']
+                  endpoint: "https://www.example-sns-endpoint.com"
+                  eventTypes: ["article.restore"]
               SNS Subscription (config.update):
                 value:
-                  endpoint: 'https://www.example-sns-endpoint.com'
-                  eventTypes: ['config.update']
+                  endpoint: "https://www.example-sns-endpoint.com"
+                  eventTypes: ["config.update"]
       responses:
-        '201':
+        "201":
           description: Created SNS Subscription in CloudMatrix
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SNSSubscriptionResponse'
+                $ref: "#/components/schemas/SNSSubscriptionResponse"
               examples:
                 Example - Success:
                   value:
-                      id: "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234"
-                      tenantId: "3c565fca-c792-469d-a745-8d202261b35f"
-                      endpoint: 'https://www.example-sns-endpoint.com'
-                      eventTypes: ['article.update']
-                      createdAt: "2024-11-21T19:00:00Z"
-                      status: "PENDING" 
-        '400':
+                    id: "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234"
+                    tenantId: "3c565fca-c792-469d-a745-8d202261b35f"
+                    endpoint: "https://www.example-sns-endpoint.com"
+                    eventTypes: ["article.update"]
+                    createdAt: "2024-11-21T19:00:00Z"
+                    status: "PENDING"
+        "400":
           description: Bad Request
           content:
             application/json:
@@ -503,8 +503,8 @@ paths:
                   value:
                     message: "Unreachable Endpoint"
                     error: Bad Request
-                    statusCode: 400    
-        '403':
+                    statusCode: 400
+        "403":
           description: Forbidden
           content:
             application/json:
@@ -521,7 +521,7 @@ paths:
                 Invalid API Key:
                   value:
                     message: Forbidden
-        '409':
+        "409":
           description: Conflict
           content:
             application/json:
@@ -539,7 +539,7 @@ paths:
                   statusCode:
                     type: number
                     enum:
-                      - 409  
+                      - 409
                 required:
                   - message
                   - error
@@ -554,8 +554,8 @@ paths:
                   value:
                     message: "Subscription already exists with different attributes"
                     error: Conflict
-                    statusCode: 409    
-        '500':
+                    statusCode: 409
+        "500":
           description: Internal Server Error
           content:
             application/json:
@@ -580,7 +580,7 @@ paths:
               examples:
                 Internal Server Error:
                   value:
-                    message: 'Subscription creation failed'
+                    message: "Subscription creation failed"
                     error: Internal Server Error
                     statusCode: 500
       x-stoplight:
@@ -592,8 +592,8 @@ paths:
         name: tenant-id
         description: UUID identifying tenant
         required: true
-  /subscription/audit: 
-    get: 
+  /subscription/audit:
+    get:
       summary: Retrieve all SNS delivery logs in CloudMatrix for a destination
       description: |
         This endpoint retrieves all log(s) for a specified destination. The client must provide a valid tenant-id in the request headers.
@@ -607,9 +607,9 @@ paths:
           - timestamp: is used for pagination. The timestamp of the last log returned in the previous request. 
             <b>NOTE</b>:  Should be passed together with exclusiveStartKey           
 
-        The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header. 
+        The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header.
       tags:
-        - SNS-Logs 
+        - SNS-Logs
 
       security:
         - ApiKey: []
@@ -642,58 +642,58 @@ paths:
           description: id of the last item returned in the previous request
           optional: true
         - schema:
-            type: string  
+            type: string
           in: query
           name: timestamp
-          description: timestamp of the last log returned in the previous request  
+          description: timestamp of the last log returned in the previous request
         - schema:
             type: string
           in: query
           name: destination
           description: destination URL to filter the logs by
-          required: true  
+          required: true
         - schema:
             type: string
-            in: query  
+            in: query
             name: timestamp
             description: timestamp of the last log returned in the previous request
       operationId: get-all-sns-subscription
       responses:
-        '200':        
+        "200":
           description: All SNS Logs in CloudMatrix for a Given Destination
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LogsListResponse'
+                $ref: "#/components/schemas/LogsListResponse"
               examples:
                 Successful response:
                   value:
                     items:
-                    - messageId: "adb526de-830e-51b9-94f3-790df365672e"
-                      lastUpdated: "2024-12-11T10:49:39.664Z"
-                      statusCode: 404,
-                      deliveryTimestamp: "2024-12-11T10:49:39.664Z"
-                      status: "FAILURE"
-                      destination: "https://0909-2001-818-e781-cc00-a053-7bf4-aeb3-23bf.ngrok-free.app"
-                      failureReason": "Not Found"
-                      attempts: 1
-                      eventTypes: 'article.update'
-                      entryId: "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234"
-                      mediaReady: true
+                      - messageId: "adb526de-830e-51b9-94f3-790df365672e"
+                        lastUpdated: "2024-12-11T10:49:39.664Z"
+                        statusCode: 404,
+                        deliveryTimestamp: "2024-12-11T10:49:39.664Z"
+                        status: "FAILURE"
+                        destination: "https://0909-2001-818-e781-cc00-a053-7bf4-aeb3-23bf.ngrok-free.app"
+                        failureReason": "Not Found"
+                        attempts: 1
+                        eventTypes: "article.update"
+                        entryId: "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234"
+                        mediaReady: true
 
-                    - messageId: "6f70192d-8e02-40bb-8caa-5be21aa5c901"
-                      destination: "https://0909-2001-818-e781-cc00-a053-7bf4-aeb3-23bf.ngrok-free.app"
-                      lastUpdated: "2024-12-09T16:57:02.963Z"
-                      statusCode: 200
-                      deliveryTimestamp: "2024-12-09T16:57:02.963Z"
-                      status: "SUCCESS"
-                      eventType: 'config.update'
-                      entitlement: ['paidEntitlement']
-            
+                      - messageId: "6f70192d-8e02-40bb-8caa-5be21aa5c901"
+                        destination: "https://0909-2001-818-e781-cc00-a053-7bf4-aeb3-23bf.ngrok-free.app"
+                        lastUpdated: "2024-12-09T16:57:02.963Z"
+                        statusCode: 200
+                        deliveryTimestamp: "2024-12-09T16:57:02.963Z"
+                        status: "SUCCESS"
+                        eventType: "config.update"
+                        entitlement: ["paidEntitlement"]
+
                     pagination:
                       totalCount: 2
                       pageSize: 10
-        '400':
+        "400":
           description: Bad Request
           content:
             application/json:
@@ -719,15 +719,15 @@ paths:
               examples:
                 Invalid Parameter:
                   value:
-                    message: 'Destination is required'
+                    message: "Destination is required"
                     error: Bad Request
                     statusCode: 400
                 Invalid Pagination Parameters:
                   value:
-                    message: 'Both exclusiveStartKey and timestamp must be provided together.'
-                    error: Bad Request  
-                    statusCode: 400  
-        '403':
+                    message: "Both exclusiveStartKey and timestamp must be provided together."
+                    error: Bad Request
+                    statusCode: 400
+        "403":
           description: Forbidden
           content:
             application/json:
@@ -744,7 +744,7 @@ paths:
                 Invalid API Key:
                   value:
                     message: Forbidden
-        '500':
+        "500":
           description: Internal Server Error
           content:
             application/json:
@@ -769,9 +769,153 @@ paths:
               examples:
                 Internal Server Error:
                   value:
-                    message: 'Retrieving logs failed'
+                    message: "Retrieving logs failed"
                     error: Internal Server Error
-                    statusCode: 500                     
+                    statusCode: 500
+
+  /subscription/sync:
+    post:
+      summary: Start a sync of all articles for the given timestamp and destination
+      description: |
+        This endpoint checks for articles that were updated within a specified time range and resends the latest state of those articles to the specified destination
+        The client must provide a valid tenant-id in the request headers.        
+
+        The user must first be authenticated (via an API-Key). This token should be passed during the API call through the 'x-api-key' header.
+      tags:
+        - SNS-Resync
+
+      security:
+        - ApiKey: []
+      parameters:
+        - in: header
+          name: tenant-id
+          description: The unique identifier of the tenant
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: header
+          name: x-api-key
+          description: The x-api-key
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResyncSubscription"
+            examples:
+              Resync Subscription:
+                value:
+                  subscriptionId: "4a5b0d0c-2f1b-4e9f-b0f0-6a97e91a1234"
+                  startTime: "2024-12-01T00:00:00Z"
+                  endTime: "2024-12-10T23:59:59Z"
+
+      responses:
+        responses:
+        "201":
+          description: Resync Subscription in CloudMatrix
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResyncSubscriptionResponse"
+              examples:
+                Example - Success:
+                  value:
+                    message: "Subscription resync triggered successfully"
+                    statusCode: 201
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Invalid request data for the event to create
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                  error:
+                    type: string
+                    enum:
+                      - Bad Request
+                  statusCode:
+                    type: number
+                    enum:
+                      - 400
+                required:
+                  - message
+                  - error
+                  - statusCode
+              examples:
+                Missing Subscription Id:
+                  value:
+                    message:
+                      - "subscriptionId must be a UUID"
+                      - "subscriptionId must be a string"
+                    error: Bad Request
+                    statusCode: 400
+                Missing Start Time:
+                  value:
+                    message:
+                      - "startTime must be a valid ISO 8601 date string"
+                      - "startTime must be a string"
+                    error: Bad Request
+                    statusCode: 400
+                Missing End Time:
+                  value:
+                    message:
+                      - "endTime must be a must be a valid ISO 8601 date string"
+                      - "endTime must be a string"
+
+                    error: Bad Request
+                    statusCode: 400
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: Invalid/Missing API Key
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                Invalid API Key:
+                  value:
+                    message: API Key not provided or not valid
+
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                description: Subscription resync failure
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                  error:
+                    type: string
+                    minLength: 1
+                  statusCode:
+                    type: number
+                    enum:
+                      - 500
+                required:
+                  - message
+                  - error
+                  - statusCode
+              examples:
+                Internal Server Error:
+                  value:
+                    message: "Subscription resync failed"
+                    error: Internal Server Error
+                    statusCode: 500
 components:
   securitySchemes:
     ApiKey:
@@ -840,8 +984,8 @@ components:
         - statusCode
         - lastUpdated
         - deliveryTimestamp
-        - destination   
-        - eventType    
+        - destination
+        - eventType
       properties:
         messageId:
           type: string
@@ -881,26 +1025,66 @@ components:
         attempts:
           type: number
           minimum: 1
-          description: number of delivery attempts   
-          optional: true 
+          description: number of delivery attempts
+          optional: true
         eventType:
           type: string
           minLength: 1
           description: event type
           required: true
-        entryId:  
+        entryId:
           type: string
           description: unique identifier for the subscription (uuid or MP id)
-          optional: true        
+          optional: true
         entitlement:
           type: array
           minLength: 1
           description: entitlement value on config.update event
-          optional: true    
+          optional: true
         mediaReady:
           type: boolean
           description: true or false boolean value to advise if media is ready to be used
-          optional: true    
+          optional: true
+    ResyncSubscription:
+      type: object
+      x-stoplight:
+        id: gey87qt7ekx7o
+      title: ResyncSubscription
+      required:
+        - subscriptionId
+        - startTime
+        - endTime
+      properties:
+        subscriptionId:
+          type: string
+          minLength: 1
+          description: id of the subscription to resync
+        startTime:
+          type: string
+          format: date-time
+          description: start time of the resync period
+        endTime:
+          type: string
+          format: date-time
+          description: end time of the resync period
+    ResyncSubscriptionResponse:
+      type: object
+      x-stoplight:
+        id: gey81qt7eka7o
+      title: ResyncSubscriptionResponse
+      required:
+        - message
+        - statusCode
+      properties:
+        message:
+          type: string
+          minLength: 1
+          description: message indicating the result of the resync operation
+        statusCode:
+          type: number
+          description: HTTP status code
+          enum:
+            - 201
 
     SNSSubscriptionListResponse:
       type: object
@@ -933,6 +1117,6 @@ components:
             $ref: "#/components/schemas/AuditLogsResponse"
         pagination:
           $ref: "#/components/schemas/Pagination"
-  
+
   tags:
-  - name: SNS-Subscription
+    - name: SNS-Subscription
