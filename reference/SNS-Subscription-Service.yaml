@@ -881,6 +881,16 @@ paths:
 
                     error: Bad Request
                     statusCode: 400
+                Start Time After End Time:
+                  value:
+                    message: "Invalid time range: startTime must be earlier than endTime"
+                    error: Bad Request
+                    statusCode: 400    
+                Start Time or End Time in the Future:
+                  value:
+                    message: "Invalid time range: startTime and endTime must be in the past"
+                    error: Bad Request
+                    statusCode: 400    
         "403":
           description: Forbidden
           content:
