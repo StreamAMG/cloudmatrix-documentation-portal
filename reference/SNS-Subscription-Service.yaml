@@ -824,6 +824,17 @@ paths:
                   value:
                     message: "Subscription resync triggered successfully"
                     statusCode: 201
+        "204":
+          description: Subscription is up to date and no resync is needed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpToDateSubscriptionResponse"
+              examples:
+                Example - Success:
+                  value:
+                    message: "No new articles to sync. Everything is up to date'"
+                    statusCode: 204            
         "400":
           description: Bad Request
           content:
@@ -1085,6 +1096,24 @@ components:
           description: HTTP status code
           enum:
             - 201
+    UpToDateSubscriptionResponse:
+      type: object
+      x-stoplight:
+        id: gey81qt7eka7o
+      title: UpToDateSubscriptionResponse
+      required:
+        - message
+        - statusCode
+      properties:
+        message:
+          type: string
+          minLength: 1
+          description: message indicating the result of the resync operation
+        statusCode:
+          type: number
+          description: HTTP status code
+          enum:
+            - 204        
 
     SNSSubscriptionListResponse:
       type: object
