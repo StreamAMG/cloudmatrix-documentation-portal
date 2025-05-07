@@ -908,6 +908,34 @@ paths:
                 Invalid API Key:
                   value:
                     message: API Key not provided or not valid
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: "Subscription: {id} not found"
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                  error:
+                    type: string
+                    minLength: 1
+                  statusCode:
+                    type: number
+                    enum:
+                      - 404
+                required:
+                  - message
+                  - error
+                  - statusCode
+              examples:
+                Invalid Event Id:
+                  value:
+                    message: "Subscription: 354a82b8-fb50-45fe-8b78-c952b06e2a82 not found"
+                    error: Not Found
+                    statusCode: 404           
 
         "500":
           description: Internal Server Error
