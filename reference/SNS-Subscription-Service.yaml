@@ -824,7 +824,7 @@ paths:
                   value:
                     message: "Subscription resync triggered successfully"
                     statusCode: 201
-        "204":
+        "200":
           description: Subscription is up to date and no resync is needed
           content:
             application/json:
@@ -834,7 +834,7 @@ paths:
                 Example - Success:
                   value:
                     message: "No new articles to sync. Everything is up to date'"
-                    statusCode: 204            
+                    statusCode: 200           
         "400":
           description: Bad Request
           content:
@@ -1151,7 +1151,7 @@ components:
           type: number
           description: HTTP status code
           enum:
-            - 204        
+            - 200        
 
     SNSSubscriptionListResponse:
       type: object
