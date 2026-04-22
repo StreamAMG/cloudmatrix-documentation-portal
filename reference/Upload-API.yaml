@@ -16,8 +16,6 @@ tags:
   - name: Search
   - name: Entitlement
   - name: Feed
-  - name: 'Unrestricted Feed'
-  - name: 'Publication target'
   - name: Event
 x-tagGroups:
   - name: Entry
@@ -35,10 +33,6 @@ x-tagGroups:
   - name: Feed
     tags:
       - Feed
-  - name: Feed Section
-    tags:
-      - 'Unrestricted Feed'
-      - 'Publication target'
   - name: Event
     tags:
       - Event
@@ -1645,7 +1639,7 @@ paths:
   '/api/v1/{apiUserId}/{apiKey}/{languageCode}/feed/{feedId}/sections':
     get:
       tags:
-        - 'Unrestricted Feed'
+        - Feed
       operationId: get-feed-sections-unrestricted
       summary: Get all feed sections, or one section (unrestricted)
       description: >-
@@ -1675,7 +1669,7 @@ paths:
   '/api/v1/{apiUserId}/{apiKey}/{targetId}/{languageCode}/feed/{feedId}/sections':
     get:
       tags:
-        - 'Publication target'
+        - Feed
       operationId: get-feed-sections-with-target
       summary: Get all feed sections, or one section (publication target in path)
       description: >-
