@@ -1640,27 +1640,48 @@ paths:
     get:
       tags:
         - Feed
-      operationId: get-feed-sections
+      operationId: get-feed-sections-list-all
       summary: List all feed sections
       description: >-
-        Single `GET` resource for feed sections. There is **no** path segment or trailing `/` after `sections`
-        (for example not `.../sections/` and not a double `/` in the path such as `//api/v1/...`).
-
-        **List every section** — call this path and **do not** pass the `section` query. You get `feedMetaData` and a
-        `sections` array (one object per section with `id`, `name`, `itemData`, `pagingData`).
-
-        **Get a specified section** — use the **same** URL and add `?section={sectionId}` (Postman:
-        `.../feed/{feedId}/sections?section={{sectionId}}`). The response is the same schema; `sections` often has a
-        single object. The **200** example **singleSectionFiltered** (listed first) matches this case.
-
-        If you use a **publication target** in your integration, insert `{targetId}` in the path after `{apiKey}` the
-        same way as for your other target-scoped feed or search calls.
+        Return **all** sections configured for the feed: one entry in `sections[]` per section, each with `id`,
+        `name`, `itemData`, and `pagingData`. The body also has `feedMetaData` (parent feed id, name, title,
+        `description` which may be `null`).
       parameters:
         - $ref: '#/components/parameters/FssPath_ApiUserId'
         - $ref: '#/components/parameters/FssPath_ApiKey'
         - $ref: '#/components/parameters/FssPath_LanguageCode'
         - $ref: '#/components/parameters/FssPath_FeedId'
-        - $ref: '#/components/parameters/FssQuery_Section'
+        - $ref: '#/components/parameters/FssQuery_PageIndex'
+        - $ref: '#/components/parameters/FssQuery_PageSize'
+      responses:
+        '200':
+          $ref: '#/components/responses/FssSections_200'
+        '400':
+          $ref: '#/components/responses/FssBadRequest'
+        '401':
+          $ref: '#/components/responses/FssUnauthorized'
+        '404':
+          $ref: '#/components/responses/FssNotFound'
+        '500':
+          $ref: '#/components/responses/FssServerError'
+  '/api/v1/{apiUserId}/{apiKey}/{languageCode}/feed/{feedId}/sections/':
+    get:
+      tags:
+        - Feed
+      operationId: get-feed-sections-specified
+      summary: Get a specified section
+      description: >-
+        Return **one** section by id: add the **`section` query** with that section’s UUID. The response uses the
+        same object shape as *List all feed sections*, but `sections[]` usually has a **single** object.
+
+        A trailing slash on the path is used in this spec only so this operation appears as its own item next to
+        *List all feed sections* in the API list.
+      parameters:
+        - $ref: '#/components/parameters/FssPath_ApiUserId'
+        - $ref: '#/components/parameters/FssPath_ApiKey'
+        - $ref: '#/components/parameters/FssPath_LanguageCode'
+        - $ref: '#/components/parameters/FssPath_FeedId'
+        - $ref: '#/components/parameters/FssQuery_Section_Required'
         - $ref: '#/components/parameters/FssQuery_PageIndex'
         - $ref: '#/components/parameters/FssQuery_PageSize'
       responses:
@@ -2145,14 +2166,13 @@ components:
         type: string
         format: uuid
       example: 00000000-0000-0000-0000-000000000003
-    FssQuery_Section:
+    FssQuery_Section_Required:
       name: section
       in: query
-      required: false
+      required: true
       description: |
-        Section **UUID** to return only that section. Omit to list all sections. Example:
-        `GET .../feed/{feedId}/sections?section=00000000-0000-0000-0000-000000000000` (id from a prior call or
-        the CloudMatrix UI). When set, the response is usually a **single** object in `sections[]`.
+        The section to return, as a **UUID** (from *List all feed sections* or from the CloudMatrix UI). The
+        response usually contains a **single** object in `sections[]`.
       schema:
         type: string
         format: uuid
@@ -2179,17 +2199,12 @@ components:
         minimum: 1
   responses:
     FssSections_200:
-      description: |
-        The **singleSectionFiltered** example (listed first) is the typical body when
-        `GET .../feed/{feedId}/sections?section={sectionId}` is used. The **allSections** example is for requests with
-        no `section` query. Same schema in both cases.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/FssFeedSectionsResponse'
           examples:
-            singleSectionFiltered:
-              summary: 'Get a specified section (query: section=...)'
+            allSections:
               value:
                 feedMetaData:
                   id: 00000000-0000-0000-0000-000000000003
@@ -2197,6 +2212,15 @@ components:
                   title: 'My feed'
                   description: null
                 sections:
+                  - id: 00000000-0000-0000-0000-000000000010
+                    name: 'Section A'
+                    itemData: []
+                    pagingData:
+                      totalCount: 0
+                      itemCount: 0
+                      pageCount: 0
+                      pageSize: 200
+                      pageIndex: 0
                   - id: 00000000-0000-0000-0000-000000000011
                     name: 'Section B'
                     itemData:
@@ -2222,8 +2246,7 @@ components:
                       pageCount: 1
                       pageSize: 200
                       pageIndex: 0
-            allSections:
-              summary: 'List all sections (omit `section` query)'
+            singleSectionFiltered:
               value:
                 feedMetaData:
                   id: 00000000-0000-0000-0000-000000000003
@@ -2231,15 +2254,6 @@ components:
                   title: 'My feed'
                   description: null
                 sections:
-                  - id: 00000000-0000-0000-0000-000000000010
-                    name: 'Section A'
-                    itemData: []
-                    pagingData:
-                      totalCount: 0
-                      itemCount: 0
-                      pageCount: 0
-                      pageSize: 200
-                      pageIndex: 0
                   - id: 00000000-0000-0000-0000-000000000011
                     name: 'Section B'
                     itemData:
