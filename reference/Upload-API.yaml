@@ -1664,7 +1664,7 @@ paths:
           $ref: '#/components/responses/FssNotFound'
         '500':
           $ref: '#/components/responses/FssServerError'
-  '/api/v1/{apiUserId}/{apiKey}/{languageCode}/feed/{feedId}/sections/':
+  '/api/v1/{apiUserId}/{apiKey}/{languageCode}/feed/{feedId}/sections?section={sectionId}':
     get:
       tags:
         - Feed
