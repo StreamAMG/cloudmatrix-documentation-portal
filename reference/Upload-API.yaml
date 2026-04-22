@@ -1646,11 +1646,6 @@ paths:
         Return **all** sections configured for the feed: one entry in `sections[]` per section, each with `id`,
         `name`, `itemData`, and `pagingData`. The body also has `feedMetaData` (parent feed id, name, title,
         `description` which may be `null`).
-
-        Do **not** send a `section` query parameter. Path-based `apiUserId` and `apiKey` match the other Feed API routes.
-
-        If you use a **publication target** in your integration, insert `{targetId}` in the path after `{apiKey}` in
-        the same way as for your other target-scoped feed or search calls.
       parameters:
         - $ref: '#/components/parameters/FssPath_ApiUserId'
         - $ref: '#/components/parameters/FssPath_ApiKey'
@@ -1680,11 +1675,7 @@ paths:
         same object shape as *List all feed sections*, but `sections[]` usually has a **single** object.
 
         A trailing slash on the path is used in this spec only so this operation appears as its own item next to
-        *List all feed sections* in the API list. In production, the same call is often issued as
-        `GET` …`/feed/{feedId}/sections?section={sectionId}` **without** a trailing slash if your host does not use one.
-
-        If you use a **publication target** in your integration, insert `{targetId}` in the path after `{apiKey}` in
-        the same way as for your other target-scoped feed or search calls.
+        *List all feed sections* in the API list.
       parameters:
         - $ref: '#/components/parameters/FssPath_ApiUserId'
         - $ref: '#/components/parameters/FssPath_ApiKey'
@@ -2208,9 +2199,6 @@ components:
         minimum: 1
   responses:
     FssSections_200:
-      description: >
-        `feedMetaData` for the feed, plus a `sections` array. Each section includes `id`, `name` (label), `itemData`, and
-        `pagingData` for that section. When the `section` query is used, the array is usually a single entry.
       content:
         application/json:
           schema:
