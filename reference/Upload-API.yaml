@@ -16,7 +16,32 @@ tags:
   - name: Search
   - name: Entitlement
   - name: Feed
+  - name: 'Unrestricted Feed'
+  - name: 'Publication target'
   - name: Event
+x-tagGroups:
+  - name: Entry
+    tags:
+      - Entry
+  - name: Multipart
+    tags:
+      - Multipart
+  - name: Search
+    tags:
+      - Search
+  - name: Entitlement
+    tags:
+      - Entitlement
+  - name: Feed
+    tags:
+      - Feed
+  - name: Feed Section
+    tags:
+      - 'Unrestricted Feed'
+      - 'Publication target'
+  - name: Event
+    tags:
+      - Event
 servers:
   - url: 'https://cloudmatrix.api.streamamg.com'
 paths:
@@ -45,7 +70,7 @@ paths:
                     status: 200
                     message: Successfully uploaded
                     entryId: 0_xshqrl2n
-                    uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJWZ7B6WCRGMKFGQ%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
+                    uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=00000000000000000000%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
                 properties:
                   status:
                     type: number
@@ -80,13 +105,13 @@ paths:
                     status: 200
                     message: Successfully uploaded
                     entryId: 0_xshqrl2n
-                    uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJWZ7B6WCRGMKFGQ%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
+                    uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=00000000000000000000%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
                 Example - Success With Invalid Values Reported:
                   value:
                     status: 200
                     message: Successfully uploaded
                     entryId: 0_xshqrl2n
-                    uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJWZ7B6WCRGMKFGQ%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
+                    uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=00000000000000000000%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
                     failed:
                       - id: c490887c-c21b-4bda-b59a-8ca1ee88d8a8
                         reason: Invalid value for attribute type specified
@@ -840,7 +865,7 @@ paths:
                   value:
                     partNumber: 1
                     uploadId: 9c16caf8-7f71-11ec-a8a3-0242ac120002
-                    uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJWZ7B6WCRGMKFGQ%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
+                    uploadUrl: 'https://streamamg.s3.eu-west-2.amazonaws.com/example-1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=00000000000000000000%2F20180210%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20180210T171315Z&X-Amz-Expires=1800&X-Amz-Signature=12b74b0788aa036bc7c3d03b3f20c61f1f91cc9ad8873e3314255dc479a25351&X-Amz-SignedHeaders=host'
           headers: {}
       description: |-
         <!--
@@ -1617,6 +1642,66 @@ paths:
       description: |-
         Returns the list of articles matching the rules defined in Feed and to be published without any restriction on location. 
         *Note all datetimes returned are in UTC format
+  '/api/v1/{apiUserId}/{apiKey}/{languageCode}/feed/{feedId}/sections':
+    get:
+      tags:
+        - 'Unrestricted Feed'
+      operationId: get-feed-sections-unrestricted
+      summary: Get all feed sections, or one section (unrestricted)
+      description: >-
+        Returns `feedMetaData` and `sections`. Without the `section` query, all sections in the feed are included
+        (empty `itemData` where applicable). With `?section={sectionId}` (section UUID from the list or UI), the same
+        body shape is returned, typically with one entry in `sections[]`. `apiUserId` and `apiKey` in the path provide
+        authentication, consistent with the CloudMatrix Feed and Search APIs.
+      parameters:
+        - $ref: '#/components/parameters/FssPath_ApiUserId'
+        - $ref: '#/components/parameters/FssPath_ApiKey'
+        - $ref: '#/components/parameters/FssPath_LanguageCode'
+        - $ref: '#/components/parameters/FssPath_FeedId'
+        - $ref: '#/components/parameters/FssQuery_Section'
+        - $ref: '#/components/parameters/FssQuery_PageIndex'
+        - $ref: '#/components/parameters/FssQuery_PageSize'
+      responses:
+        '200':
+          $ref: '#/components/responses/FssSections_200'
+        '400':
+          $ref: '#/components/responses/FssBadRequest'
+        '401':
+          $ref: '#/components/responses/FssUnauthorized'
+        '404':
+          $ref: '#/components/responses/FssNotFound'
+        '500':
+          $ref: '#/components/responses/FssServerError'
+  '/api/v1/{apiUserId}/{apiKey}/{targetId}/{languageCode}/feed/{feedId}/sections':
+    get:
+      tags:
+        - 'Publication target'
+      operationId: get-feed-sections-with-target
+      summary: Get all feed sections, or one section (publication target in path)
+      description: >-
+        Same behaviour as the unrestricted sections endpoint, with **targetId** in the path so publication rules
+        (holdbacks, geo, and related settings) for that target apply, consistent with target-scoped Feed/Search. Use the
+        optional `section` query to request a single section.
+      parameters:
+        - $ref: '#/components/parameters/FssPath_ApiUserId'
+        - $ref: '#/components/parameters/FssPath_ApiKey'
+        - $ref: '#/components/parameters/FssPath_TargetId'
+        - $ref: '#/components/parameters/FssPath_LanguageCode'
+        - $ref: '#/components/parameters/FssPath_FeedId'
+        - $ref: '#/components/parameters/FssQuery_Section'
+        - $ref: '#/components/parameters/FssQuery_PageIndex'
+        - $ref: '#/components/parameters/FssQuery_PageSize'
+      responses:
+        '200':
+          $ref: '#/components/responses/FssSections_200'
+        '400':
+          $ref: '#/components/responses/FssBadRequest'
+        '401':
+          $ref: '#/components/responses/FssUnauthorized'
+        '404':
+          $ref: '#/components/responses/FssNotFound'
+        '500':
+          $ref: '#/components/responses/FssServerError'
   '/api/v1/{apiUserId}/{apiKey}/{targetId}/{languageCode}/event':
     get:
       summary: List available events
@@ -2043,8 +2128,216 @@ paths:
           type: string
         name: targetId
         in: path
-        required: false   
+        required: false  
 components:
+  parameters:
+    FssPath_ApiUserId:
+      name: apiUserId
+      in: path
+      required: true
+      description: |
+        Client identifier (UUID) configured in CloudMatrix. Placed in the path together with the API key for
+        request authentication, consistent with the Feed and Search APIs.
+      schema:
+        type: string
+        format: uuid
+      example: 00000000-0000-0000-0000-000000000001
+    FssPath_ApiKey:
+      name: apiKey
+      in: path
+      required: true
+      description: |
+        Secret that authenticates the client. Must be paired with the correct `apiUserId`.
+      schema:
+        type: string
+      example: '<api-key-from-cloudmatrix>'
+    FssPath_TargetId:
+      name: targetId
+      in: path
+      required: true
+      description: |
+        Publication **target** (UUID). When this path is used, results respect that target’s publication rules. For
+        target-free behaviour, use the `GET /api/v1/{apiUserId}/{apiKey}/{languageCode}/feed/{feedId}/sections` operation.
+      schema:
+        type: string
+        format: uuid
+      example: 00000000-0000-0000-0000-000000000002
+    FssPath_LanguageCode:
+      name: languageCode
+      in: path
+      required: true
+      description: |
+        [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) two-letter language code (e.g. `en`).
+      schema:
+        type: string
+        minLength: 2
+        maxLength: 2
+        pattern: ^[a-z]{2}$
+      example: en
+    FssPath_FeedId:
+      name: feedId
+      in: path
+      required: true
+      description: |
+        UUID of the preconfigured feed in CloudMatrix.
+      schema:
+        type: string
+        format: uuid
+      example: 00000000-0000-0000-0000-000000000003
+    FssQuery_Section:
+      name: section
+      in: query
+      required: false
+      description: |
+        Section **UUID** from the `sections` list or from the CloudMatrix UI. When set, the response is typically one
+        section in `sections[]` with the same `feedMetaData`. When omitted, every section for the feed is returned.
+      schema:
+        type: string
+        format: uuid
+      example: 00000000-0000-0000-0000-000000000004
+    FssQuery_PageIndex:
+      name: pageIndex
+      in: query
+      required: false
+      description: |
+        When supported, zero-based page index for **items within** sections (see per-section `pagingData` in the response).
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    FssQuery_PageSize:
+      name: pageSize
+      in: query
+      required: false
+      description: |
+        When supported, page size for item rows inside each section. The service may return this value echoed in
+        `sections[].pagingData.pageSize`.
+      schema:
+        type: integer
+        minimum: 1
+  responses:
+    FssSections_200:
+      description: >
+        `feedMetaData` for the feed, plus a `sections` array. Each section includes `id`, `name` (label), `itemData`, and
+        `pagingData` for that section. When the `section` query is used, the array is usually a single entry.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FssFeedSectionsResponse'
+          examples:
+            allSections:
+              value:
+                feedMetaData:
+                  id: 00000000-0000-0000-0000-000000000003
+                  name: my_feed
+                  title: 'My feed'
+                  description: null
+                sections:
+                  - id: 00000000-0000-0000-0000-000000000010
+                    name: 'Section A'
+                    itemData: []
+                    pagingData:
+                      totalCount: 0
+                      itemCount: 0
+                      pageCount: 0
+                      pageSize: 200
+                      pageIndex: 0
+                  - id: 00000000-0000-0000-0000-000000000011
+                    name: 'Section B'
+                    itemData:
+                      - id: 00000000-0000-0000-0000-000000000020
+                        mediaData:
+                          mediaType: Live
+                          entryStatus: Ready
+                          source: CM
+                          entryId: 00000000-0000-0000-0000-000000000020
+                        metaData:
+                          body: null
+                          title: Example live entry
+                          tags: []
+                        publicationData:
+                          createdAt: '2026-04-08T09:31:19'
+                          updatedAt: '2026-04-08T12:09:10'
+                          released: true
+                          releaseFrom: '2026-04-08T09:31:08'
+                          releaseTo: '9999-12-31T23:59:59.9999999'
+                    pagingData:
+                      totalCount: 1
+                      itemCount: 1
+                      pageCount: 1
+                      pageSize: 200
+                      pageIndex: 0
+            singleSectionFiltered:
+              value:
+                feedMetaData:
+                  id: 00000000-0000-0000-0000-000000000003
+                  name: my_feed
+                  title: 'My feed'
+                  description: null
+                sections:
+                  - id: 00000000-0000-0000-0000-000000000011
+                    name: 'Section B'
+                    itemData:
+                      - id: 00000000-0000-0000-0000-000000000020
+                        mediaData:
+                          mediaType: Live
+                          entryStatus: Ready
+                          source: CM
+                          entryId: 00000000-0000-0000-0000-000000000020
+                        metaData:
+                          body: null
+                          title: Example live entry
+                          tags: []
+                        publicationData:
+                          createdAt: '2026-04-08T09:31:19'
+                          updatedAt: '2026-04-08T12:09:10'
+                          released: true
+                          releaseFrom: '2026-04-08T09:31:08'
+                          releaseTo: '9999-12-31T23:59:59.9999999'
+                    pagingData:
+                      totalCount: 1
+                      itemCount: 1
+                      pageCount: 1
+                      pageSize: 200
+                      pageIndex: 0
+    FssBadRequest:
+      description: The request was rejected (malformed parameters, invalid `section` UUID, or similar).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FssErrorMessage'
+          examples:
+            example:
+              value:
+                Message: Invalid request parameters.
+    FssUnauthorized:
+      description: Missing or invalid path credentials (`apiUserId` / `apiKey`).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FssErrorMessage'
+          examples:
+            missing:
+              value:
+                Message: The API Key is not present.
+            invalid:
+              value:
+                Message: The API Key is invalid.
+    FssNotFound:
+      description: The feed (or, when `section` is set, the section) was not found, or the resource is not available to this caller.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FssErrorMessage'
+          examples:
+            feed:
+              value:
+                Message: The feed was not found.
+            section:
+              value:
+                Message: The section was not found.
+    FssServerError:
+      description: Unexpected error while processing the request.
   schemas:
     Events:
       title: Events Schema
@@ -2191,6 +2484,153 @@ components:
                 type: string
       x-stoplight:
         id: ff1c3df07db85
+    FssErrorMessage:
+      type: object
+      properties:
+        Message:
+          type: string
+          description: Human-readable error message returned by the API.
+      required:
+        - Message
+    FssFeedMetaData:
+      type: object
+      required:
+        - id
+        - name
+        - title
+        - description
+      description: |
+        Metadata of the parent feed, echoed on every `sections` response. `description` may be `null`.
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type:
+            - 'null'
+            - string
+    FssSectionItemPaging:
+      type: object
+      description: Paging for **item rows** inside one section.
+      required:
+        - totalCount
+        - itemCount
+        - pageCount
+        - pageSize
+        - pageIndex
+      properties:
+        totalCount:
+          type: integer
+          minimum: 0
+        itemCount:
+          type: integer
+          minimum: 0
+        pageCount:
+          type: integer
+          minimum: 0
+        pageSize:
+          type: integer
+          minimum: 0
+        pageIndex:
+          type: integer
+          minimum: 0
+    FssSectionRowMedia:
+      type: object
+      description: Core media and entry identifiers for a row in `itemData` (tenants may receive additional properties).
+      properties:
+        mediaType:
+          type: string
+        entryStatus:
+          type: string
+        source:
+          type: string
+        entryId:
+          type: string
+        thumbnailUrl:
+          type: string
+    FssSectionRowMetadata:
+      type: object
+      additionalProperties: true
+      description: |
+        Entry metadata. Field names and types depend on the tenant, schema, and content type. Custom fields, tags, and
+        entitlements (e.g. as list fields) are common. Case of property names (e.g. `SysEntryEntitlements`) matches
+        the service payload.
+    FssSectionRowPublication:
+      type: object
+      required:
+        - createdAt
+        - updatedAt
+        - released
+        - releaseFrom
+        - releaseTo
+      properties:
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        released:
+          type: boolean
+        releaseFrom:
+          type: string
+        releaseTo:
+          type: string
+    FssSectionItem:
+      type: object
+      required:
+        - id
+        - mediaData
+        - metaData
+        - publicationData
+      properties:
+        id:
+          type: string
+          format: uuid
+        mediaData:
+          $ref: '#/components/schemas/FssSectionRowMedia'
+        metaData:
+          $ref: '#/components/schemas/FssSectionRowMetadata'
+        publicationData:
+          $ref: '#/components/schemas/FssSectionRowPublication'
+    FssSectionWithItems:
+      type: object
+      required:
+        - id
+        - name
+        - itemData
+        - pagingData
+      description: |
+        One layout section. `name` is the section label. `pagingData` always describes **that section’s** `itemData` page.
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        itemData:
+          type: array
+          items:
+            $ref: '#/components/schemas/FssSectionItem'
+        pagingData:
+          $ref: '#/components/schemas/FssSectionItemPaging'
+    FssFeedSectionsResponse:
+      type: object
+      required:
+        - feedMetaData
+        - sections
+      description: |
+        **List:** all sections, each with zero or more `itemData` rows. **Filter:** the same object with the `section`
+        query; `sections` is usually a single entry.
+      properties:
+        feedMetaData:
+          $ref: '#/components/schemas/FssFeedMetaData'
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/FssSectionWithItems'
   securitySchemes:
     x-api-key:
       name: x-api-key
