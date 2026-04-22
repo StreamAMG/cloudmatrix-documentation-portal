@@ -1640,19 +1640,22 @@ paths:
     get:
       tags:
         - Feed
-      operationId: get-feed-sections-unrestricted
-      summary: Get all feed sections, or one section (unrestricted)
+      operationId: get-feed-sections-list-all
+      summary: List all feed sections
       description: >-
-        Returns `feedMetaData` and `sections`. Without the `section` query, all sections in the feed are included
-        (empty `itemData` where applicable). With `?section={sectionId}` (section UUID from the list or UI), the same
-        body shape is returned, typically with one entry in `sections[]`. `apiUserId` and `apiKey` in the path provide
-        authentication, consistent with the CloudMatrix Feed and Search APIs.
+        Return **all** sections configured for the feed: one entry in `sections[]` per section, each with `id`,
+        `name`, `itemData`, and `pagingData`. The body also has `feedMetaData` (parent feed id, name, title,
+        `description` which may be `null`).
+
+        Do **not** send a `section` query parameter. Path-based `apiUserId` and `apiKey` match the other Feed API routes.
+
+        If you use a **publication target** in your integration, insert `{targetId}` in the path after `{apiKey}` in
+        the same way as for your other target-scoped feed or search calls.
       parameters:
         - $ref: '#/components/parameters/FssPath_ApiUserId'
         - $ref: '#/components/parameters/FssPath_ApiKey'
         - $ref: '#/components/parameters/FssPath_LanguageCode'
         - $ref: '#/components/parameters/FssPath_FeedId'
-        - $ref: '#/components/parameters/FssQuery_Section'
         - $ref: '#/components/parameters/FssQuery_PageIndex'
         - $ref: '#/components/parameters/FssQuery_PageSize'
       responses:
@@ -1666,23 +1669,28 @@ paths:
           $ref: '#/components/responses/FssNotFound'
         '500':
           $ref: '#/components/responses/FssServerError'
-  '/api/v1/{apiUserId}/{apiKey}/{targetId}/{languageCode}/feed/{feedId}/sections':
+  '/api/v1/{apiUserId}/{apiKey}/{languageCode}/feed/{feedId}/sections/':
     get:
       tags:
         - Feed
-      operationId: get-feed-sections-with-target
-      summary: Get all feed sections, or one section (publication target in path)
+      operationId: get-feed-sections-specified
+      summary: Get a specified section
       description: >-
-        Same behaviour as the unrestricted sections endpoint, with **targetId** in the path so publication rules
-        (holdbacks, geo, and related settings) for that target apply, consistent with target-scoped Feed/Search. Use the
-        optional `section` query to request a single section.
+        Return **one** section by id: add the **`section` query** with that section’s UUID. The response uses the
+        same object shape as *List all feed sections*, but `sections[]` usually has a **single** object.
+
+        A trailing slash on the path is used in this spec only so this operation appears as its own item next to
+        *List all feed sections* in the API list. In production, the same call is often issued as
+        `GET` …`/feed/{feedId}/sections?section={sectionId}` **without** a trailing slash if your host does not use one.
+
+        If you use a **publication target** in your integration, insert `{targetId}` in the path after `{apiKey}` in
+        the same way as for your other target-scoped feed or search calls.
       parameters:
         - $ref: '#/components/parameters/FssPath_ApiUserId'
         - $ref: '#/components/parameters/FssPath_ApiKey'
-        - $ref: '#/components/parameters/FssPath_TargetId'
         - $ref: '#/components/parameters/FssPath_LanguageCode'
         - $ref: '#/components/parameters/FssPath_FeedId'
-        - $ref: '#/components/parameters/FssQuery_Section'
+        - $ref: '#/components/parameters/FssQuery_Section_Required'
         - $ref: '#/components/parameters/FssQuery_PageIndex'
         - $ref: '#/components/parameters/FssQuery_PageSize'
       responses:
@@ -2145,17 +2153,6 @@ components:
       schema:
         type: string
       example: '<api-key-from-cloudmatrix>'
-    FssPath_TargetId:
-      name: targetId
-      in: path
-      required: true
-      description: |
-        Publication **target** (UUID). When this path is used, results respect that target’s publication rules. For
-        target-free behaviour, use the `GET /api/v1/{apiUserId}/{apiKey}/{languageCode}/feed/{feedId}/sections` operation.
-      schema:
-        type: string
-        format: uuid
-      example: 00000000-0000-0000-0000-000000000002
     FssPath_LanguageCode:
       name: languageCode
       in: path
@@ -2178,13 +2175,13 @@ components:
         type: string
         format: uuid
       example: 00000000-0000-0000-0000-000000000003
-    FssQuery_Section:
+    FssQuery_Section_Required:
       name: section
       in: query
-      required: false
+      required: true
       description: |
-        Section **UUID** from the `sections` list or from the CloudMatrix UI. When set, the response is typically one
-        section in `sections[]` with the same `feedMetaData`. When omitted, every section for the feed is returned.
+        The section to return, as a **UUID** (from *List all feed sections* or from the CloudMatrix UI). The
+        response usually contains a **single** object in `sections[]`.
       schema:
         type: string
         format: uuid
