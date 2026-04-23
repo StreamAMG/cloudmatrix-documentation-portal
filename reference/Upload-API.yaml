@@ -1172,7 +1172,7 @@ paths:
       description: |
         Searches the articles which are published on to the target which matches the "targetid" path parameter. The requesting user identified with the {userId} and {userKey} must have the access to the target idenitified by {targetid} to get a valid response. Target resolves to a set of country and so request will be responded only when requests coming from countries under the target. 
 
-        Json reponse containing atciles based on a provided "query string" in query parameters of the request. 
+        Json reponse containing articles based on a provided "query string" in query parameters of the request. 
         This query uses a syntax to parse and split the provided query string based on operators, such as AND or NOT. The query then analyzes each split text independently before returning matching documents.
 
         The entire reference of the query string query syntax can be found at
@@ -1399,10 +1399,10 @@ paths:
       description: |-
         Searches the articles published on any target. Request coming from a valid  user from any country will be responded with the list of artciles provided articles are published. 
 
-        Json reponse containing atciles based on a provided "query string" in query parameters of the request. 
+        Json reponse containing articles based on a provided "query string" in query parameters of the request. 
         This query uses a syntax to parse and split the provided query string based on operators, such as AND or NOT. The query then analyzes each split text independently before returning matching documents.
 
-        corThe entire reference of the query string query syntax can be found at
+        The entire reference of the query string query syntax can be found at
         https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html
   '/api/v1/entryentitlements/{entryId}':
     parameters:
@@ -1454,31 +1454,17 @@ paths:
               properties: {}
       description: 'Returns the list of entitlement and Time to live (TTL) for the "entry" identify by the entryid. '
   '/api/v1/{apiUserId}/{apiKey}/{languageCode}/feed/{feedId}':
-    parameters:
-      - schema:
-          type: string
-        name: apiUserId
-        in: path
-        required: true
-      - schema:
-          type: string
-        name: apiKey
-        in: path
-        required: true
-      - schema:
-          type: string
-        name: languageCode
-        in: path
-        required: true
-      - schema:
-          type: string
-        name: feedId
-        in: path
-        required: true
     get:
       summary: Unrestricted Feed
       tags:
         - Feed
+      parameters:
+        - $ref: '#/components/parameters/FssPath_ApiUserId'
+        - $ref: '#/components/parameters/FssPath_ApiKey'
+        - $ref: '#/components/parameters/FssPath_LanguageCode'
+        - $ref: '#/components/parameters/FssPath_FeedId'
+        - $ref: '#/components/parameters/FssQuery_PageIndex'
+        - $ref: '#/components/parameters/FssQuery_PageSize'
       responses:
         '200':
           description: OK
@@ -1635,6 +1621,14 @@ paths:
       operationId: get-api-v1-apiUserId-apiKey-languageCode-feed-feedId
       description: |-
         Returns the list of articles matching the rules defined in Feed and to be published without any restriction on location. 
+        
+        Json reponse containing articles matching the rules defined in Feed and to be published without any restriction on location. 
+        This query uses a syntax to parse and split the provided query string based on operators, such as AND or NOT. The query then analyzes each split text independently before returning matching documents.
+
+        The entire reference of the query string query syntax can be found at
+        https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html
+        
+        
         *Note all datetimes returned are in UTC format
   '/api/v1/{apiUserId}/{apiKey}/{languageCode}/feed/{feedId}/sections':
     get:
