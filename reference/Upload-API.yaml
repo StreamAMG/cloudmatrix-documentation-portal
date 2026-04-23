@@ -1463,6 +1463,14 @@ paths:
         - $ref: '#/components/parameters/FssPath_ApiKey'
         - $ref: '#/components/parameters/FssPath_LanguageCode'
         - $ref: '#/components/parameters/FssPath_FeedId'
+        - name: query
+          in: query
+          required: false
+          description: |
+            Elasticsearch [query string query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html).
+            The field must be qualified with the section in the body, for example `metadata.title`.
+          schema:
+            type: string
         - $ref: '#/components/parameters/FssQuery_PageIndex'
         - $ref: '#/components/parameters/FssQuery_PageSize'
       responses:
