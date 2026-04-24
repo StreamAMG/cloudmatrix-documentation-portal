@@ -1468,7 +1468,8 @@ paths:
           required: false
           description: |
             Elasticsearch [query string query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html).
-            The field must be qualified with the section in the body, for example `metadata.title`.
+            The field must be qualified with the section in the body, for example `?query=metaData.title:(Feed Title)`. This will then return any
+            feed entry with the title "Feed Title" or `?query=mediaData.mediaType:(OnDemand)` This will return any feed items that are on Demand 
           schema:
             type: string
         - $ref: '#/components/parameters/FssQuery_PageIndex'
@@ -1637,7 +1638,9 @@ paths:
         https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html
         
         
-        *Note all datetimes returned are in UTC format
+        * Note: all datetimes returned are in UTC format
+        * Note: Any term used in the query string will be used as a whole term and not as a partial match. So if you want to search for "Cloud Matrix" you 
+        will need to use "Cloud Matrix" as the query string.
   '/api/v1/{apiUserId}/{apiKey}/{languageCode}/feed/{feedId}/sections':
     get:
       tags:
