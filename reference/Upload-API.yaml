@@ -1639,8 +1639,7 @@ paths:
         
         
         * Note: all datetimes returned are in UTC format
-        * Note: Any term used in the query string will be used as a whole term and not as a partial match. So if you want to search for "Cloud Matrix" you 
-        will need to use "Cloud Matrix" as the query string.
+        * Note: Any term used in the query string will be used as a whole term and not as a partial match. So if you want to search for "Cloud Matrix" you will need to use "Cloud Matrix" as the query string.
   '/api/v1/{apiUserId}/{apiKey}/{languageCode}/feed/{feedId}/sections':
     get:
       tags:
