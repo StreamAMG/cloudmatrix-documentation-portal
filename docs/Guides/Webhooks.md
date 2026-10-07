@@ -99,7 +99,8 @@ The following are examples of the data expected to be sent in the message portio
   "payload": {
     "mediaData": {
       "mediaType": "OnDemand",
-      "mediaReady": true
+      "mediaReady": true,
+      "published": true
     },
     "metadata": {
       "title": "Media Platform OnDemand Title",
@@ -127,7 +128,8 @@ The following are examples of the data expected to be sent in the message portio
   "payload": {
     "mediaData": {
       "mediaType": "Live",
-      "mediaReady": true
+      "mediaReady": true,
+      "published": false
     },
     "metadata": {
       "title": "CM Live Article",
